@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ПідкрайБЕТ — Твій букмекерський сайт</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap');
+
+    /* ЗАГАЛЬНІ СТИЛІ */
+    body {
+      margin: 0;
+      font-family: 'Rubik', sans-serif;
+      background: #121212;
+      color: #f5f5f5;
+      overflow-x: hidden;
+    }
+
+    /* Анімація градієнтного фону */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(270deg, #ff6e00, #ffb347, #cc6600, #000000);
+      background-size: 800% 800%;
+      animation: gradientBG 20s ease infinite;
+      z-index: -1;
+      filter: brightness(0.4);
+    }
+    @keyframes gradientBG {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
+    }
+
+    /* ХЕДЕР */
+    header {
+      background: #000;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 10px #ff880033;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      font-weight: 900;
+      font-size: 2.2rem;
+      color: #ff8800;
+      letter-spacing: 3px;
+      margin: 0;
+      user-select: none;
+    }
+    header .balance {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #ffa733;
+      background: #2a2a2a;
+      padding: 10px 20px;
+      border-radius: 30px;
+      user-select: none;
+      box-shadow: 0 0 12px #ff8800aa;
+    }
+
+    /* НАВІГАЦІЯ */
+    nav {
+      background: #1a1a1a;
+      display: flex;
+      justify-content: center;
+      box-shadow: 0 2px 8px #ff8800bb;
+      position: sticky;
+      top: 65px;
+      z-index: 999;
+    }
+    nav a {
+      display: inline-block;
+      padding: 15px 30px;
+      color: #ffb347;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.3s ease, color 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+      letter-spacing: 1.3px;
+      font-size: 1.1rem;
+      position: relative;
+    }
+    nav a.active, nav a:hover {
+      background: #ff8800;
+      color: #1a1a1a;
+      border-radius: 8px 8px 0 0;
+      box-shadow: 0 0 15px #ff8800cc;
+    }
+    nav a.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 15px;
+      width: calc(100% - 30px);
+      height: 4px;
+      background: #ffa733;
+      border-radius: 4px 4px 0 0;
+    }
+
+    /* ГОЛОВНИЙ КОНТЕНТ */
+    main {
+      max-width: 1200px;
+      margin: 30px auto 80px;
+      background: #1e1e1e;
+      padding: 40px 30px 60px;
+      border-radius: 18px;
+      box-shadow: 0 0 25px #ff8800aa;
+      min-height: 600px;
+      color: #ffbb6f;
+      user-select: text;
+    }
+
+    /* ВКЛАДКИ */
+    .section {
+      display: none;
+      animation: fadeInUp 0.7s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .section.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h2 {
+      font-weight: 900;
+      font-size: 2.6rem;
+      margin-bottom: 20px;
+      color: #ff9e1b;
+      text-shadow: 0 0 10px #ff8800;
+    }
+    p {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      max-width: 900px;
+      margin: 0 auto 30px;
+      color: #ffbc6fdd;
+      text-shadow: 0 0 4px #000000bb;
+    }
+
+    /* ТАБЛИЦЯ МАТЧІВ */
+    table.match-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 25px #ff8800bb;
+    }
+    table.match-table thead th {
+      background: #ff8800;
+      color: #1a1a1a;
+      font-weight: 800;
+      padding: 14px 15px;
+      text-align: center;
+      letter-spacing: 1.3px;
+    }
+    table.match-table tbody td {
+      background: #2a2a2a;
+      color: #ffbb6f;
+      padding: 14px 10px;
+      text-align: center;
+      border-bottom: 1px solid #ff880022;
+      transition: background 0.25s ease;
+      user-select: none;
+    }
+    table.match-table tbody tr:hover td {
+      background: #ff8800;
+      color: #1a1a1a;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .bet-btn {
+      background: #ffb347;
+      color: #1a1a1a;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 12px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 0 12px #ffb347cc;
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+      user-select: none;
+    }
+    .bet-btn:hover {
+      background: #ff8800;
+      box-shadow: 0 0 25px #ff8800cc;
+      color: white;
+    }
+
+    /* БАНЕРИ */
+    .banner {
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 14px;
+      box-shadow: 0 0 35px #ff8800cc;
+      margin-bottom: 35px;
+      transition: transform 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+    .banner:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 60px #ffb347dd;
+    }
+
+    /* ФУТЕР */
+    .footer {
+      background: #000000cc;
+      color: #ffb347cc;
+      text-align: center;
+      padding: 20px 10px;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+      user-select: none;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      box-shadow: 0 -4px 10px #ff8800aa;
+      z-index: 1000;
+    }
+
+    /* Анімації */
+    @keyframes fadeInUp {
+      0% {opacity: 0; transform: translateY(20px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Чат підтримки */
+    #chat-container {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      width: 320px;
+      max-height: 450px;
+      background: #1a1a1a;
+      box-shadow: 0 0 15px #ff8800cc;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      font-size: 0.9rem;
+      user-select: text;
+      z-index: 1100;
+    }
+    #chat-header {
+      background: #ff8800;
+      padding: 15px;
+      border-radius: 16px 16px 0 0;
+      font-weight: 800;
+      color: #1a1a1a;
+      text-align: center;
+      letter-spacing: 1.4px;
+      user-select: none;
+    }
+    #chat-messages {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 15px;
+      background: #2a2a2a;
+      color: #ffbb6f;
+      line-height: 1.3;
+      user-select: text;
+    }
+    #chat-input-container {
+      display: flex;
+      border-top: 1px solid #ff880022;
+      background: #1a1a1a;
+      border-radius: 0 0 16px 16px;
+    }
+    #chat-input {
+      flex-grow: 1;
+      border: none;
+      padding: 10px 15px;
+      background: #121212;
+      color: #ffbb6f;
+      font-size: 1rem;
+      border-radius: 0 0 0 16px;
+      outline: none;
+    }
+    #chat-send-btn {
+      background: #ff8800;
+      border: none;
+      color: #1a1a1a;
+      font-weight: 700;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 0 0 16px 0;
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+    #chat-send-btn:hover {
+      background: #ffa733;
+    }
+    .chat-message {
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      max-width: 80%;
+      word-wrap: break-word;
+      user-select: text;
+    }
+    .chat-message.user {
+      background: #ff8800bb;
+      color: #1a1a1a;
+      align-self: flex-end;
+    }
+    .chat-message.bot {
+      background: #444444bb;
+      color: #ffbb6f;
+      align-self: flex-start;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ПІДКРАЙБЕТ</h1>
+    <div class="balance">Баланс: <strong>5000 ₴</strong></div>
+  </header>
+
+  <nav>
+    <a class="active" href="javascript:void(0)">Головна</a>
+    <a href="javascript:void(0)">Ставки</a>
+    <a href="javascript:void(0)">Live</a>
+    <a href="javascript:void(0)">Казино</a>
+    <a href="javascript:void(0)">Контакти</a>
+  </nav>
+
+  <main>
+    <!-- Головна -->
+    <section class="section active">
+      <h2>Ласкаво просимо на ПідкрайБЕТ!</h2>
+      <p>Роби ставки на улюблені матчі, включно з легендарним дербі <strong>Підкрай — Гімназія</strong>.</p>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/UEFA_Champions_League_logo_2.svg/512px-UEFA_Champions_League_logo_2.svg.png"
+        alt="Ліга Чемпіонів"
+        class="banner"
+      />
+      <p class="motivation" style="color:#ffbb6f; font-size: 1.4rem; font-style: italic; max-width: 700px; margin: 20px auto;">
+        «Спорт — це азарт, боротьба, віра у перемогу. Став на свою команду і вигравай!»
+      </p>
+    </section>
+
+    <!-- Ставки -->
+    <section class="section">
+      <h2>Сьогоднішні матчі</h2>
+      <table class="match-table">
+        <thead>
+          <tr>
+            <th>Матч</th>
+            <th>Час</th>
+            <th>1</th>
+            <th>X</th>
+            <th>2</th>
+            <th>Ставка</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Підкрай — Гімназія</td>
+            <td>18:00</td>
+            <td>2.20</td>
+            <td>3.15</td>
+            <td>2.55</td>
+            <td><button class="bet-btn" data-match="Підкрай — Гімназія">Поставити</button></td>
+          </tr>
+          <tr>
+            <td>Іспанія — Італія</td>
+            <td>21:00</td>
+            <td>2.00</td>
+            <td>3.30</td>
+            <td>3.60</td>
+            <td><button class="bet-btn" data-match="Іспанія — Італія">Поставити</button></td>
+          </tr>
+          <tr>
+            <td>Франція — Польща</td>
+            <td>22:00</td>
+            <td>1.55</td>
+            <td>3.80</td>
+            <td>6.10</td>
+            <td><button class="bet-btn" data-match="Франція — Польща">Поставити</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Live -->
+    <section class="section">
+      <h2>Live ставки</h2>
+      <p>Тут з'являються матчі в реальному часі. Стеж за змінами коефіцієнтів!</p>
+      <img
+        src="https://images.unsplash.com/photo-1502880202006-45e9f7eede34?auto=format&fit=crop&w=800&q=80"
+        alt="Live матч"
+        class="banner"
+      />
+    </section>
+
+    <!-- Казино -->
+    <section class="section">
+      <h2>Казино</h2>
+      <p>Незабаром запускаємо найкращі слоти, рулетку та live казино. Працюємо над цим!</p>
+      <img
+        src="https://images.unsplash.com/photo-1555529669-2dff6d8a0f4d?auto=format&fit=crop&w=800&q=80"
+        alt="Казино"
+        class="banner"
+      />
+    </section>
+
+    <!-- Контакти -->
+    <section class="section">
+      <h2>Контакти</h2>
+      <p>Звʼязок: <br />Email: support@pidkraybet.ua <br />Telegram: <a href="https://t.me/favbetua" style="color:#ffb347" target="_blank">@favbetua</a></p>
+      <p>💳 Для підтримки сайту: <strong>4149 5110 2688 8354</strong> — на розвиток ПідкрайБет ❤️</p>
+      <img
+        src="https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=800&q=80"
+        alt="Контакти"
+        class="banner"
+      />
+    </section>
+  </main>
+
+  <!-- ФУТЕР -->
+  <footer class="footer">
+    <p>&copy; 2025 ПідкрайБет. Усі права захищені.</p>
+    <p>Створено з любовʼю до футболу ⚽</p>
+  </footer>
+
+  <!-- ЧАТ ПІДТРИМКИ -->
+  <div id="chat-container">
+    <div id="chat-header">Підтримка</div>
+    <div id="chat-messages"></div>
+    <div id="chat-input-container">
+      <input id="chat-input" placeholder="Напиши питання..." />
+      <button id="chat-send-btn">Відправити</button>
+    </div>
+  </div>
+
+  <script>
+    // Вкладки
+    const links = document.querySelectorAll("nav a");
+    const sections = document.querySelectorAll(".section");
+
+    function showSection(idx) {
+      sections.forEach((sec, i) => {
+        sec.classList.toggle("active", i === idx);
+      });
+      links.forEach((link, i) => {
+        link.classList.toggle("active", i === idx);
+      });
+    }
+
+    links.forEach((link, idx) => {
+      link.addEventListener("click", () => showSection(idx));
+    });
+
+    showSection(0);
+
+    // Ставки — кнопка
+    const betButtons = document.querySelectorAll(".bet-btn");
+    betButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const match = btn.getAttribute("data-match");
+        alert(
+          `Дякуємо за ставку на матч:\n"${match}"\n\nРеквізити для оплати:\n` +
+          `Картка Monobank: 4149 5110 2688 8354\n\n` +
+          `Підтримуйте ПідкрайБет!`
+        );
+      });
+    });
+
+    // Чат підтримки - простий бот
+    const chatMessages = document.getElementById("chat-messages");
+    const chatInput = document.getElementById("chat-input");
+    const chatSendBtn = document.getElementById("chat-send-btn");
+
+    function addMessage(text, sender) {
+      const div = document.createElement("div");
+      div.classList.add("chat-message", sender);
+      div.textContent = text;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function botResponse(msg) {
+      msg = msg.toLowerCase();
+      if (msg.includes("привіт") || msg.includes("добрий")) {
+        return "Привіт! Чим можу допомогти?";
+      }
+      if (msg.includes("ставка")) {
+        return "Щоб зробити ставку, оберіть матч та натисніть кнопку «Поставити».";
+      }
+      if (msg.includes("карта") || msg.includes("реквізити")) {
+        return "Реквізити для оплати: картка Monobank 4149 5110 2688 8354.";
+      }
+      if (msg.includes("контакт") || msg.includes("підтримка")) {
+        return "Пишіть на support@pidkraybet.ua або у Telegram @favbetua.";
+      }
+      return "Вибачте, я не розумію. Спробуйте запитати щось інше.";
+    }
+
+    chatSendBtn.addEventListener("click", () => {
+      const userText = chatInput.value.trim();
+      if (!userText) return;
+      addMessage(userText, "user");
+      chatInput.value = "";
+      setTimeout(() => {
+        addMessage(botResponse(userText), "bot");
+      }, 800);
+    });
+
+    chatInput.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        chatSendBtn.click();
+      }
+    });
+  </script>
+</body>
+</html>
