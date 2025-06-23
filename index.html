@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ПідкрайБЕТ — Найкращий букмекерський сайт</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Rubik', sans-serif;
+      background-color: #121212;
+      color: #f2f2f2;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(to right, #ff8800, #ff4d00);
+      color: #fff;
+      padding: 30px;
+      text-align: center;
+      font-size: 2.5rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      animation: slideDown 1s ease forwards;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      background: #1a1a1a;
+      box-shadow: 0 2px 5px rgba(255, 136, 0, 0.4);
+      position: sticky;
+      top: 88px;
+      z-index: 999;
+      animation: slideDown 1.2s ease forwards;
+    }
+
+    nav a {
+      color: #ff8800;
+      padding: 15px 25px;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 3px;
+      bottom: 0;
+      left: 0;
+      background-color: #ff8800;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      background: #ff8800;
+      color: #121212;
+    }
+
+    main {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+      background: #1e1e1e;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255, 136, 0, 0.3);
+      min-height: 500px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section {
+      display: none;
+      animation: fadeInUp 0.7s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+      text-align: center;
+    }
+
+    .section.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      color: #ff8800;
+      margin-bottom: 20px;
+      font-weight: 800;
+      font-size: 2.4rem;
+      text-shadow: 1px 1px 3px #e06d00;
+      animation: glow 2s infinite alternate;
+    }
+
+    p {
+      max-width: 800px;
+      margin: 0 auto 30px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #ddd;
+      text-shadow: 0 0 3px #222;
+    }
+
+    .match-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 1rem;
+      box-shadow: 0 0 10px rgba(255,136,0,0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .match-table th,
+    .match-table td {
+      padding: 15px;
+      border: 1px solid #333;
+      text-align: center;
+      background: #2b2b2b;
+      color: #ffb366;
+      transition: background 0.3s ease;
+    }
+
+    .match-table th {
+      background-color: #3a3a3a;
+      color: #ff8800;
+      font-weight: 700;
+    }
+
+    .match-table tr:hover td {
+      background: #ff8800;
+      color: #121212;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .bet-btn {
+      background: #ff8800;
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff8800aa;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      font-size: 1rem;
+      user-select: none;
+    }
+
+    .bet-btn:hover {
+      background: #ff6600;
+      box-shadow: 0 0 20px #ff6600cc;
+    }
+
+    .footer {
+      background: #1a1a1a;
+      color: #ff8800;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      user-select: none;
+    }
+
+    .banner {
+      width: 100%;
+      border-radius: 12px;
+      margin: 30px 0 40px;
+      box-shadow: 0 0 20px rgba(255, 136, 0, 0.4);
+      max-height: 400px;
+      object-fit: contain;
+      cursor: default;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    /* Анімації */
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 8px #ff8800, 0 0 20px #ff6600;
+      }
+      to {
+        text-shadow: 0 0 20px #ffa500, 0 0 30px #ff4500;
+      }
+    }
+
+    @keyframes slideDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const links = document.querySelectorAll("nav a");
+      const sections = document.querySelectorAll(".section");
+
+      function showSection(index) {
+        sections.forEach((s, i) => {
+          s.classList.toggle("active", i === index);
+        });
+        links.forEach((l, i) => {
+          l.classList.toggle("active", i === index);
+        });
+      }
+
+      links.forEach((link, idx) =>
+        link.addEventListener("click", () => showSection(idx))
+      );
+
+      showSection(0);
+
+      // Кнопки ставок відкривають вікно з реквізитами
+      const betButtons = document.querySelectorAll(".bet-btn");
+      betButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          alert(
+            "Реквізити для ставки:\n\n" +
+              "Картка Monobank:\n4149 5110 2688 8354\n\n" +
+              "Дякуємо за підтримку ПідкрайБет!"
+          );
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <header>
+    ПІДКРАЙБЕТ
+    <br /><small>Найкращий букмекерський сайт. Творець: Головін В.С.</small>
+  </header>
+  <nav>
+    <a href="javascript:void(0)">Головна</a>
+    <a href="javascript:void(0)">Ставки</a>
+    <a href="javascript:void(0)">Live</a>
+    <a href="javascript:void(0)">Казино</a>
+    <a href="javascript:void(0)">Контакти</a>
+  </nav>
+  <main>
+    <div class="section active">
+      <h2>Ласкаво просимо!</h2>
+      <p>
+        Роби ставки на улюблені матчі, включно з легендарним дербі
+        <strong>Підкрай — Гімназія</strong>.
+      </p>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/UEFA_Champions_League_logo_2.svg/1024px-UEFA_Champions_League_logo_2.svg.png"
+        alt="Ліга Чемпіонів"
+        class="banner"
+      />
+    </div>
+    <div class="section">
+      <h2>Сьогоднішні матчі</h2>
+      <table class="match-table">
+        <thead>
+          <tr>
+            <th>Матч</th>
+            <th>Час</th>
+            <th>1</th>
+            <th>X</th>
+            <th>2</th>
+            <th>Ставка</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Підкрай — Гімназія</td>
+            <td>18:00</td>
+            <td>2.20</td>
+            <td>3.15</td>
+            <td>2.55</td>
+            <td><button class="bet-btn">Поставити</button></td>
+          </tr>
+          <tr>
+            <td>Іспанія — Італія</td>
+            <td>21:00</td>
+            <td>2.00</td>
+            <td>3.30</td>
+            <td>3.60</td>
+            <td><button class="bet-btn">Поставити</button></td>
+          </tr>
+          <tr>
+            <td>Франція — Польща</td>
+            <td>22:00</td>
+            <td>1.55</td>
+            <td>3.80</td>
+            <td>6.10</td>
+            <td><button class="bet-btn">Поставити</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="section">
+      <h2>Live ставки</h2>
+      <p>Тут з'являються матчі в реальному часі. Стеж за змінами коефіцієнтів!</p>
+      <img
+        src="https://images.unsplash.com/photo-1502880202006-45e9f7eede34?auto=format&fit=crop&w=800&q=80"
+        alt="Live матч"
+        class="banner"
+      />
+    </div>
+    <div class="section">
+      <h2>Казино</h2>
+      <p>Незабаром запускаємо найкращі слоти, рулетку та live казино. Працюємо над цим!</p>
+      <img
+        src="https://images.unsplash.com/photo-1555529669-2dff6d8a0f4d?auto=format&fit=crop&w=800&q=80"
+        alt="Казино"
+        class="banner"
+      />
+    </div>
+    <div class="section">
+      <h2>Контакти</h2>
+      <p>
+        Звʼязок: <br />
+        Email: support@pidkraybet.ua <br />
+        Telegram:
+        <a href="https://t.me/favbetua" style="color:#ff8800" target="_blank"
+          >@favbetua</a
+        >
+      </p>
+      <p>
+        💳 Для підтримки сайту: <strong>4149 5110 2688 8354</strong> — на розвиток
+        ПідкрайБет ❤️
+      </p>
+      <img
+        src="https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=800&q=80"
+        alt="Контакти"
+        class="banner"
+      />
+    </div>
+  </main>
+  <div class="footer">
+    <p>&copy; 2025 ПідкрайБет. Усі права захищені.</p>
+    <p>Створено з любовʼю до футболу ⚽</p>
+  </div>
+</body>
+</html>
