@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>teXbet — Найкращий букмекерський сайт</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+  body {
+    margin:0; padding:0; font-family: 'Orbitron', sans-serif; background: linear-gradient(135deg, #000428, #004e92);
+    color: white; min-height: 100vh; display: flex; flex-direction: column;
+  }
+  header {
+    background: #001f4d;
+    padding: 15px 30px;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 0 15px #00ACFF;
+  }
+  header .logo {
+    font-size: 28px;
+    font-weight: 900;
+    color: #00ACFF;
+    letter-spacing: 0.1em;
+    user-select: none;
+    text-shadow: 0 0 10px #00ACFF;
+  }
+  nav button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    margin-left: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+    user-select: none;
+  }
+  nav button:hover, nav button.active {
+    color: #00ACFF;
+    text-decoration: underline;
+  }
+  main {
+    flex-grow: 1;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  section {
+    display: none;
+  }
+  section.active {
+    display: block;
+  }
+  .match {
+    background: #003366;
+    border: 1px solid #00ACFF;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+  }
+  .match h3 {
+    margin: 0 0 10px;
+  }
+  .odds {
+    display: flex;
+    justify-content: space-around;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .odds div {
+    flex: 1;
+    text-align: center;
+  }
+  button.bet-btn {
+    background: linear-gradient(90deg, #00ACFF, #004e92);
+    border: none;
+    border-radius: 6px;
+    padding: 10px 0;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s;
+    user-select: none;
+  }
+  button.bet-btn:hover {
+    background: linear-gradient(90deg, #004e92, #00ACFF);
+  }
+  /* Modal */
+  .modal {
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  .modal-content {
+    background: #00264d;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 0 15px #00ACFF;
+  }
+  .modal-content h2 {
+    margin-top: 0;
+    color: #00ACFF;
+  }
+  .modal-content input[type=number] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #00ACFF;
+    background: #001f3f;
+    color: white;
+    margin-bottom: 20px;
+  }
+  .modal-content button {
+    background: #00ACFF;
+    border: none;
+    color: black;
+    font-weight: 700;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    user-select: none;
+  }
+  .modal-content button.cancel {
+    background: transparent;
+    color: white;
+    margin-top: 10px;
+    border: 1px solid #00ACFF;
+  }
+  /* News */
+  .news-item {
+    background: #003366;
+    margin-bottom: 15px;
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 1px solid #00ACFF;
+  }
+  /* Casino */
+  .casino-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .casino-item {
+    flex: 1 1 250px;
+    background: #003366;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #00ACFF;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+    transition: box-shadow 0.3s;
+  }
+  .casino-item:hover {
+    box-shadow: 0 0 15px #00ACFF;
+  }
+  footer {
+    text-align: center;
+    padding: 15px;
+    color: #007acc;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">teXbet</div>
+  <nav>
+    <button id="tab-live" class="active">Live ставки</button>
+    <button id="tab-news">Новини</button>
+    <button id="tab-casino">Казино</button>
+  </nav>
+</header>
+<main>
+  <section id="live" class="active" aria-label="Live ставки">
+    <h2>🎯 Live-матчі</h2>
+    <div id="matches-container"></div>
+  </section>
+  <section id="news" aria-label="Новини">
+    <h2>📰 Спортивні новини</h2>
+    <div id="news-container"></div>
+  </section>
+  <section id="casino" aria-label="Казино">
+    <h2>🎰 Казино</h2>
+    <div class="casino-list" id="casino-container"></div>
+  </section>
+</main>
+
+<!-- Модалка для ставки -->
+<div id="bet-modal" class="modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="bet-modal-title">
+  <div class="modal-content">
+    <h2 id="bet-modal-title">Зробити ставку</h2>
+    <p id="bet-match-info"></p>
+    <input type="number" id="bet-amount" placeholder="Сума ставки в UAH" min="1" />
+    <button id="pay-btn">Оплатити через Apple Pay / Google Pay</button>
+    <button id="cancel-btn" class="cancel">Відмінити</button>
+  </div>
+</div>
+
+<footer>
+  © 2025 teXbet — букмекерський сайт від Ілона Маска
+</footer>
+
+<script>
+  // Дані матчів (можна доповнити або оновлювати)
+  const matches = [
+    {
+      id: 1,
+      sport: "Футбол",
+      team1: "Барселона",
+      team2: "Реал Мадрид",
+      odds: { team1: 2.1, draw: 3.2, team2: 3.5 },
+      time: "45:00",
+    },
+    {
+      id: 2,
+      sport: "UFC",
+      team1: "Конор МакГрегор",
+      team2: "Майкл Чендлер",
+      odds: { team1: 1.8, team2: 2.2 },
+      time: "Round 3",
+    },
+    {
+      id: 3,
+      sport: "Баскетбол",
+      team1: "Лейкерс",
+      team2: "Буллз",
+      odds: { team1: 1.95, draw: 0, team2: 2.05 },
+      time: "3rd Quarter",
+    },
+  ];
+
+  // Новини
+  const news = [
+    { id: 1, title: "Барселона обіграла Реал у класичному матчі!", time: "10 хв тому" },
+    { id: 2, title: "Конор МакГрегор анонсував новий бій", time: "1 год тому" },
+    { id: 3, title: "Нова зірка у світі баскетболу — молодий талант Лейкерс", time: "3 год тому" },
+  ];
+
+  // Казино
+  const casinoGames = [
+    { id: 1, name: "Слоти", provider: "NetEnt" },
+    { id: 2, name: "Рулетка", provider: "Evolution" },
+    { id: 3, name: "Покер", provider: "Pragmatic Play" },
+  ];
+
+  const matchesContainer = document.getElementById("matches-container");
+  const newsContainer = document.getElementById("news-container");
+  const casinoContainer = document.getElementById("casino-container");
+  const betModal = document.getElementById("bet-modal");
+  const betMatchInfo = document.getElementById("bet-match-info");
+  const betAmountInput = document.getElementById("bet-amount");
+  const payBtn = document.getElementById("pay-btn");
+  const cancelBtn = document.getElementById("cancel-btn");
+
+  let currentBetMatch = null;
+
+  // Відображення матчів
+  function renderMatches() {
+    matchesContainer.innerHTML = "";
+    matches.forEach((match) => {
+      const div = document.createElement("div");
+      div.className = "match";
+      div.innerHTML = `
+        <h3>${match.team1} vs ${match.team2} <small style="color:#00ACFF">(${match.sport})</small></h3>
+        <div class="odds">
+          <div><strong>${match.odds.team1.toFixed(2)}</strong><br>${match.team1}</div>
+          ${match.odds.draw ? `<div><strong>${match.odds.draw.toFixed(2)}</strong><br>Нічия</div>` : ""}
+          <div><strong>${match.odds.team2.toFixed(2)}</strong><br>${match.team2}</div>
+        </div>
+        <div>Час: ${match.time}</div>
+        <button class="bet-btn" data-id="${match.id}">Зробити ставку</button>
+      `;
+      matchesContainer.appendChild(div);
+    });
+
+    // Додаємо події на кнопки ставок
+    document.querySelectorAll(".bet-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = parseInt(btn.getAttribute("data-id"));
+        openBetModal(id);
+      });
+    });
+  }
+
+  // Відображення новин
+  function renderNews() {
+    newsContainer.innerHTML = "";
+    news.forEach((item) => {
+      const div = document.createElement("div");
+      div.className = "news-item";
+      div.innerHTML = `<strong>${item.title}</strong><br><small>${item.time}</small>`;
+      newsContainer.appendChild(div);
+    });
+  }
+
+  // Відображення казино
+  function renderCasino() {
+    casinoContainer.innerHTML = "";
+    casinoGames.forEach((game) => {
+      const div = document.createElement("div");
+      div.className = "casino-item";
+      div.textContent = `${game.name} від ${game.provider}`;
+      casinoContainer.appendChild(div);
+    });
+  }
+
+  // Відкриття модалки ставок
+  function openBetModal(matchId) {
+    currentBetMatch = matches.find((m) => m.id === matchId);
+    betMatchInfo.textContent = `${currentBetMatch.team1} vs ${currentBetMatch.team2}`;
+    betAmountInput.value = "";
+    betModal.style.display = "flex";
+    betAmountInput.focus();
+  }
+
+  // Закриття модалки
+  function closeBetModal() {
+    betModal.style.display = "none";
+  }
+
+  // Обробка оплати (демо)
+  function handlePayment() {
+    const amount = parseFloat(betAmountInput.value);
+    if (isNaN(amount) || amount <= 0) {
+      alert("Введіть коректну суму ставки");
+      betAmountInput.focus();
+      return;
+    }
+    alert(`Ви зробили ставку ${amount.toFixed(2)} UAH на матч ${currentBetMatch.team1} vs ${currentBetMatch.team2} (демо)`);
+    closeBetModal();
+  }
+
+  // Навігація по вкладках
+  function setupTabs() {
+    const tabs = ["live", "news", "casino"];
+    tabs.forEach((tabId) => {
+      document.getElementById("tab-" + tabId).addEventListener("click", () => {
+        tabs.forEach((t) => {
+          document.getElementById("tab-" + t).classList.remove("active");
+          document.getElementById(t).classList.remove("active");
+        });
+        document.getElementById("tab-" + tabId).classList.add("active");
+        document.getElementById(tabId).classList.add("active");
+      });
+    });
+  }
+
+  // Ініціалізація
+  renderMatches();
+  renderNews();
+  renderCasino();
+  setupTabs();
+
+  payBtn.addEventListener("click", handlePayment);
+  cancelBtn.addEventListener("click", closeBetModal);
+
+</script>
+</body>
+</html>
+
+
