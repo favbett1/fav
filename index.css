@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Додаткові стилі якщо хочеш */
+body {
+  background: linear-gradient(to bottom, #000000, #1a202c, #000000);
+  font-family: 'Orbitron', sans-serif, system-ui, sans-serif;
+  color: white;
+}
