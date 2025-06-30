@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>teXbet — букмекерський сайт від Головніна Вадима</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin:0; padding:0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #0d1b2a, #1b263b);
+    color: #e0e6f2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    background: #14213d;
+    padding: 20px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 0 25px #00bfff88;
+    user-select: none;
+  }
+  .logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 2.4rem;
+    color: #00bfff;
+    letter-spacing: 0.15em;
+    text-shadow: 0 0 15px #00bfff;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  nav button {
+    background: transparent;
+    border: none;
+    color: #a9bcd0;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 12px;
+    transition:
+      color 0.3s ease,
+      background 0.3s ease,
+      transform 0.15s ease;
+    user-select: none;
+  }
+  nav button:hover, nav button.active {
+    color: #14213d;
+    background: #00bfff;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px #00bfffaa;
+  }
+  main {
+    flex-grow: 1;
+    max-width: 1100px;
+    margin: 30px auto;
+    width: 95%;
+    padding-bottom: 60px;
+  }
+  section {
+    display: none;
+    animation: fadeIn 0.6s ease forwards;
+  }
+  section.active {
+    display: block;
+  }
+  .match {
+    background: #1b263b;
+    border-radius: 16px;
+    box-shadow: 0 0 15px #00bfff80;
+    margin-bottom: 22px;
+    padding: 25px 30px;
+    transition: box-shadow 0.4s ease;
+  }
+  .match:hover {
+    box-shadow: 0 0 25px #00bfffcc;
+  }
+  .match h3 {
+    margin: 0 0 12px;
+    font-size: 1.5rem;
+    color: #00bfff;
+    user-select: text;
+  }
+  .odds {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+  .odds div {
+    flex: 1;
+    text-align: center;
+    user-select: text;
+    color: #d1d9e6;
+  }
+  .odds div strong {
+    display: block;
+    font-size: 1.4rem;
+    color: #00bfff;
+    margin-bottom: 4px;
+  }
+  .time {
+    font-size: 1rem;
+    color: #7a8ca7;
+    margin-bottom: 18px;
+  }
+  button.bet-btn {
+    width: 100%;
+    padding: 14px 0;
+    background: linear-gradient(90deg, #00bfff, #005f99);
+    border: none;
+    border-radius: 20px;
+    font-weight: 900;
+    font-size: 1.3rem;
+    color: #14213d;
+    cursor: pointer;
+    box-shadow: 0 0 12px #00bfffaa;
+    transition: background 0.3s ease, transform 0.15s ease;
+    user-select: none;
+  }
+  button.bet-btn:hover {
+    background: linear-gradient(90deg, #005f99, #00bfff);
+    transform: scale(1.07);
+  }
+  .modal {
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(10, 10, 30, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .modal.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .modal-content {
+    background: #14213d;
+    border-radius: 20px;
+    padding: 35px 30px 40px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 0 30px #00bfffaa;
+    user-select: none;
+  }
+  .modal-content h2 {
+    margin-top: 0;
+    color: #00bfff;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+  }
+  .modal-content p {
+    margin: 18px 0 20px;
+    font-size: 1.1rem;
+    color: #a9bcd0;
+  }
+  .modal-content input[type=number], .modal-content input[type=text], .modal-content input[type=password] {
+    width: 100%;
+    padding: 15px 18px;
+    font-size: 1.2rem;
+    border-radius: 14px;
+    border: 2px solid #00bfff;
+    background: #1b263b;
+    color: #d1d9e6;
+    outline-offset: 4px;
+    user-select: text;
+    margin-bottom: 15px;
+  }
+  .modal-content input[type=number]:focus, 
+  .modal-content input[type=text]:focus, 
+  .modal-content input[type=password]:focus {
+    border-color: #00e0ff;
+    outline: none;
+  }
+  .modal-content button {
+    margin-top: 10px;
+    background: #00bfff;
+    border: none;
+    border-radius: 20px;
+    padding: 15px 0;
+    font-weight: 900;
+    font-size: 1.3rem;
+    color: #14213d;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 0 0 12px #00bfffcc;
+    transition: background 0.3s ease;
+    user-select: none;
+  }
+  .modal-content button:hover {
+    background: #00e0ff;
+  }
+  .modal-content button.cancel {
+    background: transparent;
+    color: #00bfff;
+    margin-top: 16px;
+    border: 2px solid #00bfff;
+  }
+  .modal-content button.cancel:hover {
+    background: #003359;
+    color: #00e0ff;
+  }
+  .news-item {
+    background: #1b263b;
+    margin-bottom: 18px;
+    padding: 20px 28px;
+    border-radius: 20px;
+    border: 2px solid #00bfff;
+    user-select: text;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    transition: background 0.3s ease;
+    cursor: default;
+  }
+  .news-item:hover {
+    background: #002040;
+  }
+  .casino-list {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    user-select: none;
+  }
+  .casino-item {
+    flex: 1 1 280px;
+    background: #1b263b;
+    padding: 28px 20px;
+    border-radius: 22px;
+    border: 2px solid #00bfff;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #00bfff;
+    cursor: pointer;
+    box-shadow: 0 0 15px #00bfff99;
+    transition: box-shadow 0.3s ease, transform 0.15s ease;
+  }
+  .casino-item:hover {
+    box-shadow: 0 0 25px #00bfffcc;
+    transform: scale(1.07);
+  }
+  footer {
+    text-align: center;
+    padding: 22px 15px;
+    font-weight: 700;
+    color: #00bfff;
+    font-family: 'Orbitron', sans-serif;
+    user-select: none;
+    letter-spacing: 0.12em;
+    border-top: 1px solid #00bfff44;
+  }
+  @media (max-width: 700px) {
+    nav button {
+      font-size: 0.9rem;
+      padding: 8px 15px;
+    }
+    main {
+      margin: 20px auto;
+      width: 90%;
+      padding-bottom: 50px;
+    }
+    .casino-list {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(15px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+  #bet-history {
+    margin-top: 32px;
+    max-height: 160px;
+    overflow-y: auto;
+    background: #14213d;
+    border-radius: 16px;
+    padding: 20px 25px;
+    font-size: 1rem;
+    color: #7aa7f7;
+    box-shadow: inset 0 0 8px #00bfff44;
+  }
+  #bet-history h3 {
+    margin-top: 0;
+    font-family: 'Orbitron', sans-serif;
+    color: #00bfff;
+    font-weight: 900;
+    font-size: 1.3rem;
+    user-select: none;
+  }
+  #bet-history ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 8px 0 0 0;
+  }
+  #bet-history li {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #003459;
+    padding-bottom: 6px;
+    user-select: text;
+  }
+  #user-info {
+    color: #00bfff;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    margin-left: 15px;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo" aria-label="Логотип teXbet">teXbet</div>
+  <nav role="navigation" aria-label="Головне меню">
+    <button id="tab-live" class="active" aria-controls="live" aria-selected="true">Live ставки</button>
+    <button id="tab-news" aria-controls="news" aria-selected="false">Новини</button>
+    <button id="tab-casino" aria-controls="casino" aria-selected="false">Казино</button>
+    <button id="tab-login" aria-controls="login" aria-selected="false">Вхід / Реєстрація</button>
+  </nav>
+  <div id="user-info" aria-live="polite" aria-atomic="true"></div>
+</header>
+<main>
+  <section id="live" class="active" aria-label="Live ставки" tabindex="0">
+    <h2>🎯 Live-матчі</h2>
+    <div id="matches-container" role="list" aria-live="polite" aria-atomic="true"></div>
+    <div id="bet-history" aria-label="Історія ставок">
+      <h3>Історія ставок</h3>
+      <ul id="history-list"></ul>
+    </div>
+  </section>
+  <section id="news" aria-label="Новини" tabindex="0">
+    <h2>📰 Спортивні новини</h2>
+    <div id="news-container"></div>
+  </section>
+  <section id="casino" aria-label="Казино" tabindex="0">
+    <h2>🎰 Казино</h2>
+    <div class="casino-list" id="casino-container"></div>
+  </section>
+  <section id="login" aria-label="Вхід та реєстрація" tabindex="0">
+    <h2>🔑 Вхід / Реєстрація</h2>
+    <form id="login-form" aria-label="Форма входу">
+      <input type="text" id="username" placeholder="Логін" autocomplete="username" required aria-required="true" />
+      <input type="password" id="password" placeholder="Пароль" autocomplete="current-password" required aria-required="true" />
+      <button type="submit" id="login-btn">Увійти</button>
+    </form>
+    <form id="register-form" aria-label="Форма реєстрації" style="margin-top:20px;">
+      <input type="text" id="reg-username" placeholder="Новий логін" autocomplete="username" required aria-required="true" />
+      <input type="password" id="reg-password" placeholder="Новий пароль" autocomplete="new-password" required aria-required="true" />
+      <button type="submit" id="register-btn">Зареєструватися</button>
+    </form>
+  </section>
+</main>
+
+<div id="bet-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="bet-modal-title" aria-describedby="bet-modal-desc">
+  <div class="modal-content">
+    <h2 id="bet-modal-title">Зробити ставку</h2>
+    <p id="bet-modal-desc"></p>
+    <input type="number" id="bet-amount" placeholder="Сума ставки в UAH" min="1" aria-label="Сума ставки в гривнях" />
+    <button id="pay-btn">Оплатити через Apple Pay / Google Pay</button>
+    <button id="cancel-btn" class="cancel">Відмінити</button>
+  </div>
+</div>
+
+<footer>
+  © 2025 teXbet — букмекерський сайт від Головніна Вадима
+</footer>
+
+<script>
+  // Ключ API
+  const API_KEY = '15687e1fc75dff9890d58aa512214463';
+  const SPORT_KEY = 'soccer_epl'; // Англійська Прем'єр-ліга
+  const ODDS_API_URL = `https://api.the-odds-api.com/v4/sports/${SPORT_KEY}/odds/?apiKey=${API_KEY}&regions=uk&markets=h2h`;
+
+  // DOM елементи
+  const matchesContainer = document.getElementById("matches-container");
+  const newsContainer = document.getElementById("news-container");
+  const casinoContainer = document.getElementById("casino-container");
+  const betModal = document.getElementById("bet-modal");
+  const betModalDesc = document.getElementById("bet-modal-desc");
+  const betAmountInput = document.getElementById("bet-amount");
+  const payBtn = document.getElementById("pay-btn");
+  const cancelBtn = document.getElementById("cancel-btn");
+  const historyList = document.getElementById("history-list");
+  const userInfo = document.getElementById("user-info");
+
+  let currentBetMatch = null;
+  let betHistory = [];
+  let matches = [];
+
+  // --- АВТОРИЗАЦІЯ ---
+  // Зберігаємо користувачів у localStorage (примітивно)
+  // userData = { username: string, password: string, balance: number }
+
+  function getUsers() {
+    return JSON.parse(localStorage.getItem('teXbet_users') || '{}');
+  }
+  function saveUsers(users) {
+    localStorage.setItem('teXbet_users', JSON.stringify(users));
+  }
+
+  function getCurrentUser() {
+    return JSON.parse(localStorage.getItem('teXbet_currentUser') || 'null');
+  }
+  function setCurrentUser(user) {
+    localStorage.setItem('teXbet_currentUser', JSON.stringify(user));
+  }
+  function clearCurrentUser() {
+    localStorage.removeItem('teXbet_currentUser');
+  }
+
+  function updateUserInfo() {
+    const user = getCurrentUser();
+    if (user) {
+      userInfo.textContent = `Привіт, ${user.username}! Баланс: ${user.balance.toFixed(2)} грн`;
+    } else {
+      userInfo.textContent = '';
+    }
+  }
+
+  // Реєстрація
+  const registerForm = document.getElementById('register-form');
+  registerForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const username = document.getElementById('reg-username').value.trim();
+    const password = document.getElementById('reg-password').value.trim();
+    if (!username || !password) return alert('Введіть логін і пароль');
+    let users = getUsers();
+    if (users[username]) {
+      alert('Користувач з таким логіном вже існує');
+      return;
+    }
+    users[username] = { username, password, balance: 1000 }; // стартовий баланс 1000 грн
+    saveUsers(users);
+    alert('Реєстрація успішна! Тепер увійдіть');
+    registerForm.reset();
+  });
+
+  // Логін
+  const loginForm = document.getElementById('login-form');
+  loginForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    if (!username || !password) return alert('Введіть логін і пароль');
+    const users = getUsers();
+    if (!users[username] || users[username].password !== password) {
+      alert('Невірний логін або пароль');
+      return;
+    }
+    setCurrentUser(users[username]);
+    alert(`Ласкаво просимо, ${username}!`);
+    loginForm.reset();
+    updateUserInfo();
+    // Перейти на Live ставки після входу
+    activateTab('tab-live');
+  });
+
+  // Вихід
+  userInfo.addEventListener('click', () => {
+    if (getCurrentUser()) {
+      if (confirm('Вийти з облікового запису?')) {
+        clearCurrentUser();
+        updateUserInfo();
+        alert('Ви вийшли з облікового запису');
+      }
+    }
+  });
+
+  updateUserInfo();
+
+  // --- Завантаження матчів ---
+  async function fetchMatches() {
+    try {
+      const response = await fetch(ODDS_API_URL);
+      if (!response.ok) throw new Error("Не вдалось завантажити дані");
+      const data = await response.json();
+      matches = data;
+      renderMatches();
+    } catch (e) {
+      matchesContainer.innerHTML = `<p style="color:#ff5555; user-select:none;">Помилка завантаження даних: ${e.message}</p>`;
+    }
+  }
+
+  // --- Відображення матчів ---
+  function renderMatches() {
+    matchesContainer.innerHTML = "";
+    if (!matches.length) {
+      matchesContainer.innerHTML = '<p>Матчів немає.</p>';
+      return;
+    }
+    matches.forEach(match => {
+      // Без Live статусу, але є початок
+      const startTime = new Date(match.commence_time);
+      const timeStr = startTime.toLocaleString();
+
+      // Коефіцієнти (h2h = перемога 1, нічия, перемога 2)
+      let odds1 = null, oddsDraw = null, odds2 = null;
+      const h2hMarket = match.bookmakers?.[0]?.markets?.find(m => m.key === "h2h");
+      if (h2hMarket) {
+        const outcomes = h2hMarket.outcomes;
+        odds1 = outcomes.find(o => o.name === match.home_team)?.price ?? null;
+        odds2 = outcomes.find(o => o.name === match.away_team)?.price ?? null;
+        oddsDraw = outcomes.find(o => o.name === "Draw")?.price ?? null;
+      }
+
+      // Відсутність коефіцієнтів - ігноруємо
+      if (!odds1 && !odds2) return;
+
+      // HTML для коефіцієнтів
+      let oddsHtml = `
+        <div><strong>${odds1?.toFixed(2) ?? "-"}</strong> ${match.home_team}</div>
+        ${oddsDraw !== null ? `<div><strong>${oddsDraw.toFixed(2)}</strong> Нічия</div>` : ''}
+        <div><strong>${odds2?.toFixed(2) ?? "-"}</strong> ${match.away_team}</div>
+      `;
+
+      const matchDiv = document.createElement("div");
+      matchDiv.className = "match";
+      matchDiv.innerHTML = `
+        <h3>${match.home_team} vs ${match.away_team}</h3>
+        <div class="time">Початок: ${timeStr}</div>
+        <div class="odds">${oddsHtml}</div>
+        <button class="bet-btn" data-id="${match.id}">Зробити ставку</button>
+      `;
+      matchesContainer.appendChild(matchDiv);
+    });
+    attachBetButtons();
+  }
+
+  // --- Кнопки ставки ---
+  function attachBetButtons() {
+    const btns = document.querySelectorAll(".bet-btn");
+    btns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-id");
+        openBetModal(id);
+      });
+    });
+  }
+
+  // --- Модалка ставки ---
+  function openBetModal(matchId) {
+    if (!getCurrentUser()) {
+      alert("Будь ласка, увійдіть або зареєструйтесь, щоб робити ставки.");
+      activateTab('tab-login');
+      return;
+    }
+    currentBetMatch = matches.find(m => m.id == matchId);
+    if (!currentBetMatch) return alert("Матч не знайдено");
+    let oddsText = '';
+    const h2hMarket = currentBetMatch.bookmakers?.[0]?.markets?.find(m => m.key === "h2h");
+    if (h2hMarket) {
+      const outcomes = h2hMarket.outcomes;
+      oddsText = outcomes.map(o => `${o.name}: ${o.price.toFixed(2)}`).join(', ');
+    }
+    betModalDesc.textContent = `Ставка на матч: ${currentBetMatch.home_team} vs ${currentBetMatch.away_team}. Коефіцієнти: ${oddsText}`;
+    betAmountInput.value = "";
+    betModal.classList.add("show");
+    betAmountInput.focus();
+  }
+  function hideModal() {
+    betModal.classList.remove("show");
+  }
+
+  // --- Оплата ставки ---
+  payBtn.addEventListener("click", () => {
+    if (!getCurrentUser()) {
+      alert("Будь ласка, увійдіть, щоб зробити ставку.");
+      activateTab('tab-login');
+      hideModal();
+      return;
+    }
+    const amount = parseFloat(betAmountInput.value);
+    if (!amount || amount < 1) {
+      alert("Введіть суму ставки від 1 гривні");
+      betAmountInput.focus();
+      return;
+    }
+    let user = getCurrentUser();
+    if (user.balance < amount) {
+      alert("Недостатньо коштів на балансі.");
+      betAmountInput.focus();
+      return;
+    }
+    // Імітація оплати через Apple Pay / Google Pay
+    alert(`Оплата ${amount.toFixed(2)} грн пройшла успішно! Ставка прийнята.`);
+    user.balance -= amount;
+    updateUserBalance(user);
+    addBetHistory(currentBetMatch, amount);
+    hideModal();
+  });
+
+  cancelBtn.addEventListener("click", hideModal);
+
+  // --- Історія ставок ---
+  function addBetHistory(match, amount) {
+    const bet = {
+      id: Date.now(),
+      match: `${match.home_team} vs ${match.away_team}`,
+      amount: amount.toFixed(2),
+      time: new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}),
+    };
+    betHistory.unshift(bet);
+    if (betHistory.length > 10) betHistory.pop();
+    renderBetHistory();
+  }
+  function renderBetHistory() {
+    historyList.innerHTML = "";
+    betHistory.forEach(bet => {
+      const li = document.createElement("li");
+      li.textContent = `[${bet.time}] ${bet.match} — Сума: ${bet.amount} грн`;
+      historyList.appendChild(li);
+    });
+  }
+
+  // --- Новини (фейкові) ---
+  const news = [
+    "Перемога України у чемпіонаті світу з футболу!",
+    "Неймовірний камбек від Барселони!",
+    "Змагання UFC перенесено через погоду.",
+    "Лейкерс встановили новий рекорд перемог.",
+    "Ексклюзивне інтерв'ю з чемпіоном світу.",
+  ];
+  function renderNews() {
+    newsContainer.innerHTML = "";
+    news.forEach(n => {
+      const div = document.createElement("div");
+      div.className = "news-item";
+      div.textContent = n;
+      newsContainer.appendChild(div);
+    });
+  }
+
+  // --- Казино (фейкові провайдери) ---
+  const casinoGames = [
+    {name: "Mega Jack", provider: "Pragmatic Play"},
+    {name: "Starburst", provider: "NetEnt"},
+    {name: "Book of Ra", provider: "Novomatic"},
+    {name: "Gonzo's Quest", provider: "NetEnt"},
+    {name: "Sweet Bonanza", provider: "Pragmatic Play"},
+  ];
+  function renderCasino() {
+    casinoContainer.innerHTML = "";
+    casinoGames.forEach(game => {
+      const div = document.createElement("div");
+      div.className = "casino-item";
+      div.textContent = `${game.name} — ${game.provider}`;
+      casinoContainer.appendChild(div);
+    });
+  }
+
+  // --- Оновлення балансу користувача ---
+  function updateUserBalance(user) {
+    let users = getUsers();
+    users[user.username] = user;
+    saveUsers(users);
+    setCurrentUser(user);
+    updateUserInfo();
+  }
+
+  // --- Навігація по вкладках ---
+  const tabs = document.querySelectorAll("nav button");
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(t => {
+        t.classList.remove("active");
+        document.getElementById(t.getAttribute("aria-controls")).classList.remove("active");
+        t.setAttribute("aria-selected", "false");
+      });
+      tab.classList.add("active");
+      tab.setAttribute("aria-selected", "true");
+      document.getElementById(tab.getAttribute("aria-controls")).classList.add("active");
+    });
+  });
+  function activateTab(id) {
+    tabs.forEach(t => {
+      t.classList.remove("active");
+      document.getElementById(t.getAttribute("aria-controls")).classList.remove("active");
+      t.setAttribute("aria-selected", "false");
+    });
+    const tab = document.getElementById(id);
+    tab.classList.add("active");
+    tab.setAttribute("aria-selected", "true");
+    document.getElementById(tab.getAttribute("aria-controls")).classList.add("active");
+  }
+
+  // Закриття модалки по кліку поза нею
+  betModal.addEventListener("click", e => {
+    if (e.target === betModal) hideModal();
+  });
+  // Закриття модалки по Esc
+  window.addEventListener("keydown", e => {
+    if (e.key === "Escape" && betModal.classList.contains("show")) hideModal();
+  });
+
+  // --- Початковий запуск ---
+  renderNews();
+  renderCasino();
+  fetchMatches();
+  setInterval(fetchMatches, 30000);
+  renderBetHistory();
+
+</script>
+</body>
+</html>
+
