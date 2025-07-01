@@ -1,0 +1,587 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="teXbet — найкращий букмекерський сайт із live-ставками, демо-слотами Pragmatic Play та підтримкою 24/7" />
+  <meta name="keywords" content="teXbet, букмекер, ставки, казино, Pragmatic Play, демо-слоти" />
+  <meta property="og:title" content="teXbet — Найкращий букмекерський сайт" />
+  <meta property="og:description" content="Live-ставки, демо-казино від Pragmatic Play, інтерактивний чат і бонуси" />
+  <meta property="og:image" content="https://your-username.github.io/texbet/og-image.jpg" />
+  <title>teXbet — Найкращий букмекерський сайт</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <!-- Animate.css -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" defer />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
+
+  <style>
+    body{font-family:'Roboto',sans-serif;margin:0;padding:0;background:linear-gradient(135deg,#0d1b2a,#1b263b);color:#e0e6f2;overflow-x:hidden;transition:background 0.5s,color 0.5s;}
+    body.light{background:linear-gradient(135deg,#f0f4f8,#e0e6f2);color:#14213d;}
+    a{text-decoration:none;color:#00bfff;}
+    a:hover{color:#00e0ff;}
+    #welcome-page{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#14213d,#0d1b2a);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:2000;color:#00bfff;font-family:'Orbitron',sans-serif;text-align:center;cursor:pointer;user-select:none;}
+    #welcome-page h1{font-size:4rem;text-shadow:0 0 20px #00bfff;animation:pulse 2s infinite;}
+    #welcome-page p{font-size:1.5rem;color:#00e0ffcc;margin-top:20px;}
+    #welcome-page small{font-size:1rem;color:#005580cc;margin-top:40px;}
+    #particles-js{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;}
+    @keyframes pulse{0%,100%{text-shadow:0 0 10px #00bfff;}50%{text-shadow:0 0 30px #00e0ff;}}
+    header{background:#14213d;color:#00bfff;padding:15px 40px;box-shadow:0 0 25px #00bfff88;position:sticky;top:0;z-index:1100;display:flex;justify-content:space-between;align-items:center;user-select:none;}
+    body.light header{background:#e0f0ff;color:#14213d;box-shadow:0 0 25px #0077cc88;}
+    .logo{font-family:'Orbitron',sans-serif;font-size:2.8rem;letter-spacing:0.08em;text-shadow:0 0 15px #00bfff;cursor:pointer;animation:pulse 2.5s infinite;user-select:none;}
+    .nav{display:flex;gap:25px;}
+    .nav-link{font-weight:600;font-size:1.1rem;color:#a3c9ff;padding:6px 12px;border-radius:10px;transition:background-color 0.3s,color 0.3s;cursor:pointer;}
+    body.light .nav-link{color:#14213d !important;}
+    .nav-link.active,.nav-link:hover{background-color:#00bfff;color:#14213d !important;}
+    .btn-theme-toggle{background:transparent;border:2px solid #00bfff;color:#00bfff;border-radius:12px;font-weight:700;padding:8px 14px;cursor:pointer;transition:background-color 0.3s,color 0.3s;user-select:none;}
+    body.light .btn-theme-toggle{border-color:#14213d;color:#14213d;}
+    .btn-theme-toggle:hover{background-color:#00bfff;color:#14213d;}
+    main.container{max-width:1200px;padding:30px 20px 60px;margin:auto;}
+    section{display:none;}
+    section.active{display:block;}
+    h2{font-family:'Orbitron',sans-serif;font-weight:700;margin-bottom:25px;text-align:center;letter-spacing:0.05em;user-select:none;font-size:2.2rem;color:#00bfff;}
+    body.light h2{color:#14213d;}
+    #matches{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;}
+    .match-card{background:#1b263b;padding:20px;border-radius:16px;box-shadow:0 0 12px #00bfff88;transition:transform 0.3s ease,box-shadow 0.3s ease;user-drag:none;user-select:none;}
+    body.light .match-card{background:#e0e6f2;box-shadow:0 0 12px #0077cc88;}
+    .match-card:hover{transform:scale(1.05) rotate(1deg);box-shadow:0 0 25px #00bfff;}
+    .match-header{font-size:1.4rem;font-weight:700;margin-bottom:12px;}
+    .match-time{font-style:italic;margin-bottom:12px;color:#00e0ff;}
+    .coef-list{display:flex;gap:12px;margin-bottom:12px;}
+    .coef-item{background:#0d1b2a;padding:8px 16px;border-radius:12px;font-weight:600;color:#00bfff;flex-grow:1;text-align:center;cursor:pointer;user-select:none;transition:background-color 0.3s,transform 0.2s;}
+    body.light .coef-item{background:#d0d8e8;color:#14213d;}
+    .coef-item:hover{background-color:#00bfff;color:#14213d;transform:scale(1.1);}
+    .coef-item.updated{animation:flash 0.5s;}
+    @keyframes flash{0%,100%{background-color:#0d1b2a;}50%{background-color:#00e0ff;}}
+    .btn-bet{width:100%;font-weight:700;background-color:#00bfff;border:none;border-radius:12px;color:#14213d;cursor:pointer;padding:10px 0;transition:background-color 0.3s;}
+    .btn-bet:hover{background-color:#00e0ff;}
+    #filter-sport{margin-bottom:20px;padding:10px;border-radius:10px;border:1px solid #00bfff66;background:transparent;color:#e0e6f2;}
+    body.light #filter-sport{background:#fff;color:#14213d;}
+    #bet-slip{position:fixed;right:0;bottom:80px;width:320px;max-width:90vw;background:#14213dcc;border-radius:15px 0 0 15px;box-shadow:-5px 0 15px #00bfffaa;color:#00d4ff;padding:15px;transform:translateX(100%);transition:transform 0.4s ease;z-index:1200;}
+    #bet-slip.open{transform:translateX(0);}
+    #bet-slip-header{background:#00bfff;padding:10px;border-radius:10px 10px 0 0;color:#14213d;font-weight:700;display:flex;justify-content:space-between;align-items:center;}
+    #bet-slip-list{max-height:300px;overflow-y:auto;padding:10px;}
+    .bet-item{background:#0d1b2a;padding:8px;border-radius:8px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;}
+    body.light .bet-item{background:#d0d8e8;color:#14213d;}
+    .btn-remove-bet{background:none;border:none;color:#f55;font-size:1.2rem;cursor:pointer;}
+    .btn-remove-bet:hover{color:#ff7777;}
+    .btn-confirm-bets{width:100%;background:#00bfff;color:#14213d;font-weight:700;padding:10px;border-radius:10px;border:none;cursor:pointer;}
+    .btn-confirm-bets:hover{background:#00e0ff;}
+    #bet-total{font-weight:700;margin-top:10px;text-align:center;}
+    #bet-type-select{margin:10px 0;padding:8px;border-radius:8px;border:1px solid #00bfff66;background:transparent;color:#e0e6f2;}
+    body.light #bet-type-select{background:#fff;color:#14213d;}
+    #casino-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+    .casino-card{background:#1b263b;border-radius:16px;padding:25px 15px;box-shadow:0 0 18px #00bfff88;text-align:center;font-weight:700;font-size:1.25rem;color:#00d4ff;cursor:pointer;user-select:none;transition:transform 0.3s ease,box-shadow 0.3s ease;}
+    body.light .casino-card{background:#e0e6f2;box-shadow:0 0 18px #0077cc88;}
+    .casino-card:hover{transform:scale(1.05) rotate(1deg);box-shadow:0 0 28px #00d4ff;}
+    .casino-card small{display:block;font-weight:400;font-size:0.9rem;margin-top:8px;color:#00aacc;user-select:none;}
+    body.light .casino-card small{color:#005580;}
+    .slot-machine,.roulette-game{background:#0d1b2a;border-radius:15px;padding:25px;box-shadow:0 0 15px #00bfffaa;color:#00d4ff;font-weight:700;font-size:1.3rem;user-select:none;margin-top:15px;text-align:center;}
+    body.light .slot-machine,.roulette-game{background:#d0d8e8;color:#14213d;}
+    .slot-reels{display:flex;justify-content:center;gap:18px;margin-bottom:15px;font-size:3rem;letter-spacing:0.15em;perspective:500px;}
+    .slot-reel{display:inline-block;transform-style:preserve-3d;transition:transform 0.5s ease;}
+    .slot-reel.spin{animation:spin 0.5s ease-in-out;}
+    @keyframes spin{0%{transform:translateZ(-50px) rotateX(0deg);}50%{transform:translateZ(-50px) rotateX(360deg);}100%{transform:translateZ(-50px) rotateX(0deg);}}
+    .btn-spin,.btn-roulette{background:#00bfff;border:none;padding:10px 30px;border-radius:12px;font-weight:700;color:#14213d;cursor:pointer;transition:background-color 0.3s;user-select:none;}
+    .btn-spin:hover,.btn-roulette:hover{background-color:#00e0ff;}
+    .pragmatic-iframe{width:100%;height:500px;border:none;border-radius:10px;margin-top:15px;}
+    #casino-balance{font-size:1.2rem;margin-bottom:15px;}
+    #leaderboard{max-width:700px;margin:20px auto;}
+    #leaderboard table{width:100%;border-collapse:collapse;}
+    #leaderboard th,#leaderboard td{padding:10px;text-align:center;border:1px solid #00bfff66;}
+    body.light #leaderboard th,body.light #leaderboard td{border-color:#0077cc66;}
+    #news-list{max-width:700px;margin:0 auto;list-style:none;padding:0;}
+    #news-list li{background:#1b263b;padding:15px 20px;margin-bottom:12px;border-radius:12px;box-shadow:0 0 15px #00bfff77;user-select:none;font-weight:600;cursor:default;transition:background-color 0.3s;}
+    body.light #news-list li{background:#e0e6f2;box-shadow:0 0 15px #0077cc77;}
+    #news-list li:hover{background-color:#00bfff33;}
+    #profile{max-width:450px;margin:0 auto;}
+    .balance-box{font-weight:700;font-size:1.3rem;text-align:center;margin-bottom:20px;color:#00bfff;user-select:none;}
+    body.light .balance-box{color:#14213d;}
+    .btn-primary,.btn-success,.btn-google{width:100%;font-weight:700;border-radius:12px;padding:12px 0;user-select:none;cursor:pointer;}
+    .btn-primary:hover,.btn-success:hover,.btn-google:hover{opacity:0.85;}
+    .btn-google{background:#db4437;color:#fff;}
+    form input{margin-bottom:15px;padding:10px 15px;font-size:1rem;border-radius:10px;border:1.8px solid #00bfff66;background:transparent;color:#e0e6f2;transition:border-color 0.3s;user-select:text;}
+    body.light form input{background:#fff;color:#14213d;border-color:#0077cc66;}
+    form input:focus{border-color:#00e0ff;outline:none;background:#14213d;}
+    body.light form input:focus{background:#e0f0ff;}
+    #bet-history{margin-top:20px;}
+    #bet-history-list{list-style:none;padding:0;}
+    #bet-history-list li{background:#1b263b;padding:10px;border-radius:10px;margin-bottom:10px;color:#00d4ff;}
+    body.light #bet-history-list li{background:#e0e6f2;color:#14213d;}
+    #chat-support{position:fixed;right:0;bottom:80px;width:320px;max-width:90vw;height:400px;background:#14213dcc;border-radius:15px 0 0 15px;box-shadow:-5px 0 15px #00bfffaa;color:#00d4ff;display:none;flex-direction:column;z-index:1200;}
+    #chat-support.open{display:flex;}
+    #chat-header{background:#00bfff;padding:10px;border-radius:10px 0 0 0;color:#14213d;font-weight:700;display:flex;justify-content:space-between;align-items:center;}
+    #chat-messages{flex-grow:1;padding:10px;overflow-y:auto;background:#0d1b2a;}
+    body.light #chat-messages{background:#d0d8e8;}
+    .chat-message{padding:8px;border-radius:8px;margin-bottom:10px;max-width:85%;display:flex;align-items:center;}
+    .chat-message.user{background:#00bfff;color:#14213d;margin-left:auto;}
+    .chat-message.bot{background:#1b263b;color:#00d4ff;}
+    body.light .chat-message.bot{background:#e0e6f2;color:#14213d;}
+    .chat-message.bot img{width:30px;height:30px;border-radius:50%;margin-right:10px;}
+    .typing-indicator{font-style:italic;color:#00aacc;}
+    body.light .typing-indicator{color:#005580;}
+    #chat-input{background:#0d1b2a;padding:10px;display:flex;gap:10px;}
+    body.light #chat-input{background:#d0d8e8;}
+    #chat-input input{flex-grow:1;padding:8px;border-radius:8px;border:none;background:#14213d;color:#e0e6f2;}
+    body.light #chat-input input{background:#fff;color:#14213d;}
+    #chat-input input:focus{outline:none;background:#1b263b;}
+    body.light #chat-input input:focus{background:#e0f0ff;}
+    #chat-input button{background:#00bfff;color:#14213d;border:none;border-radius:8px;padding:8px 15px;font-weight:700;cursor:pointer;}
+    #chat-input button:hover{background:#00e0ff;}
+    .btn-chat-toggle{position:fixed;bottom:20px;right:20px;width:50px;height:50px;background:#00bfff;color:#14213d;border:none;border-radius:50%;font-size:1.5rem;cursor:pointer;box-shadow:0 0 15px #00bfffaa;transition:background-color 0.3s;z-index:1300;}
+    .btn-chat-toggle:hover{background:#00e0ff;}
+    footer{background:#14213d;color:#00bfff;font-family:'Orbitron',sans-serif;font-weight:600;padding:18px 0;text-align:center;border-top:1px solid #00bfff44;user-select:none;font-size:0.9rem;position:relative;}
+    body.light footer{background:#e0f0ff;color:#14213d;border-top:1px solid #0077cc44;}
+    footer small{display:block;font-weight:400;margin-top:6px;color:#00aaccaa;}
+    body.light footer small{color:#005580aa;}
+    #progress-bar{position:fixed;top:0;left:0;width:100%;height:5px;background:#00bfff;transform:scaleX(0);transform-origin:left;transition:transform 1s ease;z-index:1500;}
+    #progress-bar.active{transform:scaleX(1);}
+    .parallax{background-attachment:fixed;background-position:center;background-size:cover;}
+  </style>
+</head>
+<body>
+  <div id="welcome-page" class="animate__animated animate__fadeIn">
+    <div id="particles-js"></div>
+    <h1>teXbet</h1>
+    <p>Найкращий букмекерський сайт із демо-слотами Pragmatic Play</p>
+    <small>Натисніть, щоб розпочати</small>
+  </div>
+
+  <header>
+    <a href="#" class="logo">teXbet</a>
+    <nav class="nav">
+      <a href="#live" class="nav-link active">Live</a>
+      <a href="#casino" class="nav-link">Казино</a>
+      <a href="#news" class="nav-link">Новини</a>
+      <a href="#profile" class="nav-link">Кабінет</a>
+    </nav>
+    <button class="btn-theme-toggle">Світла тема</button>
+  </header>
+
+  <div id="progress-bar"></div>
+
+  <main class="container parallax" style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e756b6')">
+    <section id="live" class="active">
+      <h2><i class="fa-solid fa-bolt"></i> Live-матчі</h2>
+      <select id="filter-sport">
+        <option value="all">Усі види спорту</option>
+        <option value="football">Футбол</option>
+        <option value="basketball">Баскетбол</option>
+      </select>
+      <div id="matches"></div>
+    </section>
+
+    <section id="casino">
+      <h2><i class="fa-solid fa-dice"></i> Казино (демо)</h2>
+      <div id="casino-balance">Демо-рахунок: <span id="casino-balance-amount">100000</span> грн</div>
+      <div id="casino-list"></div>
+      <div class="slot-machine">
+        <div class="slot-reels">
+          <span class="slot-reel">🍒</span>
+          <span class="slot-reel">🍋</span>
+          <span class="slot-reel">🍉</span>
+        </div>
+        <button class="btn-spin">Запустити слот</button>
+        <div id="slot-result"></div>
+      </div>
+      <div class="roulette-game">
+        <div id="roulette-wheel">🎰 Рулетка</div>
+        <button class="btn-roulette">Крутити рулетку</button>
+        <div id="roulette-result"></div>
+      </div>
+      <div id="leaderboard">
+        <h3>🏆 Лідери</h3>
+        <table>
+          <tr><th>Гравець</th><th>Виграш</th></tr>
+          <tr><td>Гравець 1</td><td>5000 грн</td></tr>
+          <tr><td>Гравець 2</td><td>3000 грн</td></tr>
+          <tr><td>Гравець 3</td><td>1000 грн</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section id="news">
+      <h2><i class="fa-solid fa-newspaper"></i> Останні новини</h2>
+      <ul id="news-list"></ul>
+    </section>
+
+    <section id="profile">
+      <h2><i class="fa-solid fa-user"></i> Особистий кабінет</h2>
+      <div class="balance-box">Баланс: <span id="balance">1000.00</span> грн</div>
+      <button class="btn btn-success mb-3" onclick="replenishBalance()">Поповнити демо баланс</button>
+      <button class="btn btn-google mb-3" onclick="signInWithGoogle()">Увійти через Google</button>
+      <form onsubmit="event.preventDefault(); alert('Вхід у кабінет наразі недоступний. Використовуйте Google-авторизацію.');">
+        <input type="text" class="form-control" placeholder="Логін" required />
+        <input type="password" class="form-control" placeholder="Пароль" required />
+        <button type="submit" class="btn btn-primary">Увійти</button>
+      </form>
+      <div id="bet-history">
+        <h3>📜 Історія ставок</h3>
+        <ul id="bet-history-list"></ul>
+      </div>
+    </section>
+  </main>
+
+  <div id="bet-slip">
+    <div id="bet-slip-header">
+      Купон ставок
+      <button class="btn-remove-bet" onclick="toggleBetSlip()">✕</button>
+    </div>
+    <select id="bet-type-select">
+      <option value="single">Одиночна</option>
+      <option value="express">Експрес</option>
+    </select>
+    <div id="bet-slip-list"></div>
+    <div id="bet-total"></div>
+    <button class="btn-confirm-bets" onclick="confirmBets()">Підтвердити ставки</button>
+  </div>
+  <button class="btn-chat-toggle" onclick="toggleBetSlip()" aria-label="Відкрити купон ставок">
+    <i class="fa-solid fa-ticket"></i>
+  </button>
+
+  <div id="chat-support">
+    <div id="chat-header">
+      Підтримка
+      <button class="btn-remove-bet" onclick="toggleChat()">✕</button>
+    </div>
+    <div id="chat-messages"></div>
+    <div id="chat-input">
+      <input type="text" placeholder="Напишіть повідомлення..." aria-label="Повідомлення" onkeydown="if(event.key === 'Enter') sendMessage();" />
+      <button onclick="sendMessage()" aria-label="Надіслати повідомлення">➤</button>
+    </div>
+  </div>
+  <button class="btn-chat-toggle" onclick="toggleChat()" aria-label="Відкрити чат підтримки">
+    <i class="fa-solid fa-comment"></i>
+  </button>
+
+  <footer>
+    © 2025 teXbet — офіційний букмекерський сайт від Вадима Головніна
+    <br />
+    <small>Підтримка сайту: карта 4149 5110 2688 8354</small>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.min.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+
+  <script>
+    const firebaseConfig={apiKey:"AIzaSyD2z1y5m2q3s4t5u6v7w8x9y0z1a2b3c4d",authDomain:"texbet-demo.firebaseapp.com",projectId:"texbet-demo",storageBucket:"texbet-demo.appspot.com",messagingSenderId:"123456789012",appId:"1:123456789012:web:abcdef1234567890"};
+    firebase.initializeApp(firebaseConfig);
+    const auth=firebase.auth();
+
+    const sections=document.querySelectorAll('section'),navLinks=document.querySelectorAll('.nav-link'),body=document.body,themeToggle=document.querySelector('.btn-theme-toggle'),matchesContainer=document.getElementById('matches'),casinoList=document.getElementById('casino-list'),newsList=document.getElementById('news-list'),betSlip=document.getElementById('bet-slip'),betSlipList=document.getElementById('bet-slip-list'),betTotal=document.getElementById('bet-total'),betTypeSelect=document.getElementById('bet-type-select'),chatSupport=document.getElementById('chat-support'),chatMessages=document.getElementById('chat-messages'),chatInput=document.getElementById('chat-input').querySelector('input'),balanceSpan=document.getElementById('balance'),casinoBalanceSpan=document.getElementById('casino-balance-amount'),betHistoryList=document.getElementById('bet-history-list'),slotReels=document.querySelectorAll('.slot-reel'),slotResult=document.getElementById('slot-result'),rouletteWheel=document.getElementById('roulette-wheel'),rouletteResult=document.getElementById('roulette-result'),progressBar=document.getElementById('progress-bar');
+    const spinSound=new Howl({src:['https://cdn.pixabay.com/audio/2023/08/07/audio_6c9e9e8b6b.mp3']}),winSound=new Howl({src:['https://cdn.pixabay.com/audio/2023/08/07/audio_7f3f7e9b8a.mp3']});
+    const mockMatches=[
+      {id:1,sport:'football',home:'Шахтар',away:'Динамо',time:'18:30',odds:{home:2.1,draw:3.2,away:2.8},stats:'Останні 5: В-П-В-Н-П'},
+      {id:2,sport:'football',home:'Реал',away:'Барселона',time:'20:00',odds:{home:1.9,draw:3.5,away:3.0},stats:'Останні 5: В-В-Н-П-В'},
+      {id:3,sport:'basketball',home:'Лейкерс',away:'Буллз',time:'21:00',odds:{home:2.5,draw:3.1,away:2.7},stats:'Останні 5: П-В-В-Н-П'}
+    ];
+    const casinoGames=[
+      {name:'Gates of Olympus',provider:'Pragmatic Play',demoUrl:'https://www.pragmaticplay.com/en/games/gates-of-olympus'},
+      {name:'Sweet Bonanza',provider:'Pragmatic Play',demoUrl:'https://www.pragmaticplay.com/en/games/sweet-bonanza'},
+      {name:'The Dog House',provider:'Pragmatic Play',demoUrl:'https://www.pragmaticplay.com/en/games/the-dog-house'}
+    ];
+    const newsItems=[
+      {id:1,title:'Новий слот Gates of Olympus уже в teXbet!'},
+      {id:2,title:'Шахтар готується до матчу з Динамо'},
+      {id:3,title:'Бонус 100 грн за першу ставку!'}
+    ];
+    const slotSymbols=['🍒','🍋','🍉','🍇','🍊','⭐','7️⃣'],rouletteOutcomes=['Червоне','Чорне','Зелене'];
+    let bets=JSON.parse(localStorage.getItem('bets'))||[],balance=parseFloat(localStorage.getItem('balance'))||1000,casinoBalance=parseFloat(localStorage.getItem('casinoBalance'))||100000,chatHistory=JSON.parse(localStorage.getItem('chatMessages'))||[],user=null;
+
+    function init(){
+      if(localStorage.getItem('theme')==='light'){body.classList.add('light');themeToggle.textContent='Темна тема';}
+      particlesJS('particles-js',{particles:{number:{value:100,density:{enable:true,value_area:800}},color:{value:'#00bfff'},shape:{type:'circle'},opacity:{value:0.5,random:true},size:{value:3,random:true},line_linked:{enable:true,distance:150,color:'#00bfff',opacity:0.4,width:1},move:{enable:true,speed:6,direction:'none',random:false,straight:false,out_mode:'out',bounce:false,attract:{enable:false,rotateX:600,rotateY:1200}}});
+      renderMatches();
+      renderCasino();
+      renderNews();
+      renderBetSlip();
+      renderChat();
+      updateBalance();
+      updateCasinoBalance();
+      renderBetHistory();
+      setInterval(updateOdds,10000);
+      showProgressBar();
+      auth.onAuthStateChanged(u=>{user=u;document.querySelector('.btn-google').textContent=user?'Вийти':'Увійти через Google';});
+      if('Notification' in window&&Notification.permission!=='denied'){Notification.requestPermission().then(p=>{if(p==='granted')notify('Ласкаво просимо до teXbet!');});}
+    }
+
+    function showProgressBar(){progressBar.classList.add('active');setTimeout(()=>progressBar.classList.remove('active'),1000);}
+    function toggleTheme(){body.classList.toggle('light');localStorage.setItem('theme',body.classList.contains('light')?'light':'dark');themeToggle.textContent=body.classList.contains('light')?'Темна тема':'Світла тема';}
+    function showSection(sectionId){sections.forEach(s=>s.classList.remove('active'));navLinks.forEach(l=>l.classList.remove('active'));document.getElementById(sectionId).classList.add('active');document.querySelector(`.nav-link[href="#${sectionId}"]`).classList.add('active');showProgressBar();}
+    function notify(message){new Notification(message,{body:'teXbet',icon:'https://images.unsplash.com/photo-1516321318423-f06f85e756b6'});}
+    function renderMatches(){
+      const filter=document.getElementById('filter-sport').value;
+      matchesContainer.innerHTML='';
+      mockMatches.filter(m=>filter==='all'||m.sport===filter).forEach(match=>{
+        const card=document.createElement('div');
+        card.className='match-card animate__animated animate__fadeInUp';
+        card.innerHTML=`
+          <div class="match-header">${match.home} vs ${match.away}</div>
+          <div class="match-time">Час: ${match.time}</div>
+          <div>Статистика: ${match.stats}</div>
+          <div class="coef-list">
+            <div class="coef-item" onclick="addBet('${match.home} vs ${match.away}','Перемога ${match.home}',${match.odds.home})">${match.home}: <span>${match.odds.home}</span></div>
+            <div class="coef-item" onclick="addBet('${match.home} vs ${match.away}','Нічия',${match.odds.draw})">Нічия: <span>${match.odds.draw}</span></div>
+            <div class="coef-item" onclick="addBet('${match.home} vs ${match.away}','Перемога ${match.away}',${match.odds.away})">${match.away}: <span>${match.odds.away}</span></div>
+          </div>
+          <button class="btn btn-bet" onclick="alert('Ставка зроблена на матч ${match.home} - ${match.away}')">Зробити ставку</button>
+        `;
+        matchesContainer.appendChild(card);
+      });
+    }
+    function updateOdds(){
+      mockMatches.forEach(match=>{
+        match.odds.home=(parseFloat(match.odds.home)+(Math.random()-0.5)*0.1).toFixed(2);
+        match.odds.draw=(parseFloat(match.odds.draw)+(Math.random()-0.5)*0.1).toFixed(2);
+        match.odds.away=(parseFloat(match.odds.away)+(Math.random()-0.5)*0.1).toFixed(2);
+      });
+      renderMatches();
+      document.querySelectorAll('.coef-item span').forEach(span=>{span.parentElement.classList.add('updated');setTimeout(()=>span.parentElement.classList.remove('updated'),500);});
+      if('Notification' in window&&Notification.permission==='granted')notify('Оновлено коефіцієнти!');
+    }
+    function renderCasino(){
+      casinoList.innerHTML='';
+      casinoGames.forEach(game=>{
+        const card=document.createElement('div');
+        card.className='casino-card animate__animated animate__fadeInUp';
+        card.innerHTML=`<i class="fa-solid fa-gamepad"></i> ${game.name}<small>Провайдер: ${game.provider}</small>`;
+        card.onclick=()=>{
+          casinoList.innerHTML=`<iframe src="${game.demoUrl}" class="pragmatic-iframe" title="${game.name} Demo"></iframe>`;
+          casinoBalance-=100;
+          updateCasinoBalance();
+        };
+        casinoList.appendChild(card);
+      });
+    }
+    function renderNews(){
+      newsList.innerHTML='';
+      newsItems.forEach(news=>{
+        const li=document.createElement('li');
+        li.className='animate__animated animate__fadeInUp';
+        li.textContent=news.title;
+        newsList.appendChild(li);
+      });
+    }
+    function addBet(match,type,odds){
+      bets.push({match,type,odds});
+      localStorage.setItem('bets',JSON.stringify(bets));
+      renderBetSlip();
+      renderBetHistory();
+      if(!betSlip.classList.contains('open'))toggleBetSlip();
+    }
+    function removeBet(index){
+      bets.splice(index,1);
+      localStorage.setItem('bets',JSON.stringify(bets));
+      renderBetSlip();
+      renderBetHistory();
+    }
+    function renderBetSlip(){
+      betSlipList.innerHTML=bets.length===0?'<p>Купон порожній</p>':'';
+      bets.forEach((bet,index)=>{
+        const item=document.createElement('div');
+        item.className='bet-item';
+        item.innerHTML=`<span>${bet.match} - ${bet.type} (${bet.odds})</span><button class="btn-remove-bet" onclick="removeBet(${index})" aria-label="Видалити ставку">✕</button>`;
+        betSlipList.appendChild(item);
+      });
+      const totalOdds=betTypeSelect.value==='single'?bets.reduce((acc,bet)=>acc+bet.odds,0).toFixed(2):bets.reduce((acc,bet)=>acc*bet.odds,1).toFixed(2);
+      betTotal.textContent=bets.length>0?`Тип: ${betTypeSelect.value==='single'?'Одиночна':'Експрес'} | Загальний коефіцієнт: ${totalOdds} | Виграш: ${(totalOdds*100).toFixed(2)} грн`:'';
+    }
+    function toggleBetSlip(){
+      betSlip.classList.toggle('open');
+      if(betSlip.classList.contains('open')){betSlip.classList.add('animate__animated','animate__slideInRight');setTimeout(()=>betSlip.classList.remove('animate__animated','animate__slideInRight'),400);}
+    }
+    function confirmBets(){
+      if(bets.length===0){alert('Купон порожній!');return;}
+      const totalOdds=betTypeSelect.value==='single'?bets.reduce((acc,bet)=>acc+bet.odds,0):bets.reduce((acc,bet)=>acc*bet.odds,1);
+      balance+=totalOdds*100;
+      localStorage.setItem('balance',balance);
+      updateBalance();
+      alert('Ставки підтверджено! Виграш: '+(totalOdds*100).toFixed(2)+' грн');
+      bets=[];
+      localStorage.setItem('bets',JSON.stringify(bets));
+      renderBetSlip();
+      renderBetHistory();
+      confetti({particleCount:100,spread:70,origin:{y:0.6}});
+    }
+    function renderChat(){
+      chatMessages.innerHTML='';
+      chatHistory.forEach(msg=>{
+        const div=document.createElement('div');
+        div.className=`chat-message ${msg.isUser?'user':'bot'} animate__animated animate__fadeIn`;
+        div.innerHTML=msg.isUser?msg.text:`<img src="https://i.imgur.com/7f3f7e9b8a.png" alt="Бот">${msg.text}`;
+        chatMessages.appendChild(div);
+      });
+      chatMessages.scrollTop=chatMessages.scrollHeight;
+    }
+    function sendMessage(){
+      const text=chatInput.value.trim();
+      if(!text)return;
+      chatHistory.push({text,isUser:true});
+      chatMessages.innerHTML+=`<div class="chat-message user animate__animated animate__fadeIn">${text}</div>`;
+      chatInput.value='';
+      chatMessages.scrollTop=chatMessages.scrollHeight;
+      localStorage.setItem('chatMessages',JSON.stringify(chatHistory));
+      chatMessages.innerHTML+=`<div class="typing-indicator">Бот пише...</div>`;
+      setTimeout(()=>{
+        let reply='Вибачте, я бот підтримки. Зверніться, будь ласка, пізніше.';
+        if(/привіт|здравствуй|hello/i.test(text))reply='Привіт! Як я можу допомогти? 😊';
+        else if(/поповнити|баланс/i.test(text))reply='Поповніть демо-баланс у Кабінеті або грайте в казино з демо-рахунком!';
+        else if(/казино|слот/i.test(text))reply='Спробуйте демо-слоти Pragmatic Play у вкладці Казино! 🎰';
+        else if(/матч/i.test(text))reply='Live-матчі оновлюються кожні 10 секунд! ⚽';
+        chatHistory.push({text:reply,isUser:false});
+        chatMessages.innerHTML=chatMessages.innerHTML.replace('<div class="typing-indicator">Бот пише...</div>','');
+        const replyDiv=document.createElement('div');
+        replyDiv.className='chat-message bot animate__animated animate__fadeIn';
+        replyDiv.innerHTML=`<img src="https://i.imgur.com/7f3f7e9b8a.png" alt="Бот">${reply}`;
+        chatMessages.appendChild(replyDiv);
+        chatMessages.scrollTop=chatMessages.scrollHeight;
+        localStorage.setItem('chatMessages',JSON.stringify(chatHistory));
+      },1000);
+    }
+    function toggleChat(){
+      chatSupport.classList.toggle('open');
+      if(chatSupport.classList.contains('open')){chatSupport.classList.add('animate__animated','animate__slideInRight');setTimeout(()=>chatSupport.classList.remove('animate__animated','animate__slideInRight'),400);}
+    }
+    function replenishBalance(){
+      const amount=parseFloat(prompt('Введіть суму для поповнення (грн):','100'));
+      if(!isNaN(amount)&&amount>0){
+        balance+=amount;
+        localStorage.setItem('balance',balance);
+        updateBalance();
+        alert(`Баланс поповнено на ${amount.toFixed(2)} грн!\nНомер карти для оплати: 4149 5110 2688 8354`);
+        confetti({particleCount:50,spread:50});
+      }else{alert('Введіть правильну суму!');}
+    }
+    function updateBalance(){balanceSpan.textContent=balance.toFixed(2);}
+    function updateCasinoBalance(){
+      casinoBalanceSpan.textContent=casinoBalance.toFixed(2);
+      localStorage.setItem('casinoBalance',casinoBalance);
+    }
+    function renderBetHistory(){
+      betHistoryList.innerHTML=bets.length===0?'<p>Ставок ще немає.</p>':'';
+      bets.forEach((bet,index)=>{
+        const li=document.createElement('li');
+        li.className='animate__animated animate__fadeIn';
+        li.textContent=`${bet.match} - ${bet.type} (коеф. ${bet.odds})`;
+        betHistoryList.appendChild(li);
+      });
+    }
+    function spinSlot(){
+      if(casinoBalance<100){alert('Недостатньо коштів на демо-рахунку!');return;}
+      spinSound.play();
+      casinoBalance-=100;
+      updateCasinoBalance();
+      slotReels.forEach(reel=>{reel.classList.add('spin');setTimeout(()=>reel.classList.remove('spin'),500);});
+      const newReels=Array(3).fill().map(()=>slotSymbols[Math.floor(Math.random()*slotSymbols.length)]);
+      setTimeout(()=>{
+        slotReels.forEach((reel,i)=>(reel.textContent=newReels[i]));
+        if(newReels.every((val,i,arr)=>val===arr[0])){
+          slotResult.textContent='Виграш! +500 грн 🎉';
+          winSound.play();
+          casinoBalance+=500;
+          updateCasinoBalance();
+          confetti({particleCount:100,spread:70});
+        }else{slotResult.textContent='Спробуйте ще!';}
+      },500);
+    }
+    function spinRoulette(){
+      if(casinoBalance<100){alert('Недостатньо коштів на демо-рахунку!');return;}
+      spinSound.play();
+      casinoBalance-=100;
+      updateCasinoBalance();
+      rouletteWheel.classList.add('animate__animated','animate__rotateIn');
+      setTimeout(()=>{
+        rouletteWheel.classList.remove('animate__animated','animate__rotateIn');
+        const result=rouletteOutcomes[Math.floor(Math.random()*rouletteOutcomes.length)];
+        rouletteResult.textContent=`Результат: ${result}`;
+        if(result==='Червоне'){
+          casinoBalance+=200;
+          updateCasinoBalance();
+          winSound.play();
+          confetti({particleCount:100,spread:70});
+        }
+      },1000);
+    }
+    function signInWithGoogle(){
+      if(user){auth.signOut();return;}
+      const provider=new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider).then(result=>{
+        user=result.user;
+        alert(`Вітаємо, ${user.displayName}!`);
+        document.querySelector('.btn-google').textContent='Вийти';
+      }).catch(error=>alert('Помилка авторизації: '+error.message));
+    }
+
+    document.getElementById('welcome-page').onclick=()=>{
+      document.getElementById('welcome-page').classList.add('animate__fadeOut');
+      setTimeout(()=>document.getElementById('welcome-page').style.display='none',800);
+    };
+    document.getElementById('welcome-page').onkeydown=e=>{
+      if(e.key==='Enter'||e.key===' '){
+        document.getElementById('welcome-page').classList.add('animate__fadeOut');
+        setTimeout(()=>document.getElementById('welcome-page').style.display='none',800);
+      }
+    };
+    navLinks.forEach(link=>{
+      link.onclick=e=>{
+        e.preventDefault();
+        showSection(link.getAttribute('href').slice(1));
+      };
+    });
+    themeToggle.onclick=toggleTheme;
+    document.querySelector('.btn-spin').onclick=spinSlot;
+    document.querySelector('.btn-roulette').onclick=spinRoulette;
+    document.getElementById('filter-sport').onchange=renderMatches;
+    init();
+  </script>
+</body>
+</html>
