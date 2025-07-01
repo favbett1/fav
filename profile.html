@@ -1,0 +1,113 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Xbet - Кабінет">
+  <title>Xbet - Кабінет</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <script src="https://cdn.jsdelivr.net/npm/i18next@23.11.5/dist/umd/i18next.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body class="dark">
+  <header>
+    <div class="logo">Xbet</div>
+    <nav>
+      <a href="live.html" data-i18n="live" aria-label="Live-матчі">Live</a>
+      <a href="casino.html" data-i18n="casino" aria-label="Казино">Казино</a>
+      <a href="tournaments.html" data-i18n="tournaments" aria-label="Турніри">Турніри</a>
+      <a href="profile.html" data-i18n="profile" aria-label="Кабінет" class="active">Кабінет</a>
+    </nav>
+    <div class="user-info">
+      <div id="balance" data-i18n="balance">Баланс: {{amount}} грн</div>
+      <div id="points" data-i18n="points">Бали: {{amount}}</div>
+      <div class="jackpot-display" data-i18n="jackpot">Джекпот: {{amount}} грн</div>
+      <button id="theme-toggle" data-i18n="light_theme" aria-label="Переключити тему">Світла тема</button>
+      <select id="language-select" aria-label="Вибір мови">
+        <option value="uk">Українська</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+  </header>
+  <main>
+    <section id="profile">
+      <h2 data-i18n="profile">Кабінет</h2>
+      <form id="requisites-form" aria-label="Форма реквізитів">
+        <input id="card-number" type="text" placeholder="Номер карти" data-i18n-placeholder="requisites" aria-label="Номер карти">
+        <input id="card-holder" type="text" placeholder="Власник карти" data-i18n-placeholder="requisites" aria-label="Власник карти">
+        <button type="submit" data-i18n="save_requisites" aria-label="Зберегти реквізити">Зберегти</button>
+      </form>
+      <button id="btn-replenish" data-i18n="replenish_balance" aria-label="Поповнити баланс">Поповнити</button>
+      <button id="btn-withdraw" data-i18n="withdraw_balance" aria-label="Вивести кошти">Вивести</button>
+      <button id="referral-btn" data-i18n="referral_share" aria-label="Поділитися реферальним посиланням">Запросити друга</button>
+      <label><input id="notifications" type="checkbox" aria-label="Увімкнути сповіщення"> <span data-i18n="enable_notifications">Сповіщення</span></label>
+      <input id="avatar-input" type="file" accept="image/*" aria-label="Завантажити аватар">
+      <img id="avatar-preview" src="" alt="Попередній перегляд аватара">
+      <h3 data-i18n="bet_history">Історія ставок</h3>
+      <canvas id="stats-canvas" width="400" height="200" aria-label="Статистика ставок"></canvas>
+      <h3 data-i18n="bet_calculator">Калькулятор ставок</h3>
+      <input id="calc-amount" type="number" min="0" placeholder="Сума" aria-label="Сума ставки">
+      <input id="calc-coef" type="number" min="1" step="0.1" placeholder="Коефіцієнт" aria-label="Коефіцієнт ставки">
+      <button id="calc-btn" data-i18n="calculate" aria-label="Розрахувати ставку">Розрахувати</button>
+      <div id="calc-result" aria-live="polite"></div>
+    </section>
+  </main>
+  <div id="chat-support" aria-label="Чат підтримки">
+    <button id="chat-toggle-btn" aria-label="Відкрити чат">💬</button>
+    <button id="chat-close-btn" data-i18n="support" aria-label="Закрити чат">AI-Підтримка</button>
+    <div id="chat-messages" aria-live="polite"></div>
+    <input id="chat-input" type="text" data-i18n-placeholder="chat_placeholder" aria-label="Повідомлення в чат">
+    <button id="chat-send-btn" aria-label="Відправити повідомлення">➤</button>
+  </div>
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+  <div id="task-notification" class="notification" style="display: none;" aria-live="polite"></div>
+  <footer>
+    <p>© 2025 Xbet. Створено <a href="https://github.com/VadimGolovnin" target="_blank">Головніним Вадимом</a>.</p>
+  </footer>
+  <audio id="win-sound" src="win-sound.mp3"></audio>
+  <script src="script.js"></script>
+</body>
+</html>
