@@ -4,576 +4,104 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>teXbet — Офіційний букмекерський сайт</title>
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- Animate.css -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
-  <!-- FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap-grid.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto&display=swap" rel="stylesheet" />
-
-  <style>
-    /* --- Основні стилі --- */
-    body {
-      font-family: 'Roboto', sans-serif;
-      margin: 0; padding: 0;
-      background: #0d1b2a;
-      color: #e0e6f2;
-      overflow-x: hidden;
-      transition: background 0.5s, color 0.5s;
-    }
-    a {
-      text-decoration: none;
-      color: #00bfff;
-    }
-    a:hover {
-      color: #00e0ff;
-    }
-    /* --- Темна та світла тема --- */
-    body.light {
-      background: #f0f4f8;
-      color: #14213d;
-    }
-    body.light header {
-      background: #e0f0ff;
-      color: #14213d;
-      box-shadow: 0 0 25px #0077cc88;
-    }
-    body.light .nav-link {
-      color: #14213d !important;
-    }
-    body.light .nav-link.active {
-      background-color: #00bfff !important;
-      color: #fff !important;
-    }
-    /* --- Хедер --- */
-    header {
-      background: #14213d;
-      color: #00bfff;
-      padding: 15px 40px;
-      box-shadow: 0 0 25px #00bfff88;
-      position: sticky;
-      top: 0;
-      z-index: 1100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      user-select: none;
-    }
-    .logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.8rem;
-      letter-spacing: 0.08em;
-      text-shadow: 0 0 15px #00bfff;
-      cursor: pointer;
-      animation: pulse 2.5s infinite;
-      user-select: none;
-    }
-    @keyframes pulse {
-      0%, 100% { text-shadow: 0 0 8px #00bfff; }
-      50% { text-shadow: 0 0 20px #00e0ff; }
-    }
-    .nav {
-      display: flex;
-      gap: 25px;
-    }
-    .nav-link {
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: #a3c9ff;
-      padding: 6px 12px;
-      border-radius: 10px;
-      transition: background-color 0.3s, color 0.3s;
-      cursor: pointer;
-    }
-    .nav-link.active, .nav-link:hover {
-      background-color: #00bfff;
-      color: #14213d !important;
-    }
-    /* --- Контент --- */
-    main.container {
-      max-width: 1200px;
-      padding: 30px 20px 60px;
-      margin: auto;
-    }
-    h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      margin-bottom: 25px;
-      text-align: center;
-      letter-spacing: 0.05em;
-      user-select: none;
-    }
-    /* --- Live матчі --- */
-    #matches {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
-      gap: 20px;
-    }
-    .match-card {
-      background: #1b263b;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 0 12px #00bfff88;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
-    }
-    .match-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px #00bfff;
-    }
-    .match-header {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-    .match-time {
-      font-style: italic;
-      margin-bottom: 12px;
-      color: #00e0ff;
-    }
-    .coef-list {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-    .coef-item {
-      background: #0d1b2a;
-      padding: 8px 16px;
-      border-radius: 12px;
-      font-weight: 600;
-      color: #00bfff;
-      flex-grow: 1;
-      text-align: center;
-      cursor: pointer;
-      user-select: none;
-      transition: background-color 0.3s;
-    }
-    .coef-item:hover {
-      background-color: #00bfff;
-      color: #14213d;
-    }
-    .btn-bet {
-      width: 100%;
-      font-weight: 700;
-      background-color: #00bfff;
-      border: none;
-      border-radius: 12px;
-      color: #14213d;
-      cursor: pointer;
-      padding: 10px 0;
-      transition: background-color 0.3s;
-    }
-    .btn-bet:hover {
-      background-color: #00e0ff;
-    }
-    /* --- Казино --- */
-    #casino-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 20px;
-    }
-    .casino-card {
-      background: #1b263b;
-      border-radius: 16px;
-      padding: 25px 15px;
-      box-shadow: 0 0 18px #00bfff88;
-      text-align: center;
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: #00d4ff;
-      cursor: pointer;
-      user-select: none;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .casino-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 28px #00d4ff;
-    }
-    .casino-card small {
-      display: block;
-      font-weight: 400;
-      font-size: 0.9rem;
-      margin-top: 8px;
-      color: #00aacc;
-      user-select: none;
-    }
-    /* Слот гра - демонстрація */
-    .slot-machine {
-      background: #0d1b2a;
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 0 15px #00bfffaa;
-      color: #00d4ff;
-      font-weight: 700;
-      font-size: 1.3rem;
-      user-select: none;
-      margin-top: 15px;
-      text-align: center;
-    }
-    .slot-reels {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      margin-bottom: 15px;
-      font-size: 3rem;
-      letter-spacing: 0.15em;
-    }
-    .btn-spin {
-      background: #00bfff;
-      border: none;
-      padding: 10px 30px;
-      border-radius: 12px;
-      font-weight: 700;
-      color: #14213d;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      user-select: none;
-    }
-    .btn-spin:hover {
-      background-color: #00e0ff;
-    }
-    /* --- Новини --- */
-    #news-list {
-      max-width: 700px;
-      margin: 0 auto;
-      list-style: none;
-      padding: 0;
-    }
-    #news-list li {
-      background: #1b263b;
-      padding: 15px 20px;
-      margin-bottom: 12px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px #00bfff77;
-      user-select: none;
-      font-weight: 600;
-      cursor: default;
-      transition: background-color 0.3s;
-    }
-    #news-list li:hover {
-      background-color: #00bfff33;
-    }
-    /* --- Кабінет --- */
-    #profile {
-      max-width: 450px;
-      margin: 0 auto;
-    }
-    .balance-box {
-      font-weight: 700;
-      font-size: 1.3rem;
-      text-align: center;
-      margin-bottom: 20px;
-      color: #00bfff;
-      user-select: none;
-    }
-    .btn-primary, .btn-success {
-      width: 100%;
-      font-weight: 700;
-      border-radius: 12px;
-      padding: 12px 0;
-      user-select: none;
-      cursor: pointer;
-    }
-    .btn-primary:hover, .btn-success:hover {
-      opacity: 0.85;
-    }
-    form input {
-      margin-bottom: 15px;
-      padding: 10px 15px;
-      font-size: 1rem;
-      border-radius: 10px;
-      border: 1.8px solid #00bfff66;
-      background: transparent;
-      color: #e0e6f2;
-      transition: border-color 0.3s;
-      user-select: text;
-    }
-    form input:focus {
-      border-color: #00e0ff;
-      outline: none;
-      background: #14213d;
-    }
-    /* --- Футер --- */
-    footer {
-      background: #14213d;
-      color: #00bfff;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 600;
-      padding: 18px 0;
-      text-align: center;
-      border-top: 1px solid #00bfff44;
-      user-select: none;
-      font-size: 0.9rem;
-      position: relative;
-    }
-    footer small {
-      display: block;
-      font-weight: 400;
-      margin-top: 6px;
-      color: #00aaccaa;
-    }
-    /* --- Темна/світла тема кнопка --- */
-    .btn-theme-toggle {
-      background: transparent;
-      border: 2px solid #00bfff;
-      color: #00bfff;
-      border-radius: 12px;
-      font-weight: 700;
-      padding: 8px 14px;
-      cursor: pointer;
-      transition: background-color 0.3s, color 0.3s;
-      user-select: none;
-    }
-    .btn-theme-toggle:hover {
-      background-color: #00bfff;
-      color: #14213d;
-    }
-    /* --- Чат підтримки збоку --- */
-    #chat-support {
-      position: fixed;
-      right: 0;
-      bottom: 80px;
-      width: 320px;
-      max-width: 90vw;
-      height: 400px;
-      background: #14213dcc;
-      border-radius: 15px 0 0 15px;
-      box-shadow: -5px 0 15px #00bfffaa;
-      color: #00d4ff;
-      font-family: 'Roboto', sans-serif;
-      display: flex;
-      flex-direction: column;
-      user-select: none;
-      transform: translateX(100%);
-      transition: transform 0.4s ease;
-      z-index: 1200;
-    }
-    #chat-support.open {
-      transform: translateX(0);
-    }
-    #chat-header {
-      background: #00bfff;
-      padding: 12px 20px;
-      border-radius: 15px 0 0 0;
-      color: #14213d;
-      font-weight: 700;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: grab;
-      user-select: none;
-    }
-    #chat-messages {
-      flex-grow: 1;
-      padding: 15px 20px;
-      overflow-y: auto;
-      font-size: 0.95rem;
-      background: #0d1b2a;
-      border-bottom: 2px solid #00bfff66;
-    }
-    #chat-input-area {
-      display: flex;
-      padding: 10px 15px;
-      background: #1b263b;
-      border-radius: 0 0 15px 15px;
-    }
-    #chat-input {
-      flex-grow: 1;
-      padding: 8px 12px;
-      border-radius: 12px;
-      border: none;
-      font-size: 1rem;
-      outline: none;
-    }
-    #chat-send-btn {
-      background: #00bfff;
-      border: none;
-      color: #14213d;
-      font-weight: 700;
-      padding: 8px 15px;
-      margin-left: 8px;
-      border-radius: 12px;
-      cursor: pointer;
-      user-select: none;
-      transition: background-color 0.3s;
-    }
-    #chat-send-btn:hover {
-      background-color: #00e0ff;
-    }
-    /* --- Кнопка відкриття чату --- */
-    #chat-toggle-btn {
-      position: fixed;
-      right: 0;
-      bottom: 30px;
-      background: #00bfff;
-      color: #14213d;
-      border-radius: 30px 0 0 30px;
-      width: 60px;
-      height: 60px;
-      box-shadow: -3px 0 10px #00bfffaa;
-      cursor: pointer;
-      font-size: 1.8rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      user-select: none;
-      z-index: 1300;
-      transition: background-color 0.3s;
-    }
-    #chat-toggle-btn:hover {
-      background-color: #00e0ff;
-    }
-    /* --- Титульна сторінка --- */
-    #welcome-page {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, #14213d, #0d1b2a);
-      color: #00bfff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 3rem;
-      letter-spacing: 0.15em;
-      text-align: center;
-      z-index: 1500;
-      user-select: none;
-      cursor: pointer;
-      transition: opacity 0.8s ease;
-    }
-    #welcome-subtitle {
-      font-size: 1.2rem;
-      margin-top: 15px;
-      font-weight: 400;
-      letter-spacing: 0.05em;
-      color: #00e0ffcc;
-    }
-    #welcome-page.fade-out {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    /* --- Адаптив --- */
-    @media(max-width: 576px) {
-      header {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 12px;
-      }
-      .nav {
-        gap: 12px;
-        overflow-x: auto;
-        width: 100%;
-        justify-content: center;
-      }
-      .nav-link {
-        font-size: 0.95rem;
-        padding: 5px 10px;
-      }
-      #chat-support {
-        width: 100vw;
-        height: 350px;
-        bottom: 0;
-        border-radius: 0;
-        box-shadow: none;
-      }
-      #chat-toggle-btn {
-        bottom: 10px;
-        right: 10px;
-        width: 50px;
-        height: 50px;
-        font-size: 1.4rem;
-      }
-      main.container {
-        padding: 20px 12px 50px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
   <!-- Титульна сторінка -->
   <div id="welcome-page" role="button" tabindex="0" aria-label="Відкрити сайт teXbet">
     teXbet<br />
-    <span id="welcome-subtitle">Офіційний букмекерський сайт</span>
-    <small style="font-size:0.7rem; margin-top: 40px; color:#005580cc;">Натисніть щоб увійти</small>
+    <span id="welcome-subtitle" data-i18n="welcome_subtitle">Офіційний букмекерський сайт</span>
+    <small style="font-size:0.7rem; margin-top: 40px; color:#005580cc;" data-i18n="click_to_enter">Натисніть щоб увійти</small>
   </div>
 
   <!-- Хедер -->
   <header>
     <div class="logo" role="link" tabindex="0" aria-label="Головна сторінка teXbet">teXbet</div>
     <nav class="nav" role="navigation" aria-label="Основне меню">
-      <a href="#live" class="nav-link active" data-tab="live" role="tab" aria-selected="true">Live</a>
-      <a href="#casino" class="nav-link" data-tab="casino" role="tab" aria-selected="false">Казино</a>
-      <a href="#news" class="nav-link" data-tab="news" role="tab" aria-selected="false">Новини</a>
-      <a href="#profile" class="nav-link" data-tab="profile" role="tab" aria-selected="false">Кабінет</a>
+      <a href="#live" class="nav-link active" data-tab="live" role="tab" aria-selected="true" data-i18n="live">Live</a>
+      <a href="#casino" class="nav-link" data-tab="casino" role="tab" aria-selected="false" data-i18n="casino">Казино</a>
+      <a href="#news" class="nav-link" data-tab="news" role="tab" aria-selected="false" data-i18n="news">Новини</a>
+      <a href="#profile" class="nav-link" data-tab="profile" role="tab" aria-selected="false" data-i18n="profile">Кабінет</a>
     </nav>
-    <button id="theme-toggle" class="btn-theme-toggle" aria-label="Переключити тему">Світла тема</button>
+    <div class="header-controls">
+      <select id="language-select" aria-label="Вибрати мову">
+        <option value="uk">Українська</option>
+        <option value="en">English</option>
+      </select>
+      <button id="theme-toggle" class="btn-theme-toggle" aria-label="Переключити тему" data-i18n="light_theme">Світла тема</button>
+    </div>
   </header>
 
   <!-- Основний контент -->
   <main class="container" role="main" tabindex="0">
     <!-- Live -->
     <section id="live" class="tab-content" role="tabpanel" aria-label="Live матчі">
-      <h2 class="animate__animated animate__fadeIn">🎯 Live-матчі</h2>
-      <div id="matches" aria-live="polite" aria-relevant="additions" class="animate__animated animate__fadeInUp"></div>
+      <h2 class="fade-in" data-i18n="live_matches">🎯 Live-матчі</h2>
+      <div class="filter-bar">
+        <select id="sport-filter" aria-label="Фільтр за видом спорту">
+          <option value="all" data-i18n="all_sports">Усі види спорту</option>
+          <option value="1" data-i18n="football">Футбол</option>
+          <option value="2" data-i18n="basketball">Баскетбол</option>
+        </select>
+      </div>
+      <div id="matches" aria-live="polite" aria-relevant="additions" class="fade-in"></div>
     </section>
 
     <!-- Казино -->
     <section id="casino" class="tab-content" role="tabpanel" aria-label="Казино (демо)" hidden>
-      <h2 class="animate__animated animate__fadeIn">🎰 Казино (демо)</h2>
+      <h2 class="fade-in" data-i18n="casino_demo">🎰 Казино (демо)</h2>
       <div id="casino-list"></div>
-
-      <!-- Слот машина -->
-      <div class="slot-machine" aria-label="Демо слот машина" role="region" aria-live="polite" aria-atomic="true">
+      <div class="slot-machine" aria-label="Демо слот машина" role="region" aria-live="polite">
         <div class="slot-reels" id="slot-reels" aria-hidden="true">🍒 🍋 🍉</div>
-        <button class="btn-spin" id="slot-spin-btn" aria-label="Запустити слот машину">Запустити слот</button>
+        <button class="btn-spin" id="slot-spin-btn" aria-label="Запустити слот машину" data-i18n="spin_slot">Запустити слот</button>
         <div id="slot-result" style="margin-top:10px; font-weight: 700;"></div>
+      </div>
+      <div class="roulette-game" aria-label="Демо рулетка" role="region" aria-live="polite">
+        <h3 data-i18n="roulette_demo">🎡 Демо рулетка</h3>
+        <div id="roulette-wheel" style="font-size:2rem; text-align:center; margin:15px 0;">0</div>
+        <button class="btn-spin" id="roulette-spin-btn" aria-label="Запустити рулетку" data-i18n="spin_roulette">Запустити рулетку</button>
+        <div id="roulette-result" style="margin-top:10px; font-weight: 700;"></div>
       </div>
     </section>
 
     <!-- Новини -->
     <section id="news" class="tab-content" role="tabpanel" aria-label="Новини спорту" hidden>
-      <h2 class="animate__animated animate__fadeIn">📰 Останні новини</h2>
+      <h2 class="fade-in" data-i18n="latest_news">📰 Останні новини</h2>
       <ul id="news-list" aria-live="polite" aria-relevant="additions" role="list"></ul>
     </section>
 
     <!-- Профіль -->
     <section id="profile" class="tab-content" role="tabpanel" aria-label="Особистий кабінет" hidden>
-      <h2 class="animate__animated animate__fadeIn">👤 Особистий кабінет</h2>
-      <div class="balance-box" id="balance" aria-live="polite">Баланс: 1000 грн</div>
-      <button class="btn btn-success mb-3" id="btn-replenish">Поповнити демо баланс</button>
-
+      <h2 class="fade-in" data-i18n="profile">👤 Особистий кабінет</h2>
+      <div class="balance-box" id="balance" aria-live="polite" data-i18n="balance">Баланс: 1000 грн</div>
+      <button class="btn btn-success mb-3" id="btn-replenish" data-i18n="replenish_balance">Поповнити демо баланс</button>
       <form id="login-form" aria-label="Форма входу">
         <input type="text" placeholder="Логін" aria-label="Логін" required autocomplete="username" />
         <input type="password" placeholder="Пароль" aria-label="Пароль" required autocomplete="current-password" />
-        <button type="submit" class="btn btn-primary">Увійти</button>
+        <button type="submit" class="btn btn-primary" data-i18n="login">Увійти</button>
       </form>
     </section>
   </main>
 
-  <!-- Підтримка сайту з карткою -->
+  <!-- Футер -->
   <footer>
-    © 2025 teXbet — офіційний букмекерський сайт від Вадима Головніна
+    <span data-i18n="footer_copyright">© 2025 teXbet — офіційний букмекерський сайт від Вадима Головніна</span>
     <br />
-    <small>Підтримка сайту: карта 4149 5110 2688 8354</small>
+    <small data-i18n="footer_support">Підтримка сайту: карта 4149 5110 2688 8354</small>
   </footer>
 
   <!-- Чат підтримки -->
-  <div id="chat-support" aria-live="polite" aria-atomic="true" role="region" aria-label="Чат підтримки">
+  <div id="chat-support" aria-live="polite" role="region" aria-label="Чат підтримки">
     <div id="chat-header">
-      Підтримка
-      <button id="chat-close-btn" aria-label="Закрити чат" style="background:none;border:none; font-size:1.5rem; color:#14213d; cursor:pointer;">&times;</button>
+      <span data-i18n="support">Підтримка</span>
+      <button id="chat-close-btn" aria-label="Закрити чат" style="background:none;border:none; font-size:1.5rem; color:#14213d; cursor:pointer;">×</button>
     </div>
     <div id="chat-messages" tabindex="0"></div>
     <div id="chat-input-area">
-      <input type="text" id="chat-input" placeholder="Напишіть повідомлення..." aria-label="Повідомлення" autocomplete="off" />
+      <input type="text" id="chat-input" placeholder="Напишіть повідомлення..." aria-label="Повідомлення" autocomplete="off" data-i18n-placeholder="chat_placeholder" />
       <button id="chat-send-btn" aria-label="Надіслати повідомлення"><i class="fa-solid fa-paper-plane"></i></button>
     </div>
   </div>
@@ -581,242 +109,8 @@
     <i class="fa-solid fa-comments"></i>
   </button>
 
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // --- Змінна балансу ---
-    let balance = 1000;
-
-    // --- Титульна сторінка ---
-    const welcomePage = document.getElementById('welcome-page');
-    welcomePage.addEventListener('click', () => {
-      welcomePage.classList.add('fade-out');
-      setTimeout(() => welcomePage.style.display = 'none', 800);
-    });
-    welcomePage.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        welcomePage.click();
-      }
-    });
-
-    // --- Навігація між вкладками ---
-    const navLinks = document.querySelectorAll('.nav-link');
-    const tabs = document.querySelectorAll('.tab-content');
-    navLinks.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        navLinks.forEach(l => {
-          l.classList.remove('active');
-          l.setAttribute('aria-selected', 'false');
-        });
-        link.classList.add('active');
-        link.setAttribute('aria-selected', 'true');
-
-        const tabId = link.getAttribute('data-tab');
-        tabs.forEach(tab => {
-          if (tab.id === tabId) {
-            tab.hidden = false;
-          } else {
-            tab.hidden = true;
-          }
-        });
-      });
-    });
-
-    // --- Темна/світла тема ---
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    themeToggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('light');
-      if(document.body.classList.contains('light')) {
-        themeToggleBtn.textContent = 'Темна тема';
-      } else {
-        themeToggleBtn.textContent = 'Світла тема';
-      }
-    });
-
-    // --- API реальних матчів ---
-    const API_KEY = "15687e1fc75dff9890d58aa512214463";
-    const matchesContainer = document.getElementById('matches');
-
-    async function fetchMatches() {
-      try {
-        matchesContainer.innerHTML = '<p>Завантаження матчів...</p>';
-        const response = await fetch(`https://api.betsapi.com/v2/events/inplay?sport_id=1&token=${API_KEY}`);
-        const data = await response.json();
-
-        if(data.results && data.results.length > 0){
-          matchesContainer.innerHTML = '';
-          data.results.forEach(match => {
-            const div = document.createElement('div');
-            div.className = 'match-card animate__animated animate__fadeInUp';
-            const home = match.home || 'Команда A';
-            const away = match.away || 'Команда B';
-            const time = new Date(match.time * 1000).toLocaleTimeString('uk-UA', {hour:'2-digit', minute:'2-digit'});
-            // Для прикладу беремо коефіцієнти з першого букмекера якщо є
-            let coefText = 'Коефіцієнти недоступні';
-            if(match.bookmakers && match.bookmakers.length > 0 && match.bookmakers[0].markets.length > 0) {
-              const outcomes = match.bookmakers[0].markets[0].outcomes;
-              coefText = outcomes.map(o => `${o.name}: ${o.price}`).join(' / ');
-            }
-            div.innerHTML = `
-              <div class="match-header">${home} vs ${away}</div>
-              <div class="match-time">Час: ${time}</div>
-              <div class="coef-list">${coefText}</div>
-              <button class="btn-bet" onclick="alert('Ставка зроблена на матч ${home} - ${away}')">Зробити ставку</button>
-            `;
-            matchesContainer.appendChild(div);
-          });
-        } else {
-          matchesContainer.innerHTML = '<p>Немає доступних матчів.</p>';
-        }
-      } catch(err){
-        matchesContainer.innerHTML = `<p style="color:#f55;">Помилка завантаження матчів.</p>`;
-        console.error(err);
-      }
-    }
-    fetchMatches();
-    // Оновлюємо матчі кожні 60 сек
-    setInterval(fetchMatches, 60000);
-
-    // --- Казино: список і слот-машина ---
-    const casinoGames = [
-      {name: "Crazy Time (демо)", provider: "Evolution"},
-      {name: "Aviator (демо)", provider: "Spribe"},
-      {name: "Sweet Bonanza (демо)", provider: "Pragmatic Play"},
-      {name: "Book of Ra (демо)", provider: "Novomatic"},
-      {name: "Fruit Party (демо)", provider: "Pragmatic Play"},
-      {name: "Mega Joker (демо)", provider: "Novomatic"},
-      {name: "Starburst (демо)", provider: "NetEnt"},
-      {name: "Gonzo's Quest (демо)", provider: "NetEnt"}
-    ];
-    const casinoList = document.getElementById('casino-list');
-    casinoGames.forEach(game => {
-      const card = document.createElement('div');
-      card.className = 'casino-card';
-      card.setAttribute('tabindex', '0');
-      card.setAttribute('role', 'button');
-      card.setAttribute('aria-label', `Гра: ${game.name}, провайдер: ${game.provider}`);
-      card.innerHTML = `🎮 ${game.name}<br><small>Провайдер: ${game.provider}</small>`;
-      casinoList.appendChild(card);
-    });
-
-    // --- Демо слот-машина ---
-    const slotSymbols = ['🍒', '🍋', '🍉', '🍇', '🍊', '⭐', '7️⃣'];
-    const slotReels = document.getElementById('slot-reels');
-    const slotSpinBtn = document.getElementById('slot-spin-btn');
-    const slotResult = document.getElementById('slot-result');
-
-    function getRandomSymbol() {
-      return slotSymbols[Math.floor(Math.random() * slotSymbols.length)];
-    }
-    function spinSlot() {
-      slotResult.textContent = '';
-      let reels = [];
-      for(let i=0; i<3; i++) {
-        reels.push(getRandomSymbol());
-      }
-      slotReels.textContent = reels.join(' ');
-      // Проста логіка виграшу
-      if(reels[0] === reels[1] && reels[1] === reels[2]) {
-        slotResult.textContent = 'Виграш! +500 грн 🎉';
-        balance += 500;
-        updateBalanceUI();
-      } else {
-        slotResult.textContent = 'Спробуйте ще!';
-      }
-    }
-    slotSpinBtn.addEventListener('click', spinSlot);
-
-    // --- Баланс ---
-    const balanceBox = document.getElementById('balance');
-    function updateBalanceUI() {
-      balanceBox.textContent = `Баланс: ${balance.toFixed(2)} грн`;
-      balanceBox.style.color = balance > 0 ? '#00bfff' : '#f55';
-    }
-
-    // --- Поповнення балансу ---
-    const btnReplenish = document.getElementById('btn-replenish');
-    btnReplenish.addEventListener('click', () => {
-      const amountStr = prompt('Введіть суму для поповнення (грн):', '100');
-      if(amountStr === null) return; // відміна
-      const amount = parseFloat(amountStr);
-      if(isNaN(amount) || amount <= 0) {
-        alert('Введіть правильну суму!');
-        return;
-      }
-      balance += amount;
-      updateBalanceUI();
-      alert(`Баланс поповнено на ${amount.toFixed(2)} грн!\nНомер карти для оплати:\n4149 5110 2688 8354`);
-    });
-
-    updateBalanceUI();
-
-    // --- Форма логіну (демо) ---
-    const loginForm = document.getElementById('login-form');
-    loginForm.addEventListener('submit', e => {
-      e.preventDefault();
-      alert('Вхід у кабінет наразі недоступний. Це демо-версія.');
-    });
-
-    // --- Чат підтримки ---
-    const chatSupport = document.getElementById('chat-support');
-    const chatToggleBtn = document.getElementById('chat-toggle-btn');
-    const chatCloseBtn = document.getElementById('chat-close-btn');
-    const chatMessages = document.getElementById('chat-messages');
-    const chatInput = document.getElementById('chat-input');
-    const chatSendBtn = document.getElementById('chat-send-btn');
-
-    chatToggleBtn.addEventListener('click', () => {
-      chatSupport.classList.toggle('open');
-      if(chatSupport.classList.contains('open')){
-        chatInput.focus();
-      }
-    });
-    chatCloseBtn.addEventListener('click', () => {
-      chatSupport.classList.remove('open');
-      chatToggleBtn.focus();
-    });
-
-    // Демо авто-відповіді в чаті
-    function appendChatMessage(text, isUser = false){
-      const div = document.createElement('div');
-      div.textContent = text;
-      div.style.marginBottom = '8px';
-      div.style.padding = '8px 12px';
-      div.style.borderRadius = '12px';
-      div.style.maxWidth = '85%';
-      div.style.wordWrap = 'break-word';
-      div.style.userSelect = 'text';
-      if(isUser){
-        div.style.backgroundColor = '#00bfff';
-        div.style.color = '#14213d';
-        div.style.marginLeft = 'auto';
-      } else {
-        div.style.backgroundColor = '#1b263b';
-        div.style.color = '#00d4ff';
-        div.style.marginRight = 'auto';
-      }
-      chatMessages.appendChild(div);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-    chatSendBtn.addEventListener('click', () => {
-      const text = chatInput.value.trim();
-      if(!text) return;
-      appendChatMessage(text, true);
-      chatInput.value = '';
-      setTimeout(() => {
-        // Простий бот відповідь
-        let reply = 'Вибачте, я бот підтримки. Зверніться, будь ласка, пізніше.';
-        if(/привіт|здравствуй|hello/i.test(text)) reply = 'Привіт! Як я можу допомогти?';
-        else if(/поповнити|баланс/i.test(text)) reply = 'Щоб поповнити баланс, натисніть кнопку "Поповнити демо баланс" у Кабінеті.';
-        else if(/казино/i.test(text)) reply = 'У нашому демо-казино можна запускати слот-машину прямо зараз!';
-        else if(/матч/i.test(text)) reply = 'Реальні матчі оновлюються щохвилини у вкладці Live.';
-        appendChatMessage(reply);
-      }, 800);
-    });
-    chatInput.addEventListener('keydown', e => {
-      if(e.key === 'Enter') chatSendBtn.click();
-    });
-  </script>
+  <audio id="slot-win-sound" src="https://freesound.org/data/previews/387/387232_5121236-lq.mp3"></audio>
+  <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.14/dist/umd/i18next.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
