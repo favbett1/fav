@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ЦНАП Берегомет — сайт для братухи</title>
+<style>
+  /* Reset */
+  *, *::before, *::after {
+    margin:0; padding:0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+    transition: background 0.3s, color 0.3s;
+    scroll-behavior: smooth;
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  :root {
+    --bg: #f0f4f8;
+    --fg: #222;
+    --accent: #1d7a8c;
+    --accent-hover: #145f6a;
+    --header-bg: #004225;
+    --header-fg: #fff;
+    --btn-bg: #004225;
+    --btn-fg: #ffd700;
+    --shadow: rgba(0, 0, 0, 0.1);
+  }
+  body.dark {
+    --bg: #121212;
+    --fg: #ddd;
+    --accent: #3ddc97;
+    --accent-hover: #2ea97b;
+    --header-bg: #003300;
+    --header-fg: #e0e0e0;
+    --btn-bg: #0a6f4a;
+    --btn-fg: #a3d57a;
+    --shadow: rgba(0, 0, 0, 0.7);
+  }
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  a:hover, a:focus {
+    color: var(--accent-hover);
+    text-decoration: underline;
+  }
+  header {
+    background: var(--header-bg);
+    color: var(--header-fg);
+    padding: 1rem 2rem;
+    position: fixed;
+    width: 100%;
+    top: 0; left: 0;
+    z-index: 9999;
+    box-shadow: 0 2px 8px var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+  }
+  nav {
+    position: relative;
+  }
+  nav ul {
+    display: flex;
+    list-style: none;
+  }
+  nav ul li {
+    margin-left: 2rem;
+  }
+  nav ul li:first-child {
+    margin-left: 0;
+  }
+  nav ul li a {
+    color: var(--header-fg);
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+  }
+  nav ul li a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--btn-fg);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+  nav ul li a.active::after,
+  nav ul li a:hover::after,
+  nav ul li a:focus::after {
+    width: 100%;
+  }
+  /* Mobile menu */
+  #menu-toggle {
+    display: none;
+  }
+  label[for="menu-toggle"] {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 25px;
+    height: 20px;
+    cursor: pointer;
+  }
+  label[for="menu-toggle"] span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--header-fg);
+    border-radius: 2px;
+    transition: all 0.3s linear;
+  }
+  #menu-toggle:checked + label[for="menu-toggle"] span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  #menu-toggle:checked + label[for="menu-toggle"] span:nth-child(2) {
+    opacity: 0;
+  }
+  #menu-toggle:checked + label[for="menu-toggle"] span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+  @media (max-width: 768px) {
+    nav ul {
+      flex-direction: column;
+      background: var(--header-bg);
+      position: fixed;
+      top: 60px;
+      left: -100%;
+      width: 100%;
+      height: calc(100vh - 60px);
+      transition: left 0.3s ease-in-out;
+      padding-top: 2rem;
+      z-index: 9998;
+    }
+    nav ul li {
+      margin: 1.5rem 0;
+      text-align: center;
+      margin-left: 0;
+    }
+    #menu-toggle:checked ~ nav ul {
+      left: 0;
+    }
+    label[for="menu-toggle"] {
+      display: flex;
+    }
+  }
+  main {
+    max-width: 1000px;
+    margin: 100px auto 3rem auto;
+    padding: 0 1rem 50px 1rem;
+  }
+  section {
+    background: var(--bg);
+    margin-bottom: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 15px var(--shadow);
+    padding: 2rem;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  section.visible {
+    opacity: 1;
+    transform: none;
+  }
+  h1, h2 {
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  p, ul {
+    font-size: 1.1rem;
+    color: var(--fg);
+  }
+  ul.services-list {
+    list-style: disc inside;
+  }
+  ul.services-list li {
+    margin-bottom: 0.5rem;
+  }
+  .news-item {
+    border-left: 4px solid var(--accent);
+    background: var(--header-bg);
+    color: var(--header-fg);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .news-item:hover, .news-item:focus {
+    background-color: var(--accent-hover);
+    outline: none;
+  }
+  .news-date {
+    font-weight: 700;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  form input, form textarea {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 2px solid var(--accent);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    background: var(--bg);
+    color: var(--fg);
+    transition: border-color 0.3s ease;
+  }
+  form input:focus, form textarea:focus {
+    outline: none;
+    border-color: var(--btn-bg);
+  }
+  form button {
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    font-weight: 700;
+    padding: 1rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  form button:hover {
+    background: var(--accent-hover);
+  }
+  #formMessage {
+    margin-top: 1rem;
+    font-weight: 700;
+  }
+  .map-container {
+    margin-top: 2rem;
+    height: 350px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px var(--shadow);
+  }
+  /* Dark mode toggle */
+  .toggle-theme-btn {
+    background: transparent;
+    border: 2px solid var(--btn-fg);
+    color: var(--btn-fg);
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-left: 1rem;
+  }
+  .toggle-theme-btn:hover {
+    background-color: var(--btn-fg);
+    color: var(--btn-bg);
+  }
+  /* Scroll to top */
+  #scrollTopBtn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+    cursor: pointer;
+    display: none;
+    box-shadow: 0 3px 10px var(--shadow);
+    z-index: 9999;
+    transition: background-color 0.3s ease;
+  }
+  #scrollTopBtn:hover {
+    background-color: var(--accent-hover);
+  }
+  /* Chat widget */
+  #chatWidget {
+    position: fixed;
+    bottom: 110px;
+    right: 40px;
+    width: 320px;
+    max-width: 90vw;
+    background: var(--bg);
+    color: var(--fg);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow);
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(110%);
+    transition: transform 0.4s ease;
+    z-index: 10000;
+  }
+  #chatWidget.open {
+    transform: translateY(0);
+  }
+  #chatHeader {
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    padding: 0.7rem 1rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  #chatMessages {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+  }
+  #chatInputContainer {
+    display: flex;
+    border-top: 1px solid var(--accent);
+  }
+  #chatInput {
+    flex: 1;
+    border: none;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border-radius: 0 0 0 10px;
+    background: var(--bg);
+    color: var(--fg);
+  }
+  #chatInput:focus {
+    outline: none;
+  }
+  #chatSendBtn {
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    border: none;
+    padding: 0 1rem;
+    cursor: pointer;
+    font-weight: 700;
+    border-radius: 0 0 10px 0;
+    transition: background-color 0.3s ease;
+  }
+  #chatSendBtn:hover {
+    background-color: var(--accent-hover);
+  }
+  .chat-message {
+    margin-bottom: 1rem;
+  }
+  .chat-message.bot {
+    color: var(--btn-bg);
+    font-weight: 600;
+  }
+  .chat-message.user {
+    text-align: right;
+    font-style: italic;
+  }
+  /* FAQ */
+  #faq {
+    margin-top: 2rem;
+  }
+  #faq input[type="text"] {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 2px solid var(--accent);
+    margin-bottom: 1rem;
+  }
+  .faq-item {
+    background: var(--header-bg);
+    color: var(--header-fg);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .faq-item:hover, .faq-item:focus {
+    background-color: var(--accent-hover);
+    outline: none;
+  }
+  .faq-answer {
+    background: var(--bg);
+    color: var(--fg);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    display: none;
+  }
+  .faq-answer.visible {
+    display: block;
+  }
+  /* Telegram button */
+  .telegram-btn {
+    position: fixed;
+    bottom: 60px;
+    right: 40px;
+    background: #0088cc;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 9999;
+    transition: background-color 0.3s ease;
+  }
+  .telegram-btn:hover {
+    background-color: #006699;
+  }
+  /* Snow animation */
+  #snowCanvas {
+    pointer-events: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">ЦНАП Берегомет</div>
+  <input type="checkbox" id="menu-toggle" aria-label="Переключити меню" />
+  <label for="menu-toggle" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </label>
+  <nav>
+    <ul>
+      <li><a href="#home" class="active" tabindex="0">Головна</a></li>
+      <li><a href="#about" tabindex="0">Про нас</a></li>
+      <li><a href="#services" tabindex="0">Послуги</a></li>
+      <li><a href="#news" tabindex="0">Новини</a></li>
+      <li><a href="#faq" tabindex="0">FAQ</a></li>
+      <li><a href="#contact" tabindex="0">Контакти</a></li>
+    </ul>
+  </nav>
+  <button class="toggle-theme-btn" aria-pressed="false" aria-label="Увімкнути темний режим">Темний режим</button>
+</header>
+
+<main>
+  <section id="home" tabindex="0" aria-label="Головна секція">
+    <h1>Ласкаво просимо до ЦНАП Берегометської селищної ради</h1>
+    <p>Ваш надійний партнер у вирішенні адміністративних питань, оформленні документів та наданні послуг.</p>
+  </section>
+
+  <section id="about" tabindex="0" aria-label="Про нас">
+    <h2>Про нас</h2>
+    <p>Центр надання адміністративних послуг (ЦНАП) Берегометської селищної ради – це команда професіоналів, яка допомагає громадянам швидко і якісно отримати необхідні адміністративні послуги.</p>
+  </section>
+
+  <section id="services" tabindex="0" aria-label="Перелік послуг">
+    <h2>Наші послуги</h2>
+    <ul class="services-list">
+      <li>Оформлення паспортів громадянина України</li>
+      <li>Реєстрація місця проживання</li>
+      <li>Видача довідок та витягів</li>
+      <li>Реєстрація юридичних осіб і ФОП</li>
+      <li>Земельні послуги та містобудівні питання</li>
+      <li>Соціальні послуги</li>
+    </ul>
+  </section>
+
+  <section id="news" tabindex="0" aria-label="Новини">
+    <h2>Новини</h2>
+    <article class="news-item" tabindex="0" role="button" aria-pressed="false" aria-expanded="false" data-index="0">
+      <p><strong>01 липня 2025:</strong> Розпочинається прийом заяв на оформлення паспортів нового зразка.</p>
+    </article>
+    <article class="news-item" tabindex="0" role="button" aria-pressed="false" aria-expanded="false" data-index="1">
+      <p><strong>15 липня 2025:</strong> Графік роботи ЦНАП у святкові дні опубліковано на сайті.</p>
+    </article>
+    <article class="news-item" tabindex="0" role="button" aria-pressed="false" aria-expanded="false" data-index="2">
+      <p><strong>01 серпня 2025:</strong> Запрошуємо на відкритий семінар з питань реєстрації бізнесу.</p>
+    </article>
+  </section>
+
+  <section id="faq" tabindex="0" aria-label="Питання та відповіді">
+    <h2>FAQ — найпоширеніші питання</h2>
+    <input type="text" id="faqSearch" placeholder="Пошук по питаннях..." aria-label="Пошук у FAQ" />
+    <div class="faq-item" tabindex="0" role="button" aria-expanded="false" aria-controls="faq1answer">
+      <strong>Як оформити паспорт громадянина України?</strong>
+    </div>
+    <div id="faq1answer" class="faq-answer" role="region" aria-live="polite">
+      Потрібно звернутися до ЦНАП із необхідними документами: паспорт старого зразка, ідентифікаційний код, заяву та фото.
+    </div>
+    <div class="faq-item" tabindex="0" role="button" aria-expanded="false" aria-controls="faq2answer">
+      <strong>Як зареєструвати місце проживання?</strong>
+    </div>
+    <div id="faq2answer" class="faq-answer" role="region" aria-live="polite">
+      Для реєстрації місця проживання подайте заяву та документи, що підтверджують право на житло.
+    </div>
+    <div class="faq-item" tabindex="0" role="button" aria-expanded="false" aria-controls="faq3answer">
+      <strong>Які документи потрібні для реєстрації ФОП?</strong>
+    </div>
+    <div id="faq3answer" class="faq-answer" role="region" aria-live="polite">
+      Паспорт, ідентифікаційний код, заява на реєстрацію та квитанція про оплату держмита.
+    </div>
+  </section>
+
+  <section id="contact" tabindex="0" aria-label="Контактна форма">
+    <h2>Зв'яжіться з нами</h2>
+    <form id="contactForm" novalidate>
+      <input type="text" id="name" name="name" placeholder="Ваше ім'я" required minlength="2" aria-required="true" />
+      <input type="email" id="email" name="email" placeholder="Ваша електронна пошта" required aria-required="true" />
+      <textarea id="message" name="message" rows="5" placeholder="Ваше повідомлення" required minlength="5" aria-required="true"></textarea>
+      <button type="submit">Надіслати</button>
+      <div id="formMessage" role="alert" aria-live="polite"></div>
+    </form>
+    <div class="map-container" aria-label="Карта місцезнаходження ЦНАП">
+      <iframe
+        src="https://www.openstreetmap.org/export/embed.html?bbox=25.2122%2C48.0915%2C25.2227%2C48.0987&layer=mapnik"
+        style="border:0; width:100%; height:100%;"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Карта місцезнаходження ЦНАП"
+      ></iframe>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p style="text-align:center; padding:1rem 0;">© 2025 ЦНАП Берегометської селищної ради</p>
+</footer>
+
+<!-- Scroll to top button -->
+<button id="scrollTopBtn" aria-label="Прокрутити вгору" title="Вгору">↑</button>
+
+<!-- Telegram chat button -->
+<button class="telegram-btn" aria-label="Написати в Telegram" title="Написати в Telegram" onclick="window.open('https://t.me/beregomet_cnap', '_blank')">
+  &#128172;
+</button>
+
+<!-- Chat widget -->
+<div id="chatWidget" aria-live="polite" aria-atomic="true" aria-label="Чат з підтримкою">
+  <div id="chatHeader" tabindex="0" role="button" aria-expanded="false" aria-controls="chatMessages">Чат підтримки <span id="chatToggle">&#x25BC;</span></div>
+  <div id="chatMessages" tabindex="0"></div>
+  <form id="chatForm" autocomplete="off">
+    <div id="chatInputContainer">
+      <input type="text" id="chatInput" placeholder="Напишіть повідомлення..." aria-label="Повідомлення" required />
+      <button type="submit" id="chatSendBtn" aria-label="Відправити повідомлення">➡️</button>
+    </div>
+  </form>
+</div>
+
+<!-- Snow effect canvas -->
+<canvas id="snowCanvas"></canvas>
+
+<script>
+  // Highlight menu on scroll
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll("nav ul li a");
+
+  function activateMenu() {
+    let current = "";
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop - 100;
+      if (window.pageYOffset >= sectionTop) {
+        current = section.getAttribute("id");
+      }
+    });
+    navLinks.forEach((link) => {
+      link.classList.remove("active");
+      if (link.getAttribute("href").substring(1) === current) {
+        link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll", activateMenu);
+  activateMenu();
+
+  // Animate sections on scroll
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+  sections.forEach((section) => observer.observe(section));
+
+  // Form submit with Formspree
+  const form = document.getElementById("contactForm");
+  const formMessage = document.getElementById("formMessage");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      formMessage.textContent = "Будь ласка, заповніть форму коректно.";
+      formMessage.style.color = "red";
+      return;
+    }
+    const data = {
+      name: form.name.value,
+      email: form.email.value,
+      message: form.message.value,
+    };
+    try {
+      const res = await fetch("https://formspree.io/f/mzbqwbvq", { // Заміни цей URL на свій з formspree.io
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        formMessage.textContent = "Дякуємо! Ваше повідомлення надіслано.";
+        formMessage.style.color = "green";
+        form.reset();
+      } else {
+        throw new Error("Помилка при надсиланні. Спробуйте пізніше.");
+      }
+    } catch (err) {
+      formMessage.textContent = err.message;
+      formMessage.style.color = "red";
+    }
+  });
+
+  // Dark mode toggle
+  const toggleBtn = document.querySelector(".toggle-theme-btn");
+  toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    const isDark = document.body.classList.contains("dark");
+    toggleBtn.setAttribute("aria-pressed", isDark);
+    toggleBtn.textContent = isDark ? "Світлий режим" : "Темний режим";
+  });
+
+  // Scroll to top button
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+  window.addEventListener("scroll", () => {
+    if (window.pageYOffset > 300) {
+      scrollTopBtn.style.display = "block";
+    } else {
+      scrollTopBtn.style.display = "none";
+    }
+  });
+  scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({top: 0, behavior: "smooth"});
+  });
+
+  // FAQ toggling and search
+  const faqItems = document.querySelectorAll(".faq-item");
+  faqItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const answer = item.nextElementSibling;
+      const expanded = item.getAttribute("aria-expanded") === "true";
+      item.setAttribute("aria-expanded", !expanded);
+      if (answer.classList.contains("visible")) {
+        answer.classList.remove("visible");
+      } else {
+        answer.classList.add("visible");
+      }
+    });
+    item.addEventListener("keypress", e => {
+      if (e.key === "Enter" || e.key === " ") {
+        item.click();
+      }
+    });
+  });
+  document.getElementById("faqSearch").addEventListener("input", (e) => {
+    const filter = e.target.value.toLowerCase();
+    faqItems.forEach(item => {
+      const text = item.textContent.toLowerCase();
+      const answer = item.nextElementSibling;
+      if (text.includes(filter)) {
+        item.style.display = "";
+        answer.style.display = "";
+      } else {
+        item.style.display = "none";
+        answer.style.display = "none";
+      }
+    });
+  });
+
+  // News modal — просто відкриваємо alert (можна замінити на модал)
+  const newsItems = document.querySelectorAll(".news-item");
+  newsItems.forEach(item => {
+    item.addEventListener("click", () => {
+      alert(item.textContent);
+    });
+    item.addEventListener("keypress", e => {
+      if (e.key === "Enter" || e.key === " ") {
+        item.click();
+      }
+    });
+  });
+
+  // Chat widget
+  const chatWidget = document.getElementById("chatWidget");
+  const chatHeader = document.getElementById("chatHeader");
+  const chatToggleIcon = document.getElementById("chatToggle");
+  const chatMessages = document.getElementById("chatMessages");
+  const chatForm = document.getElementById("chatForm");
+  const chatInput = document.getElementById("chatInput");
+
+  chatHeader.addEventListener("click", () => {
+    const isOpen = chatWidget.classList.toggle("open");
+    chatToggleIcon.textContent = isOpen ? "▲" : "▼";
+    chatHeader.setAttribute("aria-expanded", isOpen);
+    if (isOpen) chatInput.focus();
+  });
+  chatHeader.addEventListener("keypress", e => {
+    if (e.key === "Enter" || e.key === " ") {
+      chatHeader.click();
+    }
+  });
+
+  // Прості відповіді чатбота
+  const botAnswers = [
+    "Привіт! Чим можу допомогти?",
+    "Для оформлення паспорта вам потрібно звернутися до ЦНАП із пакетом документів.",
+    "Реєстрація місця проживання займає близько 5 робочих днів.",
+    "Щоб зареєструвати ФОП, подайте заяву та оплатіть держмито.",
+    "Звертайтеся у робочі години з понеділка по п'ятницю.",
+    "Дякуємо, що звернулися до ЦНАП Берегомет!"
+  ];
+
+  function appendMessage(text, sender = "bot") {
+    const div = document.createElement("div");
+    div.classList.add("chat-message", sender);
+    div.textContent = text;
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+  chatForm.addEventListener("submit", e => {
+    e.preventDefault();
+    const userMsg = chatInput.value.trim();
+    if (!userMsg) return;
+    appendMessage(userMsg, "user");
+    chatInput.value = "";
+    // Відповідь бота - рандомний варіант з затримкою
+    setTimeout(() => {
+      const answer = botAnswers[Math.floor(Math.random() * botAnswers.length)];
+      appendMessage(answer, "bot");
+    }, 1000);
+  });
+
+  // Snow effect
+  const canvas = document.getElementById("snowCanvas");
+  const ctx = canvas.getContext("2d");
+  let width, height;
+  let snowflakes = [];
+
+  function initSnow() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    snowflakes = [];
+    for (let i = 0; i < 100; i++) {
+      snowflakes.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 3 + 1,
+        speedY: Math.random() * 1 + 0.5,
+        speedX: Math.random() * 0.5 - 0.25
+      });
+    }
+  }
+  function drawSnow() {
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+    ctx.beginPath();
+    snowflakes.forEach(flake => {
+      ctx.moveTo(flake.x, flake.y);
+      ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
+    });
+    ctx.fill();
+    updateSnow();
+  }
+  function updateSnow() {
+    snowflakes.forEach(flake => {
+      flake.y += flake.speedY;
+      flake.x += flake.speedX;
+      if (flake.y > height) {
+        flake.y = -flake.radius;
+        flake.x = Math.random() * width;
+      }
+      if (flake.x > width) {
+        flake.x = 0;
+      }
+      if (flake.x < 0) {
+        flake.x = width;
+      }
+    });
+  }
+  function loop() {
+    drawSnow();
+    requestAnimationFrame(loop);
+  }
+  window.addEventListener("resize", initSnow);
+
+  initSnow();
+  loop();
+
+</script>
+
+</body>
+</html>
