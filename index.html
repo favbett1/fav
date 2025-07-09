@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ЦНАП Берегомет — Легендарний сайт</title>
+
+<meta name="description" content="ЦНАП Берегомет — швидко, зручно та надійно для всіх мешканців." />
+<meta name="keywords" content="ЦНАП, Берегомет, адміністративні послуги, паспорт, ФОП, реєстрація" />
+<meta name="author" content="ЦНАП Берегомет" />
+
+<!-- Open Graph для соцмереж -->
+<meta property="og:title" content="ЦНАП Берегомет — Легендарний сайт" />
+<meta property="og:description" content="Швидко, зручно, надійно. Твій ЦНАП поруч." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://твій_сайт.github.io" />
+<meta property="og:image" content="https://твій_сайт.github.io/og-image.png" />
+
+<style>
+  /* Тут додаю базовий стиль + паралакс фоном */
+  body {
+    margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(120deg, #e0ffe0 0%, #b0ff9f 100%);
+    color: #1b3a1a;
+  }
+  header {
+    position: fixed; top: 0; left: 0; right: 0; background: #2d6a2d;
+    padding: 15px 30px; display: flex; justify-content: space-between; align-items: center;
+    color: #e3f8e3; font-weight: 700; font-size: 1.6rem; z-index: 1000;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  }
+  nav ul {
+    display: flex; gap: 25px;
+  }
+  nav ul li a {
+    padding: 8px 12px; border-radius: 8px; cursor: pointer; transition: background-color 0.3s ease;
+    color: #e3f8e3; font-weight: 600;
+  }
+  nav ul li a.active, nav ul li a:hover {
+    background: #7bc67e; color: #fff;
+  }
+  .menu-toggle {
+    display: none; font-size: 1.8rem; cursor: pointer; color: #d7f1d7;
+  }
+  main {
+    margin-top: 70px; max-width: 1000px; margin-left: auto; margin-right: auto;
+    padding: 20px;
+  }
+  section {
+    display: none; animation: fadeInUp 0.6s ease forwards;
+  }
+  section.active {
+    display: block;
+  }
+  @keyframes fadeInUp {
+    0% {opacity: 0; transform: translateY(20px);}
+    100% {opacity: 1; transform: translateY(0);}
+  }
+  #home {
+    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1280&q=80') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    padding: 100px 20px 60px;
+    text-align: center;
+    filter: brightness(0.7);
+    position: relative;
+  }
+  #home h1 {
+    font-size: 3rem; margin-bottom: 15px;
+  }
+  #home .typed-text {
+    font-size: 2rem; margin-bottom: 25px; font-weight: 700;
+  }
+  #home::after {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 0;
+  }
+  #home > * {
+    position: relative; z-index: 1;
+  }
+  .btn {
+    background: #4cae4c; color: #fff; padding: 14px 28px; border-radius: 30px;
+    font-weight: 700; font-size: 1.2rem; cursor: pointer; display: inline-block;
+    user-select: none; transition: background-color 0.3s ease;
+  }
+  .btn:hover {
+    background: #3b8c3b;
+  }
+  /* Інші секції */
+  h2 {
+    color: #2d6a2d; margin-bottom: 25px; text-align: center;
+  }
+  .services-list {
+    display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 25px;
+  }
+  .service-card {
+    background: #d7f1d7; padding: 20px; border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1); font-weight: 600;
+    color: #265926; text-align: center; cursor: default;
+    transition: transform 0.3s ease;
+  }
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+  }
+  .service-icon {
+    font-size: 3.5rem; margin-bottom: 15px; color: #3b8c3b;
+  }
+  /* Новини */
+  article.news-item {
+    background: #d7f1d7; margin-bottom: 20px; padding: 20px 25px;
+    border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    cursor: pointer; transition: background-color 0.3s ease;
+  }
+  article.news-item:hover {
+    background-color: #c2e3c2;
+  }
+  /* FAQ */
+  details {
+    background: #d7f1d7; margin-bottom: 15px; border-radius: 15px;
+    padding: 15px 20px; box-shadow: 0 5px 12px rgba(0,0,0,0.08);
+    cursor: pointer;
+  }
+  summary {
+    font-weight: 700; font-size: 1.2rem; color: #265926; outline: none;
+  }
+  details[open] summary {
+    color: #3b8c3b;
+  }
+  details p {
+    margin-top: 10px; line-height: 1.5; color: #224422;
+  }
+  /* Форма */
+  form#contactForm {
+    max-width: 450px; margin: 0 auto; background: #d7f1d7;
+    padding: 25px 30px; border-radius: 20px; box-shadow: 0 5px 18px rgba(0,0,0,0.1);
+    display: flex; flex-direction: column; gap: 15px;
+  }
+  form input, form textarea {
+    padding: 12px 15px; border-radius: 10px; border: 1.8px solid #7bc67e;
+    font-size: 1rem; font-family: inherit; resize: vertical;
+    transition: border-color 0.3s ease;
+  }
+  form input:focus, form textarea:focus {
+    border-color: #3b8c3b; outline: none;
+  }
+  form button {
+    background: #3b8c3b; color: white; border: none; padding: 14px 0;
+    font-weight: 700; font-size: 1.1rem; border-radius: 30px;
+    cursor: pointer; user-select: none; transition: background-color 0.3s ease;
+  }
+  form button:hover {
+    background: #265926;
+  }
+  #formMessage {
+    font-weight: 600; min-height: 24px; text-align: center;
+  }
+  /* Google Map iframe */
+  .map-container {
+    margin-top: 30px; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 0 25px #14a34fbb; max-width: 450px; margin-left: auto; margin-right: auto;
+  }
+  iframe {
+    width: 100%; height: 300px; border: 0;
+  }
+  /* Мобільне меню */
+  @media (max-width: 768px) {
+    nav ul {
+      display: none; flex-direction: column; background: #3b8c3b;
+      position: fixed; top: 60px; right: 0; width: 220px;
+      border-radius: 0 0 0 12px; padding: 15px 10px; gap: 15px;
+      z-index: 1500;
+    }
+    nav ul.show {
+      display: flex;
+    }
+    .menu-toggle {
+      display: block;
+      color: #d7f1d7;
+    }
+  }
+</style>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  crossorigin="anonymous"
+/>
+
+</head>
+<body>
+
+<header>
+  <div>ЦНАП Берегомет</div>
+  <nav>
+    <ul id="nav-links">
+      <li><a href="#" class="nav-link active" data-target="home" data-lang-uk="Головна" data-lang-en="Home">Головна</a></li>
+      <li><a href="#" class="nav-link" data-target="services" data-lang-uk="Послуги" data-lang-en="Services">Послуги</a></li>
+      <li><a href="#" class="nav-link" data-target="news" data-lang-uk="Новини" data-lang-en="News">Новини</a></li>
+      <li><a href="#" class="nav-link" data-target="faq" data-lang-uk="FAQ" data-lang-en="FAQ">FAQ</a></li>
+      <li><a href="#" class="nav-link" data-target="contact" data-lang-uk="Контакти" data-lang-en="Contact">Контакти</a></li>
+    </ul>
+  </nav>
+  <div class="menu-toggle" id="menu-toggle"><i class="fa fa-bars"></i></div>
+  <select id="lang-switch" aria-label="Мова сайту" style="background:#2d6a2d; color:#d7f1d7; border:none; border-radius:6px; padding:4px 8px; font-weight:600;">
+    <option value="uk" selected>Українська</option>
+    <option value="en">English</option>
+  </select>
+</header>
+
+<main>
+  <section id="home" class="active" tabindex="0">
+    <div class="typed-text" id="typed-text"></div>
+    <h1 data-lang-uk="Вітаємо у ЦНАП Берегомет!" data-lang-en="Welcome to CNAP Berehomet!">Вітаємо у ЦНАП Берегомет!</h1>
+    <p data-lang-uk="Швидко, зручно, надійно — твій надійний партнер у справах." data-lang-en="Fast, convenient, reliable — your trusted partner in matters.">Швидко, зручно, надійно — твій надійний партнер у справах.</p>
+    <a href="#" class="btn" data-target="services" data-lang-uk="Перейти до послуг" data-lang-en="Go to Services">Перейти до послуг</a>
+  </section>
+
+  <section id="services" tabindex="0">
+    <h2 data-lang-uk="Наші послуги" data-lang-en="Our Services">Наші послуги</h2>
+    <div class="services-list">
+      <div class="service-card" data-lang-uk="Оформлення паспорта громадянина України" data-lang-en="Ukrainian Passport Issuance">
+        <i class="fa-solid fa-id-card service-icon"></i>
+        Оформлення паспорта громадянина України
+      </div>
+      <div class="service-card" data-lang-uk="Реєстрація місця проживання" data-lang-en="Residence Registration">
+        <i class="fa-solid fa-house service-icon"></i>
+        Реєстрація місця проживання
+      </div>
+      <div class="service-card" data-lang-uk="Реєстрація фізичної особи-підприємця (ФОП)" data-lang-en="FOP Registration">
+        <i class="fa-solid fa-briefcase service-icon"></i>
+        Реєстрація фізичної особи-підприємця (ФОП)
+      </div>
+      <div class="service-card" data-lang-uk="Видача довідок та інших адміністративних послуг" data-lang-en="Certificates & Administrative Services">
+        <i class="fa-solid fa-file-contract service-icon"></i>
+        Видача довідок та інших адміністративних послуг
+      </div>
+    </div>
+  </section>
+
+  <section id="news" tabindex="0">
+    <h2 data-lang-uk="Останні новини" data-lang-en="Latest News">Останні новини</h2>
+    <article class="news-item" tabindex="0" data-lang-uk-title="Зміни у графіку роботи ЦНАП з 1 серпня 2025 року" data-lang-en-title="Changes in CNAP working hours from August 1, 2025">
+      <h3>Зміни у графіку роботи ЦНАП з 1 серпня 2025 року</h3>
+      <p data-lang-uk="Графік роботи буде подовжено для зручності мешканців." data-lang-en="Working hours extended for residents’ convenience.">Графік роботи буде подовжено для зручності мешканців.</p>
+    </article>
+    <article class="news-item" tabindex="0" data-lang-uk-title="Відкриття послуги онлайн-запису на прийом" data-lang-en-title="Opening of online appointment service">
+      <h3>Відкриття послуги онлайн-запису на прийом</h3>
+      <p data-lang-uk="Тепер можна записатися на прийом через сайт без черг." data-lang-en="You can now book appointments online without queues.">Тепер можна записатися на прийом через сайт без черг.</p>
+    </article>
+    <article class="news-item" tabindex="0" data-lang-uk-title="Додаткові години прийому у п’ятницю" data-lang-en-title="Additional Friday reception hours">
+      <h3>Додаткові години прийому у п’ятницю</h3>
+      <p data-lang-uk="П’ятниця тепер з додатковими годинами роботи для вашої зручності." data-lang-en="Friday now has extended hours for your convenience.">П’ятниця тепер з додатковими годинами роботи для вашої зручності.</p>
+    </article>
+  </section>
+
+  <section id="faq" tabindex="0">
+    <h2 data-lang-uk="Часті питання" data-lang-en="FAQ">Часті питання</h2>
+    <details>
+      <summary data-lang-uk="Як оформити паспорт громадянина України?" data-lang-en="How to get a Ukrainian passport?">Як оформити паспорт громадянина України?</summary>
+      <p data-lang-uk="Звернутися до ЦНАП із паспортом старого зразка, ІПН, заявою та фото." data-lang-en="Visit CNAP with old passport, tax ID, application, and photo.">Звернутися до ЦНАП із паспортом старого зразка, ІПН, заявою та фото.</p>
+    </details>
+    <details>
+      <summary data-lang-uk="Як зареєструвати місце проживання?" data-lang-en="How to register residence?">Як зареєструвати місце проживання?</summary>
+      <p data-lang-uk="Подати заяву та документи, що підтверджують право на житло." data-lang-en="Submit application and proof of residence documents.">Подати заяву та документи, що підтверджують право на житло.</p>
+    </details>
+    <details>
+      <summary data-lang-uk="Які документи потрібні для реєстрації ФОП?" data-lang-en="What documents are needed for FOP registration?">Які документи потрібні для реєстрації ФОП?</summary>
+      <p data-lang-uk="Паспорт, ІПН, заява на реєстрацію та квитанція про оплату держмита." data-lang-en="Passport, tax ID, registration form, and payment receipt.">Паспорт, ІПН, заява на реєстрацію та квитанція про оплату держмита.</p>
+    </details>
+  </section>
+
+   <section id="contact" tabindex="0">
+    <h2 data-lang-uk="Контакти" data-lang-en="Contact">Контакти</h2>
+    <form id="contactForm" novalidate>
+      <input
+        type="text"
+        name="name"
+        placeholder="Ваше ім'я"
+        required
+        minlength="2"
+        aria-label="Ваше ім'я"
+        data-lang-uk-placeholder="Ваше ім'я"
+        data-lang-en-placeholder="Your Name"
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Ваша пошта"
+        required
+        aria-label="Ваша пошта"
+        data-lang-uk-placeholder="Ваша пошта"
+        data-lang-en-placeholder="Your Email"
+      />
+      <textarea
+        name="message"
+        placeholder="Ваше повідомлення"
+        required
+        minlength="5"
+        aria-label="Ваше повідомлення"
+        data-lang-uk-placeholder="Ваше повідомлення"
+        data-lang-en-placeholder="Your Message"
+      ></textarea>
+      <button type="submit" class="btn" data-lang-uk="Відправити" data-lang-en="Send">Відправити</button>
+      <div id="formMessage" role="alert" aria-live="polite"></div>
+    </form>
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2612.323398143625!2d25.217253315682286!3d48.09514197921806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47306d23ee3e67bb%3A0x3da63ff8ab1cfc3f!2z0JLRgNC-0LHRgNC10LzQvdC-0YDQvtCy0LAsINCd0LXRgdC60LjQuSDQvtCx0LvQsNGB0LrQvtCz0L4!5e0!3m2!1suk!2sua!4v1688999999999!5m2!1suk!2sua"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Карта ЦНАП Берегомет"
+      ></iframe>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0"></script>
+<script>
+  // Typed.js анімація
+  document.addEventListener('DOMContentLoaded', () => {
+    new Typed('#typed-text', {
+      strings: [
+        'Легенда серед ЦНАПів!',
+        'Швидко. Зручно. Надійно.',
+        'ЦНАП Берегомет — твій вибір!'
+      ],
+      typeSpeed: 60,
+      backSpeed: 30,
+      backDelay: 2800,
+      loop: true,
+      showCursor: true,
+      cursorChar: '|',
+    });
+  });
+
+  // Меню для мобілок
+  const menuToggle = document.getElementById('menu-toggle');
+  const navLinks = document.getElementById('nav-links');
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+
+  // Перемикання секцій
+  const links = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('main section');
+
+  function setActiveSection(id) {
+    sections.forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    links.forEach(link => {
+      link.classList.toggle('active', link.dataset.target === id);
+    });
+    if (navLinks.classList.contains('show')) navLinks.classList.remove('show');
+    document.getElementById(id).focus();
+  }
+
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      setActiveSection(link.dataset.target);
+    });
+  });
+
+  document.querySelector('a.btn[data-target="services"]').addEventListener('click', e => {
+    e.preventDefault();
+    setActiveSection('services');
+  });
+
+  // Форма з відправкою через Formspree
+  const form = document.getElementById('contactForm');
+  const formMessage = document.getElementById('formMessage');
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+
+    if (name.length < 2) {
+      formMessage.style.color = 'crimson';
+      formMessage.textContent = 'Ім\'я має бути мінімум 2 символи.';
+      return;
+    }
+    if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      formMessage.style.color = 'crimson';
+      formMessage.textContent = 'Введіть правильну пошту.';
+      return;
+    }
+    if (message.length < 5) {
+      formMessage.style.color = 'crimson';
+      formMessage.textContent = 'Повідомлення має бути не менше 5 символів.';
+      return;
+    }
+
+    formMessage.style.color = '#2d6a2d';
+    formMessage.textContent = 'Відправка...';
+
+    // Використовуємо Formspree — заміни на свій endpoint
+    try {
+      const response = await fetch('https://formspree.io/f/myformid', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message }),
+      });
+      if (response.ok) {
+        formMessage.textContent = 'Повідомлення відправлено! Дякуємо, що звернулися.';
+        form.reset();
+      } else {
+        throw new Error('Помилка відправки');
+      }
+    } catch (error) {
+      formMessage.style.color = 'crimson';
+      formMessage.textContent = 'Сталася помилка. Спробуйте пізніше.';
+    }
+
+    setTimeout(() => {
+      formMessage.textContent = '';
+    }, 6000);
+  });
+
+  // Мультимовність (укр / англ)
+  const langSwitch = document.getElementById('lang-switch');
+
+  function translatePage(lang) {
+    // Перекладаємо всі елементи з атрибутами data-lang-uk та data-lang-en
+    document.querySelectorAll('[data-lang-uk]').forEach(el => {
+      el.textContent = lang === 'uk' ? el.getAttribute('data-lang-uk') : el.getAttribute('data-lang-en');
+    });
+    // Для placeholder в input/textarea
+    document.querySelectorAll('[data-lang-uk-placeholder]').forEach(el => {
+      el.placeholder = lang === 'uk' ? el.getAttribute('data-lang-uk-placeholder') : el.getAttribute('data-lang-en-placeholder');
+    });
+    // Новини - заголовки статей
+    document.querySelectorAll('article.news-item').forEach(article => {
+      if (lang === 'uk') {
+        article.querySelector('h3').textContent = article.getAttribute('data-lang-uk-title');
+      } else {
+        article.querySelector('h3').textContent = article.getAttribute('data-lang-en-title');
+      }
+    });
+  }
+
+  langSwitch.addEventListener('change', () => {
+    translatePage(langSwitch.value);
+  });
+
+  // Початковий переклад (українська)
+  translatePage('uk');
+</script>
+
+</body>
+</html>
+
+
