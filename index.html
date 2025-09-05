@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GovBet Future — Слоти Майбутнього</title>
+<title>GovBet Ultimate Futuristic</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif;}
-body{background:#0b0b0b;color:#fff;overflow-x:hidden;scroll-behavior:smooth;}
+body{background:#0b0b0b;color:#fff;overflow-x:hidden;scroll-behavior:smooth;position:relative;}
 a{text-decoration:none;color:inherit;}
 button{cursor:pointer;border:none;background:none;color:inherit;font-family:inherit;transition:0.3s;}
 img{max-width:100%;display:block;}
-#particles-js{position:fixed;width:100%;height:100%;z-index:-1;top:0;left:0;}
+#particles-js{position:fixed;width:100%;height:100%;z-index:-2;top:0;left:0;}
 
 /* Header */
 header{background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);padding:15px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 0 10px #0ff;}
@@ -22,10 +22,7 @@ nav a:hover{background:#0ff;color:#000;transform:scale(1.1);}
 .burger{display:none;flex-direction:column;gap:4px;cursor:pointer;}
 .burger div{width:25px;height:3px;background:#0ff;}
 
-/* Main */
-main{padding:20px;}
-section{margin-bottom:50px;position:relative;transition:all 0.5s ease;}
-h2{color:#0ff;text-align:center;margin-bottom:20px;text-shadow:0 0 10px #0ff;}
+/* Banner */
 .banner{position:relative;margin-bottom:20px;overflow:hidden;border-radius:10px;animation:fadeIn 2s;}
 .banner img{width:100%;display:block;border-radius:10px;}
 .banner h1{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#0ff;font-size:2.5em;text-shadow:0 0 20px #0ff;text-align:center;animation:textGlow 2s infinite alternate;}
@@ -34,30 +31,16 @@ h2{color:#0ff;text-align:center;margin-bottom:20px;text-shadow:0 0 10px #0ff;}
 @keyframes textGlow{0%{text-shadow:0 0 10px #0ff;}100%{text-shadow:0 0 25px #0ff,0 0 50px #0ff;}}
 @keyframes fadeIn{0%{opacity:0;}100%{opacity:1;}}
 
-/* Games */
-.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-bottom:30px;}
-.game-card{background:rgba(0,0,0,0.7);border:2px solid #0ff;padding:15px;border-radius:15px;text-align:center;transition:0.5s;overflow:hidden;}
-.game-card:hover{transform:scale(1.05);box-shadow:0 0 25px #0ff;}
-.game-card img{border-radius:10px;margin-bottom:10px;}
-.game-card h3{margin-bottom:10px;}
-.game-card button{width:100%;padding:10px;border-radius:10px;background:#0ff;color:#000;font-weight:bold;transition:0.3s;}
-.game-card button:hover{background:#00ffff;transform:scale(1.05);}
-
-/* Profile, chat, bonus */
-.profile,.chat,.bonus-section{background:rgba(0,0,0,0.7);padding:15px;border-radius:15px;border:2px solid #0ff;margin-bottom:20px;}
-.chat input{width:100%;padding:8px;border-radius:8px;margin-top:10px;background:#0b0b0b;color:#0ff;border:1px solid #0ff;}
-
 /* Slots */
-.slot{display:flex;justify-content:center;align-items:center;gap:15px;margin-bottom:15px;}
+.slot{display:flex;justify-content:center;align-items:center;gap:15px;margin-bottom:15px;position:relative;}
 .slot div{width:70px;height:70px;background:#111;border:2px solid #0ff;border-radius:10px;display:flex;justify-content:center;align-items:center;font-size:2em;transition:0.2s;}
 .win{box-shadow:0 0 25px #0ff;animation:glow 0.5s infinite alternate;}
+.confetti{position:absolute;width:10px;height:10px;background:#0ff;animation:fall 1.5s linear forwards;}
 @keyframes glow{0%{box-shadow:0 0 20px #0ff;}100%{box-shadow:0 0 40px #0ff;}}
+@keyframes fall{0%{transform:translateY(0) rotate(0deg);}100%{transform:translateY(300px) rotate(360deg);opacity:0;}}
 
-/* Roulette futuristic */
-.roulette-container{display:flex;flex-direction:column;justify-content:center;align-items:center;margin-bottom:30px;}
-.roulette-wheel{width:220px;height:220px;border-radius:50%;border:10px solid #0ff;position:relative;overflow:hidden;transition:transform 3s ease-out;}
-.roulette-ball{width:20px;height:20px;background:red;border-radius:50%;position:absolute;top:-10px;left:100px;transition:0.5s;}
-.roulette-result{margin-top:15px;text-align:center;font-weight:bold;font-size:1.3em;color:#0ff;text-shadow:0 0 10px #0ff;}
+/* Slot Федюк */
+#sandbox{width:300px;height:150px;background:#c2b280;border:2px solid #0ff;border-radius:10px;overflow:hidden;margin:0 auto;position:relative;}
 
 /* Footer */
 footer{background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);padding:20px;text-align:center;margin-top:20px;font-size:0.9em;color:#0ff;box-shadow:0 -5px 15px #0ff;}
@@ -78,122 +61,48 @@ nav.active{display:flex;}
     </svg>
   </div>
   <nav>
-    <a href="#games">Ігри</a>
-    <a href="#bonus">Бонуси</a>
-    <a href="#profile">Профіль</a>
-    <a href="#chat">Чат</a>
     <a href="#slots">Слоти</a>
-    <a href="#roulette">Рулетка</a>
+    <a href="#feduk-slot">Федюк</a>
   </nav>
-  <div class="burger">
-    <div></div><div></div><div></div>
-  </div>
+  <div class="burger"><div></div><div></div><div></div></div>
 </header>
 <main>
 <div class="banner">
   <img src="https://cdn.pixabay.com/photo/2017/05/10/22/12/casino-2308867_1280.jpg" alt="GovBet Banner">
-  <h1>GovBet — Слоти Майбутнього</h1>
+  <h1>GovBet Ultimate Futuristic</h1>
 </div>
-
-<section id="games">
-<h2>Наші ігри</h2>
-<div class="games">
-<div class="game-card">
-<img src="https://cdn.pixabay.com/photo/2017/01/06/19/15/slot-machine-1953220_1280.jpg" alt="Слот 1">
-<h3>Слот: Фортуна</h3>
-<button onclick="alert('Гра запускається!')">Грати</button>
-</div>
-<div class="game-card">
-<img src="https://cdn.pixabay.com/photo/2016/03/27/22/16/roulette-1283602_1280.jpg" alt="Рулетка">
-<h3>Рулетка</h3>
-<button onclick="alert('Гра запускається!')">Грати</button>
-</div>
-</div>
-</section>
-
-<section class="bonus-section" id="bonus">
-<h2>Бонуси</h2>
-<p>Привітальний бонус 100%! Отримайте бонус при першому депозиті!</p>
-<button onclick="alert('Бонус активовано!')">Отримати бонус</button>
-</section>
-
-<section id="profile">
-<h2>Профіль</h2>
-<div class="profile">
-<p>Ім'я: <span id="userName">Гість</span></p>
-<p>Баланс: <span id="userBalance">1000</span> GovCoins</p>
-<button onclick="addCoins()">Додати 500 GovCoins</button>
-</div>
-</section>
-
-<section id="chat">
-<h2>Чат</h2>
-<div class="chat" id="chatBox"></div>
-<input type="text" id="chatInput" placeholder="Напишіть повідомлення..." onkeydown="if(event.key==='Enter'){sendMessage();}">
-</section>
 
 <section id="slots">
 <h2>Слоти Майбутнього</h2>
 <div class="slot" id="slotReels">
-<div id="reel1"><img src="https://cdn.pixabay.com/photo/2012/04/11/15/25/cherries-27310_1280.png" alt="🍒"></div>
-<div id="reel2"><img src="https://cdn.pixabay.com/photo/2012/04/11/15/25/lemon-27309_1280.png" alt="🍋"></div>
-<div id="reel3"><img src="https://cdn.pixabay.com/photo/2013/07/12/17/38/bell-153103_1280.png" alt="🔔"></div>
+<div id="reel1"><img src="https://cdn.pixabay.com/photo/2012/04/11/15/25/cherries-27310_1280.png"></div>
+<div id="reel2"><img src="https://cdn.pixabay.com/photo/2012/04/11/15/25/lemon-27309_1280.png"></div>
+<div id="reel3"><img src="https://cdn.pixabay.com/photo/2013/07/12/17/38/bell-153103_1280.png"></div>
 </div>
-<button onclick="spinSlot()">Крутити</button>
+<button onclick="spinSlot()">Крутити слоти</button>
 <audio id="spinSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
 <audio id="winSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
 </section>
 
-<section id="roulette">
-<h2>Рулетка</h2>
-<div class="roulette-container">
-<div class="roulette-wheel" id="rouletteWheel"></div>
-<div class="roulette-ball" id="rouletteBall"></div>
-<div class="roulette-result" id="rouletteResult"></div>
-<button onclick="spinRoulette()">Крутити рулетку</button>
-</div>
+<section id="feduk-slot">
+<h2>Слот «Федюк» — Копати пісок</h2>
+<div id="sandbox"></div>
+<button onclick="digSand()">Копати пісок</button>
+<div id="sandMessages" style="text-align:center;margin-top:10px;color:#0ff;font-weight:bold;text-shadow:0 0 10px #0ff;"></div>
+<audio id="digSound" src="https://actions.google.com/sounds/v1/foley/shovel_dig.ogg"></audio>
 </section>
-</main>
 
-<footer>
-© 2025 GovBet. Всі права захищені.
-</footer>
+<footer>© 2025 GovBet. Всі права захищені.</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
 // Particles
-particlesJS("particles-js", {
-  "particles": {"number":{"value":80,"density":{"enable":true,"value_area":800}},"color":{"value":"#0ff"},"shape":{"type":"circle"},"opacity":{"value":0.5},"size":{"value":3},"line_linked":{"enable":true,"distance":150,"color":"#0ff","opacity":0.4,"width":1},"move":{"enable":true,"speed":3}},
-  "interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"repulse"}}}
-});
+particlesJS("particles-js", { "particles": {"number":{"value":80,"density":{"enable":true,"value_area":800}},"color":{"value":"#0ff"},"shape":{"type":"circle"},"opacity":{"value":0.5},"size":{"value":3},"line_linked":{"enable":true,"distance":150,"color":"#0ff","opacity":0.4,"width":1},"move":{"enable":true,"speed":3}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"repulse"}}}});
 
 // Burger
 const burger=document.querySelector('.burger');
 const nav=document.querySelector('nav');
 burger.addEventListener('click',()=>{nav.classList.toggle('active');});
-
-// Profile
-const userBalance=document.getElementById('userBalance');
-function addCoins(){userBalance.textContent=parseInt(userBalance.textContent)+500;}
-
-// Chat
-const chatBox=document.getElementById('chatBox');
-const chatInput=document.getElementById('chatInput');
-function sendMessage(){
-  const msg=chatInput.value.trim();
-  if(msg){
-    const p=document.createElement('p');p.textContent="Ви: "+msg;
-    chatBox.appendChild(p);
-    chatInput.value='';
-    chatBox.scrollTop=chatBox.scrollHeight;
-    setTimeout(()=>{
-      const bot=document.createElement('p');
-      bot.textContent="GovBot: Дякую за повідомлення!";
-      chatBox.appendChild(bot);
-      chatBox.scrollTop=chatBox.scrollHeight;
-    },500);
-  }
-}
 
 // Slots
 const symbols=[
@@ -229,35 +138,70 @@ function spinSlot(){
 function checkWin(){
   const imgs=reels.map(r=>r.querySelector('img').src);
   if(imgs.every(v=>v===imgs[0])){
-    const win=500;
-    userBalance.textContent=parseInt(userBalance.textContent)+win;
-    reels.forEach(r=>r.classList.add('win'));
     winSound.play();
-    setTimeout(()=>reels.forEach(r=>r.classList.remove('win')),1000);
-    alert(`🎉 Джекпот! Ви виграли ${win} GovCoins!`);
+    reels.forEach(r=>r.classList.add('win'));
+    spawnConfetti();
+    setTimeout(()=>reels.forEach(r=>r.classList.remove('win')),2000);
+    alert('🎉 Джекпот! Ви виграли!');
   }
 }
 
-// Roulette
-const rouletteWheel=document.getElementById('rouletteWheel');
-const rouletteBall=document.getElementById('rouletteBall');
-const rouletteResult=document.getElementById('rouletteResult');
-function spinRoulette(){
-  const number=Math.floor(Math.random()*37);
-  const color=number===0?'зелений':number%2===0?'чорне':'червоне';
-  rouletteResult.textContent=`Випало: ${number} (${color})`;
-  let balance=parseInt(userBalance.textContent);
-  if(color==='червоне') balance+=100;
-  else if(color==='чорне') balance+=50;
-  else if(color==='зелений') balance+=500;
-  userBalance.textContent=balance;
-  const deg=360*3+number*9.73;
-  rouletteWheel.style.transition='transform 3s ease-out';
-  rouletteWheel.style.transform=`rotate(${deg}deg)`;
+function spawnConfetti(){
+  for(let i=0;i<50;i++){
+    const conf=document.createElement('div');
+    conf.classList.add('confetti');
+    conf.style.left=Math.random()*window.innerWidth+'px';
+    conf.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    document.body.appendChild(conf);
+    setTimeout(()=>conf.remove(),1500);
+  }
 }
-</script>
-</body>
-</html>
+
+// Слот Федюк
+const sandbox=document.getElementById('sandbox');
+const sandMessages=document.getElementById('sandMessages');
+const digSound=document.getElementById('digSound');
+const sandTexts=["трах\"ть сук... пісок, пісок, пісок","копаємо пісок!","ще трохи піску...","пісок сиплеться!"];
+
+function digSand(){
+  digSound.currentTime=0;
+  digSound.play();
+
+  const grain=document.createElement('div');
+  grain.style.width='10px';
+  grain.style.height='10px';
+  grain.style.background='sandybrown';
+  grain.style.position='absolute';
+  grain.style.left=Math.random()*280+'px';
+  grain.style.top='0px';
+  grain.style.borderRadius='50%';
+  sandbox.appendChild(grain);
+  
+  // Пилова анімація
+  const dust=document.createElement('div');
+  dust.style.width='15px';
+  dust.style.height='15px';
+  dust.style.background='rgba(255,255,200,0.5)';
+  dust.style.position='absolute';
+  dust.style.left=grain.style.left;
+  dust.style.top='140px';
+  dust.style.borderRadius='50%';
+  sandbox.appendChild(dust);
+  dust.animate([{transform:'scale(0)'},{transform:'scale(2)',opacity:0}],{duration:800,iterations:1});
+
+  let top=0;
+  const fall=setInterval(()=>{
+    if(top<140){
+      top+=5;
+      grain.style.top=top+'px';
+    } else clearInterval(fall);
+  },30);
+
+  sandMessages.textContent=sandTexts[Math.floor(Math.random()*sandTexts.length)];
+  
+  grain
+
+
 
 
 
