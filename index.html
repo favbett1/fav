@@ -3,48 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GovBet 1,000,000.0 — Ultimate Infinity Edition</title>
+<title>GovBet Ultimate 3D Casino</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
-body{background:#0b0b0b;color:#0ff;overflow-x:hidden;scroll-behavior:smooth;position:relative;}
-header{position:sticky;top:0;background:rgba(0,0,0,0.85);padding:15px;display:flex;justify-content:space-between;align-items:center;z-index:100;backdrop-filter:blur(5px);box-shadow:0 0 20px #0ff;transition:0.5s;}
-header .logo{font-size:1.9em;font-weight:bold;text-shadow:0 0 20px #0ff;}
+body{background:#000;color:#0ff;overflow-x:hidden;scroll-behavior:smooth;}
+header{position:sticky;top:0;background:rgba(0,0,0,0.95);padding:15px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(8px);box-shadow:0 0 40px #0ff;z-index:100;}
+header .logo{font-size:2.5em;font-weight:bold;text-shadow:0 0 35px #0ff;}
 nav a{color:#0ff;margin-left:15px;text-decoration:none;transition:0.3s;}
-nav a:hover{color:#fff;text-shadow:0 0 25px #0ff;transform:scale(1.2);}
-#balance{position:absolute;top:15px;right:20px;font-size:1.3em;color:#0ff;font-weight:bold;text-shadow:0 0 15px #0ff;}
-.section{margin:20px auto;width:90%;max-width:1300px;padding:20px;border-radius:15px;box-shadow:0 0 25px #0ff;background:#111;}
-.slot{display:flex;justify-content:center;gap:10px;margin-bottom:15px;}
-.slot div{width:90px;height:90px;background:#222;border:3px solid #0ff;border-radius:15px;display:flex;justify-content:center;align-items:center;font-size:2.2em;transition:0.3s;box-shadow:0 0 20px #0ff;}
+nav a:hover{color:#fff;text-shadow:0 0 30px #0ff;transform:scale(1.25);}
+#balance{font-size:1.4em;color:#0ff;font-weight:bold;text-shadow:0 0 18px #0ff;}
+.section{margin:20px auto;width:90%;max-width:1500px;padding:25px;border-radius:20px;box-shadow:0 0 35px #0ff;background:#111;}
+.slot{display:flex;justify-content:center;gap:15px;margin-bottom:20px;perspective:800px;}
+.slot div{width:100px;height:100px;background:#222;border:3px solid #0ff;border-radius:20px;display:flex;justify-content:center;align-items:center;font-size:2.5em;transition:0.3s;box-shadow:0 0 25px #0ff;transform-style:preserve-3d;}
 .slot div.win{animation:glow 0.5s infinite alternate;}
-@keyframes glow{0%{box-shadow:0 0 25px #0ff;}100%{box-shadow:0 0 60px #0ff;}}
-button{padding:15px 30px;margin:10px;font-size:1.1em;border-radius:15px;background:#0ff;color:#000;font-weight:bold;transition:0.3s;}
-button:hover{background:#00f;color:#fff;box-shadow:0 0 30px #0ff;transform:scale(1.1);cursor:pointer;}
-#sandbox{width:400px;height:250px;background:#c2b280;border:3px solid #0ff;border-radius:15px;overflow:hidden;position:relative;margin:0 auto;box-shadow:0 0 25px #0ff;}
-#miner{position:absolute;bottom:20px;left:15px;width:70px;height:110px;}
-#body{width:45px;height:65px;background:#444;border-radius:10px;margin:auto;}
-#head{width:35px;height:35px;background:#999;border-radius:50%;margin:auto;}
-#shovel{width:14px;height:70px;background:#777;position:absolute;left:50px;bottom:10px;transform-origin:top left;}
-#blade{width:28px;height:18px;background:#ccc;position:absolute;bottom:0;left:-7px;border-radius:0 0 50% 50%;}
-.digging #shovel{animation:digMotion 0.8s infinite;}
-@keyframes digMotion{0%{transform:rotate(0deg);}50%{transform:rotate(45deg);}100%{transform:rotate(0deg);}}
-.item{position:absolute;font-size:22px;animation:rise 2s forwards;}
-@keyframes rise{0%{transform:translateY(0);opacity:1;}100%{transform:translateY(-100px);opacity:0;}}
-#shop{display:flex;flex-direction:column;align-items:center;margin:20px;background:#111;border:3px solid #0ff;border-radius:15px;padding:20px;width:90%;max-width:650px;box-shadow:0 0 25px #0ff;}
-.shop-item{display:flex;justify-content:space-between;width:100%;margin:5px 0;}
-.shop-item button{padding:7px 12px;font-size:1em;}
-footer{margin-top:50px;padding:25px;text-align:center;background:rgba(0,0,0,0.85);color:#0ff;}
-.particle{position:absolute;width:8px;height:8px;background:gold;border-radius:50%;opacity:0.85;pointer-events:none;}
+@keyframes glow{0%{box-shadow:0 0 30px #0ff;}100%{box-shadow:0 0 90px #0ff;}}
+button{padding:18px 35px;margin:12px;font-size:1.2em;border-radius:20px;background:#0ff;color:#000;font-weight:bold;transition:0.3s;}
+button:hover{background:#00f;color:#fff;box-shadow:0 0 50px #0ff;transform:scale(1.15);cursor:pointer;}
+#sandbox{width:450px;height:300px;background:#c2b280;border:3px solid #0ff;border-radius:20px;overflow:hidden;position:relative;margin:0 auto;box-shadow:0 0 35px #0ff;}
+#miner{position:absolute;bottom:20px;left:20px;width:80px;height:120px;}
+#body{width:50px;height:70px;background:#444;border-radius:12px;margin:auto;}
+#head{width:38px;height:38px;background:#999;border-radius:50%;margin:auto;}
+#shovel{width:16px;height:80px;background:#777;position:absolute;left:55px;bottom:10px;transform-origin:top left;}
+#blade{width:30px;height:20px;background:#ccc;position:absolute;bottom:0;left:-8px;border-radius:0 0 50% 50%;}
+.digging #shovel{animation:digMotion 0.7s infinite;}
+@keyframes digMotion{0%{transform:rotate(0deg);}50%{transform:rotate(55deg);}100%{transform:rotate(0deg);}}
+.item{position:absolute;font-size:26px;animation:rise 2s forwards;}
+@keyframes rise{0%{transform:translateY(0);opacity:1;}100%{transform:translateY(-120px);opacity:0;}}
+#shop{display:flex;flex-direction:column;align-items:center;margin:20px;background:#111;border:3px solid #0ff;border-radius:20px;padding:25px;width:90%;max-width:700px;box-shadow:0 0 35px #0ff;}
+.shop-item{display:flex;justify-content:space-between;width:100%;margin:6px 0;}
+.shop-item button{padding:9px 15px;font-size:1.1em;}
+footer{margin-top:50px;padding:30px;text-align:center;background:rgba(0,0,0,0.9);color:#0ff;}
+.particle{position:absolute;width:10px;height:10px;background:gold;border-radius:50%;opacity:0.9;pointer-events:none;animation:particleMove 3s linear infinite;}
+@keyframes particleMove{0%{transform:translateY(0);}100%{transform:translateY(-400px);opacity:0;}}
 .bonus-flash{position:absolute;width:100%;height:100%;background:linear-gradient(90deg,#0ff,#fff,#0ff);top:0;left:0;opacity:0;pointer-events:none;animation:flashAnim 0.6s;}
 @keyframes flashAnim{0%{opacity:1;}100%{opacity:0;}}
-@media(max-width:480px){.slot div{width:70px;height:70px;font-size:1.7em;}#sandbox{width:90%;height:200px;}button{padding:12px 25px;font-size:1em;}.banner h1{font-size:2em;}}
+#casino3D{width:100%;height:450px;background:#111;border:3px solid #0ff;margin:25px 0;border-radius:20px;perspective:1200px;overflow:hidden;position:relative;}
+.cube{width:170px;height:170px;background:#222;border:3px solid #0ff;position:absolute;top:140px;left:50%;transform-style:preserve-3d;transform:translateX(-50%) rotateX(0deg) rotateY(0deg);transition:transform 0.8s;}
+.cube div{position:absolute;width:170px;height:170px;background:rgba(0,255,255,0.25);border:1px solid #0ff;}
+.cube .front{transform:rotateY(0deg) translateZ(85px);}
+.cube .back{transform:rotateY(180deg) translateZ(85px);}
+.cube .right{transform:rotateY(90deg) translateZ(85px);}
+.cube .left{transform:rotateY(-90deg) translateZ(85px);}
+.cube .top{transform:rotateX(90deg) translateZ(85px);}
+.cube .bottom{transform:rotateX(-90deg) translateZ(85px);}
+@media(max-width:480px){.slot div{width:75px;height:75px;font-size:2em;}#sandbox{width:90%;height:220px;}button{padding:14px 28px;font-size:1.1em;}#casino3D{height:300px;}}
 </style>
 </head>
 <body>
-
 <div id="particles"></div>
-
 <header>
-<div class="logo">GovBet 1,000,000.0</div>
+<div class="logo">GovBet Ultimate</div>
 <nav>
 <a href="#home">Головна</a>
 <a href="#slotsSection">Слоти</a>
@@ -57,47 +65,37 @@ footer{margin-top:50px;padding:25px;text-align:center;background:rgba(0,0,0,0.85
 </header>
 
 <section id="home" class="section">
-<h1>GovBet 1,000,000.0 — Казино Майбутнього</h1>
-<p>Ультра-футуристичне онлайн-казино з міні-іграми, 3D-анімаціями та гейміфікацією!</p>
+<h1>GovBet Ultimate — Казино Майбутнього 3D Infinity</h1>
+<p>Мега-футуристичне онлайн-казино з повною 3D-анімацією, слотами, Федюком, бонусами, прогресом і спецефектами на весь екран!</p>
+</section>
+
+<section id="casino3D" class="section">
+<div class="cube" id="cube3D">
+<div class="front"></div><div class="back"></div><div class="left"></div><div class="right"></div><div class="top"></div><div class="bottom"></div>
+</div>
 </section>
 
 <section id="slotsSection" class="section">
 <h2>Слоти</h2>
-<div class="slot" id="slotReels1">
-<div id="reel1a">🍒</div>
-<div id="reel1b">🍋</div>
-<div id="reel1c">🔔</div>
-</div>
-<div class="slot" id="slotReels2">
-<div id="reel2a">💎</div>
-<div id="reel2b">7️⃣</div>
-<div id="reel2c">🍒</div>
-</div>
-<div class="slot" id="slotReels3">
-<div id="reel3a">🍋</div>
-<div id="reel3b">🔔</div>
-<div id="reel3c">💎</div>
-</div>
+<div class="slot" id="slotReels1"><div id="reel1a">🍒</div><div id="reel1b">🍋</div><div id="reel1c">🔔</div></div>
+<div class="slot" id="slotReels2"><div id="reel2a">💎</div><div id="reel2b">7️⃣</div><div id="reel2c">🍒</div></div>
+<div class="slot" id="slotReels3"><div id="reel3a">🍋</div><div id="reel3b">🔔</div><div id="reel3c">💎</div></div>
 <button onclick="spinAllSlots()">Крутити всі слоти</button>
 </section>
 
 <section id="fedukSection" class="section">
-<h2>Федюк — Копати Пісок (Легкий/Середній/Складний)</h2>
+<h2>Федюк — Копати Пісок</h2>
 <div id="sandbox">
-<div id="miner">
-<div id="head"></div>
-<div id="body"></div>
-<div id="shovel"><div id="blade"></div></div>
-</div>
+<div id="miner"><div id="head"></div><div id="body"></div><div id="shovel"><div id="blade"></div></div></div>
 </div>
 <button onclick="digSand()">Копати пісок</button>
-<div id="sandMessages" style="margin-top:10px;color:#0ff;font-weight:bold;text-shadow:0 0 12px #0ff;text-align:center;"></div>
+<div id="sandMessages" style="margin-top:10px;color:#0ff;font-weight:bold;text-shadow:0 0 15px #0ff;text-align:center;"></div>
 </section>
 
 <section id="bonusWheel" class="section">
 <h2>Бонус-колесо</h2>
 <button onclick="spinBonusWheel()">Крутити колесо</button>
-<div id="wheelMessage" style="margin-top:10px;color:#0ff;font-weight:bold;text-shadow:0 0 12px #0ff;text-align:center;"></div>
+<div id="wheelMessage" style="margin-top:12px;color:#0ff;font-weight:bold;text-shadow:0 0 15px #0ff;text-align:center;"></div>
 </section>
 
 <section id="shopSection" class="section">
@@ -113,129 +111,33 @@ footer{margin-top:50px;padding:25px;text-align:center;background:rgba(0,0,0,0.85
 <section id="leadersSection" class="section">
 <h2>Топ-гравці</h2>
 <ul id="leaderBoard" style="color:#0ff;">
-<li>Гравець1 — 5000💰</li>
-<li>Гравець2 — 4500💰</li>
-<li>Гравець3 — 4000💰</li>
-<li>Гравець4 — 3500💰</li>
-<li>Гравець5 — 3000💰</li>
+<li>Гравець1 — 5000💰</li><li>Гравець2 — 4500💰</li><li>Гравець3 — 4000💰</li><li>Гравець4 — 3500💰</li><li>Гравець5 — 3000💰</li>
 </ul>
 </section>
 
-<footer>© 2025 GovBet 1,000,000.0 Ultimate Infinity Edition. Всі права захищені.</footer>
+<footer>© 2025 GovBet Ultimate 3D Casino. Всі права захищені.</footer>
 
 <script>
-// --- Particles ---
+// ----------------- JS GovBet Ultimate -----------------
 const particlesContainer=document.getElementById('particles');
-for(let i=0;i<200;i++){
-let p=document.createElement('div');p.className='particle';
-p.style.left=Math.random()*window.innerWidth+'px';
-p.style.top=Math.random()*window.innerHeight+'px';
-p.style.animationDuration=(2+Math.random()*3)+'s';
-particlesContainer.appendChild(p);
-}
-
-// Balance
-let balance=0;
-const balanceEl=document.getElementById('balance');
-function updateBalance(amount){balance+=amount;balanceEl.textContent="💰 Баланс: "+balance;}
-
-// Slots
-const allReels=[[document.getElementById('reel1a'),document.getElementById('reel1b'),document.getElementById('reel1c')],
-[document.getElementById('reel2a'),document.getElementById('reel2b'),document.getElementById('reel2c')],
-[document.getElementById('reel3a'),document.getElementById('reel3b'),document.getElementById('reel3c')]];
+for(let i=0;i<250;i++){let p=document.createElement('div');p.className='particle';p.style.left=Math.random()*window.innerWidth+'px';p.style.top=Math.random()*window.innerHeight+'px';p.style.animationDuration=(2+Math.random()*2)+'s';particlesContainer.appendChild(p);}
+let balance=0; const balanceEl=document.getElementById('balance'); function updateBalance(amount){balance+=amount;balanceEl.textContent="💰 Баланс: "+balance;}
+const allReels=[[document.getElementById('reel1a'),document.getElementById('reel1b'),document.getElementById('reel1c')],[document.getElementById('reel2a'),document.getElementById('reel2b'),document.getElementById('reel2c')],[document.getElementById('reel3a'),document.getElementById('reel3b'),document.getElementById('reel3c')]];
 const symbols=["🍒","🍋","🔔","7️⃣","💎"];
-function spinSlot(reels){
-reels.forEach(r=>r.classList.remove('win'));
-let spins=18;
-function spinReel(i){
-let count=0;
-const interval=setInterval(()=>{
-reels[i].textContent=symbols[Math.floor(Math.random()*symbols.length)];
-count++;
-if(count>=spins){clearInterval(interval);if(i<reels.length-1) spinReel(i+1); else checkWin(reels);}
-},90);
-}
-spinReel(0);
-}
-function checkWin(reels){
-const values=reels.map(r=>r.textContent);
-if(values.every(v=>v===values[0])){
-reels.forEach(r=>r.classList.add('win'));
-playSound('jackpot');flashBonus();
-alert("🎉 Джекпот! Ви виграли!");updateBalance(100);
-}}
+function spinSlot(reels){reels.forEach(r=>r.classList.remove('win'));let spins=20;function spinReel(i){let count=0;const interval=setInterval(()=>{reels[i].textContent=symbols[Math.floor(Math.random()*symbols.length)];count++;if(count>=spins){clearInterval(interval);if(i<reels.length-1) spinReel(i+1); else checkWin(reels);}},80);}spinReel(0);}
+function checkWin(reels){const values=reels.map(r=>r.textContent);if(values.every(v=>v===values[0])){reels.forEach(r=>r.classList.add('win'));playSound('jackpot');flashBonus();alert("🎉 Джекпот! Ви виграли!");updateBalance(200);}}
 function spinAllSlots(){allReels.forEach(r=>spinSlot(r));playSound('spin');}
-
-// Feduk
-const sandbox=document.getElementById('sandbox');
-const miner=document.getElementById('miner');
-const sandMessages=document.getElementById('sandMessages');
-const finds=[{emoji:"💰",value:50},{emoji:"💎",value:100},{emoji:"🪙",value:10},{emoji:"⚒️",value:5},{emoji:"🪨",value:1}];
-const messages=["трах'ть сук пісок, пісок, пісок","Знайдено скарб!","Ще більше піску...","Ого, діамант!","Монетки сиплються!"];
-function digSand(){
-miner.classList.add('digging');
-sandMessages.textContent="Копаємо...";
-playSound('dig');
-setTimeout(()=>{
-miner.classList.remove('digging');
-const find=finds[Math.floor(Math.random()*finds.length)];
-const item=document.createElement('div');item.className='item';
-item.textContent=find.emoji;
-item.style.left=(60+Math.random()*230)+'px';
-item.style.bottom='20px';
-sandbox.appendChild(item);
-setTimeout(()=>item.remove(),2000);
-sandMessages.textContent=messages[Math.floor(Math.random()*messages.length)];
-updateBalance(find.value);
-spawnGoldParticles();
-playSound('coin');
-},1500);
-}
-
-// Shop
-function buyItem(type,cost){
-if(balance>=cost){
-balance-=cost;
-balanceEl.textContent="💰 Баланс: "+balance;
-alert("✅ Ви купили: "+type);
-if(type==='vip'){alert("⚡ VIP активовано!");}
-if(type==='freespin'){spinAllSlots();}
-if(type==='skin'){alert("🛡️ Новий скин для Федюка активовано!");}
-if(type==='booster'){alert("💥 Наступні виграші x2!");}
-}else alert("❌ Недостатньо монет!");
-}
-
-// Sounds
-const sounds={spin:new Audio("https://www.soundjay.com/misc/sounds/button-16.mp3"),
-dig:new Audio("https://www.soundjay.com/button/sounds/button-10.mp3"),
-coin:new Audio("https://www.soundjay.com/misc/sounds/coin-drop-1.mp3"),
-jackpot:new Audio("https://www.soundjay.com/misc/sounds/jackpot.mp3")};
+const sandbox=document.getElementById('sandbox'); const miner=document.getElementById('miner'); const sandMessages=document.getElementById('sandMessages'); const finds=[{emoji:"💰",value:50},{emoji:"💎",value:100},{emoji:"🪙",value:10},{emoji:"⚒️",value:5},{emoji:"🪨",value:1}]; const messages=["трах'ть сук пісок, пісок, пісок","Знайдено скарб!","Ще більше піску...","Ого, діамант!","Монетки сиплються!"];
+function digSand(){miner.classList.add('digging');sandMessages.textContent="Копаємо...";playSound('dig');setTimeout(()=>{miner.classList.remove('digging');const find=finds[Math.floor(Math.random()*finds.length)];const item=document.createElement('div');item.className='item';item.textContent=find.emoji;item.style.left=(60+Math.random()*280)+'px';item.style.bottom='20px';sandbox.appendChild(item);setTimeout(()=>item.remove(),2000);sandMessages.textContent=messages[Math.floor(Math.random()*messages.length)];updateBalance(find.value);spawnGoldParticles();playSound('coin');},1300);}
+function buyItem(type,cost){if(balance>=cost){balance-=cost;balanceEl.textContent="💰 Баланс: "+balance;alert("✅ Ви купили: "+type);if(type==='vip'){alert("⚡ VIP активовано!");}if(type==='freespin'){spinAllSlots();}if(type==='skin'){alert("🛡️ Новий скин для Федюка активовано!");}if(type==='booster'){alert("💥 Наступні виграші x2!");}}else alert("❌ Недостатньо монет!");}
+const sounds={spin:new Audio("https://www.soundjay.com/misc/sounds/button-16.mp3"),dig:new Audio("https://www.soundjay.com/button/sounds/button-10.mp3"),coin:new Audio("https://www.soundjay.com/misc/sounds/coin-drop-1.mp3"),jackpot:new Audio("https://www.soundjay.com/misc/sounds/jackpot.mp3")};
 function playSound(type){if(sounds[type]) sounds[type].play();}
-
-// Bonus flash
 function flashBonus(){const flash=document.createElement('div');flash.className='bonus-flash';document.body.appendChild(flash);setTimeout(()=>flash.remove(),600);}
-
-// Gold particles
-function spawnGoldParticles(){for(let i=0;i<25;i++){let p=document.createElement('div');p.className='particle';
-p.style.left=(sandbox.offsetLeft+Math.random()*sandbox.offsetWidth)+'px';
-p.style.top=(sandbox.offsetTop+sandbox.offsetHeight-20)+'px';
-document.body.appendChild(p);setTimeout(()=>p.remove(),2000);}}
-  
-// Bonus Wheel
-function spinBonusWheel(){
-const rewards=["💰 50 монет","💎 100 монет","Free Spin","VIP активовано","💥 Бустер x2"];
-const reward=rewards[Math.floor(Math.random()*rewards.length)];
-document.getElementById('wheelMessage').textContent="🎉 Ви отримали: "+reward;
-switch(reward){
-case "💰 50 монет": updateBalance(50); break;
-case "💎 100 монет": updateBalance(100); break;
-case "Free Spin": spinAllSlots(); break;
-case "VIP активовано": alert("⚡ VIP режим активовано!"); break;
-case "💥 Бустер x2": alert("💥 Наступні виграші x2!"); break;
-}
-playSound('jackpot');flashBonus();
-}
+function spawnGoldParticles(){for(let i=0;i<30;i++){let p=document.createElement('div');p.className='particle';p.style.left=(sandbox.offsetLeft+Math.random()*sandbox.offsetWidth)+'px';p.style.top=(sandbox.offsetTop+sandbox.offsetHeight-20)+'px';document.body.appendChild(p);setTimeout(()=>p.remove(),2000);}}
+function spinBonusWheel(){const rewards=["💰 50 монет","💎 100 монет","Free Spin","VIP активовано","💥 Бустер x2"];const reward=rewards[Math.floor(Math.random()*rewards.length)];document.getElementById('wheelMessage').textContent="🎉 Ви отримали: "+reward;switch(reward){case "💰 50 монет":updateBalance(50);break;case "💎 100 монет":updateBalance(100);break;case "Free Spin":spinAllSlots();break;case "VIP активовано":alert("⚡ VIP режим активовано!");break;case "💥 Бустер x2":alert("💥 Наступні виграші x2!");break;}playSound('jackpot');flashBonus();}
+const cube=document.getElementById('cube3D');let angleX=0,angleY=0;setInterval(()=>{angleX+=1.2;angleY+=1.2;cube.style.transform=`translateX(-50%) rotateX(${angleX}deg) rotateY(${angleY}deg)`;},50);
 </script>
+
 </body>
 </html>
 
