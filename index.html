@@ -3,368 +3,404 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>GovBet Ultimate 4.0 — Казино Майбутнього</title>
+<title>GovBet Ultimate 5.0 — Казино Майбутнього</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --neon:#00f7ff;
-    --neon-2:#7b2cff;
-    --bg:#050509;
-    --card:#0f1114;
-    --accent:#00f7ff;
+    --bg-dark:#04060a;
+    --panel:#0f1316;
+    --neon1: #00f7ff;
+    --neon2: #7b2cff;
+    --accent: #00f7ff;
+    --muted: rgba(230,249,255,0.75);
+  }
+  [data-theme="space"]{
+    --bg-dark: #020316;
+    --panel: #071026;
+    --neon1: #8be8ff;
+    --neon2: #ff6bfc;
+    --accent:#8be8ff;
   }
   *{box-sizing:border-box}
-  html,body{height:100%;margin:0;background:radial-gradient(ellipse at center,#07101a 0%, #020205 70%);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#e6f9ff;overflow-x:hidden}
-  /* Canvas backgrounds */
-  #bgCanvas,#lightCanvas,#neonCanvas{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:-100}
-  /* Header */
-  header{position:sticky;top:0;z-index:120;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:linear-gradient(180deg,rgba(2,6,10,0.5),rgba(2,6,10,0.15));backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,255,255,0.04)}
-  .logo{display:flex;gap:12px;align-items:center}
-  .logo .mark{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--neon),var(--neon-2));display:flex;align-items:center;justify-content:center;color:#020202;font-weight:800;box-shadow:0 6px 30px rgba(0,255,255,0.08)}
-  .logo .title{font-weight:800;letter-spacing:0.6px}
-  nav{display:flex;gap:14px;align-items:center}
-  nav a{color:rgba(230,249,255,0.9);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600;transition:all .18s}
-  nav a:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,255,255,0.06);background:linear-gradient(90deg,rgba(0,255,255,0.06),rgba(123,44,255,0.03))}
-  /* Container */
-  .wrap{max-width:1200px;margin:28px auto;padding:0 20px;position:relative;z-index:10}
-  .banner{position:relative;border-radius:14px;padding:36px;overflow:hidden;background:linear-gradient(135deg, rgba(0,255,255,0.04), rgba(123,44,255,0.03));box-shadow:0 8px 40px rgba(11,12,14,0.6);display:flex;align-items:center;justify-content:space-between;gap:18px}
-  .hero-left{max-width:62%}
-  h1{font-size:34px;margin:0 0 8px 0;color:var(--neon);text-shadow:0 0 30px rgba(0,255,255,0.12)}
-  p.lead{color:rgba(230,249,255,0.85);margin:0 0 8px 0;opacity:0.9}
-  .hero-actions{display:flex;gap:12px;margin-top:12px}
-  .btn{background:linear-gradient(90deg,var(--neon),var(--neon-2));color:#021018;padding:12px 18px;border-radius:12px;font-weight:800;box-shadow:0 12px 40px rgba(0,255,255,0.08);border:none;cursor:pointer;transform-style:preserve-3d}
-  .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.05);color:#dff7ff}
-  .hero-right{width:36%;display:flex;align-items:center;justify-content:center}
-  .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 40px rgba(0,0,0,0.5)}
-  /* Slots area */
-  .section{margin-top:28px}
-  .section h2{margin:0 0 14px 0;color:var(--neon);text-shadow:0 0 12px rgba(0,255,255,0.08)}
-  .slot-stage{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
-  .slot-panel{flex:1 1 320px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 50px rgba(0,0,0,0.6);position:relative;overflow:visible}
-  .reels{display:flex;gap:12px;justify-content:center;margin:18px 0}
-  .reel{width:92px;height:92px;border-radius:14px;background:linear-gradient(180deg,#081018,#0f1620);display:flex;align-items:center;justify-content:center;font-size:36px;border:2px solid rgba(0,255,255,0.06);box-shadow:0 6px 22px rgba(0,255,255,0.02);transition:transform .25s, box-shadow .25s}
-  .reel.win{box-shadow:0 0 32px rgba(0,255,255,0.35);transform:scale(1.08)}
-  .controls{display:flex;gap:12px;justify-content:center;align-items:center}
-  .btn3d{padding:12px 18px;border-radius:12px;background:linear-gradient(180deg,var(--neon),var(--neon-2));border:none;color:#001114;font-weight:800;cursor:pointer;box-shadow:0 18px 50px rgba(0,255,255,0.08),0 4px 10px rgba(0,0,0,0.6);transform:translateZ(30px)}
-  /* Feduk slot */
-  #sandbox{width:100%;max-width:520px;height:160px;background:#d9c58a;border-radius:10px;border:2px solid rgba(0,255,255,0.06);margin:14px auto;position:relative;overflow:hidden;box-shadow:inset 0 -20px 40px rgba(0,0,0,0.2)}
-  .sand-grain{position:absolute;width:10px;height:10px;border-radius:50%;background:sandybrown;pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,0.3))}
-  .sand-dust{position:absolute;width:18px;height:18px;border-radius:50%;background:rgba(255,255,230,0.6);pointer-events:none}
-  /* Confetti holder */
-  .confetti-holder{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:9999}
-  /* small responsive */
-  @media(max-width:880px){
-    .hero-left{max-width:100%}
-    .hero-right{display:none}
-    h1{font-size:26px}
-  }
+  html,body{height:100%;margin:0;background:radial-gradient(ellipse at center,var(--bg-dark) 0%, #000 80%);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:var(--muted);-webkit-font-smoothing:antialiased}
+  /* canvases for visual fx */
+  canvas.bg, canvas.halo {position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:-10}
+  /* header */
+  header{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:linear-gradient(180deg,rgba(0,0,0,0.35),transparent);backdrop-filter:blur(6px)}
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo .mark{width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,var(--neon1),var(--neon2));display:flex;align-items:center;justify-content:center;color:#001318;font-weight:800;box-shadow:0 8px 40px rgba(0,0,0,0.6)}
+  .logo .text{font-weight:800;color:var(--neon1);letter-spacing:0.6px}
+  nav{display:flex;gap:10px;align-items:center}
+  nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600;transition:all .15s}
+  nav a:hover{transform:translateY(-3px);color:#fff}
+  .theme-toggle{padding:8px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);cursor:pointer;color:var(--muted)}
+  /* container */
+  .wrap{max-width:1180px;margin:22px auto;padding:0 18px;position:relative;z-index:2}
+  .banner{display:flex;gap:20px;align-items:center;justify-content:space-between;padding:28px;border-radius:14px;background:linear-gradient(135deg,rgba(0,0,0,0.18),rgba(0,0,0,0.06));box-shadow:0 12px 40px rgba(0,0,0,0.6)}
+  .hero{max-width:66%}
+  h1{font-size:30px;color:var(--neon1);margin:0 0 8px 0;text-shadow:0 0 18px rgba(0,255,255,0.08)}
+  p.lead{margin:0;color:rgba(230,249,255,0.85)}
+  .hero-cta{margin-top:12px;display:flex;gap:10px}
+  .btn{background:linear-gradient(90deg,var(--neon1),var(--neon2));color:#041419;padding:12px 16px;border-radius:12px;font-weight:800;border:none;cursor:pointer;box-shadow:0 12px 40px rgba(0,255,255,0.06)}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+  .info-card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);min-width:220px;text-align:center}
+  .info-card .bal{font-weight:800;color:var(--neon1);margin-top:8px}
+  /* sections */
+  .section{margin-top:22px}
+  .section h2{margin:0 0 12px 0;color:var(--neon1)}
+  .slot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .panel{background:var(--panel);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 36px rgba(0,0,0,0.6);position:relative;overflow:visible}
+  .panel small{color:rgba(255,255,255,0.6)}
+  .reels{display:flex;gap:12px;justify-content:center;margin:12px 0}
+  .reel{width:86px;height:86px;border-radius:12px;background:linear-gradient(180deg,#061018,#0e1820);display:flex;align-items:center;justify-content:center;font-size:34px;border:2px solid rgba(255,255,255,0.03);transition:transform .25s,box-shadow .25s}
+  .reel.win{transform:scale(1.08);box-shadow:0 0 28px rgba(0,255,255,0.22)}
+  .controls{display:flex;gap:10px;justify-content:center;margin-top:10px}
+  .small{font-size:13px;color:rgba(255,255,255,0.6)}
+  /* feduk sandbox */
+  #sandbox{width:100%;height:140px;background:linear-gradient(180deg,#dbc88a,#cdae6b);border-radius:10px;border:2px solid rgba(255,255,255,0.04);position:relative;overflow:hidden;margin-top:12px}
+  .sand-grain{position:absolute;width:10px;height:10px;border-radius:50%;background:sandybrown;pointer-events:none;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.3))}
+  .sand-dust{position:absolute;width:16px;height:16px;border-radius:50%;background:rgba(255,255,230,0.6);pointer-events:none}
+  /* confetti */
+  .confetti-layer{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:9999}
+  /* bonus pop */
+  .bonus-pop{position:fixed;right:18px;bottom:18px;background:linear-gradient(90deg,var(--neon1),var(--neon2));color:#021a1a;padding:12px 16px;border-radius:12px;font-weight:800;box-shadow:0 10px 30px rgba(0,255,255,0.08);z-index:1001}
+  /* responsive */
+  @media(max-width:980px){ .slot-grid{grid-template-columns:1fr 1fr} .hero{max-width:60%} }
+  @media(max-width:680px){ .slot-grid{grid-template-columns:1fr} .banner{flex-direction:column;align-items:flex-start} .hero{max-width:100%} }
 </style>
 </head>
-<body>
-  <!-- background canvases (neon waves, lights, dynamic halos) -->
-  <canvas id="bgCanvas"></canvas>
-  <canvas id="lightCanvas"></canvas>
-  <canvas id="neonCanvas"></canvas>
+<body data-theme="default">
+  <!-- canvases -->
+  <canvas class="bg" id="bg" ></canvas>
+  <canvas class="halo" id="halo"></canvas>
 
   <header>
-    <div class="logo"><div class="mark">G</div><div class="title">GovBet</div></div>
+    <div class="logo"><div class="mark">G</div><div class="text">GovBet</div></div>
     <nav>
-      <a href="#slots">Головна</a>
       <a href="#slotsSection">Слоти</a>
       <a href="#fedukSection">Федюк</a>
+      <button class="theme-toggle" id="themeToggle">Тема: Космос</button>
     </nav>
   </header>
 
   <div class="wrap">
     <div class="banner">
-      <div class="hero-left">
-        <h1>GovBet — Казино Майбутнього</h1>
-        <p class="lead">Футуристичний інтерфейс, 3D-ефекти, живий неоновий фон і інтерактивні слоти — все в одному демо.</p>
-        <div class="hero-actions">
-          <button class="btn" id="playNow">Пограти зараз</button>
-          <button class="btn secondary" id="learn">Детальніше</button>
+      <div class="hero">
+        <h1>GovBet — Казино Майбутнього (v5.0)</h1>
+        <p class="lead">Три слоти: <strong>Федюк</strong>, <strong>Mars Casino</strong>, <strong>Tesla Spin</strong>. Перемикач теми, бонуси, звуки та справжній футуристичний UX.</p>
+        <div class="hero-cta">
+          <button class="btn" id="playNowBtn">Грати зараз</button>
+          <button class="btn ghost" id="howBtn">Як це працює</button>
         </div>
       </div>
-      <div class="hero-right">
-        <div class="card" style="width:220px;text-align:center">
-          <div style="font-size:13px;color:#9ff">Профіль</div>
-          <div style="font-size:18px;font-weight:800;margin-top:8px">Гість</div>
-          <div style="margin-top:8px;font-weight:700;color:var(--neon)">Баланс: <span id="balance">2500</span> GBC</div>
-        </div>
+      <div class="info-card">
+        <div class="small">Профіль</div>
+        <div style="font-size:18px;font-weight:800">Гість</div>
+        <div class="bal" id="balance">2500</div>
+        <div style="margin-top:6px;font-size:12px;color:rgba(255,255,255,0.6)">GovCoins</div>
       </div>
     </div>
 
-    <!-- SLOTS -->
     <section id="slotsSection" class="section">
       <h2>Слоти Майбутнього</h2>
-      <div class="slot-stage">
-        <div class="slot-panel" id="slot-main">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <strong>Футуристичний слот</strong>
-            <div style="font-size:12px;color:rgba(255,255,255,0.6)">RTP demo • offline</div>
-          </div>
+      <div class="slot-grid" id="slotGrid">
 
-          <div class="reels" id="reels">
-            <div class="reel" id="r1">🍒</div>
-            <div class="reel" id="r2">🍋</div>
-            <div class="reel" id="r3">🔔</div>
+        <!-- Panel: Futuristic main -->
+        <div class="panel" data-slot="main" id="panel-main">
+          <small>Футуристичний слот</small>
+          <div class="reels" id="mainReels">
+            <div class="reel" id="m1">🍒</div>
+            <div class="reel" id="m2">🍋</div>
+            <div class="reel" id="m3">🔔</div>
           </div>
-
           <div class="controls">
-            <button class="btn3d" id="spinBtn">Крутити</button>
-            <button class="btn3d" id="maxBtn">Макс</button>
+            <button class="btn" data-action="spin" data-target="main" id="spinMain">Крутити</button>
+            <button class="btn ghost" data-action="max" data-target="main">Макс</button>
           </div>
-
-          <p style="text-align:center;margin-top:10px;font-size:13px;color:rgba(255,255,255,0.6)">Реалістична анімація з підсвіткою та джекпотом</p>
+          <p class="small" style="text-align:center;margin-top:10px">Натисни «Крутити» або «Макс» (вищий ризик — вищий шанс).</p>
         </div>
 
-        <!-- Feduk panel -->
-        <div class="slot-panel" id="slot-feduk">
-          <strong>Слот «Федюк» — Копати пісок</strong>
-          <div id="sandbox" aria-hidden="true"></div>
-          <div style="display:flex;gap:8px;justify-content:center;margin-top:12px">
-            <button class="btn3d" id="digBtn">Копати</button>
-            <button class="btn3d" id="digBurstBtn">Бурст ×5</button>
+        <!-- Panel: Mars Casino -->
+        <div class="panel" data-slot="mars" id="panel-mars">
+          <small>Mars Casino</small>
+          <div class="reels" id="marsReels">
+            <div class="reel" id="a1">🪐</div>
+            <div class="reel" id="a2">🚀</div>
+            <div class="reel" id="a3">🌑</div>
           </div>
-          <div id="sandMessages" style="text-align:center;margin-top:12px;color:rgba(0,255,255,0.9);font-weight:700"></div>
+          <div class="controls">
+            <button class="btn" data-action="spin" data-target="mars">Крутити</button>
+            <button class="btn ghost" data-action="max" data-target="mars">Макс</button>
+          </div>
+          <p class="small" style="text-align:center;margin-top:10px">Космічний режим: блискавки та збільшений шанс «марсіанських» виграшів при Макс.</p>
         </div>
+
+        <!-- Panel: Tesla Spin -->
+        <div class="panel" data-slot="tesla" id="panel-tesla">
+          <small>Tesla Spin</small>
+          <div class="reels" id="teslaReels">
+            <div class="reel" id="t1">⚡</div>
+            <div class="reel" id="t2">🔋</div>
+            <div class="reel" id="t3">⚙️</div>
+          </div>
+          <div class="controls">
+            <button class="btn" data-action="spin" data-target="tesla">Крутити</button>
+            <button class="btn ghost" data-action="max" data-target="tesla">Макс</button>
+          </div>
+          <p class="small" style="text-align:center;margin-top:10px">Електричні барабани: спеціальні ефекти і шанс на ланцюжок виграшів.</p>
+        </div>
+
       </div>
     </section>
+
+    <section id="fedukSection" class="section">
+      <h2>Слот «Федюк» — Копати пісок</h2>
+      <div class="panel">
+        <small>Рукомісна міні-гра: Копай — знаходь скарби</small>
+        <div id="sandbox"></div>
+        <div style="display:flex;gap:10px;justify-content:center;margin-top:12px">
+          <button class="btn" id="digOne">Копати</button>
+          <button class="btn ghost" id="digFive">×5</button>
+        </div>
+        <div id="sandMessages" style="text-align:center;margin-top:10px;font-weight:800;color:var(--neon1)"></div>
+      </div>
+    </section>
+
   </div>
 
-  <!-- confetti holder -->
-  <div class="confetti-holder" id="confettiHolder"></div>
+  <div class="confetti-layer" id="confetti"></div>
+  <div id="bonusPop" style="display:none" class="bonus-pop"></div>
 
 <script>
-/* -------------------------
-   Utilities & global vars
-   ------------------------- */
-const rand = (a,b)=>a+Math.random()*(b-a);
-const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+/* -----------------------
+   Globals & balance
+   ----------------------- */
 let balance = 2500;
 const balanceEl = document.getElementById('balance');
-function changeBalance(delta){ balance=Math.max(0,Math.round(balance+delta)); balanceEl.textContent=balance; }
+function changeBalance(amount){
+  balance = Math.max(0, Math.round(balance + amount));
+  balanceEl.textContent = balance;
+}
 
-/* -------------------------
-   Canvas: neon wave background
-   ------------------------- */
-const bgCanvas = document.getElementById('bgCanvas');
-const bgCtx = bgCanvas.getContext('2d');
-function resizeCanvas(c){ c.width = window.innerWidth; c.height = window.innerHeight; }
-resizeCanvas(bgCanvas);
-window.addEventListener('resize',()=>resizeCanvas(bgCanvas));
+/* -----------------------
+   Theme toggle
+   ----------------------- */
+const themeToggle = document.getElementById('themeToggle');
+let theme = 'default';
+function setTheme(t){
+  theme = t;
+  document.body.setAttribute('data-theme', t === 'space' ? 'space' : 'default');
+  themeToggle.textContent = `Тема: ${t === 'space' ? 'Космос' : 'Кібер'}`;
+}
+themeToggle.addEventListener('click', ()=>{
+  setTheme(theme === 'space' ? 'default' : 'space');
+});
+setTheme('space'); // default to space-mode
 
-let t0 = performance.now();
-function drawNeon(){
-  const w = bgCanvas.width, h = bgCanvas.height;
+/* -----------------------
+   Canvas: background neon waves (responsive)
+   ----------------------- */
+const bg = document.getElementById('bg'), halo = document.getElementById('halo');
+const bgCtx = bg.getContext('2d'), haloCtx = halo.getContext('2d');
+function resizeCanvas(){
+  [bg,halo].forEach(c=>{
+    c.width = window.innerWidth; c.height = window.innerHeight;
+  });
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+let start = performance.now();
+function drawBg(){
+  const w = bg.width, h = bg.height;
   bgCtx.clearRect(0,0,w,h);
-  const time = (performance.now()-t0)/1000;
-  // multi-layer waves
-  for(let layer=0;layer<4;layer++){
+  const t = (performance.now() - start)/1000;
+  for(let L=0; L<5; L++){
     bgCtx.beginPath();
-    const amp = 20 + layer*10;
-    const freq = 0.0025 + layer*0.001;
-    const speed = 0.6 + layer*0.2;
-    for(let x=0;x<w;x+=8){
-      const y = h*0.6 + Math.sin((x*freq) + time*speed + layer)*amp*(1+Math.sin(time+layer));
+    const amp = 14 + L*8;
+    const freq = 0.002 + L*0.0007;
+    const speed = 0.8 + L*0.25;
+    for(let x=0;x<w;x+=6){
+      const y = h*0.55 + Math.sin((x*freq) + t*speed + L)*amp;
       if(x===0) bgCtx.moveTo(x,y); else bgCtx.lineTo(x,y);
     }
-    const hue = 190 + layer*25 + Math.sin(time+layer)*20;
-    bgCtx.strokeStyle = `hsla(${hue},100%,60%,${0.07+layer*0.03})`;
-    bgCtx.lineWidth = 2+layer*1.2;
+    const hue = 190 + L*30 + Math.sin(t + L)*20;
+    bgCtx.strokeStyle = `hsla(${hue},90%,60%,${0.06 + L*0.02})`;
+    bgCtx.lineWidth = 2.2;
     bgCtx.stroke();
   }
-  requestAnimationFrame(drawNeon);
+  requestAnimationFrame(drawBg);
 }
-drawNeon();
+drawBg();
 
-/* -------------------------
-   Light halo canvas (reacts to mouse & jackpot)
-   ------------------------- */
-const lightCanvas = document.getElementById('lightCanvas');
-const lctx = lightCanvas.getContext('2d');
-resizeCanvas(lightCanvas);
-window.addEventListener('resize',()=>resizeCanvas(lightCanvas));
-
-let mouseX = window.innerWidth/2, mouseY = window.innerHeight/2;
-window.addEventListener('mousemove',(e)=>{ mouseX = e.clientX; mouseY = e.clientY; });
-
-let jackpotFlash = 0;
-function drawLights(){
-  const w = lightCanvas.width, h = lightCanvas.height;
-  lctx.clearRect(0,0,w,h);
-  // soft radial around mouse
-  const grd = lctx.createRadialGradient(mouseX,mouseY,20,mouseX,mouseY,300);
-  grd.addColorStop(0, 'rgba(0,255,255,' + (0.12 + jackpotFlash*0.4) + ')');
-  grd.addColorStop(1, 'rgba(0,0,0,0)');
-  lctx.fillStyle = grd;
-  lctx.fillRect(0,0,w,h);
-  // subtle global flash when jackpot
-  if(jackpotFlash>0){
-    lctx.fillStyle = `rgba(255,255,255,${0.06 * jackpotFlash})`;
-    lctx.fillRect(0,0,w,h);
-    jackpotFlash = Math.max(0, jackpotFlash - 0.02);
-  }
-  requestAnimationFrame(drawLights);
+/* small halo that follows mouse */
+let mx = window.innerWidth/2, my = window.innerHeight/2;
+window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function drawHalo(){
+  haloCtx.clearRect(0,0,halo.width,halo.height);
+  const g = haloCtx.createRadialGradient(mx,my,20,mx,my,380);
+  g.addColorStop(0, 'rgba(0,255,255,0.10)');
+  g.addColorStop(1, 'rgba(0,0,0,0)');
+  haloCtx.fillStyle = g;
+  haloCtx.fillRect(0,0,halo.width,halo.height);
+  requestAnimationFrame(drawHalo);
 }
-drawLights();
+drawHalo();
 
-/* -------------------------
-   Neon canvas overlay for halo on elements
-   ------------------------- */
-const neonCanvas = document.getElementById('neonCanvas');
-const nctx = neonCanvas.getContext('2d');
-resizeCanvas(neonCanvas);
-window.addEventListener('resize',()=>resizeCanvas(neonCanvas));
-function drawNeonHighlights(){
-  nctx.clearRect(0,0,neonCanvas.width,neonCanvas.height);
-  // draw halo over main banner area (approx)
-  const wrap = document.querySelector('.wrap');
-  if(wrap){
-    const rect = wrap.getBoundingClientRect();
-    const x = rect.left + rect.width*0.65;
-    const y = rect.top + 60;
-    const grd = nctx.createRadialGradient(x,y,10,x,y,220);
-    grd.addColorStop(0, 'rgba(0,255,255,0.06)');
-    grd.addColorStop(1, 'rgba(0,255,255,0)');
-    nctx.fillStyle = grd;
-    nctx.fillRect(0,0,neonCanvas.width,neonCanvas.height);
-  }
-  requestAnimationFrame(drawNeonHighlights);
-}
-drawNeonHighlights();
+/* -----------------------
+   Slot engine (generic)
+   ----------------------- */
+const SLOT_DEFS = {
+  main: { reels: ['m1','m2','m3'], symbols: ["🍒","🍋","🔔","7️⃣","💎","⭐","🍀"], baseCost: 10 },
+  mars: { reels: ['a1','a2','a3'], symbols: ["🪐","🚀","🌑","👽","🔴","✨","🛰️"], baseCost: 12 },
+  tesla: { reels: ['t1','t2','t3'], symbols: ["⚡","🔋","⚙️","🔌","🛠️","🔩","⚙️"], baseCost: 15 }
+};
 
-/* -------------------------
-   Sound helpers
-   ------------------------- */
-function playSound(url, vol=1){
-  try{
-    const a = new Audio(url);
-    a.volume = vol;
-    a.play();
-  }catch(e){/* ignore */ }
-}
+let spinningState = { main:false, mars:false, tesla:false };
 
-/* -------------------------
-   Slot logic (3D feel + jackpot)
-   ------------------------- */
-const r1 = document.getElementById('r1'), r2 = document.getElementById('r2'), r3 = document.getElementById('r3');
-const spinBtn = document.getElementById('spinBtn'), maxBtn = document.getElementById('maxBtn');
-const symbols = ["🍒","🍋","🔔","7️⃣","💎","⭐","🍀"];
-let spinning=false;
-
-function animatePress(el){
-  el.animate([{transform:'translateY(0)'},{transform:'translateY(-8px)'},{transform:'translateY(0)'}],{duration:350, easing:'cubic-bezier(.2,.9,.3,1)'});
-}
-
-spinBtn.addEventListener('click', ()=>{
-  if(spinning) return;
-  spinSlot();
-});
-maxBtn.addEventListener('click', ()=>{
-  if(spinning) return;
-  changeBalance(-100);
-  animatePress(maxBtn);
-  spinSlot(true);
-});
-
-function spinSlot(max=false){
-  spinning=true;
-  const cost = max?100:10;
+function spinSlot(name, options={max:false}){
+  if(spinningState[name]) return;
+  spinningState[name]=true;
+  const def = SLOT_DEFS[name];
+  const targetIds = def.reels;
+  const symbols = def.symbols;
+  const cost = def.baseCost * (options.max ? 5 : 1);
   changeBalance(-cost);
+  // play spin sound
   playSound('https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg',0.9);
-  // numbers of spins per reel (staggered)
-  const targetSpins = [randInt(18,28), randInt(28,36), randInt(36,44)];
-  const reels = [r1,r2,r3];
-  reels.forEach((el,i)=>{
-    el.classList.remove('win');
-  });
-  // visual light pulse
-  jackpotFlash = 0.08;
-  // spin each
-  targetSpins.forEach((t,i)=>{
-    let count=0;
-    const speedBase=40 + i*20;
+  // determine spins for each reel
+  const spins = targetIds.map((_,i)=>randInt(16 + i*6, 26 + i*8));
+  // animate
+  targetIds.forEach((id,i)=>{
+    const el = document.getElementById(id);
+    let c = 0;
     const iv = setInterval(()=>{
-      const sym = symbols[Math.floor(Math.random()*symbols.length)];
-      reels[i].textContent = sym;
-      // small 3D tilt
-      reels[i].style.transform = `rotateX(${Math.sin(count/3+i)*6}deg) translateZ(${(count%2)*2}px)`;
-      count++;
-      if(count>t){
+      el.textContent = symbols[randInt(0,symbols.length-1)];
+      el.style.transform = `rotateX(${Math.sin(c/2 + i)*6}deg)`;
+      c++;
+      if(c >= spins[i]){
         clearInterval(iv);
-        reels[i].style.transform = '';
-        // last settle: ensure slight chance to match for demo
-        if(i===reels.length-1) finalCheck();
+        el.style.transform = '';
+        // if last reel, determine result
+        if(i === targetIds.length -1) {
+          setTimeout(()=>finalize(), 120);
+        }
       }
-    }, speedBase);
+    }, 60 + i*15);
   });
-  // helper
-  function finalCheck(){
-    // determine win chance
-    const winChance = max?0.45:0.14; // higher with max
-    const isWin = Math.random() < winChance;
+
+  function finalize(){
+    // decide win probability: default low, max increases chance
+    const winProb = options.max ? 0.45 : 0.12;
+    const isWin = Math.random() < winProb;
     if(isWin){
-      // pick symbol and set all reels to it
-      const sym = symbols[Math.floor(Math.random()*symbols.length)];
-      [r1,r2,r3].forEach(el=>el.textContent = sym);
-      // visual
-      [r1,r2,r3].forEach(el=>el.classList.add('win'));
-      // big jackpot effects
-      spawnConfettiBig();
-      playJackpotEffects();
-      changeBalance(Math.round( (max?800:250) ));
-      setTimeout(()=>{ [r1,r2,r3].forEach(el=>el.classList.remove('win')); spinning=false; },2200);
+      // choose symbol and set
+      const pick = symbols[randInt(0,symbols.length-1)];
+      targetIds.forEach(id=>{
+        const el = document.getElementById(id);
+        el.textContent = pick;
+        el.classList.add('win');
+      });
+      // give reward scaled by slot
+      const rewardBase = name==='tesla' ? 400 : name==='mars' ? 350 : 300;
+      const reward = options.max ? Math.round(rewardBase*1.8) : rewardBase;
+      changeBalance(reward);
+      spawnConfettiLarge();
+      playJackpot();
+      // cleanup
+      setTimeout(()=>{ targetIds.forEach(id=>document.getElementById(id).classList.remove('win')); spinningState[name]=false; }, 2000);
     } else {
-      spinning=false;
+      spinningState[name]=false;
     }
+    // random bonus pop occasionally
+    if(Math.random() < 0.12) spawnRandomBonus();
   }
 }
 
-function randInt(a,b){ return Math.floor(a + Math.random()*(b-a+1)); }
+/* UI hooks for all spin buttons */
+document.querySelectorAll('[data-action="spin"]').forEach(btn=>{
+  btn.addEventListener('click', ()=> spinSlot(btn.dataset.target, {max:false}));
+});
+document.querySelectorAll('[data-action="max"]').forEach(btn=>{
+  btn.addEventListener('click', ()=> spinSlot(btn.dataset.target, {max:true}));
+});
 
-/* -------------------------
-   Jackpot audio & visual
-   ------------------------- */
-function playbackFanfare(){
-  playSound('https://actions.google.com/sounds/v1/alarms/air_horn.ogg', 0.7);
+/* quick play now */
+document.getElementById('playNowBtn').addEventListener('click', ()=> {
+  // spin main once
+  document.querySelector('#panel-main [data-action="spin"]').click();
+});
+
+/* -----------------------
+   Jackpot & confetti
+   ----------------------- */
+function playSound(url, vol=1){
+  try{ const a = new Audio(url); a.volume = vol; a.play(); } catch(e){}
 }
-function playJackpotEffects(){
-  jackpotFlash = 1.0;
-  // bright flash overlay
-  playSound('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg',0.8);
-  playbackFanfare();
+function playJackpot(){
+  playSound('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg',0.85);
+  playSound('https://actions.google.com/sounds/v1/alarms/air_horn.ogg',0.5);
+  // big flash by increasing halo brightness briefly
+  halo.style.opacity = '1';
+  setTimeout(()=>halo.style.opacity = '0.9', 200);
 }
 
-/* Confetti big */
-function spawnConfettiBig(){
-  const holder = document.getElementById('confettiHolder');
+function spawnConfettiLarge(){
+  const holder = document.getElementById('confetti');
   for(let i=0;i<140;i++){
     const d = document.createElement('div');
     d.style.position='absolute';
-    d.style.left = rand(0,window.innerWidth)+'px';
-    d.style.top = '-40px';
-    d.style.width = rand(6,14)+'px';
-    d.style.height = rand(6,14)+'px';
-    d.style.background = `hsl(${rand(0,360)},85%,60%)`;
-    d.style.borderRadius='3px';
-    d.style.transform = `rotate(${rand(0,360)}deg)`;
+    d.style.left = Math.random()*window.innerWidth + 'px';
+    d.style.top = '-30px';
+    d.style.width = (6+Math.random()*12)+'px';
+    d.style.height = d.style.width;
+    d.style.background = `hsl(${Math.random()*360},80%,60%)`;
+    d.style.borderRadius = '3px';
     d.style.zIndex = 9999;
     holder.appendChild(d);
-    const anim = d.animate([
-      { transform:`translateY(0) rotate(${rand(0,360)}deg)`, opacity:1 },
-      { transform:`translateY(${window.innerHeight+200}px) rotate(${rand(360,720)}deg)`, opacity:0 }
-    ],{ duration: 1400+Math.random()*600, easing:'cubic-bezier(.2,.8,.2,1)'});
-    anim.onfinish = ()=>d.remove();
+    const dur = 1100 + Math.random()*900;
+    d.animate([
+      { transform: `translateY(0) rotate(0deg)`, opacity:1 },
+      { transform: `translateY(${window.innerHeight + 200}px) rotate(${Math.random()*720}deg)`, opacity:0 }
+    ],{ duration: dur, easing: 'cubic-bezier(.2,.8,.2,1)'});
+    setTimeout(()=> d.remove(), dur+50);
   }
 }
 
-/* -------------------------
-   Feduk slot (enhanced)
-   ------------------------- */
+/* -----------------------
+   Random bonus pop (+100, Free Spin)
+   ----------------------- */
+const bonusPop = document.getElementById('bonusPop');
+function spawnRandomBonus(){
+  const roll = Math.random();
+  if(roll < 0.5){
+    // +100 pop
+    bonusPop.textContent = '+100 GovCoins';
+    bonusPop.style.display = 'block';
+    changeBalance(100);
+    playSound('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg',0.6);
+    setTimeout(()=> bonusPop.style.display='none', 1800);
+  } else {
+    // free spin on random slot
+    const slots = ['main','mars','tesla'];
+    const pick = slots[randInt(0,slots.length-1)];
+    bonusPop.textContent = `Free Spin → ${pick}`;
+    bonusPop.style.display = 'block';
+    setTimeout(()=> {
+      bonusPop.style.display='none';
+      // execute free spin
+      spinSlot(pick,{max:false});
+    }, 1200);
+  }
+}
+
+/* -----------------------
+   Feduk enhanced: sand physics-ish
+   ----------------------- */
 const sandbox = document.getElementById('sandbox');
 const sandMessages = document.getElementById('sandMessages');
-const digBtn = document.getElementById('digBtn'), digBurstBtn = document.getElementById('digBurstBtn');
+const digOne = document.getElementById('digOne');
+const digFive = document.getElementById('digFive');
 
 const sandPhrases = [
   'трах"ть сук... пісок, пісок, пісок',
@@ -375,94 +411,89 @@ const sandPhrases = [
   'федюк радіє піску'
 ];
 
-digBtn.addEventListener('click', ()=>digSand(1));
-digBurstBtn.addEventListener('click', ()=>digSand(6));
-
-function makeGrain(x){
-  const g = document.createElement('div');
-  g.className = 'sand-grain';
-  g.style.left = x + 'px';
-  g.style.top = '0px';
-  sandbox.appendChild(g);
-  return g;
-}
-
-function makeDust(x,y){
-  const d = document.createElement('div');
-  d.className = 'sand-dust';
-  d.style.left = x + 'px';
-  d.style.top = y + 'px';
-  d.style.opacity = 0.95;
-  sandbox.appendChild(d);
-  d.animate([
-    { transform: 'translateY(0) scale(0.2)', opacity:0.95 },
-    { transform: 'translateY(-12px) scale(1.6)', opacity:0 }
-  ],{ duration: 650+Math.random()*250, easing:'cubic-bezier(.2,.8,.2,1)'});
-  setTimeout(()=>d.remove(),900);
-}
+digOne.addEventListener('click', ()=> digSand(1));
+digFive.addEventListener('click', ()=> digSand(5));
 
 function digSand(count=1){
-  // play shovel sound
-  playSound('https://actions.google.com/sounds/v1/foley/shovel_dig.ogg',0.7);
+  playSound('https://actions.google.com/sounds/v1/foley/shovel_dig.ogg',0.75);
   sandMessages.textContent = sandPhrases[randInt(0,sandPhrases.length-1)];
-  changeBalance(+Math.round(rand(1,8))); // small reward
   for(let i=0;i<count;i++){
-    const x = rand(12, sandbox.clientWidth - 22);
-    const g = makeGrain(x);
-    // falling animation
-    let top=0;
-    const fallIv = setInterval(()=>{
-      top += rand(6,12);
-      g.style.top = top + 'px';
-      if(top >= sandbox.clientHeight - 18){
-        clearInterval(fallIv);
-        // small dust
-        makeDust(x, sandbox.clientHeight - 24);
-        // 10% chance of finding 'gem'
-        if(Math.random() < 0.08){
-          spawnFound(x);
-        }
-        setTimeout(()=>g.remove(), 350);
-      }
-    }, 28 + Math.random()*30);
+    createGrain();
   }
+  // small chance for bonus per dig
+  if(Math.random() < 0.12) spawnRandomBonus();
 }
 
-function spawnFound(x){
-  // create tiny gem effect
+function createGrain(){
+  const g = document.createElement('div');
+  g.className = 'sand-grain';
+  const x = randInt(8, sandbox.clientWidth - 18);
+  g.style.left = x + 'px';
+  g.style.top = '-6px';
+  sandbox.appendChild(g);
+  // falling animation
+  let y = -6;
+  const fallInterval = setInterval(()=>{
+    y += 6 + Math.random()*6;
+    g.style.top = y + 'px';
+    if(y >= sandbox.clientHeight - 18){
+      clearInterval(fallInterval);
+      // dust
+      const d = document.createElement('div');
+      d.className = 'sand-dust';
+      d.style.left = x + 'px';
+      d.style.top = (sandbox.clientHeight - 22)+'px';
+      sandbox.appendChild(d);
+      d.animate([{ transform:'translateY(0) scale(0.2)', opacity: 0.9 }, { transform:'translateY(-12px) scale(1.6)', opacity:0}], {duration:700, easing:'cubic-bezier(.2,.8,.2,1)'});
+      setTimeout(()=> d.remove(),900);
+      // small chance to find gem
+      if(Math.random() < 0.09){
+        spawnGem(x);
+      }
+      setTimeout(()=> g.remove(), 350);
+    }
+  }, 28);
+}
+
+function spawnGem(x){
   const gem = document.createElement('div');
-  gem.style.position='absolute';
+  gem.style.position = 'absolute';
   gem.style.left = x + 'px';
   gem.style.top = (sandbox.clientHeight - 36) + 'px';
-  gem.style.width='18px';
-  gem.style.height='18px';
-  gem.style.background='radial-gradient(circle at 30% 30%, #fff, #a8fffe 40%, #7b2cff)';
-  gem.style.borderRadius='4px';
-  gem.style.zIndex=20;
+  gem.style.width = '18px';
+  gem.style.height = '18px';
+  gem.style.borderRadius = '4px';
+  gem.style.background = 'radial-gradient(circle at 30% 30%, #fff, #b8ffff 40%, #8b2bff)';
   sandbox.appendChild(gem);
-  gem.animate([
-    { transform:'scale(0)', opacity:0 },
-    { transform:'scale(1.2)', opacity:1 },
-    { transform:'scale(1)', opacity:1 }
-  ], { duration: 450, easing:'cubic-bezier(.2,.8,.2,1)'});
-  // reward
-  changeBalance(+randInt(6,40));
+  gem.animate([{ transform:'scale(0)', opacity:0 }, { transform:'scale(1.1)', opacity:1 }], {duration:420, easing:'cubic-bezier(.2,.8,.2,1)'});
+  changeBalance(randInt(6,40));
   playSound('https://actions.google.com/sounds/v1/musical/bell_tone_003.ogg',0.7);
-  setTimeout(()=>gem.animate([{transform:'translateY(-30px)', opacity:0}],{duration:900}).onfinish=(()=>gem.remove()), 700);
+  setTimeout(()=> { gem.animate([{ transform:'translateY(-26px)', opacity:0}],{duration:1000}).onfinish = ()=> gem.remove(); }, 700);
 }
 
-/* -------------------------
-   UI binds & initial small effects
-   ------------------------- */
-document.getElementById('playNow').addEventListener('click', ()=>{ document.getElementById('spinBtn').click(); });
-document.getElementById('learn').addEventListener('click', ()=>{ window.scrollTo({top:document.getElementById('slotsSection').offsetTop - 60, behavior:'smooth'}); });
+/* -----------------------
+   Utilities
+   ----------------------- */
+function randInt(min,max){ return Math.floor(min + Math.random()*(max-min+1)); }
+function rand(min,max){ return min + Math.random()*(max-min); }
 
-/* small attention pulser on startup */
-setTimeout(()=>{ document.querySelectorAll('.reel').forEach(el=>el.animate([{transform:'translateY(0)'},{transform:'translateY(-6px)'},{transform:'translateY(0)'}],{duration:700,iterations:1})); },600);
+/* small auto-bonus spawner (background) */
+setInterval(()=>{ if(Math.random() < 0.06) spawnRandomBonus(); }, 7000);
 
+/* small init animation */
+setTimeout(()=> {
+  document.querySelectorAll('.reel').forEach((r,i)=> r.animate([{ transform:'translateY(0)' },{ transform:'translateY(-8px)' },{ transform:'translateY(0)'}], { duration:700 + i*80 }));
+},300);
+
+/* accessibility: show how */
+document.getElementById('howBtn').addEventListener('click', ()=> {
+  alert('GovBet v5.0 demo — три слоти: натисни Крутити або Макс. Федюк — копай пісок, знаходь камінці для баланс-ефекту. Бонуси з\'являються рандомно.');
+});
 </script>
 </body>
 </html>
+
+
 
 
 
