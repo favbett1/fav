@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GovBet 10.0 Ultimate Futuristic</title>
+<title>GovBet Ultimate Edition</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
 body{background:#0b0b0b;color:#0ff;overflow-x:hidden;scroll-behavior:smooth;position:relative;}
@@ -14,39 +14,40 @@ nav a:hover{color:#fff;text-shadow:0 0 20px #0ff;transform:scale(1.2);}
 #balance{position:absolute;top:15px;right:20px;font-size:1.2em;color:#0ff;font-weight:bold;text-shadow:0 0 15px #0ff;}
 
 /* Banner */
-.banner{margin:20px auto;width:90%;max-width:1200px;height:300px;border-radius:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 25px #0ff;transition:0.5s;}
+.banner{margin:20px auto;width:90%;max-width:1200px;height:300px;border-radius:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 30px #0ff;transition:0.5s;}
 .banner h1{font-size:3em;text-shadow:0 0 25px #0ff,0 0 50px #0ff;animation:bannerGlow 2s infinite alternate;}
 @keyframes bannerGlow{0%{text-shadow:0 0 25px #0ff,0 0 50px #0ff;}100%{text-shadow:0 0 50px #0ff,0 0 100px #0ff;}}
 
 /* Slots */
 .slotContainer{display:flex;flex-direction:column;align-items:center;margin:20px;}
 .slot{display:flex;justify-content:center;gap:10px;margin-bottom:15px;}
-.slot div{width:80px;height:80px;background:#111;border:2px solid #0ff;border-radius:15px;display:flex;justify-content:center;align-items:center;font-size:2em;transition:0.3s;box-shadow:0 0 10px #0ff;}
+.slot div{width:80px;height:80px;background:#111;border:2px solid #0ff;border-radius:15px;display:flex;justify-content:center;align-items:center;font-size:2em;transition:0.3s;box-shadow:0 0 15px #0ff;}
 .slot div.win{animation:glow 0.5s infinite alternate;}
-@keyframes glow{0%{box-shadow:0 0 15px #0ff;}100%{box-shadow:0 0 40px #0ff;}}
+@keyframes glow{0%{box-shadow:0 0 20px #0ff;}100%{box-shadow:0 0 50px #0ff;}}
 
+/* Buttons */
 button{padding:12px 25px;margin:10px;font-size:1em;border-radius:12px;background:#0ff;color:#000;font-weight:bold;transition:0.3s;}
-button:hover{background:#00f;color:#fff;box-shadow:0 0 20px #0ff;transform:scale(1.1);cursor:pointer;}
+button:hover{background:#00f;color:#fff;box-shadow:0 0 25px #0ff;transform:scale(1.1);cursor:pointer;}
 
 /* Feduk Slot */
-#sandbox{width:350px;height:220px;background:#c2b280;border:2px solid #0ff;border-radius:10px;overflow:hidden;position:relative;margin:0 auto;box-shadow:0 0 15px #0ff;}
+#sandbox{width:350px;height:220px;background:#c2b280;border:2px solid #0ff;border-radius:10px;overflow:hidden;position:relative;margin:0 auto;box-shadow:0 0 20px #0ff;}
 #miner{position:absolute;bottom:20px;left:10px;width:60px;height:100px;}
 #body{width:40px;height:60px;background:#444;border-radius:10px;margin:auto;}
 #head{width:30px;height:30px;background:#999;border-radius:50%;margin:auto;}
 #shovel{width:12px;height:60px;background:#777;position:absolute;left:45px;bottom:10px;transform-origin:top left;}
 #blade{width:25px;height:15px;background:#ccc;position:absolute;bottom:0;left:-6px;border-radius:0 0 50% 50%;}
 .digging #shovel{animation:digMotion 0.8s infinite;}
-@keyframes digMotion{0%{transform:rotate(0deg);}50%{transform:rotate(40deg);}100%{transform:rotate(0deg);}}
+@keyframes digMotion{0%{transform:rotate(0deg);}50%{transform:rotate(45deg);}100%{transform:rotate(0deg);}}
 .item{position:absolute;font-size:20px;animation:rise 2s forwards;}
 @keyframes rise{0%{transform:translateY(0);opacity:1;}100%{transform:translateY(-80px);opacity:0;}}
 
 /* Shop */
-#shop{display:flex;flex-direction:column;align-items:center;margin:20px;background:#111;border:2px solid #0ff;border-radius:15px;padding:15px;width:90%;max-width:600px;box-shadow:0 0 15px #0ff;}
+#shop{display:flex;flex-direction:column;align-items:center;margin:20px;background:#111;border:2px solid #0ff;border-radius:15px;padding:15px;width:90%;max-width:600px;box-shadow:0 0 20px #0ff;}
 .shop-item{display:flex;justify-content:space-between;width:100%;margin:5px 0;}
 .shop-item button{padding:5px 10px;font-size:0.9em;}
 
 /* Footer */
-footer{margin-top:40px;padding:20px;text-align:center;background:rgba(0,0,0,0.8);color:#0ff;}
+footer{margin-top:40px;padding:20px;text-align:center;background:rgba(0,0,0,0.85);color:#0ff;}
 
 /* Responsive */
 @media(max-width:480px){
@@ -60,7 +61,7 @@ footer{margin-top:40px;padding:20px;text-align:center;background:rgba(0,0,0,0.8)
 <body>
 
 <header>
-  <div class="logo">GovBet 10.0</div>
+  <div class="logo">GovBet Ultimate Edition</div>
   <nav>
     <a href="#slotsSection">Слоти</a>
     <a href="#fedukSection">Федюк</a>
@@ -70,7 +71,7 @@ footer{margin-top:40px;padding:20px;text-align:center;background:rgba(0,0,0,0.8)
 </header>
 
 <div class="banner">
-  <h1>GovBet 10.0 Ultimate Futuristic</h1>
+  <h1>GovBet Ultimate Edition — Майбутнє Казино</h1>
 </div>
 
 <section id="slotsSection" class="slotContainer">
@@ -94,7 +95,7 @@ footer{margin-top:40px;padding:20px;text-align:center;background:rgba(0,0,0,0.8)
 </section>
 
 <section id="fedukSection" class="slotContainer">
-  <h2>Слот «Федюк» — Копати пісок</h2>
+  <h2>Федюк — Копати Пісок</h2>
   <div id="sandbox">
     <div id="miner">
       <div id="head"></div>
@@ -128,23 +129,18 @@ footer{margin-top:40px;padding:20px;text-align:center;background:rgba(0,0,0,0.8)
   </div>
 </section>
 
-<footer>© 2025 GovBet. Всі права захищені.</footer>
+<footer>© 2025 GovBet Ultimate Edition. Всі права захищені.</footer>
 
 <script>
 // --- Balance ---
 let balance=0;
 const balanceEl=document.getElementById('balance');
-function updateBalance(amount){
-  balance+=amount;
-  balanceEl.textContent="💰 Баланс: "+balance;
-}
+function updateBalance(amount){balance+=amount;balanceEl.textContent="💰 Баланс: "+balance;}
 
 // --- Slots ---
-const allReels=[
-  [document.getElementById('reel1a'),document.getElementById('reel1b'),document.getElementById('reel1c')],
-  [document.getElementById('reel2a'),document.getElementById('reel2b'),document.getElementById('reel2c')],
-  [document.getElementById('reel3a'),document.getElementById('reel3b'),document.getElementById('reel3c')]
-];
+const allReels=[[document.getElementById('reel1a'),document.getElementById('reel1b'),document.getElementById('reel1c')],
+                [document.getElementById('reel2a'),document.getElementById('reel2b'),document.getElementById('reel2c')],
+                [document.getElementById('reel3a'),document.getElementById('reel3b'),document.getElementById('reel3c')]];
 const symbols=["🍒","🍋","🔔","7️⃣","💎"];
 function spinSlot(reels){
   reels.forEach(r=>r.classList.remove('win'));
@@ -163,29 +159,23 @@ function checkWin(reels){
   const values=reels.map(r=>r.textContent);
   if(values.every(v=>v===values[0])){
     reels.forEach(r=>r.classList.add('win'));
+    playSound('jackpot');
     alert("🎉 Джекпот! Ви виграли!");
     updateBalance(100);
   }
 }
-function spinAllSlots(){
-  allReels.forEach(r=>spinSlot(r));
-}
+function spinAllSlots(){allReels.forEach(r=>spinSlot(r));playSound('spin');}
 
 // --- Feduk Slot ---
 const sandbox=document.getElementById('sandbox');
 const miner=document.getElementById('miner');
 const sandMessages=document.getElementById('sandMessages');
-const finds=[
-  {emoji:"💰",value:50},
-  {emoji:"💎",value:100},
-  {emoji:"🪙",value:10},
-  {emoji:"⚒️",value:5},
-  {emoji:"🪨",value:1}
-];
+const finds=[{emoji:"💰",value:50},{emoji:"💎",value:100},{emoji:"🪙",value:10},{emoji:"⚒️",value:5},{emoji:"🪨",value:1}];
 const messages=["Знайдено скарб!","Ще більше піску...","Ого, діамант!","Монетки сиплються!"];
 function digSand(){
   miner.classList.add('digging');
   sandMessages.textContent="Копаємо...";
+  playSound('dig');
   setTimeout(()=>{
     miner.classList.remove('digging');
     const find=finds[Math.floor(Math.random()*finds.length)];
@@ -198,6 +188,7 @@ function digSand(){
     setTimeout(()=>item.remove(),2000);
     sandMessages.textContent=messages[Math.floor(Math.random()*messages.length)];
     updateBalance(find.value);
+    playSound('coin');
   },1500);
 }
 
@@ -211,13 +202,19 @@ function buyItem(type,cost){
     if(type==='freespin'){spinAllSlots();}
     if(type==='skin'){alert("🛡️ Новий скин для Федюка активовано!");}
     if(type==='booster'){alert("💥 Наступні виграші x2!");}
-  } else{
-    alert("❌ Недостатньо монет!");
-  }
+  } else alert("❌ Недостатньо монет!");
 }
+
+// --- Sounds ---
+const sounds={spin:new Audio("https://www.soundjay.com/misc/sounds/button-16.mp3"),
+              dig:new Audio("https://www.soundjay.com/button/sounds/button-10.mp3"),
+              coin:new Audio("https://www.soundjay.com/misc/sounds/coin-drop-1.mp3"),
+              jackpot:new Audio("https://www.soundjay.com/misc/sounds/jackpot.mp3")};
+function playSound(type){if(sounds[type]) sounds[type].play();}
 </script>
 </body>
 </html>
+
 
 
 
