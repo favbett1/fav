@@ -4,130 +4,80 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GovBet Ultimate Futuristic</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif;}
-body{background:#0b0b0b;color:#fff;overflow-x:hidden;scroll-behavior:smooth;position:relative;}
-a{text-decoration:none;color:inherit;}
-button{cursor:pointer;border:none;background:none;color:inherit;font-family:inherit;transition:0.3s;}
-img{max-width:100%;display:block;}
-#particles-js{position:fixed;width:100%;height:100%;z-index:-2;top:0;left:0;}
-
-/* Header */
-header{background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);padding:15px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 0 10px #0ff;}
-.logo svg{height:45px;}
-nav{display:flex;gap:20px;}
-nav a{padding:8px 12px;border-radius:5px;color:#0ff;transition:0.3s;}
-nav a:hover{background:#0ff;color:#000;transform:scale(1.1);}
-.burger{display:none;flex-direction:column;gap:4px;cursor:pointer;}
-.burger div{width:25px;height:3px;background:#0ff;}
-
-/* Banner */
-.banner{position:relative;margin-bottom:20px;overflow:hidden;border-radius:10px;animation:fadeIn 2s;}
-.banner img{width:100%;display:block;border-radius:10px;}
-.banner h1{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#0ff;font-size:2.5em;text-shadow:0 0 20px #0ff;text-align:center;animation:textGlow 2s infinite alternate;}
-
-/* Glow animations */
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
+body{background:#0b0b0b;color:#0ff;overflow-x:hidden;scroll-behavior:smooth;}
+header{position:sticky;top:0;background:rgba(0,0,0,0.8);padding:15px;display:flex;justify-content:space-between;align-items:center;z-index:100;backdrop-filter:blur(5px);}
+header .logo{font-size:1.5em;font-weight:bold;text-shadow:0 0 10px #0ff;}
+nav a{color:#0ff;margin-left:15px;text-decoration:none;transition:0.3s;}
+nav a:hover{color:#fff;text-shadow:0 0 10px #0ff;transform:scale(1.1);}
+.banner{position:relative;margin:20px auto;width:90%;max-width:1200px;height:300px;background:linear-gradient(135deg,#0ff,#00f);border-radius:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px #0ff;}
+.banner h1{font-size:3em;text-align:center;text-shadow:0 0 20px #0ff;animation:textGlow 2s infinite alternate;}
 @keyframes textGlow{0%{text-shadow:0 0 10px #0ff;}100%{text-shadow:0 0 25px #0ff,0 0 50px #0ff;}}
-@keyframes fadeIn{0%{opacity:0;}100%{opacity:1;}}
 
 /* Slots */
-.slot{display:flex;justify-content:center;align-items:center;gap:15px;margin-bottom:15px;position:relative;}
-.slot div{width:70px;height:70px;background:#111;border:2px solid #0ff;border-radius:10px;display:flex;justify-content:center;align-items:center;font-size:2em;transition:0.2s;}
-.win{box-shadow:0 0 25px #0ff;animation:glow 0.5s infinite alternate;}
-.confetti{position:absolute;width:10px;height:10px;background:#0ff;animation:fall 1.5s linear forwards;}
-@keyframes glow{0%{box-shadow:0 0 20px #0ff;}100%{box-shadow:0 0 40px #0ff;}}
-@keyframes fall{0%{transform:translateY(0) rotate(0deg);}100%{transform:translateY(300px) rotate(360deg);opacity:0;}}
+.slotContainer{display:flex;flex-direction:column;align-items:center;margin:20px;}
+.slot{display:flex;justify-content:center;gap:10px;margin-bottom:15px;}
+.slot div{width:80px;height:80px;background:#111;border:2px solid #0ff;border-radius:15px;display:flex;justify-content:center;align-items:center;font-size:2em;transition:0.3s;box-shadow:0 0 5px #0ff;}
+.slot div.win{animation:glow 0.5s infinite alternate;}
+@keyframes glow{0%{box-shadow:0 0 15px #0ff;}100%{box-shadow:0 0 40px #0ff;}}
+button{padding:10px 20px;margin:10px;font-size:1em;border-radius:10px;background:#0ff;color:#000;font-weight:bold;transition:0.3s;}
+button:hover{background:#00f;color:#fff;box-shadow:0 0 15px #0ff;transform:scale(1.1);cursor:pointer;}
 
-/* Slot Федюк */
-#sandbox{width:300px;height:150px;background:#c2b280;border:2px solid #0ff;border-radius:10px;overflow:hidden;margin:0 auto;position:relative;}
+/* Feduk Slot */
+#sandbox{width:300px;height:150px;background:#c2b280;border:2px solid #0ff;border-radius:10px;overflow:hidden;position:relative;margin:0 auto;}
 
 /* Footer */
-footer{background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);padding:20px;text-align:center;margin-top:20px;font-size:0.9em;color:#0ff;box-shadow:0 -5px 15px #0ff;}
-@media(max-width:768px){
-nav{display:none;flex-direction:column;background:rgba(0,0,0,0.9);position:absolute;top:60px;right:20px;padding:10px;border-radius:10px;}
-nav.active{display:flex;}
-.burger{display:flex;}
-}
+footer{margin-top:40px;padding:20px;text-align:center;background:rgba(0,0,0,0.7);color:#0ff;backdrop-filter:blur(5px);}
 </style>
 </head>
 <body>
-<div id="particles-js"></div>
+
 <header>
-  <div class="logo">
-    <svg viewBox="0 0 200 50">
-      <text x="0" y="35" fill="cyan" font-size="35" font-weight="bold" font-family="Roboto">GovBet</text>
-      <circle cx="180" cy="25" r="10" fill="red"/>
-    </svg>
-  </div>
-  <nav>
-    <a href="#slots">Слоти</a>
-    <a href="#feduk-slot">Федюк</a>
-  </nav>
-  <div class="burger"><div></div><div></div><div></div></div>
+<div class="logo">GovBet</div>
+<nav>
+<a href="#slotsSection">Слоти</a>
+<a href="#fedukSection">Федюк</a>
+</nav>
 </header>
-<main>
+
 <div class="banner">
-  <img src="https://cdn.pixabay.com/photo/2017/05/10/22/12/casino-2308867_1280.jpg" alt="GovBet Banner">
-  <h1>GovBet Ultimate Futuristic</h1>
+<h1>GovBet Ultimate Futuristic</h1>
 </div>
 
-<section id="slots">
+<section id="slotsSection" class="slotContainer">
 <h2>Слоти Майбутнього</h2>
 <div class="slot" id="slotReels">
-<div id="reel1"><img src="https://cdn.pixabay.com/photo/2012/04/11/15/25/cherries-27310_1280.png"></div>
-<div id="reel2"><img src="https://cdn.pixabay.com/photo/2012/04/11/15/25/lemon-27309_1280.png"></div>
-<div id="reel3"><img src="https://cdn.pixabay.com/photo/2013/07/12/17/38/bell-153103_1280.png"></div>
+<div id="reel1">🍒</div>
+<div id="reel2">🍋</div>
+<div id="reel3">🔔</div>
 </div>
 <button onclick="spinSlot()">Крутити слоти</button>
-<audio id="spinSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
-<audio id="winSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
 </section>
 
-<section id="feduk-slot">
+<section id="fedukSection" class="slotContainer">
 <h2>Слот «Федюк» — Копати пісок</h2>
 <div id="sandbox"></div>
 <button onclick="digSand()">Копати пісок</button>
-<div id="sandMessages" style="text-align:center;margin-top:10px;color:#0ff;font-weight:bold;text-shadow:0 0 10px #0ff;"></div>
-<audio id="digSound" src="https://actions.google.com/sounds/v1/foley/shovel_dig.ogg"></audio>
+<div id="sandMessages" style="margin-top:10px;color:#0ff;font-weight:bold;text-shadow:0 0 10px #0ff;text-align:center;"></div>
 </section>
 
 <footer>© 2025 GovBet. Всі права захищені.</footer>
 
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
-// Particles
-particlesJS("particles-js", { "particles": {"number":{"value":80,"density":{"enable":true,"value_area":800}},"color":{"value":"#0ff"},"shape":{"type":"circle"},"opacity":{"value":0.5},"size":{"value":3},"line_linked":{"enable":true,"distance":150,"color":"#0ff","opacity":0.4,"width":1},"move":{"enable":true,"speed":3}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"repulse"}}}});
-
-// Burger
-const burger=document.querySelector('.burger');
-const nav=document.querySelector('nav');
-burger.addEventListener('click',()=>{nav.classList.toggle('active');});
-
 // Slots
-const symbols=[
-  {img:"https://cdn.pixabay.com/photo/2012/04/11/15/25/cherries-27310_1280.png"},
-  {img:"https://cdn.pixabay.com/photo/2012/04/11/15/25/lemon-27309_1280.png"},
-  {img:"https://cdn.pixabay.com/photo/2013/07/12/17/38/bell-153103_1280.png"},
-  {img:"https://cdn.pixabay.com/photo/2013/07/13/15/26/seven-158253_1280.png"},
-  {img:"https://cdn.pixabay.com/photo/2012/04/11/15/25/bar-27311_1280.png"}
-];
 const reels=[document.getElementById('reel1'),document.getElementById('reel2'),document.getElementById('reel3')];
-const spinSound=document.getElementById('spinSound');
-const winSound=document.getElementById('winSound');
-
+const symbols=["🍒","🍋","🔔","7️⃣","💎"];
 function spinSlot(){
-  spinSound.play();
   let spins=15;
-  function spinReel(reelIndex){
-    let counter=0;
+  function spinReel(i){
+    let count=0;
     const interval=setInterval(()=>{
-      const symbol=symbols[Math.floor(Math.random()*symbols.length)];
-      reels[reelIndex].innerHTML='<img src="'+symbol.img+'">';
-      counter++;
-      if(counter>=spins){
+      reels[i].textContent=symbols[Math.floor(Math.random()*symbols.length)];
+      count++;
+      if(count>=spins){
         clearInterval(interval);
-        if(reelIndex<reels.length-1) spinReel(reelIndex+1);
+        if(i<reels.length-1) spinReel(i+1);
         else checkWin();
       }
     },100);
@@ -136,37 +86,19 @@ function spinSlot(){
 }
 
 function checkWin(){
-  const imgs=reels.map(r=>r.querySelector('img').src);
-  if(imgs.every(v=>v===imgs[0])){
-    winSound.play();
+  const values=reels.map(r=>r.textContent);
+  if(values.every(v=>v===values[0])){
     reels.forEach(r=>r.classList.add('win'));
-    spawnConfetti();
     setTimeout(()=>reels.forEach(r=>r.classList.remove('win')),2000);
-    alert('🎉 Джекпот! Ви виграли!');
+    alert("🎉 Джекпот! Ви виграли!");
   }
 }
 
-function spawnConfetti(){
-  for(let i=0;i<50;i++){
-    const conf=document.createElement('div');
-    conf.classList.add('confetti');
-    conf.style.left=Math.random()*window.innerWidth+'px';
-    conf.style.background=`hsl(${Math.random()*360},100%,50%)`;
-    document.body.appendChild(conf);
-    setTimeout(()=>conf.remove(),1500);
-  }
-}
-
-// Слот Федюк
+// Feduk Slot
 const sandbox=document.getElementById('sandbox');
 const sandMessages=document.getElementById('sandMessages');
-const digSound=document.getElementById('digSound');
 const sandTexts=["трах\"ть сук... пісок, пісок, пісок","копаємо пісок!","ще трохи піску...","пісок сиплеться!"];
-
 function digSand(){
-  digSound.currentTime=0;
-  digSound.play();
-
   const grain=document.createElement('div');
   grain.style.width='10px';
   grain.style.height='10px';
@@ -176,8 +108,7 @@ function digSand(){
   grain.style.top='0px';
   grain.style.borderRadius='50%';
   sandbox.appendChild(grain);
-  
-  // Пилова анімація
+
   const dust=document.createElement('div');
   dust.style.width='15px';
   dust.style.height='15px';
@@ -198,14 +129,14 @@ function digSand(){
   },30);
 
   sandMessages.textContent=sandTexts[Math.floor(Math.random()*sandTexts.length)];
-  
-  grain.animate([{transform:'scale(1)'},{transform:'scale(1.5)'},{transform:'scale(1)'}],{duration:300,iterations:1});
   setTimeout(()=>grain.remove(),2000);
   setTimeout(()=>dust.remove(),1000);
 }
 </script>
+
 </body>
 </html>
+
 
 
 
