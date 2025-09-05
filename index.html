@@ -3,38 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GovBet Ultimate Futuristic</title>
+<title>GovBet Ultimate 3.0</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
-body{background:#0b0b0b;color:#0ff;overflow-x:hidden;scroll-behavior:smooth;}
-header{position:sticky;top:0;background:rgba(0,0,0,0.8);padding:15px;display:flex;justify-content:space-between;align-items:center;z-index:100;backdrop-filter:blur(5px);}
-header .logo{font-size:1.5em;font-weight:bold;text-shadow:0 0 10px #0ff;}
+body{background:#0b0b0b;color:#0ff;overflow-x:hidden;scroll-behavior:smooth;perspective:1000px;position:relative;}
+header{position:sticky;top:0;background:rgba(0,0,0,0.85);padding:15px;display:flex;justify-content:space-between;align-items:center;z-index:100;backdrop-filter:blur(5px);box-shadow:0 0 15px #0ff;}
+header .logo{font-size:1.8em;font-weight:bold;text-shadow:0 0 15px #0ff;}
 nav a{color:#0ff;margin-left:15px;text-decoration:none;transition:0.3s;}
-nav a:hover{color:#fff;text-shadow:0 0 10px #0ff;transform:scale(1.1);}
-.banner{position:relative;margin:20px auto;width:90%;max-width:1200px;height:300px;background:linear-gradient(135deg,#0ff,#00f);border-radius:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px #0ff;}
-.banner h1{font-size:3em;text-align:center;text-shadow:0 0 20px #0ff;animation:textGlow 2s infinite alternate;}
-@keyframes textGlow{0%{text-shadow:0 0 10px #0ff;}100%{text-shadow:0 0 25px #0ff,0 0 50px #0ff;}}
+nav a:hover{color:#fff;text-shadow:0 0 20px #0ff;transform:scale(1.2);}
+.banner{position:relative;margin:20px auto;width:90%;max-width:1200px;height:300px;border-radius:15px;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 25px #0ff;animation:bannerGlow 3s infinite alternate;}
+@keyframes bannerGlow{0%{box-shadow:0 0 15px #0ff;}100%{box-shadow:0 0 40px #0ff;}}
+.banner h1{font-size:3em;text-align:center;text-shadow:0 0 25px #0ff,0 0 50px #0ff;animation:textGlow 2s infinite alternate;}
+@keyframes textGlow{0%{text-shadow:0 0 15px #0ff;}100%{text-shadow:0 0 50px #0ff,0 0 100px #0ff;}}
 
 /* Slots */
 .slotContainer{display:flex;flex-direction:column;align-items:center;margin:20px;}
-.slot{display:flex;justify-content:center;gap:10px;margin-bottom:15px;}
-.slot div{width:80px;height:80px;background:#111;border:2px solid #0ff;border-radius:15px;display:flex;justify-content:center;align-items:center;font-size:2em;transition:0.3s;box-shadow:0 0 5px #0ff;}
+.slot{display:flex;justify-content:center;gap:10px;margin-bottom:15px;transform-style:preserve-3d;transition:transform 0.3s;}
+.slot div{width:80px;height:80px;background:#111;border:2px solid #0ff;border-radius:15px;display:flex;justify-content:center;align-items:center;font-size:2em;transition:0.3s;box-shadow:0 0 10px #0ff;}
+.slot div:hover{transform:rotateY(20deg) scale(1.1);box-shadow:0 0 25px #0ff;}
 .slot div.win{animation:glow 0.5s infinite alternate;}
 @keyframes glow{0%{box-shadow:0 0 15px #0ff;}100%{box-shadow:0 0 40px #0ff;}}
-button{padding:10px 20px;margin:10px;font-size:1em;border-radius:10px;background:#0ff;color:#000;font-weight:bold;transition:0.3s;}
-button:hover{background:#00f;color:#fff;box-shadow:0 0 15px #0ff;transform:scale(1.1);cursor:pointer;}
+
+button{padding:12px 25px;margin:10px;font-size:1em;border-radius:12px;background:#0ff;color:#000;font-weight:bold;transition:0.3s;transform-style:preserve-3d;}
+button:hover{background:#00f;color:#fff;box-shadow:0 0 20px #0ff;transform:scale(1.15) rotateY(15deg);cursor:pointer;}
 
 /* Feduk Slot */
-#sandbox{width:300px;height:150px;background:#c2b280;border:2px solid #0ff;border-radius:10px;overflow:hidden;position:relative;margin:0 auto;}
+#sandbox{width:300px;height:150px;background:#c2b280;border:2px solid #0ff;border-radius:10px;overflow:hidden;position:relative;margin:0 auto;box-shadow:0 0 15px #0ff;}
 
 /* Footer */
-footer{margin-top:40px;padding:20px;text-align:center;background:rgba(0,0,0,0.7);color:#0ff;backdrop-filter:blur(5px);}
+footer{margin-top:40px;padding:20px;text-align:center;background:rgba(0,0,0,0.8);color:#0ff;backdrop-filter:blur(5px);box-shadow:0 -5px 15px #0ff;}
+
+/* Neon waves */
+#canvasBG{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-3;}
 </style>
 </head>
 <body>
 
+<canvas id="canvasBG"></canvas>
+
 <header>
-<div class="logo">GovBet</div>
+<div class="logo">GovBet 3.0</div>
 <nav>
 <a href="#slotsSection">Слоти</a>
 <a href="#fedukSection">Федюк</a>
@@ -65,6 +73,30 @@ footer{margin-top:40px;padding:20px;text-align:center;background:rgba(0,0,0,0.7)
 <footer>© 2025 GovBet. Всі права захищені.</footer>
 
 <script>
+// Neon wave background
+const canvas=document.getElementById('canvasBG');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+let waveOffset=0;
+function drawWaves(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let i=0;i<5;i++){
+    ctx.beginPath();
+    ctx.moveTo(0,canvas.height/2);
+    for(let x=0;x<canvas.width;x++){
+      ctx.lineTo(x,canvas.height/2 + Math.sin((x+i*50+waveOffset)/50)*20*(i+1));
+    }
+    ctx.strokeStyle=`hsl(${i*60},100%,50%)`;
+    ctx.lineWidth=2;
+    ctx.stroke();
+  }
+  waveOffset+=2;
+  requestAnimationFrame(drawWaves);
+}
+drawWaves();
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+
 // Slots
 const reels=[document.getElementById('reel1'),document.getElementById('reel2'),document.getElementById('reel3')];
 const symbols=["🍒","🍋","🔔","7️⃣","💎"];
@@ -89,9 +121,40 @@ function checkWin(){
   const values=reels.map(r=>r.textContent);
   if(values.every(v=>v===values[0])){
     reels.forEach(r=>r.classList.add('win'));
+    spawnConfetti();
+    playJackpot();
     setTimeout(()=>reels.forEach(r=>r.classList.remove('win')),2000);
     alert("🎉 Джекпот! Ви виграли!");
   }
+}
+
+function spawnConfetti(){
+  for(let i=0;i<80;i++){
+    const conf=document.createElement('div');
+    conf.style.width='10px';
+    conf.style.height='10px';
+    conf.style.position='absolute';
+    conf.style.left=Math.random()*window.innerWidth+'px';
+    conf.style.top='0px';
+    conf.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    conf.style.borderRadius='50%';
+    conf.style.zIndex='1000';
+    document.body.appendChild(conf);
+    conf.animate([{transform:'translateY(0)'},{transform:'translateY(400px)',opacity:0}],{duration:1500,iterations:1});
+    setTimeout(()=>conf.remove(),1500);
+  }
+}
+
+// Jackpot flash & sound
+function playJackpot(){
+  const flash=document.createElement('div');
+  flash.style.position='fixed';
+  flash.style.top=0; flash.style.left=0; flash.style.width='100%'; flash.style.height='100%';
+  flash.style.background='white'; flash.style.opacity='0.3'; flash.style.zIndex='2000';
+  document.body.appendChild(flash);
+  setTimeout(()=>flash.remove(),200);
+  const audio=new Audio('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg');
+  audio.play();
 }
 
 // Feduk Slot
@@ -122,10 +185,8 @@ function digSand(){
 
   let top=0;
   const fall=setInterval(()=>{
-    if(top<140){
-      top+=5;
-      grain.style.top=top+'px';
-    } else clearInterval(fall);
+    if(top<140){top+=5;grain.style.top=top+'px';}
+    else clearInterval(fall);
   },30);
 
   sandMessages.textContent=sandTexts[Math.floor(Math.random()*sandTexts.length)];
@@ -133,9 +194,10 @@ function digSand(){
   setTimeout(()=>dust.remove(),1000);
 }
 </script>
-
 </body>
 </html>
+
+
 
 
 
