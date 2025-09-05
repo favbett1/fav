@@ -199,12 +199,13 @@ function digSand(){
 
   sandMessages.textContent=sandTexts[Math.floor(Math.random()*sandTexts.length)];
   
-  grain
-
-
-
-
-
+  grain.animate([{transform:'scale(1)'},{transform:'scale(1.5)'},{transform:'scale(1)'}],{duration:300,iterations:1});
+  setTimeout(()=>grain.remove(),2000);
+  setTimeout(()=>dust.remove(),1000);
+}
+</script>
+</body>
+</html>
 
 
 
