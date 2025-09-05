@@ -1,515 +1,203 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>GovBet Ultimate 6.0 — Казино Майбутнього</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-<meta name="theme-color" content="#050016">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GovBet Ultimate 9.0</title>
 <style>
-:root{
-  --bg:#04040a; --panel:#0b1120; --neon1:#00f7ff; --neon2:#7b2cff; --muted:rgba(230,249,255,0.8);
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
+body{background:#0b0b0b;color:#0ff;overflow-x:hidden;scroll-behavior:smooth;position:relative;}
+header{position:sticky;top:0;background:rgba(0,0,0,0.85);padding:15px;display:flex;justify-content:space-between;align-items:center;z-index:100;backdrop-filter:blur(5px);box-shadow:0 0 15px #0ff;transition:0.5s;}
+header .logo{font-size:1.8em;font-weight:bold;text-shadow:0 0 15px #0ff;}
+nav a{color:#0ff;margin-left:15px;text-decoration:none;transition:0.3s;}
+nav a:hover{color:#fff;text-shadow:0 0 20px #0ff;transform:scale(1.2);}
+#balance{position:absolute;top:15px;right:20px;font-size:1.2em;color:#0ff;font-weight:bold;text-shadow:0 0 15px #0ff;}
+
+/* Banner */
+.banner{margin:20px auto;width:90%;max-width:1200px;height:300px;border-radius:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 25px #0ff;transition:0.5s;}
+.banner h1{font-size:3em;text-shadow:0 0 25px #0ff,0 0 50px #0ff;animation:bannerGlow 2s infinite alternate;}
+@keyframes bannerGlow{0%{text-shadow:0 0 25px #0ff,0 0 50px #0ff;}100%{text-shadow:0 0 50px #0ff,0 0 100px #0ff;}}
+
+/* Slots */
+.slotContainer{display:flex;flex-direction:column;align-items:center;margin:20px;}
+.slot{display:flex;justify-content:center;gap:10px;margin-bottom:15px;}
+.slot div{width:80px;height:80px;background:#111;border:2px solid #0ff;border-radius:15px;display:flex;justify-content:center;align-items:center;font-size:2em;transition:0.3s;box-shadow:0 0 10px #0ff;}
+.slot div.win{animation:glow 0.5s infinite alternate;}
+@keyframes glow{0%{box-shadow:0 0 15px #0ff;}100%{box-shadow:0 0 40px #0ff;}}
+
+button{padding:12px 25px;margin:10px;font-size:1em;border-radius:12px;background:#0ff;color:#000;font-weight:bold;transition:0.3s;}
+button:hover{background:#00f;color:#fff;box-shadow:0 0 20px #0ff;transform:scale(1.1);cursor:pointer;}
+
+/* Feduk Slot */
+#sandbox{width:320px;height:200px;background:#c2b280;border:2px solid #0ff;border-radius:10px;overflow:hidden;position:relative;margin:0 auto;box-shadow:0 0 15px #0ff;}
+#miner{position:absolute;bottom:20px;left:10px;width:60px;height:100px;}
+#body{width:40px;height:60px;background:#444;border-radius:10px;margin:auto;}
+#head{width:30px;height:30px;background:#999;border-radius:50%;margin:auto;}
+#shovel{width:12px;height:60px;background:#777;position:absolute;left:45px;bottom:10px;transform-origin:top left;}
+#blade{width:25px;height:15px;background:#ccc;position:absolute;bottom:0;left:-6px;border-radius:0 0 50% 50%;}
+.digging #shovel{animation:digMotion 0.8s infinite;}
+@keyframes digMotion{0%{transform:rotate(0deg);}50%{transform:rotate(40deg);}100%{transform:rotate(0deg);}}
+.item{position:absolute;font-size:20px;animation:rise 2s forwards;}
+@keyframes rise{0%{transform:translateY(0);opacity:1;}100%{transform:translateY(-80px);opacity:0;}}
+
+/* Shop */
+#shop{display:flex;flex-direction:column;align-items:center;margin:20px;background:#111;border:2px solid #0ff;border-radius:15px;padding:15px;width:90%;max-width:600px;box-shadow:0 0 15px #0ff;}
+.shop-item{display:flex;justify-content:space-between;width:100%;margin:5px 0;}
+.shop-item button{padding:5px 10px;font-size:0.9em;}
+
+/* Footer */
+footer{margin-top:40px;padding:20px;text-align:center;background:rgba(0,0,0,0.8);color:#0ff;}
+
+/* Responsive */
+@media(max-width:480px){
+  .slot div{width:60px;height:60px;font-size:1.5em;}
+  #sandbox{width:90%;height:180px;}
+  button{padding:10px 20px;font-size:0.9em;}
+  .banner h1{font-size:2em;}
 }
-*{box-sizing:border-box}
-html,body{height:100%;margin:0;background:radial-gradient(circle at 20% 20%, rgba(6,10,18,0.6), #000 75%);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:var(--muted);-webkit-font-smoothing:antialiased}
-canvas.bg, canvas.halo { position:fixed; left:0; top:0; width:100%; height:100%; pointer-events:none; z-index:-10; }
-header{position:sticky;top:0;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:linear-gradient(180deg, rgba(0,0,0,0.35), transparent);backdrop-filter:blur(6px)}
-.logo{display:flex;gap:12px;align-items:center}
-.mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--neon1),var(--neon2));display:flex;align-items:center;justify-content:center;color:#001418;font-weight:900}
-.title{font-weight:800;color:var(--neon1)}
-nav{display:flex;gap:12px;align-items:center}
-nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600}
-.theme-btn{padding:8px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);cursor:pointer;color:var(--muted)}
-.wrap{max-width:1200px;margin:22px auto;padding:0 16px;position:relative;z-index:2}
-.banner{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:24px;border-radius:14px;background:linear-gradient(135deg, rgba(0,0,0,0.12), rgba(0,0,0,0.05));box-shadow:0 12px 40px rgba(0,0,0,0.6)}
-.hero-left{max-width:68%}
-h1{margin:0;font-size:30px;color:var(--neon1);text-shadow:0 0 20px rgba(0,255,255,0.08)}
-.lead{margin:6px 0 0 0;color:rgba(230,249,255,0.85)}
-.cta{margin-top:12px;display:flex;gap:10px}
-.btn{background:linear-gradient(90deg,var(--neon1),var(--neon2));color:#041418;padding:10px 14px;border-radius:12px;border:none;font-weight:800;cursor:pointer;box-shadow:0 12px 40px rgba(0,255,255,0.06)}
-.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
-.info-card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);min-width:220px;text-align:center}
-.balance{font-weight:800;color:var(--neon1);margin-top:6px}
-
-/* layout */
-.section{margin-top:22px}
-.section h2{margin:0 0 12px 0;color:var(--neon1)}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.panel{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 40px rgba(0,0,0,0.6);position:relative;overflow:visible}
-.small{font-size:13px;color:rgba(255,255,255,0.7)}
-.reels{display:flex;gap:10px;justify-content:center;margin:12px 0}
-.reel{width:90px;height:90px;border-radius:12px;background:linear-gradient(180deg,#071018,#0f1620);display:flex;align-items:center;justify-content:center;font-size:36px;border:2px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(0,0,0,0.6);transition:transform .24s, box-shadow .24s}
-.reel.win{transform:scale(1.08);box-shadow:0 0 28px rgba(0,255,255,0.28)}
-.controls{display:flex;gap:8px;justify-content:center;margin-top:8px}
-.smallBtn{padding:8px 10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);cursor:pointer;color:var(--muted)}
-
-/* feduk sandbox */
-#sandbox{width:100%;height:150px;border-radius:10px;background:linear-gradient(180deg,#d8c68a,#cdb76a);border:2px solid rgba(255,255,255,0.03);position:relative;overflow:hidden}
-.sand-grain{position:absolute;width:10px;height:10px;border-radius:50%;background:sandybrown;pointer-events:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,0.3))}
-.sand-dust{position:absolute;width:16px;height:16px;border-radius:50%;background:rgba(255,255,230,0.6);pointer-events:none}
-.gem{position:absolute;width:18px;height:18px;border-radius:4px;background:radial-gradient(circle at 30% 30%, #fff, #a8fffe 40%, #7b2cff)}
-
-.confetti-layer{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:9999}
-
-/* bonus pop */
-.bonus-pop{position:fixed;right:18px;bottom:18px;background:linear-gradient(90deg,var(--neon1),var(--neon2));color:#021a1a;padding:12px 16px;border-radius:12px;font-weight:800;box-shadow:0 10px 30px rgba(0,255,255,0.06);z-index:1001}
-
-/* chat bot (simple) */
-.chat-box{position:fixed;right:18px;bottom:90px;width:300px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;padding:8px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 40px rgba(0,0,0,0.6);z-index:1002}
-.chat-log{max-height:220px;overflow:auto;padding:6px}
-.chat-log p{margin:6px 0;font-size:13px}
-.chat-input{display:flex;gap:6px;margin-top:8px}
-.chat-input input{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted)}
-.chat-input button{padding:8px;border-radius:8px;border:none;background:var(--neon1);color:#021a1a;cursor:pointer}
-
-/* responsive */
-@media(max-width:1000px){ .grid{grid-template-columns:1fr 1fr} }
-@media(max-width:680px){ .grid{grid-template-columns:1fr} .banner{flex-direction:column;align-items:flex-start} .hero-left{max-width:100%} }
 </style>
 </head>
 <body>
 
-<!-- canvases for background/neon -->
-<canvas class="bg" id="bgCanvas"></canvas>
-<canvas class="halo" id="haloCanvas"></canvas>
-
 <header>
-  <div class="logo"><div class="mark">G</div><div class="title">GovBet</div></div>
+  <div class="logo">GovBet 9.0</div>
   <nav>
     <a href="#slotsSection">Слоти</a>
     <a href="#fedukSection">Федюк</a>
-    <button class="theme-btn" id="themeBtn">Тема: Космос</button>
+    <a href="#shopSection">Магазин</a>
   </nav>
+  <div id="balance">💰 Баланс: 0</div>
 </header>
 
-<div class="wrap">
-  <div class="banner">
-    <div class="hero-left">
-      <h1>GovBet Ultimate 6.0 — Казино Майбутнього</h1>
-      <p class="lead">Три повноцінні слоти, слот «Федюк» з фізикою піску, космічна тема, PWA-підготовка, AI-бот (локальний), саундтрек і випадкові бонуси.</p>
-      <div class="cta">
-        <button class="btn" id="playBtn">Почати (увімкнути звук)</button>
-        <button class="btn ghost" id="installBtn">Встановити (PWA)</button>
-      </div>
-    </div>
-    <div class="info-card">
-      <div class="small">Профіль</div>
-      <div style="font-size:18px;font-weight:800">Гість</div>
-      <div class="balance" id="balanceDisplay">2500</div>
-      <div style="font-size:12px;color:rgba(255,255,255,0.6)">GovCoins</div>
-    </div>
-  </div>
-
-  <section id="slotsSection" class="section">
-    <h2>Слоти Майбутнього</h2>
-    <div class="grid">
-
-      <!-- Main slot -->
-      <div class="panel" id="panelMain">
-        <div class="small">Футуристичний слот</div>
-        <div class="reels" id="mainReels">
-          <div class="reel" id="main_r1">🍒</div>
-          <div class="reel" id="main_r2">🍋</div>
-          <div class="reel" id="main_r3">🔔</div>
-        </div>
-        <div class="controls">
-          <button class="btn" data-slot="main" id="mainSpin">Крутити</button>
-          <button class="btn ghost" data-slot="main" id="mainMax">Макс</button>
-        </div>
-        <p class="small" style="text-align:center;margin-top:10px">Ризик/Нагорода: натисни «Макс», щоб підвищити шанс.</p>
-      </div>
-
-      <!-- Mars -->
-      <div class="panel" id="panelMars">
-        <div class="small">Mars Casino</div>
-        <div class="reels" id="marsReels">
-          <div class="reel" id="mars_r1">🪐</div>
-          <div class="reel" id="mars_r2">🚀</div>
-          <div class="reel" id="mars_r3">👽</div>
-        </div>
-        <div class="controls">
-          <button class="btn" data-slot="mars" id="marsSpin">Крутити</button>
-          <button class="btn ghost" data-slot="mars" id="marsMax">Макс</button>
-        </div>
-      </div>
-
-      <!-- Tesla -->
-      <div class="panel" id="panelTesla">
-        <div class="small">Tesla Spin</div>
-        <div class="reels" id="teslaReels">
-          <div class="reel" id="tesla_r1">⚡</div>
-          <div class="reel" id="tesla_r2">🔋</div>
-          <div class="reel" id="tesla_r3">🧲</div>
-        </div>
-        <div class="controls">
-          <button class="btn" data-slot="tesla" id="teslaSpin">Крутити</button>
-          <button class="btn ghost" data-slot="tesla" id="teslaMax">Макс</button>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="fedukSection" class="section">
-    <h2>Слот «Федюк» — Копати пісок</h2>
-    <div class="panel">
-      <div class="small">Міні-гра — копай і знаходь нагороди</div>
-      <div id="sandbox"></div>
-      <div style="display:flex;gap:10px;justify-content:center;margin-top:12px">
-        <button class="btn" id="digOne">Копати ×1</button>
-        <button class="btn ghost" id="digFive">Копати ×5</button>
-      </div>
-      <div id="sandMessages" style="text-align:center;margin-top:12px;color:var(--neon1);font-weight:800"></div>
-    </div>
-  </section>
-
+<div class="banner">
+  <h1>GovBet Ultimate Futuristic</h1>
 </div>
 
-<!-- confetti and bonus -->
-<div class="confetti-layer" id="confetti"></div>
-<div class="bonus-pop" id="bonusPop" style="display:none"></div>
-
-<!-- chat bot (simple simulated) -->
-<div class="chat-box" id="chatBox" style="display:none">
-  <div class="chat-log" id="chatLog"><p style="font-size:13px;color:rgba(255,255,255,0.7)">GovBot: Привіт! Я GovBot. Пиши, якщо потрібна допомога.</p></div>
-  <div class="chat-input">
-    <input id="chatInput" placeholder="Напиши повідомлення..." />
-    <button id="chatSend">Відправити</button>
+<section id="slotsSection" class="slotContainer">
+  <h2>Слоти Майбутнього</h2>
+  <div class="slot" id="slotReels">
+    <div id="reel1">🍒</div>
+    <div id="reel2">🍋</div>
+    <div id="reel3">🔔</div>
   </div>
-</div>
+  <button onclick="spinSlot()">Крутити слоти</button>
+</section>
+
+<section id="fedukSection" class="slotContainer">
+  <h2>Слот «Федюк» — Копати пісок</h2>
+  <div id="sandbox">
+    <div id="miner">
+      <div id="head"></div>
+      <div id="body"></div>
+      <div id="shovel"><div id="blade"></div></div>
+    </div>
+  </div>
+  <button onclick="digSand()">Копати пісок</button>
+  <div id="sandMessages" style="margin-top:10px;color:#0ff;font-weight:bold;text-shadow:0 0 10px #0ff;text-align:center;"></div>
+</section>
+
+<section id="shopSection" class="slotContainer">
+  <h2>Магазин бонусів</h2>
+  <div id="shop">
+    <div class="shop-item">
+      <span>🎰 Free Spin (50 монет)</span>
+      <button onclick="buyItem('freespin',50)">Купити</button>
+    </div>
+    <div class="shop-item">
+      <span>⚡ VIP режим (200 монет)</span>
+      <button onclick="buyItem('vip',200)">Купити</button>
+    </div>
+    <div class="shop-item">
+      <span>🛡️ Новий скин Федюка (100 монет)</span>
+      <button onclick="buyItem('skin',100)">Купити</button>
+    </div>
+  </div>
+</section>
+
+<footer>© 2025 GovBet. Всі права захищені.</footer>
 
 <script>
-/* =========================
-   Globals & audio init
-   ========================= */
-let balance = 2500;
-const balanceDisplay = document.getElementById('balanceDisplay');
-function setBalance(v){ balance = Math.max(0, Math.round(v)); balanceDisplay.textContent = balance; }
-function addBalance(v){ setBalance(balance + v); }
-setBalance(balance);
-
-// audio (playback after gesture)
-let audioUnlocked = false;
-const bgMusic = new Audio('https://cdn.pixabay.com/audio/loops/cyber-ambience-14967.mp3'); // fallback background ambient (public CDN)
-bgMusic.loop = true;
-bgMusic.volume = 0.18;
-
-function unlockAudio(){
-  if(audioUnlocked) return;
-  audioUnlocked = true;
-  bgMusic.play().catch(()=>{/* ignore */});
-}
-
-/* small helper */
-function playSfx(url, vol=1){
-  if(!audioUnlocked) return;
-  try{ const s = new Audio(url); s.volume = vol; s.play().catch(()=>{}); } catch(e){}
-}
-
-/* =========================
-   Canvas background (stars + neon waves)
-   ========================= */
-const bgCanvas = document.getElementById('bgCanvas'); const haloCanvas = document.getElementById('haloCanvas');
-const bgCtx = bgCanvas.getContext('2d'), haloCtx = haloCanvas.getContext('2d');
-function resize(){ [bgCanvas, haloCanvas].forEach(c=>{ c.width = innerWidth; c.height = innerHeight; }); }
-resize(); window.addEventListener('resize', resize);
-
-let stars = [];
-for(let i=0;i<220;i++) stars.push({x:Math.random()*innerWidth, y:Math.random()*innerHeight, r:Math.random()*1.4, vx:(Math.random()-0.5)*0.25});
-
-let t0 = performance.now();
-function renderBg(){
-  const w=bgCanvas.width, h=bgCanvas.height, t=(performance.now()-t0)/1000;
-  bgCtx.clearRect(0,0,w,h);
-  // nebula bands
-  for(let b=0;b<4;b++){
-    bgCtx.beginPath();
-    const amp = 12 + b*9;
-    const freq = 0.002 + b*0.0009;
-    const speed = 0.6 + b*0.25;
-    for(let x=0;x<w;x+=6){
-      const y = h*0.55 + Math.sin((x*freq) + t*speed + b)*amp;
-      if(x===0) bgCtx.moveTo(x,y); else bgCtx.lineTo(x,y);
-    }
-    bgCtx.strokeStyle = `hsla(${180 + b*40},85%,60%,${0.06 + b*0.02})`;
-    bgCtx.lineWidth = 1.8;
-    bgCtx.stroke();
+// Slots
+const reels=[document.getElementById('reel1'),document.getElementById('reel2'),document.getElementById('reel3')];
+const symbols=["🍒","🍋","🔔","7️⃣","💎"];
+function spinSlot(){
+  reels.forEach(r=>r.classList.remove('win'));
+  let spins=15;
+  function spinReel(i){
+    let count=0;
+    const interval=setInterval(()=>{
+      reels[i].textContent=symbols[Math.floor(Math.random()*symbols.length)];
+      count++;
+      if(count>=spins){clearInterval(interval);if(i<reels.length-1) spinReel(i+1); else checkWin();}
+    },100);
   }
-  // stars
-  for(const s of stars){
-    s.x += s.vx; s.y += s.vy;
-    if(s.x < 0) s.x = w; if(s.x > w) s.x = 0;
-    if(s.y < 0) s.y = h; if(s.y > h) s.y = 0;
-    bgCtx.beginPath(); bgCtx.fillStyle = 'rgba(255,255,255,'+(0.6+Math.random()*0.4)+')'; bgCtx.arc(s.x,s.y,s.r,0,Math.PI*2); bgCtx.fill();
-  }
-  requestAnimationFrame(renderBg);
+  spinReel(0);
 }
-renderBg();
-
-let mouseX=innerWidth/2, mouseY=innerHeight/2;
-window.addEventListener('mousemove', e=>{ mouseX = e.clientX; mouseY = e.clientY; });
-
-function renderHalo(){
-  haloCtx.clearRect(0,0,haloCanvas.width, haloCanvas.height);
-  const g = haloCtx.createRadialGradient(mouseX,mouseY,20,mouseX,mouseY,380);
-  g.addColorStop(0, 'rgba(0,255,255,0.08)');
-  g.addColorStop(1, 'rgba(0,0,0,0)');
-  haloCtx.fillStyle = g; haloCtx.fillRect(0,0,haloCanvas.width, haloCanvas.height);
-  requestAnimationFrame(renderHalo);
-}
-renderHalo();
-
-/* =========================
-   Slot engine — animated rotating barrels
-   (reels visually flip while cycling symbols)
-   ========================= */
-
-// utility
-function randInt(a,b){ return Math.floor(a + Math.random()*(b-a+1)); }
-function rand(a,b){ return a + Math.random()*(b-a); }
-
-// create a spinning effect: cycle symbols and animate 3D tilt
-function spinReel(el, symbols, spins, speed, onDone){
-  let count = 0;
-  const iv = setInterval(()=>{
-    el.textContent = symbols[ randInt(0, symbols.length-1) ];
-    el.style.transform = `rotateX(${Math.sin(count/3)*10}deg) translateZ(${(count%2)*2}px)`;
-    count++;
-    if(count >= spins){ clearInterval(iv); el.style.transform = ''; if(onDone) onDone(); }
-  }, speed);
-}
-
-// generic slot spin
-function spinSlot(slotIdPrefix, symbolsArr, opts={}, callback){
-  // opts: max -> boolean
-  const r1 = document.getElementById(slotIdPrefix + '_r1');
-  const r2 = document.getElementById(slotIdPrefix + '_r2');
-  const r3 = document.getElementById(slotIdPrefix + '_r3');
-  const cost = opts.max ? 100 : 10;
-  addBalance(-cost);
-  unlockAudio(); playSfx('https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg',0.9);
-  const spins = [ randInt(18,28), randInt(28,36), randInt(36,46) ];
-  [r1,r2,r3].forEach(el=>el.classList.remove('win'));
-  let doneCount = 0;
-  spinReel(r1, symbolsArr, spins[0], 60, ()=>{ doneCount++; if(doneCount===3) finalize(); });
-  setTimeout(()=> spinReel(r2, symbolsArr, spins[1], 70, ()=>{ doneCount++; if(doneCount===3) finalize(); }), 140);
-  setTimeout(()=> spinReel(r3, symbolsArr, spins[2], 80, ()=>{ doneCount++; if(doneCount===3) finalize(); }), 280);
-
-  function finalize(){
-    const winProbability = opts.max ? 0.44 : 0.14;
-    const isWin = Math.random() < winProbability;
-    if(isWin){
-      const sym = symbolsArr[ randInt(0, symbolsArr.length-1) ];
-      [r1,r2,r3].forEach(el => { el.textContent = sym; el.classList.add('win');});
-      // reward
-      const reward = opts.max ? randInt(500,1100) : randInt(200,420);
-      addBalance(reward);
-      spawnConfettiLarge(); playSfx('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg',0.9);
-      setTimeout(()=> [r1,r2,r3].forEach(el=>el.classList.remove('win')), 1800);
-    }
-    if(callback) callback(isWin);
-    // random bonus spawn chance
-    if(Math.random() < 0.12) spawnRandomBonus();
+function checkWin(){
+  const values=reels.map(r=>r.textContent);
+  if(values.every(v=>v===values[0])){
+    reels.forEach(r=>r.classList.add('win'));
+    alert("🎉 Джекпот! Ви виграли!");
   }
 }
 
-/* Bind main buttons */
-document.getElementById('mainSpin').addEventListener('click', ()=> spinSlot('main', ["🍒","🍋","🔔","7️⃣","💎","⭐","🍀"] , {max:false}));
-document.getElementById('mainMax').addEventListener('click', ()=> spinSlot('main', ["🍒","🍋","🔔","7️⃣","💎","⭐","🍀"] , {max:true}));
-document.getElementById('marsSpin').addEventListener('click', ()=> spinSlot('mars', ["🪐","🚀","🌑","👽","🛰️","🔭"], {max:false}));
-document.getElementById('marsMax').addEventListener('click', ()=> spinSlot('mars', ["🪐","🚀","🌑","👽","🛰️","🔭"], {max:true}));
-document.getElementById('teslaSpin').addEventListener('click', ()=> spinSlot('tesla', ["⚡","🔋","🧲","🔌","💡"], {max:false}));
-document.getElementById('teslaMax').addEventListener('click', ()=> spinSlot('tesla', ["⚡","🔋","🧲","🔌","💡"], {max:true}));
+// Balance system
+let balance=0;
+const balanceEl=document.getElementById('balance');
+function updateBalance(amount){
+  balance+=amount;
+  balanceEl.textContent="💰 Баланс: "+balance;
+}
 
-/* =========================
-   Confetti
-   ========================= */
-function spawnConfettiLarge(){
-  const holder = document.getElementById('confetti');
-  for(let i=0;i<120;i++){
-    const el = document.createElement('div');
-    el.style.position='absolute';
-    el.style.left = rand(0, innerWidth) + 'px';
-    el.style.top = '-20px';
-    el.style.width = (6+Math.random()*12)+'px';
-    el.style.height = el.style.width;
-    el.style.background = `hsl(${Math.random()*360},85%,60%)`;
-    el.style.borderRadius = '3px';
-    el.style.zIndex = 9999;
-    holder.appendChild(el);
-    const dur = 900 + Math.random()*900;
-    el.animate([{transform:'translateY(0) rotate(0deg)', opacity:1}, {transform:`translateY(${innerHeight+200}px) rotate(${Math.random()*720}deg)`, opacity:0}], {duration:dur, easing:'cubic-bezier(.2,.8,.2,1)'});
-    setTimeout(()=>el.remove(), dur+50);
+// Feduk Slot
+const sandbox=document.getElementById('sandbox');
+const miner=document.getElementById('miner');
+const sandMessages=document.getElementById('sandMessages');
+const finds=[
+  {emoji:"💰",value:50},
+  {emoji:"💎",value:100},
+  {emoji:"🪙",value:10},
+  {emoji:"⚒️",value:5},
+  {emoji:"🪨",value:1}
+];
+const messages=["Знайдено скарб!","Ще більше піску...","Ого, діамант!","Монетки сиплються!"];
+function digSand(){
+  miner.classList.add('digging');
+  sandMessages.textContent="Копаємо...";
+  setTimeout(()=>{
+    miner.classList.remove('digging');
+    const find=finds[Math.floor(Math.random()*finds.length)];
+    const item=document.createElement('div');
+    item.className='item';
+    item.textContent=find.emoji;
+    item.style.left=(60+Math.random()*200)+'px';
+    item.style.bottom='20px';
+    sandbox.appendChild(item);
+    setTimeout(()=>item.remove(),2000);
+    sandMessages.textContent=messages[Math.floor(Math.random()*messages.length)];
+    updateBalance(find.value);
+  },1500);
+}
+
+// Shop
+function buyItem(type,cost){
+  if(balance>=cost){
+    balance-=cost;
+    balanceEl.textContent="💰 Баланс: "+balance;
+    alert("✅ Ви купили: "+type);
+    if(type==='vip'){alert("⚡ VIP активовано!");}
+    if(type==='freespin'){spinSlot();}
+    if(type==='skin'){alert("🛡️ Новий скин для Федюка активовано!");}
+  } else{
+    alert("❌ Недостатньо монет!");
   }
 }
-
-/* =========================
-   Bonus pop
-   ========================= */
-const bonusPop = document.getElementById('bonusPop');
-function spawnRandomBonus(){
-  const isFree = Math.random() < 0.45;
-  if(isFree){
-    bonusPop.textContent = 'FREE SPIN!';
-    bonusPop.style.display = 'block';
-    playSfx('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg',0.8);
-    setTimeout(()=>{ bonusPop.style.display='none'; // run a free spin on random slot
-      const which = randInt(0,2);
-      if(which===0) document.getElementById('mainSpin').click();
-      if(which===1) document.getElementById('marsSpin').click();
-      if(which===2) document.getElementById('teslaSpin').click();
-    }, 1200);
-  } else {
-    bonusPop.textContent = '+100 GovCoins';
-    bonusPop.style.display = 'block'; addBalance(100); playSfx('https://actions.google.com/sounds/v1/musical/bell_tone_003.ogg',0.85);
-    setTimeout(()=> bonusPop.style.display='none', 1600);
-  }
-}
-
-/* spawn bonuses occasionally */
-setInterval(()=> { if(Math.random() < 0.08) spawnRandomBonus(); }, 8000);
-
-/* =========================
-   Feduk mini-game (sand physics-ish)
-   ========================= */
-const sandbox = document.getElementById('sandbox');
-const sandMessages = document.getElementById('sandMessages');
-const digOne = document.getElementById('digOne'), digFive = document.getElementById('digFive');
-const sandPhrases = ['трах"ть сук... пісок, пісок, пісок','копаємо пісок!','ще трохи піску...','пісок сиплеться!','знайдено блискітку!','федюк радіє піску'];
-
-digOne.addEventListener('click', ()=> { unlockAudio(); digSand(1); });
-digFive.addEventListener('click', ()=> { unlockAudio(); digSand(5); });
-
-function digSand(count=1){
-  playSfx('https://actions.google.com/sounds/v1/foley/shovel_dig.ogg',0.8);
-  sandMessages.textContent = sandPhrases[ randInt(0, sandPhrases.length-1) ];
-  for(let i=0;i<count;i++){
-    spawnGrain();
-  }
-  if(Math.random() < 0.12) spawnRandomBonus();
-}
-
-function spawnGrain(){
-  const g = document.createElement('div'); g.className='sand-grain';
-  const x = randInt(8, sandbox.clientWidth-18);
-  g.style.left = x + 'px'; g.style.top = '-8px';
-  sandbox.appendChild(g);
-  let y = -8;
-  const iv = setInterval(()=> {
-    y += rand(6,14); g.style.top = y + 'px';
-    if(y >= sandbox.clientHeight - 16){
-      clearInterval(iv);
-      // dust
-      const d = document.createElement('div'); d.className='sand-dust';
-      d.style.left = x + 'px'; d.style.top = (sandbox.clientHeight - 22) + 'px';
-      sandbox.appendChild(d);
-      d.animate([{transform:'scale(0)',opacity:0.9},{transform:'scale(1.4)',opacity:0}],{duration:680,easing:'cubic-bezier(.2,.8,.2,1)'});
-      setTimeout(()=> d.remove(), 900);
-      if(Math.random() < 0.10) spawnGem(x);
-      else if(Math.random() < 0.25) addBalance(randInt(1,7));
-      setTimeout(()=> g.remove(), 300);
-    }
-  }, 32);
-}
-
-function spawnGem(x){
-  const gem = document.createElement('div'); gem.className='gem';
-  gem.style.left = x + 'px'; gem.style.top = (sandbox.clientHeight - 36) + 'px';
-  sandbox.appendChild(gem);
-  gem.animate([{transform:'scale(0)', opacity:0},{transform:'scale(1.05)', opacity:1}], {duration:420, easing:'cubic-bezier(.2,.8,.2,1)'});
-  playSfx('https://actions.google.com/sounds/v1/musical/bell_tone_003.ogg',0.9); addBalance(randInt(6,42));
-  setTimeout(()=> { gem.animate([{transform:'translateY(-36px)', opacity:0}], {duration:900}); setTimeout(()=>gem.remove(),900); }, 700);
-}
-
-/* =========================
-   Chat-bot (simple local simulation)
-   ========================= */
-const chatBox = document.getElementById('chatBox'), chatLog = document.getElementById('chatLog'), chatInput = document.getElementById('chatInput'), chatSend = document.getElementById('chatSend');
-document.addEventListener('keydown', e=>{ if(e.key==='/' && !chatBox.style.display){ chatBox.style.display='block'; chatInput.focus(); }});
-chatSend && chatSend.addEventListener('click', sendChat);
-function sendChat(){
-  const txt = chatInput.value.trim(); if(!txt) return;
-  const p = document.createElement('p'); p.textContent = 'Ви: ' + txt; chatLog.appendChild(p); chatInput.value=''; chatLog.scrollTop = chatLog.scrollHeight;
-  // simple simulated AI replies
-  setTimeout(()=> {
-    const reply = generateBotReply(txt);
-    const r = document.createElement('p'); r.textContent = 'GovBot: ' + reply; r.style.color = 'rgba(180,255,255,0.95)'; chatLog.appendChild(r); chatLog.scrollTop = chatLog.scrollHeight;
-  }, 600 + Math.random()*600);
-}
-function generateBotReply(userMsg){
-  const u = userMsg.toLowerCase();
-  if(u.includes('баланс')) return `Ваш баланс: ${balance} GBC. Хочете спін?`;
-  if(u.includes('федюк') || u.includes('пісок')) return 'Федюк любить пісок. Копай, може знайдеш скарб!';
-  if(u.includes('джекпот') || u.includes('виграш')) return 'Джекпот — рідкість. Спробуйте макс-спін для більшого шансу.';
-  if(u.includes('як')||u.includes('що')) return 'Натисни "Крутити" на будь-якому слоті. Бонуси можуть з’являтися випадково.';
-  const generic = ['Гаразд!', 'Добре, тримаю в курсі.', 'Спробуй спін зараз!', 'Хочеш безкоштовний спін? Може пощастить.'];
-  return generic[randInt(0,generic.length-1)];
-}
-
-/* Toggle chat box visible via small gesture */
-document.addEventListener('keydown', e=>{ if(e.key==='g'){ chatBox.style.display = chatBox.style.display==='none' ? 'block' : 'none'; } });
-
-/* =========================
-   PWA: dynamic service worker (basic offline caching)
-   We'll create SW code on the fly and register it.
-   Note: Some browsers may require SW file to be served from same origin (this is same origin).
-   ========================= */
-if('serviceWorker' in navigator){
-  const swCode = `
-    const CACHE_NAME = 'govbet-v1';
-    const ASSETS = ['/', '/index.html'];
-    self.addEventListener('install', e => {
-      self.skipWaiting();
-      e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)).catch(()=>{}));
-    });
-    self.addEventListener('activate', e => { e.waitUntil(self.clients.claim()); });
-    self.addEventListener('fetch', e => {
-      e.respondWith(caches.match(e.request).then(r => r || fetch(e.request)));
-    });
-  `;
-  try{
-    const blob = new Blob([swCode], {type:'application/javascript'});
-    const swURL = URL.createObjectURL(blob);
-    navigator.serviceWorker.register(swURL).then(reg => { console.log('SW registered', reg); }).catch(err => { console.warn('SW failed', err); });
-  }catch(err){ console.warn('SW dynamic registration failed', err); }
-}
-
-/* Install prompt handling (simple) */
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e)=>{ e.preventDefault(); deferredPrompt = e; document.getElementById('installBtn').style.display='inline-block'; });
-document.getElementById('installBtn').addEventListener('click', async ()=>{
-  unlockAudio();
-  if(deferredPrompt){ deferredPrompt.prompt(); const choice = await deferredPrompt.userChoice; deferredPrompt = null; }
-  else alert('PWA: Це демонстрація. На GitHub Pages може показатись системний запит на встановлення.');
-});
-
-/* =========================
-   UI: unlock audio & play background on first button
-   ========================= */
-document.getElementById('playBtn').addEventListener('click', ()=>{ unlockAudio(); playSfx('https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg', 0.9); document.getElementById('chatBox').style.display='block'; });
-
-document.getElementById('themeBtn').addEventListener('click', ()=>{
-  const current = document.body.getAttribute('data-theme') === 'space' ? 'space' : 'default';
-  const next = current === 'space' ? 'default' : 'space';
-  document.body.setAttribute('data-theme', next === 'space' ? 'space' : 'default');
-  document.getElementById('themeBtn').textContent = next === 'space' ? 'Тема: Кібер' : 'Тема: Космос';
-});
-
-/* =========================
-   Small initial animations for reels
-   ========================= */
-setTimeout(()=>{ document.querySelectorAll('.reel').forEach((r,i)=> r.animate([{transform:'translateY(0)'},{transform:'translateY(-6px)'},{transform:'translateY(0)'}], {duration:700 + i*80})); }, 400);
-
-/* Accessibility: show hint */
-document.getElementById('howBtn').addEventListener('click', ()=> {
-  alert('GovBet v6.0 demo\n\n- Іграй у слоти: Крутити / Макс.\n- Федюк: копай пісок — знайдеш випадкові скарби.\n- Бонуси випадково з’являються як Free Spin або +100.\n- Натисни "Почати" щоб увімкнути звук та чат.');
-});
-
-/* Done */
-console.log('GovBet Ultimate 6.0 loaded');
 </script>
 </body>
 </html>
+
+
+
 
 
 
