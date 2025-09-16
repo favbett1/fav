@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GovBet - Найкраща платформа для ставок та казино</title>
-    <meta name="description" content="GovBet: Лідер у ставках на спорт, кіберспорт, слоти та live-казино. 3D-графіка, AI-чат, швидкі виплати, бонуси та підтримка 24/7!">
-    <meta name="theme-color" content="#00f0ff">
-    <meta name="keywords" content="GovBet, ставки, казино, спорт, кіберспорт, слоти, live-казино, бонуси">
-    <meta name="robots" content="index, follow">
-    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiR292QmV0IiwiY29sb3IiOiIjMDBmMGZmIiwic3RhcnRfdXJsIjoiLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPck1qRXhNelU1TVRVeE1EazJNRFVpT1RjNU1qUXdNREl8Iiwic2l6ZXMiOiIxOTJ4MTkyIiwidHlwZSI6ImltYWdlL3BuZyJ9LHsic3JjIjoiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9yTWpFeE16VTVNVFV4TURrMk1EVWlPVGM1TWpRd01ESXx8Iiwic2l6ZXMiOiI1MTJ4NTEyIiwidHlwZSI6ImltYWdlL3BuZyJ9XX0=">
+    <title>GovBet Demo - Казино з демо-рахунком | Створено Головнін В.С.</title>
+    <meta name="description" content="GovBet Demo - демо-версія казино зі слотами Pragmatic Play, ставками та live-казино. Створена Головнін В.С.">
+    <meta name="keywords" content="GovBet, демо-казино, Pragmatic Play, слоти, ставки, кіберспорт, live-казино, Головнін В.С.">
+    <meta name="author" content="Головнін В.С.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta property="og:title" content="GovBet Demo - Казино з демо-рахунком">
+    <meta property="og:description" content="Демо-версія GovBet із слотами Pragmatic Play, ставками та live-казино. Створена Головнін В.С.">
+    <meta property="og:image" content="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDAwMDAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZDcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkdvdkJldDwvdGV4dD48dGV4dCB4PSI1MCUiIHk9IjY1JSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIwIiBmaWxsPSIjMDBmMGZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+U3R5bGVkIGJ5IEhvbG92bm9uIFYuUy48L3RleHQ+PC9zdmc+">
+    <meta property="og:url" content="https://govbet-demo.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
     <style>
         :root {
             --neon-blue: #00f0ff;
@@ -17,54 +21,46 @@
             --black: #0a0a1a;
             --white: #f5f5f5;
             --red: #dc143c;
-            --shadow-glow: 0 0 15px rgba(0, 240, 255, 0.5), 0 0 30px rgba(199, 21, 133, 0.3);
-            --shadow-subtle: 0 4px 15px rgba(0, 0, 0, 0.6);
+            --shadow-glow: 0 0 20px rgba(0, 240, 255, 0.8), 0 0 40px rgba(0, 240, 255, 0.4);
+            --shadow-subtle: 0 6px 20px rgba(0, 0, 0, 0.5);
             --transition-fast: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            --transition-smooth: 0.6s ease;
-            --font-main: 'Montserrat', sans-serif;
-            --font-accent: 'Orbitron', sans-serif;
+            --font-main: 'Inter', sans-serif;
+            --font-accent: 'Orbitron', monospace;
             --border-radius: 12px;
         }
 
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Orbitron:wght@700;900&display=swap');
+        [data-theme="light"] {
+            --black: #f8f9fa;
+            --white: #212529;
+            --shadow-glow: 0 0 20px rgba(0, 240, 255, 0.5), 0 0 40px rgba(0, 240, 255, 0.2);
+            --shadow-subtle: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: var(--font-main);
         }
 
         body {
-            background: linear-gradient(135deg, var(--black), #1b0a3c);
+            font-family: var(--font-main);
+            background: linear-gradient(135deg, var(--black), #1a0d2e);
             color: var(--white);
+            line-height: 1.6;
             overflow-x: hidden;
             scroll-behavior: smooth;
-            position: relative;
         }
 
-        body[data-theme="light"] {
-            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-            color: var(--black);
+        [data-theme="light"] body {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
         }
 
-        body[data-theme="light"] header,
-        body[data-theme="light"] footer {
-            background: rgba(255, 255, 255, 0.95);
-            color: var(--black);
-        }
-
-        body[data-theme="light"] section {
-            background: rgba(0, 0, 0, 0.05);
-        }
-
-        /* Header */
         header {
             position: sticky;
             top: 0;
             background: rgba(10, 10, 26, 0.95);
             backdrop-filter: blur(15px);
-            padding: 1.5rem 3rem;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -73,194 +69,217 @@
             border-bottom: 2px solid var(--neon-blue);
         }
 
+        [data-theme="light"] header {
+            background: rgba(248, 249, 250, 0.95);
+            border-bottom-color: var(--neon-purple);
+        }
+
         .logo {
             font-family: var(--font-accent);
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(1.8rem, 4vw, 2.2rem);
             color: var(--gold);
             text-shadow: var(--shadow-glow);
-            letter-spacing: 3px;
-            animation: logoPulse 3s infinite alternate;
+            letter-spacing: 2px;
+            animation: logoPulse 2s ease-in-out infinite;
         }
 
         @keyframes logoPulse {
-            0% { text-shadow: var(--shadow-glow); }
-            100% { text-shadow: 0 0 30px var(--neon-blue), 0 0 50px var(--neon-purple); }
+            0% { transform: scale(1); text-shadow: var(--shadow-glow); }
+            50% { transform: scale(1.05); text-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-purple); }
+            100% { transform: scale(1); text-shadow: var(--shadow-glow); }
         }
 
         nav {
             display: flex;
-            gap: 2rem;
+            gap: 1.2rem;
+            flex-wrap: wrap;
         }
 
         nav a {
             color: var(--white);
             text-decoration: none;
-            font-weight: 700;
-            font-family: var(--font-accent);
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
             transition: var(--transition-fast);
             position: relative;
         }
 
-        body[data-theme="light"] nav a {
-            color: var(--black);
+        [data-theme="light"] nav a {
+            color: var(--white);
         }
 
         nav a::after {
             content: '';
             position: absolute;
-            bottom: -6px;
+            bottom: 0;
             left: 0;
-            width: 0;
-            height: 3px;
+            width: 100%;
+            height: 2px;
             background: linear-gradient(90deg, var(--neon-blue), var(--gold));
-            transition: width var(--transition-fast);
+            transform: scaleX(0);
+            transition: transform var(--transition-fast);
         }
 
         nav a:hover::after {
-            width: 100%;
+            transform: scaleX(1);
         }
 
         nav a:hover {
-            color: var(--neon-blue);
+            background: rgba(0, 240, 255, 0.2);
+            color: var(--gold);
             text-shadow: var(--shadow-glow);
-            transform: translateY(-2px);
         }
 
         .controls {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 0.8rem;
         }
 
-        .theme-toggle, .sound-toggle, .lang-toggle {
+        .controls button {
             background: none;
             border: 2px solid var(--neon-blue);
             color: var(--white);
-            padding: 0.6rem;
+            padding: 0.5rem;
             border-radius: 50%;
             cursor: pointer;
             transition: var(--transition-fast);
             font-size: 1.2rem;
         }
 
-        body[data-theme="light"] .theme-toggle,
-        body[data-theme="light"] .sound-toggle,
-        body[data-theme="light"] .lang-toggle {
-            color: var(--black);
+        [data-theme="light"] .controls button {
             border-color: var(--neon-purple);
         }
 
-        .theme-toggle:hover, .sound-toggle:hover, .lang-toggle:hover {
+        .controls button:hover {
+            transform: scale(1.1);
             box-shadow: var(--shadow-glow);
-            transform: scale(1.2) rotate(360deg);
+            background: var(--neon-blue);
+            color: var(--black);
         }
 
         #balance {
             font-family: var(--font-accent);
-            font-size: 1.4rem;
+            font-weight: 700;
             color: var(--gold);
             text-shadow: var(--shadow-glow);
-            animation: balanceGlow 2s infinite alternate;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
         }
 
-        @keyframes balanceGlow {
-            0% { text-shadow: var(--shadow-glow); }
-            100% { text-shadow: 0 0 30px var(--neon-purple); }
+        .hero {
+            position: relative;
+            padding: 4rem 1rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(199, 21, 133, 0.15));
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            overflow: hidden;
         }
 
-        /* Sections */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.3), transparent);
+            transition: left 1.5s ease;
+        }
+
+        .hero:hover::before {
+            left: 100%;
+        }
+
+        .hero h1 {
+            font-family: var(--font-accent);
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            color: var(--gold);
+            text-shadow: var(--shadow-glow);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+            opacity: 0.9;
+        }
+
+        .hero-cta {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: var(--transition-fast);
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-4px);
+            background: linear-gradient(45deg, var(--gold), var(--red));
+            box-shadow: var(--shadow-glow);
+        }
+
         section {
-            min-height: 80vh;
-            padding: 3rem;
-            margin: 3rem auto;
-            max-width: 1600px;
+            padding: 3rem 1rem;
+            margin: 2rem auto;
+            max-width: 1400px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-subtle);
             display: none;
             opacity: 0;
-            transform: translateY(30px) scale(0.98);
-            transition: opacity var(--transition-smooth), transform var(--transition-smooth);
-            position: relative;
-            overflow: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        [data-theme="light"] section {
+            background: rgba(0, 0, 0, 0.05);
         }
 
         section.active {
             display: block;
             opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
-            transition: left 1s;
-        }
-
-        section:hover::before {
-            left: 100%;
+            transform: translateY(0);
         }
 
         h2 {
             font-family: var(--font-accent);
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(2rem, 5vw, 2.8rem);
             color: var(--gold);
             text-align: center;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             text-shadow: var(--shadow-glow);
-            letter-spacing: 2px;
         }
 
-        /* General Button Styling */
-        button {
-            background: linear-gradient(45deg, var(--red), var(--neon-purple));
-            color: var(--white);
+        button, .btn {
+            background: var(--neon-blue);
+            color: var(--black);
             border: none;
-            padding: 1rem 2rem;
+            padding: 0.8rem 1.8rem;
             border-radius: var(--border-radius);
-            font-family: var(--font-accent);
-            font-weight: 900;
+            font-family: var(--font-main);
+            font-weight: 600;
             cursor: pointer;
             transition: var(--transition-fast);
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-subtle);
         }
 
-        body[data-theme="light"] button {
-            color: var(--black);
-        }
-
-        button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        button:hover:not(:disabled)::before {
-            left: 100%;
-        }
-
-        button:hover:not(:disabled) {
-            background: linear-gradient(45deg, var(--neon-blue), var(--gold));
+        button:hover:not(:disabled), .btn:hover {
+            background: var(--gold);
             box-shadow: var(--shadow-glow);
-            transform: scale(1.1);
+            transform: translateY(-2px);
         }
 
         button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
-            background: #555;
         }
 
         .bet-input, select {
@@ -269,195 +288,130 @@
             border-radius: var(--border-radius);
             background: rgba(0, 0, 0, 0.6);
             color: var(--white);
-            font-family: var(--font-main);
             width: 120px;
             transition: var(--transition-fast);
         }
 
-        body[data-theme="light"] .bet-input,
-        body[data-theme="light"] select {
-            background: rgba(255, 255, 255, 0.6);
-            color: var(--black);
-            border-color: var(--neon-purple);
-        }
-
         .bet-input:focus, select:focus {
+            outline: none;
             border-color: var(--gold);
             box-shadow: var(--shadow-glow);
         }
 
-        /* Sports & Esports */
-        .events {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+        [data-theme="light"] .bet-input, [data-theme="light"] select {
+            background: rgba(255, 255, 255, 0.6);
         }
 
-        .event-card {
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .game-card {
             background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
+            padding: 1.2rem;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-subtle);
-            transition: var(--transition-fast);
             text-align: center;
+            transition: var(--transition-fast);
+            position: relative;
+            overflow: hidden;
         }
 
-        body[data-theme="light"] .event-card {
-            background: rgba(0, 0, 0, 0.1);
-        }
-
-        .event-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .event-card h3 {
-            font-family: var(--font-accent);
-            color: var(--neon-blue);
-            margin-bottom: 1rem;
-        }
-
-        .event-card .odds {
-            display: flex;
-            justify-content: space-around;
-            gap: 1rem;
-        }
-
-        .event-card button {
-            margin-top: 1rem;
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
+            transition: left 0.8s ease;
         }
 
-        .live-stats {
-            margin-top: 1rem;
+        .game-card:hover::before {
+            left: 100%;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            background: #333;
+        }
+
+        .game-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-card p {
             font-size: 0.9rem;
-            color: var(--gold);
+            opacity: 0.8;
         }
 
-        /* Slots */
-        #slotsCanvas {
+        #slotsCanvas, #liveCasinoCanvas {
             display: block;
-            margin: 0 auto;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-glow);
-        }
-
-        /* Live Casino */
-        #liveCasinoCanvas {
-            display: block;
-            margin: 0 auto;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-glow);
-            background: radial-gradient(circle, #006400, #004d00);
-        }
-
-        /* Tournaments */
-        #tournamentList {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .tournament-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
+            margin: 0 auto 1.5rem;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-subtle);
-            text-align: center;
-            transition: var(--transition-fast);
+            background: #1a1a2e;
         }
 
-        body[data-theme="light"] .tournament-card {
-            background: rgba(0, 0, 0, 0.1);
-        }
-
-        .tournament-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .tournament-card h3 {
-            font-family: var(--font-accent);
-            color: var(--neon-blue);
-            margin-bottom: 1rem;
-        }
-
-        /* Promotions */
-        #promoList {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        /* Leaderboard & Chat */
         #leaderList {
             list-style: none;
-            padding: 1.5rem;
-            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.6);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-subtle);
-        }
-
-        body[data-theme="light"] #leaderList {
-            background: rgba(255, 255, 255, 0.5);
         }
 
         #leaderList li {
-            padding: 1rem;
+            padding: 0.8rem;
             margin: 0.5rem 0;
-            border-left: 5px solid var(--neon-blue);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
             transition: var(--transition-fast);
         }
 
-        #leaderList li:first-child {
-            border-left-color: var(--gold);
-            background: linear-gradient(45deg, var(--gold), #ffaa00);
-            color: var(--black);
-            font-weight: 900;
-        }
-
         #leaderList li:hover {
-            transform: translateX(10px);
-            box-shadow: var(--shadow-glow);
+            background: rgba(0, 240, 255, 0.2);
         }
 
         #chat {
             max-height: 250px;
             overflow-y: auto;
             background: rgba(0, 0, 0, 0.6);
-            padding: 1.5rem;
+            padding: 1rem;
             border-radius: var(--border-radius);
-            border: 2px solid var(--neon-blue);
-            margin-top: 2rem;
-        }
-
-        body[data-theme="light"] #chat {
-            background: rgba(255, 255, 255, 0.6);
-            border-color: var(--neon-purple);
+            margin-top: 1rem;
+            box-shadow: var(--shadow-subtle);
         }
 
         .chat-message {
-            margin: 0.75rem 0;
-            padding: 0.5rem;
-            background: rgba(255, 215, 0, 0.1);
+            margin: 0.5rem 0;
+            padding: 0.8rem;
+            background: rgba(255, 215, 0, 0.15);
             border-radius: 8px;
-            color: var(--white);
-            font-size: 1rem;
+            transition: var(--transition-fast);
         }
 
-        body[data-theme="light"] .chat-message {
-            color: var(--black);
-        }
-
-        .chat-message.ai {
-            color: var(--neon-blue);
-            background: rgba(0, 240, 255, 0.1);
+        .chat-message:hover {
+            background: rgba(255, 215, 0, 0.25);
         }
 
         .chat-input {
             display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
+            gap: 0.5rem;
+            margin-top: 1rem;
         }
 
         .chat-input input {
@@ -467,55 +421,30 @@
             border-radius: var(--border-radius);
             background: rgba(0, 0, 0, 0.6);
             color: var(--white);
-            font-family: var(--font-main);
+            transition: var(--transition-fast);
         }
 
-        body[data-theme="light"] .chat-input input {
-            background: rgba(255, 255, 255, 0.6);
-            color: var(--black);
-            border-color: var(--neon-purple);
-        }
-
-        /* Particles */
-        #particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: radial-gradient(circle, var(--neon-blue), transparent);
-            border-radius: 50%;
-            opacity: 0.9;
-            animation: float 4s linear infinite;
+        .chat-input input:focus {
+            outline: none;
+            border-color: var(--gold);
             box-shadow: var(--shadow-glow);
         }
 
-        @keyframes float {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 0.9; }
-            90% { opacity: 0.9; }
-            100% { transform: translateY(-20px) scale(1.5); opacity: 0; }
-        }
-
-        /* Footer */
         footer {
             background: rgba(10, 10, 26, 0.95);
-            padding: 2rem;
+            padding: 1.5rem;
             text-align: center;
             color: var(--white);
-            box-shadow: var(--shadow-glow);
             border-top: 2px solid var(--neon-blue);
+            box-shadow: var(--shadow-subtle);
         }
 
-        /* Modal */
+        .creator {
+            font-size: 0.9rem;
+            color: var(--gold);
+            text-shadow: var(--shadow-glow);
+        }
+
         .modal {
             position: fixed;
             top: 0;
@@ -542,20 +471,17 @@
             padding: 2rem;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-glow);
-            text-align: center;
-            max-width: 500px;
+            max-width: 400px;
             width: 90%;
-            border: 3px solid var(--neon-blue);
-        }
-
-        body[data-theme="light"] .modal-content {
-            background: var(--white);
-            border-color: var(--neon-purple);
+            text-align: center;
+            position: relative;
         }
 
         .close-modal {
-            float: right;
-            font-size: 2rem;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
             cursor: pointer;
             color: var(--neon-blue);
             transition: var(--transition-fast);
@@ -563,840 +489,61 @@
 
         .close-modal:hover {
             color: var(--gold);
-            transform: rotate(360deg);
         }
 
-        /* PWA Install Prompt */
-        .install-prompt {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: linear-gradient(45deg, var(--neon-blue), var(--gold));
-            color: var(--black);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-glow);
-            display: none;
-            z-index: 1500;
-            text-align: center;
-            animation: promptPulse 2s infinite alternate;
-        }
-
-        @keyframes promptPulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.05); }
-        }
-
-        .install-prompt button {
-            margin: 0.5rem;
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
-                gap: 1.5rem;
+                gap: 1rem;
                 padding: 1rem;
             }
 
             nav {
-                flex-wrap: wrap;
                 justify-content: center;
-                gap: 1rem;
+                gap: 0.5rem;
             }
 
-            section {
-                padding: 2rem;
-                margin: 1.5rem;
+            .game-grid {
+                grid-template-columns: 1fr;
             }
 
             #slotsCanvas, #liveCasinoCanvas {
-                width: 300px;
-                height: 200px;
+                width: 100%;
+                max-width: 320px;
+                height: 240px;
             }
 
-            .event-card, .tournament-card {
-                padding: 1rem;
-            }
-
-            .chat-input {
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 1.8rem;
-            }
-
-            button {
-                padding: 0.7rem 1.2rem;
-                font-size: 0.9rem;
-            }
-
-            .bet-input, select {
-                width: 90px;
+            .hero h1 {
+                font-size: clamp(2rem, 5vw, 2.5rem);
             }
         }
     </style>
 </head>
 <body>
-    <div id="particles"></div>
     <header>
-        <div class="logo">GovBet</div>
+        <div class="logo">GovBet Demo</div>
         <nav>
             <a href="#" onclick="showSection('home')">Головна</a>
-            <a href="#" onclick="showSection('sports')">Спорт</a>
-            <a href="#" onclick="showSection('esports')">Кіберспорт</a>
             <a href="#" onclick="showSection('slots')">Слоти</a>
             <a href="#" onclick="showSection('live')">Live Казино</a>
-            <a href="#" onclick="showSection('tournaments')">Турніри</a>
-            <a href="#" onclick="showSection('promos')">Акції</a>
+            <a href="#" onclick="showSection('sports')">Спорт</a>
+            <a href="#" onclick="showSection('esports')">Кіберспорт</a>
             <a href="#" onclick="showSection('leaders')">Лідери</a>
         </nav>
         <div class="controls">
-            <button class="theme-toggle" id="themeToggle">🌙</button>
-            <button class="sound-toggle" id="soundToggle">🔊</button>
-            <button class="lang-toggle" id="langToggle">🇺🇦</button>
-            <span id="balance">Баланс: ₴1000</span>
+            <button id="themeToggle" aria-label="Перемкнути тему">🌙</button>
+            <button id="soundToggle" aria-label="Перемкнути звук">🔊</button>
+            <button id="langToggle" aria-label="Перемкнути мову">🇺🇦</button>
+            <button id="resetBalance" aria-label="Скинути баланс">🔄</button>
+            <span id="balance">Баланс: ₴10000</span>
         </div>
     </header>
 
-    <section id="home" class="active">
-        <h2>Ласкаво просимо до GovBet!</h2>
-        <p>Найкраща платформа для ставок на спорт, кіберспорт, слоти та live-казино. 3D-графіка, швидкі виплати, щедрі бонуси та AI-підтримка 24/7. Заряджай на перемогу! 🚀</p>
-    </section>
+    <div class="hero">
+        <h1>GovBet Demo - Грайте безкоштовно!</h1>
+        <p>Спробуйте слоти від Pragmatic Play, live-казино та ставки з демо-рахунком. Створено Головнін В.С.</p>
+        <a href="#" onclick="show
 
-    <section id="sports">
-        <h2>Ставки на спорт</h2>
-        <div class="events" id="sportsEvents"></div>
-    </section>
-
-    <section id="esports">
-        <h2>Кіберспорт</h2>
-        <div class="events" id="esportsEvents"></div>
-    </section>
-
-    <section id="slots">
-        <h2>Неонові слоти</h2>
-        <canvas id="slotsCanvas" width="600" height="400"></canvas>
-        <div class="controls">
-            <input type="number" id="slotBet" class="bet-input" value="10" min="1" max="1000">
-            <button id="spinButton">Крутити</button>
-            <button id="autoSpinButton">Автооберт</button>
-        </div>
-        <div id="slotResult" style="text-align: center; margin-top: 1.5rem; font-size: 1.2rem; font-weight: bold;"></div>
-        <div id="jackpot" style="text-align: center; margin-top: 1rem; font-size: 1.2rem; color: var(--gold);">Джекпот: ₴<span id="jackpotAmount">10000</span></div>
-    </section>
-
-    <section id="live">
-        <h2>Live Казино</h2>
-        <canvas id="liveCasinoCanvas" width="600" height="400"></canvas>
-        <div class="controls">
-            <input type="number" id="liveBet" class="bet-input" value="10" min="1" max="1000">
-            <select id="liveGame">
-                <option value="roulette">Рулетка</option>
-                <option value="blackjack">Блекджек</option>
-                <option value="poker">Покер</option>
-            </select>
-            <button id="livePlayButton">Грати</button>
-        </div>
-        <div id="liveResult" style="text-align: center; margin-top: 1.5rem; font-size: 1.2rem; font-weight: bold;"></div>
-    </section>
-
-    <section id="tournaments">
-        <h2>Турніри</h2>
-        <div id="tournamentList"></div>
-    </section>
-
-    <section id="promos">
-        <h2>Акції та бонуси</h2>
-        <div id="promoList"></div>
-    </section>
-
-    <section id="leaders">
-        <h2>Глобальний рейтинг</h2>
-        <ul id="leaderList"></ul>
-        <div id="chat"></div>
-        <div class="chat-input">
-            <input type="text" id="chatInput" placeholder="Чат із гравцями GovBet..." maxlength="200">
-            <button id="sendChat">Надіслати</button>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 GovBet - Найкращі ставки та казино в Україні. Усі права захищено.</p>
-    </footer>
-
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div id="modalBody"></div>
-        </div>
-    </div>
-
-    <div id="installPrompt" class="install-prompt">
-        <p>Встановити GovBet як додаток? 🚀</p>
-        <button id="installYes">Так</button>
-        <button id="installNo">Ні</button>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script>
-        // Utility: Debounce
-        function debounce(fn, delay = 300) {
-            let timeout;
-            return (...args) => {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => fn(...args), delay);
-            };
-        }
-
-        // Show Section
-        function showSection(id) {
-            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            gameState.addChatMessage(`Відвідали розділ: ${id}`);
-        }
-
-        // Game State
-        class GameState {
-            constructor() {
-                this.balance = parseInt(localStorage.getItem('govbet_balance')) || 1000;
-                this.playerName = localStorage.getItem('govbet_name') || `Гравець${Math.floor(Math.random() * 10000)}`;
-                this.leaderboard = JSON.parse(localStorage.getItem('govbet_leaderboard')) || [];
-                this.vipStatus = localStorage.getItem('govbet_vip') ? new Date(localStorage.getItem('govbet_vip')) > new Date() : false;
-                this.freeBets = parseInt(localStorage.getItem('govbet_freebets')) || 0;
-                this.soundEnabled = localStorage.getItem('govbet_sound') !== 'false';
-                this.theme = localStorage.getItem('govbet_theme') || 'dark';
-                this.lang = localStorage.getItem('govbet_lang') || 'uk';
-                this.level = parseInt(localStorage.getItem('govbet_level')) || 1;
-                this.xp = parseInt(localStorage.getItem('govbet_xp')) || 0;
-                this.jackpot = parseInt(localStorage.getItem('govbet_jackpot')) || 10000;
-                this.achievements = JSON.parse(localStorage.getItem('govbet_achievements')) || [];
-                this.init();
-            }
-
-            init() {
-                document.body.setAttribute('data-theme', this.theme);
-                document.getElementById('themeToggle').textContent = this.theme === 'dark' ? '☀️' : '🌙';
-                document.getElementById('soundToggle').textContent = this.soundEnabled ? '🔊' : '🔇';
-                document.getElementById('langToggle').textContent = this.lang === 'uk' ? '🇺🇦' : '🇬🇧';
-                this.updateUI();
-                this.updateLeaderboard();
-                this.save();
-                new Particles(150);
-                this.simulateAIChat();
-                document.getElementById('themeToggle').addEventListener('click', () => this.toggleTheme());
-                document.getElementById('soundToggle').addEventListener('click', () => this.toggleSound());
-                document.getElementById('langToggle').addEventListener('click', () => this.toggleLang());
-            }
-
-            updateUI() {
-                document.getElementById('balance').textContent = `Баланс: ₴${this.balance}`;
-                document.getElementById('spinButton').textContent = this.freeBets > 0 ? `Крутити (Безкоштовно: ${this.freeBets})` : 'Крутити';
-                document.getElementById('jackpotAmount').textContent = this.jackpot;
-            }
-
-            addBalance(amount) {
-                const finalAmount = this.vipStatus ? amount * 2 : amount;
-                this.balance += finalAmount;
-                this.jackpot += Math.floor(finalAmount * 0.05);
-                this.addXP(finalAmount / 10);
-                this.save();
-                this.updateUI();
-                this.updateLeaderboard();
-                this.showModal(`+₴${finalAmount}!`, 'success');
-                this.playSound('win');
-                if ('vibrate' in navigator) navigator.vibrate([100, 50, 100]);
-            }
-
-            deductBalance(amount) {
-                if (this.balance >= amount) {
-                    this.balance -= amount;
-                    this.jackpot += Math.floor(amount * 0.05);
-                    this.addXP(amount / 20);
-                    this.save();
-                    this.updateUI();
-                    this.updateLeaderboard();
-                    return true;
-                }
-                this.showModal('Недостатньо коштів!', 'error');
-                this.playSound('lose');
-                return false;
-            }
-
-            addXP(amount) {
-                this.xp += Math.floor(amount);
-                const levelThreshold = this.level * 1000;
-                if (this.xp >= levelThreshold) {
-                    this.level++;
-                    this.xp -= levelThreshold;
-                    this.addAchievement(`Рівень ${this.level}`);
-                    this.showModal(`Вітаємо! Ви досягли ${this.level} рівня!`, 'success');
-                }
-                this.save();
-            }
-
-            addAchievement(name) {
-                if (!this.achievements.includes(name)) {
-                    this.achievements.push(name);
-                    this.save();
-                    this.showModal(`Досягнення: ${name}!`, 'success');
-                }
-            }
-
-            updateLeaderboard() {
-                this.leaderboard = this.leaderboard.filter(p => Date.now() - p.timestamp < 24*60*60*1000);
-                const existingIndex = this.leaderboard.findIndex(p => p.name === this.playerName);
-                if (existingIndex > -1) {
-                    this.leaderboard[existingIndex] = { name: this.playerName, balance: this.balance, level: this.level, timestamp: Date.now() };
-                } else {
-                    this.leaderboard.push({ name: this.playerName, balance: this.balance, level: this.level, timestamp: Date.now() });
-                }
-                this.leaderboard.sort((a, b) => b.balance - a.balance).slice(0, 10);
-                localStorage.setItem('govbet_leaderboard', JSON.stringify(this.leaderboard));
-                document.getElementById('leaderList').innerHTML = this.leaderboard.map((p, i) => 
-                    `<li>${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}.`} ${p.name} (Рівень ${p.level}): ₴${p.balance}</li>`
-                ).join('');
-            }
-
-            addChatMessage(msg, isAI = false) {
-                const chat = document.getElementById('chat');
-                const div = document.createElement('div');
-                div.className = `chat-message${isAI ? ' ai' : ''}`;
-                div.textContent = `${new Date().toLocaleTimeString()}: ${isAI ? '[AI]' : this.playerName}: ${msg}`;
-                chat.appendChild(div);
-                chat.scrollTop = chat.scrollHeight;
-                setTimeout(() => div.remove(), 60000);
-            }
-
-            simulateAIChat() {
-                const messages = [
-                    'Джекпот вже близько! 🎰',
-                    'Зроби ставку і стань легендою! 💪',
-                    'AI прогнозує: епічний виграш! 🌟',
-                    'GovBet вірить у твій успіх!'
-                ];
-                setInterval(() => {
-                    if (Math.random() > 0.7) {
-                        this.addChatMessage(messages[Math.floor(Math.random() * messages.length)], true);
-                    }
-                }, 10000);
-            }
-
-            playSound(type) {
-                if (!this.soundEnabled) return;
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = ctx.createOscillator();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(type === 'win' ? 523.25 : type === 'lose' ? 196 : 440, ctx.currentTime);
-                const gain = ctx.createGain();
-                gain.gain.setValueAtTime(0.4, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.start();
-                osc.stop(ctx.currentTime + 0.5);
-            }
-
-            save() {
-                localStorage.setItem('govbet_balance', this.balance);
-                localStorage.setItem('govbet_name', this.playerName);
-                localStorage.setItem('govbet_vip', this.vipStatus ? new Date(Date.now() + 24*60*60*1000).toISOString() : '');
-                localStorage.setItem('govbet_freebets', this.freeBets);
-                localStorage.setItem('govbet_sound', this.soundEnabled);
-                localStorage.setItem('govbet_theme', this.theme);
-                localStorage.setItem('govbet_lang', this.lang);
-                localStorage.setItem('govbet_level', this.level);
-                localStorage.setItem('govbet_xp', this.xp);
-                localStorage.setItem('govbet_jackpot', this.jackpot);
-                localStorage.setItem('govbet_achievements', JSON.stringify(this.achievements));
-            }
-
-            showModal(message, type = 'info') {
-                const modal = document.getElementById('modal');
-                const body = document.getElementById('modalBody');
-                body.textContent = message;
-                body.style.color = type === 'error' ? var(--red) : type === 'success' ? var(--gold) : var(--white);
-                modal.classList.add('show');
-                setTimeout(() => modal.classList.remove('show'), 3000);
-            }
-
-            toggleTheme() {
-                this.theme = this.theme === 'dark' ? 'light' : 'dark';
-                document.body.setAttribute('data-theme', this.theme);
-                document.getElementById('themeToggle').textContent = this.theme === 'dark' ? '☀️' : '🌙';
-                this.save();
-                game.slots.render();
-                game.live.render();
-            }
-
-            toggleSound() {
-                this.soundEnabled = !this.soundEnabled;
-                document.getElementById('soundToggle').textContent = this.soundEnabled ? '🔊' : '🔇';
-                this.save();
-            }
-
-            toggleLang() {
-                this.lang = this.lang === 'uk' ? 'en' : 'uk';
-                document.getElementById('langToggle').textContent = this.lang === 'uk' ? '🇺🇦' : '🇬🇧';
-                this.save();
-                // Note: Full localization would require updating all text, omitted for simplicity
-            }
-        }
-
-        // Sports Betting
-        class Sports {
-            constructor() {
-                this.events = [
-                    { id: 'epl1', name: 'Манчестер Сіті - Манчестер Юнайтед', odds: { p1: 1.76, draw: 4.05, p2: 4.50 }, stats: '67% володіння м’ячем' },
-                    { id: 'nba1', name: 'Лейкерс - Бостон', odds: { p1: 2.10, draw: 3.50, p2: 2.30 }, stats: '45% влучань' },
-                    { id: 'ufc1', name: 'Макгрегор - Пор’є', odds: { p1: 1.95, p2: 1.85 }, stats: 'KO ймовірність: 60%' }
-                ];
-                this.init();
-            }
-
-            init() {
-                this.render();
-            }
-
-            render() {
-                document.getElementById('sportsEvents').innerHTML = this.events.map(event => `
-                    <div class="event-card">
-                        <h3>${event.name}</h3>
-                        <div class="live-stats">${event.stats}</div>
-                        <div class="odds">
-                            ${event.odds.p1 ? `<button onclick="game.sports.bet('${event.id}', 'p1', ${event.odds.p1})">П1: ${event.odds.p1}</button>` : ''}
-                            ${event.odds.draw ? `<button onclick="game.sports.bet('${event.id}', 'draw', ${event.odds.draw})">Нічия: ${event.odds.draw}</button>` : ''}
-                            ${event.odds.p2 ? `<button onclick="game.sports.bet('${event.id}', 'p2', ${event.odds.p2})">П2: ${event.odds.p2}</button>` : ''}
-                        </div>
-                    </div>
-                `).join('');
-            }
-
-            bet(eventId, outcome, odds) {
-                const bet = parseInt(document.getElementById('slotBet').value || 10);
-                if (!gameState.deductBalance(bet)) return;
-                const win = Math.random() > 0.4 ? bet * odds : 0;
-                if (win) {
-                    gameState.addBalance(win);
-                    gameState.addChatMessage(`⚽ ${gameState.playerName} виграв ₴${win.toFixed(2)} на ${this.events.find(e => e.id === eventId).name}!`);
-                    gameState.addAchievement(`Перемога в ставках на спорт`);
-                }
-                document.getElementById('slotResult').textContent = win ? `Виграш: ₴${win.toFixed(2)}` : 'Програш!';
-            }
-        }
-
-        // Esports
-        class Esports {
-            constructor() {
-                this.events = [
-                    { id: 'cs1', name: 'NAVI - FaZe Clan', odds: { p1: 1.65, p2: 2.20 }, stats: '70% влучань' },
-                    { id: 'dota1', name: 'Pvision - Xtreme', odds: { p1: 1.86, p2: 1.94 }, stats: 'GPM: 650' },
-                    { id: 'valorant1', name: 'Sentinels - Fnatic', odds: { p1: 1.75, p2: 2.05 }, stats: 'KDA: 1.2' }
-                ];
-                this.init();
-            }
-
-            init() {
-                this.render();
-            }
-
-            render() {
-                document.getElementById('esportsEvents').innerHTML = this.events.map(event => `
-                    <div class="event-card">
-                        <h3>${event.name}</h3>
-                        <div class="live-stats">${event.stats}</div>
-                        <div class="odds">
-                            <button onclick="game.esports.bet('${event.id}', 'p1', ${event.odds.p1})">П1: ${event.odds.p1}</button>
-                            <button onclick="game.esports.bet('${event.id}', 'p2', ${event.odds.p2})">П2: ${event.odds.p2}</button>
-                        </div>
-                    </div>
-                `).join('');
-            }
-
-            bet(eventId, outcome, odds) {
-                const bet = parseInt(document.getElementById('slotBet').value || 10);
-                if (!gameState.deductBalance(bet)) return;
-                const win = Math.random() > 0.4 ? bet * odds : 0;
-                if (win) {
-                    gameState.addBalance(win);
-                    gameState.addChatMessage(`🎮 ${gameState.playerName} виграв ₴${win.toFixed(2)} на ${this.events.find(e => e.id === eventId).name}!`);
-                    gameState.addAchievement(`Перемога в кіберспорті`);
-                }
-                document.getElementById('slotResult').textContent = win ? `Виграш: ₴${win.toFixed(2)}` : 'Програш!';
-            }
-        }
-
-        // Slots
-        class Slots {
-            constructor() {
-                this.canvas = document.getElementById('slotsCanvas');
-                this.scene = new THREE.Scene();
-                this.camera = new THREE.PerspectiveCamera(75, 600 / 400, 0.1, 1000);
-                this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true });
-                this.reels = [0, 0, 0];
-                this.symbols = ['🍒', '🍋', '🔔', '💎', '7️⃣', '🌟'];
-                this.meshes = [];
-                this.autoSpinning = false;
-                this.init();
-            }
-
-            init() {
-                this.renderer.setSize(600, 400);
-                this.camera.position.z = 5;
-                const light = new THREE.AmbientLight(0xffffff, 0.8);
-                this.scene.add(light);
-                const pointLight = new THREE.PointLight(0xffffff, 1);
-                pointLight.position.set(5, 5, 5);
-                this.scene.add(pointLight);
-
-                const geometry = new THREE.BoxGeometry(1, 1, 1);
-                const material = new THREE.MeshStandardMaterial({ color: 0x00f0ff });
-                for (let i = 0; i < 3; i++) {
-                    const mesh = new THREE.Mesh(geometry, material);
-                    mesh.position.x = (i - 1) * 1.5;
-                    this.meshes.push(mesh);
-                    this.scene.add(mesh);
-                }
-
-                document.getElementById('spinButton').addEventListener('click', debounce(() => this.spin(), 200));
-                document.getElementById('autoSpinButton').addEventListener('click', () => this.toggleAutoSpin());
-                this.render();
-            }
-
-            render() {
-                this.meshes.forEach((mesh, i) => {
-                    mesh.rotation.x += 0.01;
-                    mesh.rotation.y += 0.01;
-                    const text = document.createElement('div');
-                    text.style.position = 'absolute';
-                    text.style.fontSize = '40px';
-                    text.style.left = `${200 + (i - 1) * 150}px`;
-                    text.style.top = '200px';
-                    text.style.transform = 'translate(-50%, -50%)';
-                    text.textContent = this.symbols[this.reels[i]];
-                    this.canvas.parentNode.appendChild(text);
-                    setTimeout(() => text.remove(), 1000);
-                });
-                this.renderer.render(this.scene, this.camera);
-                requestAnimationFrame(() => this.render());
-            }
-
-            async spin() {
-                const bet = parseInt(document.getElementById('slotBet').value);
-                let usedFreeBet = false;
-                if (gameState.freeBets > 0) {
-                    gameState.freeBets--;
-                    gameState.save();
-                    usedFreeBet = true;
-                } else if (!gameState.deductBalance(bet)) return;
-
-                document.getElementById('spinButton').disabled = true;
-                this.meshes.forEach(m => m.rotation.x = 0);
-
-                for (let i = 0; i < 3; i++) {
-                    for (let j = 0; j < 20; j++) {
-                        this.reels[i] = Math.floor(Math.random() * this.symbols.length);
-                        await new Promise(r => setTimeout(r, 60));
-                    }
-                }
-
-                let win = 0;
-                if (this.reels[0] === this.reels[1] && this.reels[1] === this.reels[2]) {
-                    const multiplier = this.symbols[this.reels[0]] === '7️⃣' ? 50 : this.symbols[this.reels[0]] === '🌟' ? 100 : 20;
-                    win = bet * multiplier;
-                    if (this.symbols[this.reels[0]] === '🌟' && Math.random() > 0.9) {
-                        win += gameState.jackpot;
-                        gameState.jackpot = 10000;
-                        gameState.addAchievement(`Джекпот виграно!`);
-                    }
-                    this.meshes.forEach(m => m.material.color.set(0xffd700));
-                    setTimeout(() => this.meshes.forEach(m => m.material.color.set(0x00f0ff)), 3000);
-                }
-                if (win) {
-                    gameState.addBalance(win);
-                    gameState.addChatMessage(`🎉 ${gameState.playerName} виграв ₴${win} на слотах!`);
-                    document.getElementById('slotResult').textContent = `Джекпот! +₴${win}`;
-                } else {
-                    document.getElementById('slotResult').textContent = 'Спробуй ще!';
-                }
-                document.getElementById('spinButton').disabled = false;
-                gameState.updateUI();
-            }
-
-            toggleAutoSpin() {
-                this.autoSpinning = !this.autoSpinning;
-                document.getElementById('autoSpinButton').textContent = this.autoSpinning ? 'Зупинити авто' : 'Автооберт';
-                if (this.autoSpinning) {
-                    this.autoSpinInterval = setInterval(() => this.spin(), 2000);
-                } else {
-                    clearInterval(this.autoSpinInterval);
-                }
-            }
-        }
-
-        // Live Casino
-        class LiveCasino {
-            constructor() {
-                this.canvas = document.getElementById('liveCasinoCanvas');
-                this.scene = new THREE.Scene();
-                this.camera = new THREE.PerspectiveCamera(75, 600 / 400, 0.1, 1000);
-                this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true });
-                this.init();
-            }
-
-            init() {
-                this.renderer.setSize(600, 400);
-                this.camera.position.z = 5;
-                const light = new THREE.AmbientLight(0xffffff, 0.8);
-                this.scene.add(light);
-                const pointLight = new THREE.PointLight(0xffffff, 1);
-                pointLight.position.set(5, 5, 5);
-                this.scene.add(pointLight);
-
-                const geometry = new THREE.SphereGeometry(1, 32, 32);
-                const material = new THREE.MeshStandardMaterial({ color: 0x006400 });
-                const table = new THREE.Mesh(geometry, material);
-                this.scene.add(table);
-
-                document.getElementById('livePlayButton').addEventListener('click', debounce(() => this.play(), 200));
-                this.render();
-            }
-
-            render() {
-                this.renderer.render(this.scene, this.camera);
-                requestAnimationFrame(() => this.render());
-            }
-
-            async play() {
-                const bet = parseInt(document.getElementById('liveBet').value);
-                const gameType = document.getElementById('liveGame').value;
-                if (!gameState.deductBalance(bet)) return;
-
-                document.getElementById('livePlayButton').disabled = true;
-                if (gameType === 'roulette') {
-                    const result = Math.floor(Math.random() * 37);
-                    const color = result === 0 ? 'green' : result % 2 ? 'red' : 'black';
-                    const isWin = Math.random() > 0.5;
-                    let payout = isWin ? bet * 2 : 0;
-                    if (payout) {
-                        gameState.addBalance(payout);
-                        gameState.addChatMessage(`🎡 ${gameState.playerName} виграв ₴${payout} на рулетці (${result})!`);
-                        gameState.addAchievement(`Перемога в рулетці`);
-                    }
-                    document.getElementById('liveResult').textContent = `Номер: ${result} (${color}) - ${isWin ? `Виграш: ₴${payout}` : 'Програш'}`;
-                } else if (gameType === 'blackjack') {
-                    const playerScore = Math.floor(Math.random() * 10) + 12;
-                    const dealerScore = Math.floor(Math.random() * 10) + 12;
-                    const isWin = playerScore > dealerScore && playerScore <= 21;
-                    let payout = isWin ? bet * 2 : 0;
-                    if (payout) {
-                        gameState.addBalance(payout);
-                        gameState.addChatMessage(`🃏 ${gameState.playerName} виграв ₴${payout} у блекджеку!`);
-                        gameState.addAchievement(`Перемога в блекджеку`);
-                    }
-                    document.getElementById('liveResult').textContent = `${isWin ? `Виграш: ₴${payout}` : 'Програш'} (Г: ${playerScore}, Д: ${dealerScore})`;
-                } else {
-                    const playerScore = Math.floor(Math.random() * 13) + 2;
-                    const dealerScore = Math.floor(Math.random() * 13) + 2;
-                    const isWin = playerScore > dealerScore;
-                    let payout = isWin ? bet * 3 : 0;
-                    if (payout) {
-                        gameState.addBalance(payout);
-                        gameState.addChatMessage(`🃏 ${gameState.playerName} виграв ₴${payout} у покері!`);
-                        gameState.addAchievement(`Перемога в покері`);
-                    }
-                    document.getElementById('liveResult').textContent = `${isWin ? `Виграш: ₴${payout}` : 'Програш'} (Г: ${playerScore}, Д: ${dealerScore})`;
-                }
-                document.getElementById('livePlayButton').disabled = false;
-            }
-        }
-
-        // Tournaments
-        class Tournaments {
-            constructor() {
-                this.tournaments = [
-                    { id: 'slot1', name: 'Слот-марафон', prize: '₴5000', players: 120 },
-                    { id: 'poker1', name: 'Покерний турнір', prize: '₴10000', players: 80 },
-                    { id: 'esport1', name: 'CS2 Битва', prize: '₴3000', players: 200 }
-                ];
-                this.init();
-            }
-
-            init() {
-                this.render();
-            }
-
-            render() {
-                document.getElementById('tournamentList').innerHTML = this.tournaments.map(t => `
-                    <div class="tournament-card">
-                        <h3>${t.name}</h3>
-                        <p>Призовий фонд: ${t.prize}</p>
-                        <p>Гравців: ${t.players}</p>
-                        <button onclick="game.tournaments.join('${t.id}')">Приєднатися</button>
-                    </div>
-                `).join('');
-            }
-
-            join(id) {
-                const tournament = this.tournaments.find(t => t.id === id);
-                if (!gameState.deductBalance(50)) return;
-                gameState.addChatMessage(`🏆 ${gameState.playerName} приєднався до ${tournament.name}!`);
-                gameState.addAchievement(`Участь у ${tournament.name}`);
-                gameState.showModal(`Ви приєдналися до ${tournament.name}!`, 'success');
-            }
-        }
-
-        // Promotions
-        class Promotions {
-            constructor() {
-                this.promos = [
-                    { id: 'welcome', name: 'Вітальний бонус', desc: 'Отримай +100% до першого депозиту!', cost: 100 },
-                    { id: 'freebet', name: 'Безкоштовна ставка', desc: 'Отримай 1 безкоштовну ставку!', cost: 50 },
-                    { id: 'vip', name: 'VIP Статус', desc: 'Подвійні виграші на 24 години!', cost: 200 },
-                    { id: 'cashback', name: 'Кешбек 10%', desc: 'Повернення 10% від програшів!', cost: 0 }
-                ];
-                this.init();
-            }
-
-            init() {
-                document.getElementById('promoList').innerHTML = this.promos.map(promo => `
-                    <div class="event-card">
-                        <h3>${promo.name}</h3>
-                        <p>${promo.desc}</p>
-                        <button onclick="game.promos.activate('${promo.id}')">${promo.cost ? `Активувати (₴${promo.cost})` : 'Активувати'}</button>
-                    </div>
-                `).join('');
-            }
-
-            activate(id) {
-                const promo = this.promos.find(p => p.id === id);
-                if (promo.cost && !gameState.deductBalance(promo.cost)) return;
-                if (id === 'freebet') {
-                    gameState.freeBets++;
-                    gameState.save();
-                    gameState.updateUI();
-                } else if (id === 'vip') {
-                    gameState.vipStatus = true;
-                    localStorage.setItem('govbet_vip', new Date(Date.now() + 24*60*60*1000).toISOString());
-                    gameState.save();
-                } else if (id === 'cashback') {
-                    gameState.addBalance(gameState.balance * 0.1);
-                } else {
-                    gameState.addBalance(promo.cost * 2);
-                }
-                gameState.addChatMessage(`🎁 ${gameState.playerName} активував ${promo.name}!`);
-                gameState.addAchievement(`Активація ${promo.name}`);
-                gameState.showModal(`Активовано: ${promo.name}!`, 'success');
-            }
-        }
-
-        // Chat
-        class Chat {
-            constructor() {
-                document.getElementById('sendChat').addEventListener('click', debounce(() => this.send(), 200));
-                document.getElementById('chatInput').addEventListener('keypress', e => {
-                    if (e.key === 'Enter') this.send();
-                });
-            }
-
-            send() {
-                const input = document.getElementById('chatInput');
-                const msg = input.value.trim();
-                if (msg) {
-                    gameState.addChatMessage(msg);
-                    input.value = '';
-                    setTimeout(() => {
-                        gameState.addChatMessage(`AI: Супер, ${gameState.playerName}! Продовжуй домінувати!`, true);
-                    }, 1000);
-                }
-            }
-        }
-
-        // Particles
-        class Particles {
-            constructor(count) {
-                this.container = document.getElementById('particles');
-                for (let i = 0; i < count; i++) this.createParticle();
-                setInterval(() => this.createParticle(), 1000);
-            }
-
-            createParticle() {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + 'vw';
-                particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                particle.style.animationDelay = Math.random() * 1.5 + 's';
-                this.container.appendChild(particle);
-                setTimeout(() => particle.remove(), 5000);
-            }
-        }
-
-        // Modal
-        class Modal {
-            constructor() {
-                document.querySelector('.close-modal').addEventListener('click', () => {
-                    document.getElementById('modal').classList.remove('show');
-                });
-                document.getElementById('modal').addEventListener('click', e => {
-                    if (e.target === e.currentTarget) e.currentTarget.classList.remove('show');
-                });
-            }
-        }
-
-        // PWA
-        class PWA {
-            constructor() {
-                this.deferredPrompt = null;
-                this.init();
-            }
-
-            init() {
-                window.addEventListener('beforeinstallprompt', e => {
-                    e.preventDefault();
-                    this.deferredPrompt = e;
-                    document.getElementById('installPrompt').style.display = 'block';
-                    setTimeout(() => document.getElementById('installPrompt').style.display = 'none', 30000);
-                });
-                document.getElementById('installYes').addEventListener('click', () => this.install());
-                document.getElementById('installNo').addEventListener('click', () => this.hidePrompt());
-                if ('serviceWorker' in navigator) {
-                    const swCode = `self.addEventListener('install', e => e.waitUntil(caches.open('govbet-v1').then(cache => cache.addAll(['/', '/index.html']))));self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));`;
-                    navigator.serviceWorker.register(URL.createObjectURL(new Blob([swCode], { type: 'application/javascript' })));
-                }
-            }
-
-            install() {
-                if (this.deferredPrompt) {
-                    this.deferredPrompt.prompt();
-                    this.deferredPrompt.userChoice.then(() => this.deferredPrompt = null);
-                }
-                this.hidePrompt();
-            }
-
-            hidePrompt() {
-                document.getElementById('installPrompt').style.display = 'none';
-            }
-        }
-
-        // Game Instance
-        const game = {
-            state: new GameState(),
-            sports: new Sports(),
-            esports: new Esports(),
-            slots: new Slots(),
-            live: new LiveCasino(),
-            tournaments: new Tournaments(),
-            promos: new Promotions(),
-            chat: new Chat(),
-            modal: new Modal(),
-            pwa: new PWA()
-        };
-    </script>
-</body>
-</html>
 
 
 
