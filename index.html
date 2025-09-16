@@ -12,28 +12,27 @@
     <meta property="og:description" content="Демо-версія GovBet із слотами Pragmatic Play, ставками та live-казино. Створена Головнін В.С.">
     <meta property="og:image" content="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDAwMDAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZDcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkdvdkJldDwvdGV4dD48dGV4dCB4PSI1MCUiIHk9IjY1JSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIwIiBmaWxsPSIjMDBmMGZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+U3R5bGVkIGJ5IEhvbG92bm9uIFYuUy48L3RleHQ+PC9zdmc+">
     <meta property="og:url" content="https://govbet-demo.com">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Orbitron:wght@400;700&display=swap">
     <style>
         :root {
-            --neon-blue: #00f0ff;
-            --neon-purple: #c71585;
-            --gold: #ffd700;
-            --black: #0a0a1a;
-            --white: #f5f5f5;
-            --red: #dc143c;
-            --shadow-glow: 0 0 20px rgba(0, 240, 255, 0.8), 0 0 40px rgba(0, 240, 255, 0.4);
-            --shadow-subtle: 0 6px 20px rgba(0, 0, 0, 0.5);
-            --transition-fast: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            --font-main: 'Inter', sans-serif;
-            --font-accent: 'Orbitron', monospace;
-            --border-radius: 12px;
+            --primary: #1e1e2e;
+            --secondary: #2a2a3e;
+            --accent: #ffd700;
+            --text: #e0e0e0;
+            --highlight: #00d4ff;
+            --danger: #ff4444;
+            --shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+            --transition: 0.3s ease;
+            --font-main: 'Roboto', sans-serif;
+            --font-accent: 'Orbitron', sans-serif;
+            --border-radius: 8px;
         }
 
         [data-theme="light"] {
-            --black: #f8f9fa;
-            --white: #212529;
-            --shadow-glow: 0 0 20px rgba(0, 240, 255, 0.5), 0 0 40px rgba(0, 240, 255, 0.2);
-            --shadow-subtle: 0 6px 20px rgba(0, 0, 0, 0.15);
+            --primary: #f0f2f5;
+            --secondary: #ffffff;
+            --text: #1a1a1a;
+            --shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
         }
 
         * {
@@ -44,204 +43,135 @@
 
         body {
             font-family: var(--font-main);
-            background: linear-gradient(135deg, var(--black), #1a0d2e);
-            color: var(--white);
-            line-height: 1.6;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.5;
             overflow-x: hidden;
             scroll-behavior: smooth;
-        }
-
-        [data-theme="light"] body {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
         }
 
         header {
             position: sticky;
             top: 0;
-            background: rgba(10, 10, 26, 0.95);
-            backdrop-filter: blur(15px);
+            background: var(--secondary);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: var(--shadow-glow);
+            box-shadow: var(--shadow);
             z-index: 1000;
-            border-bottom: 2px solid var(--neon-blue);
-        }
-
-        [data-theme="light"] header {
-            background: rgba(248, 249, 250, 0.95);
-            border-bottom-color: var(--neon-purple);
         }
 
         .logo {
             font-family: var(--font-accent);
-            font-size: clamp(1.8rem, 4vw, 2.2rem);
-            color: var(--gold);
-            text-shadow: var(--shadow-glow);
-            letter-spacing: 2px;
-            animation: logoPulse 2s ease-in-out infinite;
+            font-size: clamp(1.6rem, 3.5vw, 2rem);
+            color: var(--accent);
+            letter-spacing: 1px;
+            transition: var(--transition);
         }
 
-        @keyframes logoPulse {
-            0% { transform: scale(1); text-shadow: var(--shadow-glow); }
-            50% { transform: scale(1.05); text-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-purple); }
-            100% { transform: scale(1); text-shadow: var(--shadow-glow); }
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         nav {
             display: flex;
-            gap: 1.2rem;
+            gap: 1rem;
             flex-wrap: wrap;
         }
 
         nav a {
-            color: var(--white);
+            color: var(--text);
             text-decoration: none;
-            font-weight: 600;
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            transition: var(--transition-fast);
-            position: relative;
-        }
-
-        [data-theme="light"] nav a {
-            color: var(--white);
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--neon-blue), var(--gold));
-            transform: scaleX(0);
-            transition: transform var(--transition-fast);
-        }
-
-        nav a:hover::after {
-            transform: scaleX(1);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
         }
 
         nav a:hover {
-            background: rgba(0, 240, 255, 0.2);
-            color: var(--gold);
-            text-shadow: var(--shadow-glow);
+            background: var(--highlight);
+            color: var(--primary);
         }
 
         .controls {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 0.5rem;
         }
 
         .controls button {
-            background: none;
-            border: 2px solid var(--neon-blue);
-            color: var(--white);
+            background: transparent;
+            border: 1px solid var(--highlight);
+            color: var(--text);
             padding: 0.5rem;
             border-radius: 50%;
             cursor: pointer;
-            transition: var(--transition-fast);
-            font-size: 1.2rem;
-        }
-
-        [data-theme="light"] .controls button {
-            border-color: var(--neon-purple);
+            transition: var(--transition);
         }
 
         .controls button:hover {
+            background: var(--highlight);
+            color: var(--primary);
             transform: scale(1.1);
-            box-shadow: var(--shadow-glow);
-            background: var(--neon-blue);
-            color: var(--black);
         }
 
         #balance {
             font-family: var(--font-accent);
-            font-weight: 700;
-            color: var(--gold);
-            text-shadow: var(--shadow-glow);
-            font-size: 1.1rem;
+            font-size: 1rem;
+            color: var(--accent);
             padding: 0.5rem 1rem;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
+            background: var(--primary);
+            border-radius: var(--border-radius);
         }
 
         .hero {
-            position: relative;
-            padding: 4rem 1rem;
+            padding: 3rem 1rem;
             text-align: center;
-            background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(199, 21, 133, 0.15));
-            border-radius: 0 0 var(--border-radius) var(--border-radius);
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.3), transparent);
-            transition: left 1.5s ease;
-        }
-
-        .hero:hover::before {
-            left: 100%;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
         }
 
         .hero h1 {
             font-family: var(--font-accent);
-            font-size: clamp(2.5rem, 6vw, 3.5rem);
-            color: var(--gold);
-            text-shadow: var(--shadow-glow);
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--accent);
             margin-bottom: 1rem;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
+            font-size: 1.1rem;
+            max-width: 600px;
             margin: 0 auto 1.5rem;
             opacity: 0.9;
         }
 
         .hero-cta {
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-            color: var(--white);
-            padding: 1rem 2.5rem;
+            background: var(--highlight);
+            color: var(--primary);
+            padding: 0.8rem 2rem;
             border-radius: var(--border-radius);
             text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: var(--transition-fast);
-            box-shadow: var(--shadow-subtle);
+            font-weight: 500;
+            transition: var(--transition);
         }
 
         .hero-cta:hover {
-            transform: translateY(-4px);
-            background: linear-gradient(45deg, var(--gold), var(--red));
-            box-shadow: var(--shadow-glow);
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
         }
 
         section {
-            padding: 3rem 1rem;
-            margin: 2rem auto;
-            max-width: 1400px;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem 1rem;
+            margin: 1rem auto;
+            max-width: 1200px;
+            background: var(--secondary);
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow-subtle);
+            box-shadow: var(--shadow);
             display: none;
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(10px);
             transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        [data-theme="light"] section {
-            background: rgba(0, 0, 0, 0.05);
         }
 
         section.active {
@@ -252,29 +182,27 @@
 
         h2 {
             font-family: var(--font-accent);
-            font-size: clamp(2rem, 5vw, 2.8rem);
-            color: var(--gold);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--accent);
             text-align: center;
-            margin-bottom: 2rem;
-            text-shadow: var(--shadow-glow);
+            margin-bottom: 1.5rem;
         }
 
         button, .btn {
-            background: var(--neon-blue);
-            color: var(--black);
+            background: var(--highlight);
+            color: var(--primary);
             border: none;
-            padding: 0.8rem 1.8rem;
+            padding: 0.7rem 1.5rem;
             border-radius: var(--border-radius);
-            font-family: var(--font-main);
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            transition: var(--transition-fast);
+            transition: var(--transition);
         }
 
         button:hover:not(:disabled), .btn:hover {
-            background: var(--gold);
-            box-shadow: var(--shadow-glow);
+            background: var(--accent);
             transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
 
         button:disabled {
@@ -283,73 +211,51 @@
         }
 
         .bet-input, select {
-            padding: 0.8rem;
-            border: 2px solid var(--neon-blue);
+            padding: 0.7rem;
+            border: 1px solid var(--highlight);
             border-radius: var(--border-radius);
-            background: rgba(0, 0, 0, 0.6);
-            color: var(--white);
-            width: 120px;
-            transition: var(--transition-fast);
+            background: var(--primary);
+            color: var(--text);
+            width: 100px;
+            transition: var(--transition);
         }
 
         .bet-input:focus, select:focus {
             outline: none;
-            border-color: var(--gold);
-            box-shadow: var(--shadow-glow);
-        }
-
-        [data-theme="light"] .bet-input, [data-theme="light"] select {
-            background: rgba(255, 255, 255, 0.6);
+            border-color: var(--accent);
+            box-shadow: var(--shadow);
         }
 
         .game-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
         }
 
         .game-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.2rem;
+            background: var(--primary);
+            padding: 1rem;
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow-subtle);
+            box-shadow: var(--shadow);
             text-align: center;
-            transition: var(--transition-fast);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .game-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
-            transition: left 0.8s ease;
-        }
-
-        .game-card:hover::before {
-            left: 100%;
+            transition: var(--transition);
         }
 
         .game-card:hover {
             transform: translateY(-5px);
-            box-shadow: var(--shadow-glow);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.3);
         }
 
         .game-card img {
             width: 100%;
-            height: 180px;
+            height: 150px;
             object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            background: #333;
+            border-radius: var(--border-radius);
+            margin-bottom: 0.8rem;
         }
 
         .game-card h3 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 0.5rem;
         }
 
@@ -367,57 +273,54 @@
 
         .odds button {
             flex: 1;
-            min-width: 80px;
+            min-width: 70px;
         }
 
         #slotsCanvas, #liveCasinoCanvas {
             display: block;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto 1rem;
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow-subtle);
-            background: #1a1a2e;
+            box-shadow: var(--shadow);
+            background: var(--primary);
         }
 
         #leaderList {
             list-style: none;
             padding: 1rem;
-            background: rgba(0, 0, 0, 0.6);
+            background: var(--primary);
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow-subtle);
+            box-shadow: var(--shadow);
         }
 
         #leaderList li {
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            transition: var(--transition-fast);
+            padding: 0.7rem;
+            margin: 0.3rem 0;
+            background: var(--secondary);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
         }
 
         #leaderList li:hover {
-            background: rgba(0, 240, 255, 0.2);
+            background: var(--highlight);
+            color: var(--primary);
         }
 
         #chat {
-            max-height: 250px;
+            max-height: 200px;
             overflow-y: auto;
-            background: rgba(0, 0, 0, 0.6);
+            background: var(--primary);
             padding: 1rem;
             border-radius: var(--border-radius);
             margin-top: 1rem;
-            box-shadow: var(--shadow-subtle);
+            box-shadow: var(--shadow);
         }
 
         .chat-message {
             margin: 0.5rem 0;
-            padding: 0.8rem;
-            background: rgba(255, 215, 0, 0.15);
-            border-radius: 8px;
-            transition: var(--transition-fast);
-        }
-
-        .chat-message:hover {
-            background: rgba(255, 215, 0, 0.25);
+            padding: 0.7rem;
+            background: var(--secondary);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
         }
 
         .chat-input {
@@ -428,33 +331,30 @@
 
         .chat-input input {
             flex: 1;
-            padding: 0.8rem;
-            border: 2px solid var(--neon-blue);
+            padding: 0.7rem;
+            border: 1px solid var(--highlight);
             border-radius: var(--border-radius);
-            background: rgba(0, 0, 0, 0.6);
-            color: var(--white);
-            transition: var(--transition-fast);
+            background: var(--primary);
+            color: var(--text);
+            transition: var(--transition);
         }
 
         .chat-input input:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: var(--shadow-glow);
+            border-color: var(--accent);
+            box-shadow: var(--shadow);
         }
 
         footer {
-            background: rgba(10, 10, 26, 0.95);
-            padding: 1.5rem;
+            background: var(--secondary);
+            padding: 1rem;
             text-align: center;
-            color: var(--white);
-            border-top: 2px solid var(--neon-blue);
-            box-shadow: var(--shadow-subtle);
+            color: var(--text);
+            box-shadow: var(--shadow);
         }
 
         .creator {
             font-size: 0.9rem;
-            color: var(--gold);
-            text-shadow: var(--shadow-glow);
+            color: var(--accent);
         }
 
         .modal {
@@ -463,14 +363,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 2000;
             opacity: 0;
             visibility: hidden;
-            transition: var(--transition-fast);
+            transition: var(--transition);
         }
 
         .modal.show {
@@ -479,11 +379,11 @@
         }
 
         .modal-content {
-            background: var(--black);
-            padding: 2rem;
+            background: var(--secondary);
+            padding: 1.5rem;
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow-glow);
-            max-width: 400px;
+            box-shadow: var(--shadow);
+            max-width: 350px;
             width: 90%;
             text-align: center;
             position: relative;
@@ -492,27 +392,27 @@
         .close-modal {
             position: absolute;
             top: 10px;
-            right: 15px;
-            font-size: 1.5rem;
+            right: 10px;
+            font-size: 1.2rem;
             cursor: pointer;
-            color: var(--neon-blue);
-            transition: var(--transition-fast);
+            color: var(--highlight);
+            transition: var(--transition);
         }
 
         .close-modal:hover {
-            color: var(--gold);
+            color: var(--accent);
         }
 
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
+                gap: 0.8rem;
+                padding: 0.8rem;
             }
 
             nav {
                 justify-content: center;
-                gap: 0.5rem;
+                gap: 0.3rem;
             }
 
             .game-grid {
@@ -521,12 +421,12 @@
 
             #slotsCanvas, #liveCasinoCanvas {
                 width: 100%;
-                max-width: 320px;
-                height: 240px;
+                max-width: 300px;
+                height: 200px;
             }
 
             .hero h1 {
-                font-size: clamp(2rem, 5vw, 2.5rem);
+                font-size: clamp(1.8rem, 4vw, 2.2rem);
             }
         }
     </style>
@@ -535,12 +435,12 @@
     <header>
         <div class="logo">GovBet Demo</div>
         <nav>
-            <a href="#" onclick="showSection('home')">Головна</a>
-            <a href="#" onclick="showSection('slots')">Слоти</a>
-            <a href="#" onclick="showSection('live')">Live Казино</a>
-            <a href="#" onclick="showSection('sports')">Спорт</a>
-            <a href="#" onclick="showSection('esports')">Кіберспорт</a>
-            <a href="#" onclick="showSection('leaders')">Лідери</a>
+            <a href="#" onclick="showSection('home')">🏠</a>
+            <a href="#" onclick="showSection('slots')">🎰</a>
+            <a href="#" onclick="showSection('live')">🃏</a>
+            <a href="#" onclick="showSection('sports')">⚽</a>
+            <a href="#" onclick="showSection('esports')">🎮</a>
+            <a href="#" onclick="showSection('leaders')">🏆</a>
         </nav>
         <div class="controls">
             <button id="themeToggle" aria-label="Перемкнути тему">🌙</button>
@@ -552,18 +452,18 @@
     </header>
 
     <div class="hero">
-        <h1>GovBet Demo - Грайте безкоштовно!</h1>
-        <p>Спробуйте слоти від Pragmatic Play, live-казино та ставки з демо-рахунком. Створено Головнін В.С.</p>
+        <h1>GovBet Demo - Грайте безкоштовно! 🎉</h1>
+        <p>Слоти Pragmatic Play, live-казино та ставки з демо-рахунком. Створено Головнін В.С.</p>
         <a href="#" onclick="showSection('slots')" class="hero-cta">Грати в слоти</a>
     </div>
 
     <section id="home" class="active">
-        <h2>Ласкаво просимо до GovBet Demo!</h2>
-        <p style="text-align: center; max-width: 600px; margin: 0 auto;">Демо-версія казино з реальними слотами Pragmatic Play, live-іграми та ставками. Грайте безкоштовно з демо-рахунком!</p>
+        <h2>Ласкаво просимо до GovBet Demo! 🚀</h2>
+        <p style="text-align: center; max-width: 600px; margin: 0 auto;">Демо-версія казино з реальними слотами Pragmatic Play, live-іграми та ставками. Грайте безкоштовно!</p>
     </section>
 
     <section id="slots">
-        <h2>Слоти</h2>
+        <h2>Слоти 🎰</h2>
         <div class="game-grid" id="slotGames"></div>
         <div id="slotGameArea" style="display: none;">
             <h3 id="slotGameTitle"></h3>
@@ -574,12 +474,12 @@
                 <button id="backToSlots">Назад до слотів</button>
             </div>
             <div id="slotResult" style="text-align: center; margin-top: 1rem;"></div>
-            <div id="jackpot" style="text-align: center; color: var(--gold);">Джекпот: ₴<span id="jackpotAmount">100000</span></div>
+            <div id="jackpot" style="text-align: center; color: var(--accent);">Джекпот: ₴<span id="jackpotAmount">100000</span></div>
         </div>
     </section>
 
     <section id="live">
-        <h2>Live Казино</h2>
+        <h2>Live Казино 🃏</h2>
         <div class="game-grid" id="liveGames"></div>
         <div id="liveGameArea" style="display: none;">
             <h3 id="liveGameTitle"></h3>
@@ -594,7 +494,7 @@
     </section>
 
     <section id="sports">
-        <h2>Ставки на спорт</h2>
+        <h2>Ставки на спорт ⚽</h2>
         <div class="game-grid" id="sportsEvents"></div>
         <div class="controls">
             <input type="number" id="sportsBet" class="bet-input" value="10" min="1" max="1000" aria-label="Сума ставки на спорт">
@@ -602,7 +502,7 @@
     </section>
 
     <section id="esports">
-        <h2>Кіберспорт</h2>
+        <h2>Кіберспорт 🎮</h2>
         <div class="game-grid" id="esportsEvents"></div>
         <div class="controls">
             <input type="number" id="esportsBet" class="bet-input" value="10" min="1" max="1000" aria-label="Сума ставки на кіберспорт">
@@ -610,7 +510,7 @@
     </section>
 
     <section id="leaders">
-        <h2>Рейтинг гравців</h2>
+        <h2>Рейтинг гравців 🏆</h2>
         <ul id="leaderList"></ul>
         <div id="chat"></div>
         <div class="chat-input">
@@ -644,12 +544,12 @@
         // Localization
         const translations = {
             uk: {
-                home: "Головна",
-                slots: "Слоти",
-                live: "Live Казино",
-                sports: "Спорт",
-                esports: "Кіберспорт",
-                leaders: "Лідери",
+                home: "🏠 Головна",
+                slots: "🎰 Слоти",
+                live: "🃏 Live Казино",
+                sports: "⚽ Спорт",
+                esports: "🎮 Кіберспорт",
+                leaders: "🏆 Лідери",
                 balance: "Баланс: ₴",
                 spin: "Крутити",
                 play: "Грати",
@@ -657,26 +557,26 @@
                 back: "Назад до ігор",
                 backSlots: "Назад до слотів",
                 chatPlaceholder: "Чат із гравцями...",
-                welcomeText: "Демо-версія казино з реальними слотами Pragmatic Play, live-іграми та ставками. Грайте безкоштовно з демо-рахунком!",
-                heroTitle: "GovBet Demo - Грайте безкоштовно!",
-                heroText: "Спробуйте слоти від Pragmatic Play, live-казино та ставки з демо-рахунком. Створено Головнін В.С.",
+                welcomeText: "Демо-версія казино з реальними слотами Pragmatic Play, live-іграми та ставками. Грайте безкоштовно!",
+                heroTitle: "GovBet Demo - Грайте безкоштовно! 🎉",
+                heroText: "Слоти Pragmatic Play, live-казино та ставки з демо-рахунком. Створено Головнін В.С.",
                 cta: "Грати в слоти",
                 footer: "&copy; 2025 GovBet Demo - Демо-версія казино.",
                 creator: "Створено Головнін В.С.",
-                insufficientFunds: "Недостатньо коштів!",
+                insufficientFunds: "Недостатньо коштів! 🚫",
                 win: "Виграш: ₴",
-                loss: "Програш!",
+                loss: "Програш! 😞",
                 resetBalance: "Скинути баланс",
                 jackpot: "Джекпот: ₴",
-                betPlaced: "Ставка прийнята!"
+                betPlaced: "Ставка прийнята! ✅"
             },
             en: {
-                home: "Home",
-                slots: "Slots",
-                live: "Live Casino",
-                sports: "Sports",
-                esports: "Esports",
-                leaders: "Leaderboard",
+                home: "🏠 Home",
+                slots: "🎰 Slots",
+                live: "🃏 Live Casino",
+                sports: "⚽ Sports",
+                esports: "🎮 Esports",
+                leaders: "🏆 Leaderboard",
                 balance: "Balance: ₴",
                 spin: "Spin",
                 play: "Play",
@@ -684,18 +584,18 @@
                 back: "Back to games",
                 backSlots: "Back to slots",
                 chatPlaceholder: "Chat with players...",
-                welcomeText: "Demo version of a casino with real Pragmatic Play slots, live games, and betting. Play for free with a demo account!",
-                heroTitle: "GovBet Demo - Play for Free!",
+                welcomeText: "Demo version of a casino with real Pragmatic Play slots, live games, and betting. Play for free!",
+                heroTitle: "GovBet Demo - Play for Free! 🎉",
                 heroText: "Try Pragmatic Play slots, live casino, and betting with a demo account. Created by Holovnin V.S.",
                 cta: "Play Slots",
                 footer: "&copy; 2025 GovBet Demo - Casino Demo Version.",
                 creator: "Created by Holovnin V.S.",
-                insufficientFunds: "Insufficient funds!",
+                insufficientFunds: "Insufficient funds! 🚫",
                 win: "Win: ₴",
-                loss: "Loss!",
+                loss: "Loss! 😞",
                 resetBalance: "Reset Balance",
                 jackpot: "Jackpot: ₴",
-                betPlaced: "Bet placed!"
+                betPlaced: "Bet placed! ✅"
             }
         };
 
@@ -799,7 +699,7 @@
                     this.save();
                     this.updateUI();
                     this.updateLeaderboard();
-                    this.showModal(this.lang === 'uk' ? 'Баланс скинуто до ₴10000!' : 'Balance reset to ₴10000!', 'success');
+                    this.showModal(this.lang === 'uk' ? 'Баланс скинуто до ₴10000! ✅' : 'Balance reset to ₴10000! ✅', 'success');
                 } catch (e) {
                     console.error('Error resetting balance:', e);
                 }
@@ -880,7 +780,7 @@
                     const modal = document.getElementById('modal');
                     const body = document.getElementById('modalBody');
                     body.textContent = message;
-                    body.style.color = type === 'error' ? 'var(--red)' : 'var(--gold)';
+                    body.style.color = type === 'error' ? 'var(--danger)' : 'var(--accent)';
                     modal.classList.add('show');
                     setTimeout(() => modal.classList.remove('show'), 2000);
                 } catch (e) {
@@ -935,10 +835,10 @@
         class Slots {
             constructor() {
                 this.games = [
-                    { id: 'sweet_bonanza', name: { uk: 'Sweet Bonanza', en: 'Sweet Bonanza' }, provider: 'Pragmatic Play', rtp: 0.965, volatility: 'High', image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmY4ZmUwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlN3ZWV0IEJvbmFuemE8L3RleHQ+PC9zdmc+' },
-                    { id: 'wolf_gold', name: { uk: 'Wolf Gold', en: 'Wolf Gold' }, provider: 'Pragmatic Play', rtp: 0.96, volatility: 'Medium', image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmZiYzAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPldvbGYgR29sZDwvdGV4dD48L3N2Zz4=' },
-                    { id: 'gates_of_olympus', name: { uk: 'Gates of Olympus', en: 'Gates of Olympus' }, provider: 'Pragmatic Play', rtp: 0.955, volatility: 'High', image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjN2Y0ZmZmIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkdhdGVzIG9mIE9seW1wdXM8L3RleHQ+PC9zdmc+' },
-                    { id: 'book_of_dead', name: { uk: 'Book of Dead', en: 'Book of Dead' }, provider: 'Play\'n GO', rtp: 0.962, volatility: 'High', image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYzVhYzAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkJvb2sgb2YgRGVhZDwvdGV4dD48L3N2Zz4=' }
+                    { id: 'sweet_bonanza', name: { uk: 'Sweet Bonanza 🍬', en: 'Sweet Bonanza 🍬' }, provider: 'Pragmatic Play', rtp: 0.965, volatility: 'High', image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmY4ZmUwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlN3ZWV0IEJvbmFuemEg8J+NmDwvdGV4dD48L3N2Zz4=' },
+                    { id: 'wolf_gold', name: { uk: 'Wolf Gold 🐺', en: 'Wolf Gold 🐺' }, provider: 'Pragmatic Play', rtp: 0.96, volatility: 'Medium', image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmZiYzAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPldvbGYgR29sZCDwn4i3PC90ZXh0Pjwvc3ZnPg==' },
+                    { id: 'gates_of_olympus', name: { uk: 'Gates of Olympus ⚡️', en: 'Gates of Olympus ⚡️' }, provider: 'Pragmatic Play', rtp: 0.955, volatility: 'High', image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjN2Y0ZmZmIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkdhdGVzIG9mIE9seW1wdXMg4pqkPC90ZXh0Pjwvc3ZnPg==' },
+                    { id: 'book_of_dead', name: { uk: 'Book of Dead 📖', en: 'Book of Dead 📖' }, provider: 'Play\'n GO', rtp: 0.962, volatility: 'High', image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYzVhYzAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkJvb2sgb2YgRGVhZCDwn6C6PC90ZXh0Pjwvc3ZnPg==' }
                 ];
                 this.currentGame = null;
                 this.canvas = document.getElementById('slotsCanvas');
@@ -987,12 +887,12 @@
             renderReels() {
                 try {
                     this.ctx.clearRect(0, 0, 400, 300);
-                    this.ctx.fillStyle = '#1a1a2e';
+                    this.ctx.fillStyle = '#1e1e2e';
                     this.ctx.fillRect(0, 0, 400, 300);
                     for (let i = 0; i < 3; i++) {
-                        this.ctx.fillStyle = '#000';
+                        this.ctx.fillStyle = '#2a2a3e';
                         this.ctx.fillRect(40 + i * 120, 20, 100, 260);
-                        this.ctx.fillStyle = '#fff';
+                        this.ctx.fillStyle = '#e0e0e0';
                         this.ctx.font = 'bold 80px Orbitron';
                         this.ctx.textAlign = 'center';
                         this.ctx.fillText(this.symbols[this.reels[i]], 90 + i * 120, 180);
@@ -1040,9 +940,9 @@
         class LiveCasino {
             constructor() {
                 this.games = [
-                    { id: 'roulette', name: { uk: 'Рулетка', en: 'Roulette' }, rtp: 0.973, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDA2NDAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlJvdWxldHRlPC90ZXh0Pjwvc3ZnPg==' },
-                    { id: 'blackjack', name: { uk: 'Блекджек', en: 'Blackjack' }, rtp: 0.995, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDA2NDAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkJsYWNramFjazwvdGV4dD48L3N2Zz4=' },
-                    { id: 'baccarat', name: { uk: 'Баккара', en: 'Baccarat' }, rtp: 0.989, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDA2NDAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkJhY2NhcmF0PC90ZXh0Pjwvc3ZnPg==' }
+                    { id: 'roulette', name: { uk: 'Рулетка 🎡', en: 'Roulette 🎡' }, rtp: 0.973, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDA2NDAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlJvdWxldHRlIPCfhrw8L3RleHQ+PC9zdmc+' },
+                    { id: 'blackjack', name: { uk: 'Блекджек 🃏', en: 'Blackjack 🃏' }, rtp: 0.995, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDA2NDAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkJsYWNramFjayDwn5W8PC90ZXh0Pjwvc3ZnPg==' },
+                    { id: 'baccarat', name: { uk: 'Баккара 🎲', en: 'Baccarat 🎲' }, rtp: 0.989, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDA2NDAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkJhY2NhcmF0IPCfhrI8L3RleHQ+PC9zdmc+' }
                 ];
                 this.currentGame = null;
                 this.canvas = document.getElementById('liveCasinoCanvas');
@@ -1091,7 +991,7 @@
                     this.ctx.clearRect(0, 0, 400, 300);
                     this.ctx.fillStyle = '#006400';
                     this.ctx.fillRect(0, 0, 400, 300);
-                    this.ctx.fillStyle = '#fff';
+                    this.ctx.fillStyle = '#e0e0e0';
                     this.ctx.font = 'bold 32px Orbitron';
                     this.ctx.textAlign = 'center';
                     this.ctx.fillText(this.currentGame.name[gameState.lang].toUpperCase(), 200, 150);
@@ -1107,9 +1007,9 @@
                     document.getElementById('livePlayButton').disabled = true;
                     for (let i = 0; i < 10; i++) {
                         this.ctx.clearRect(0, 0, 400, 300);
-                        this.ctx.fillStyle = `hsl(${i * 20}, 100%, 50%)`;
+                        this.ctx.fillStyle = `hsl(${i * 20}, 80%, 40%)`;
                         this.ctx.fillRect(0, 0, 400, 300);
-                        this.ctx.fillStyle = '#fff';
+                        this.ctx.fillStyle = '#e0e0e0';
                         this.ctx.font = 'bold 32px Orbitron';
                         this.ctx.textAlign = 'center';
                         this.ctx.fillText(this.currentGame.name[gameState.lang].toUpperCase(), 200, 150);
@@ -1142,8 +1042,8 @@
         class Sports {
             constructor() {
                 this.events = [
-                    { id: 'epl1', name: { uk: 'Ман Сіті - Ман Юнайтед', en: 'Man City - Man United' }, odds: { p1: 1.8, draw: 3.5, p2: 4.2 }, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDA4M2I1Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1hbiBDaXR5IC0gTWFuIFVuaXRlZDwvdGV4dD48L3N2Zz4=' },
-                    { id: 'nba1', name: { uk: 'Лейкерс - Селтікс', en: 'Lakers - Celtics' }, odds: { p1: 2.0, p2: 1.9 }, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDA4M2I1Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkxha2VycyAtIENlbHRpY3M8L3RleHQ+PC9zdmc+' }
+                    { id: 'epl1', name: { uk: 'Ман Сіті - Ман Юнайтед ⚽', en: 'Man City - Man United ⚽' }, odds: { p1: 1.8, draw: 3.5, p2: 4.2 }, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDA4M2I1Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1hbiBDaXR5IC0gTWFuIFVuaXRlZCDwn4yEPC90ZXh0Pjwvc3ZnPg==' },
+                    { id: 'nba1', name: { uk: 'Лейкерс - Селтікс 🏀', en: 'Lakers - Celtics 🏀' }, odds: { p1: 2.0, p2: 1.9 }, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDA4M2I1Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkxha2VycyAtIENlbHRpY3Mg8J+NkDwvdGV4dD48L3N2Zz4=' }
                 ];
                 this.init();
             }
@@ -1194,8 +1094,8 @@
         class Esports {
             constructor() {
                 this.events = [
-                    { id: 'cs1', name: { uk: 'NAVI - FaZe (CS2)', en: 'NAVI - FaZe (CS2)' }, odds: { p1: 1.7, p2: 2.1 }, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjM2Q3YzAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5BVkkgLSBGYVplIChDUzIpPC90ZXh0Pjwvc3ZnPg==' },
-                    { id: 'dota1', name: { uk: 'Pvision - Xtreme (Dota 2)', en: 'Pvision - Xtreme (Dota 2)' }, odds: { p1: 1.9, p2: 1.8 }, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjM2Q3YzAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlB2aXNpb24gLSBYdHJlbWUgKERvdGEgMik8L3RleHQ+PC9zdmc+' }
+                    { id: 'cs1', name: { uk: 'NAVI - FaZe (CS2) 🎮', en: 'NAVI - FaZe (CS2) 🎮' }, odds: { p1: 1.7, p2: 2.1 }, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjM2Q3YzAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5BVkkgLSBGYVplIChDUzIpIPCfjoQ8L3RleHQ+PC9zdmc+' },
+                    { id: 'dota1', name: { uk: 'Pvision - Xtreme (Dota 2) 🎮', en: 'Pvision - Xtreme (Dota 2) 🎮' }, odds: { p1: 1.9, p2: 1.8 }, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjM2Q3YzAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlB2aXNpb24gLSBYdHJlbWUgKERvdGEgMikg8J+OhDwvdGV4dD48L3N2Zz4=' }
                 ];
                 this.init();
             }
@@ -1249,6 +1149,15 @@
             sports: new Sports(),
             esports: new Esports()
         };
+
+        // Ensure DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            game.state.init();
+            game.slots.init();
+            game.live.init();
+            game.sports.init();
+            game.esports.init();
+        });
     </script>
 </body>
 </html>
