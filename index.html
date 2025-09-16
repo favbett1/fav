@@ -1,1705 +1,314 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GovBet Ultimate 6.0 – Квантове Казино Метавсесвіту</title>
-    <meta name="description" content="GovBet Ultimate 6.0: Повністю перероблена версія з квантовою фізикою, AI-чатом, AR-ефектами, NFT-інтеграцією та повним PWA. Один файл для GitHub Pages – запусти й завоюй метавсесвіт!">
-    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiR292QmV0IFVsdGltYXRlIDYuMCIsInNob3J0X25hbWUiOiJHb3ZCZXQiLCJkZXNjcmlwdGlvbiI6IkVwaWNob25lIGthemlubyBtZXRhdnNlc3V0dSIsInN0YXJ0X3VybCI6Ii8iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjMGIwYjBiIiwidGhlbWVfY29sb3IiOiIjMDBmZmZmIiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJP...Iiwic2l6ZXMiOiIxOTJ4MTkyIiwidHlwZSI6ImltYWdlL3BuZyJ9LHsic3JjIjoiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk8uLi4iLCJzaXplcyI6IjUxMnU1MTIiLCJ0eXBlIjoiaW1hZ2UvcG5nIn1dfQ=="> <!-- Inline manifest for single file PWA -->
+    <title>GoVbEt - Premier Online Casino Demo</title>
+    <meta name="description" content="GoVbEt: The ultimate HTML5 casino demo with slots, roulette, blackjack, betting, and more. Fully responsive, PWA-ready single-page application.">
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiR29WYkV0IiwiY29sb3IiOiIjZmZkNzAwIiwic3RhcnRfdXJsIjoiLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPck1qRXhNelU1TVRVeE1EazJNRFVpT1RjNU1qUXdNREl8Iiwic2l6ZXMiOiIxOTJ4MTkyIiwidHlwZSI6ImltYWdlL3BuZyJ9XX0=">
     <style>
-        /* ===========================================
-           Квантові стилі: Теми, змінні, holographic effects
-        =========================================== */
         :root {
-            --primary-color: #00ffff; /* Holographic cyan */
-            --secondary-color: #ff00ff; /* Magenta glow */
-            --accent-gold: #ffd700;
-            --bg-primary: #000011; /* Cosmic void */
-            --bg-secondary: #0a0a1a; /* Nebula dark */
-            --text-primary: #00ffff;
-            --text-secondary: #ffffff;
-            --shadow-glow: 0 0 50px var(--primary-color);
-            --shadow-quantum: 0 0 100px var(--primary-color), 0 0 200px var(--secondary-color);
-            --transition-fast: 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            --transition-smooth: 1s ease-in-out;
-            --border-radius: 25px;
-            --font-family: 'Orbitron', monospace; /* Futuristic font */
-            --z-header: 100;
-            --z-modal: 200;
-        }
-
-        [data-theme="light"] {
-            --primary-color: #0000ff; /* Electric blue */
-            --secondary-color: #00ff00; /* Neon green */
-            --bg-primary: #f8f8ff;
-            --bg-secondary: #ffffff;
-            --text-primary: #0000ff;
-            --text-secondary: #000000;
-            --shadow-glow: 0 0 50px var(--primary-color);
-            --shadow-quantum: 0 0 100px var(--primary-color), 0 0 200px var(--secondary-color);
-        }
-
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: radial-gradient(circle at center, var(--bg-primary), var(--bg-secondary));
-            color: var(--text-primary);
-            font-family: var(--font-family);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-            line-height: 1.6;
-            transition: all 0.5s ease;
-        }
-
-        /* ===========================================
-           Хедер з AR-елементами та налаштуваннями
-        =========================================== */
-        header {
-            position: sticky;
-            top: 0;
-            background: rgba(0, 0, 17, 0.95);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-quantum);
-            z-index: var(--z-header);
-            border-bottom: 2px solid var(--primary-color);
-        }
-
-        [data-theme="light"] header {
-            background: rgba(248, 248, 255, 0.95);
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo {
-            font-size: clamp(2em, 5vw, 3em);
-            font-weight: 900;
-            text-shadow: var(--shadow-quantum);
-            letter-spacing: 3px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: logoGlow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes logoGlow {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
-        }
-
-        .controls {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .theme-toggle, .sound-toggle {
-            background: none;
-            border: 2px solid var(--primary-color);
-            color: var(--text-primary);
-            padding: 0.5rem;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: var(--transition-fast);
-            font-size: 1.2em;
-        }
-
-        .theme-toggle:hover, .sound-toggle:hover {
-            box-shadow: var(--shadow-glow);
-            transform: scale(1.2) rotate(360deg);
-        }
-
-        nav {
-            display: flex;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 700;
-            transition: var(--transition-fast);
-            position: relative;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            transition: width 0.4s ease;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        nav a:hover {
-            text-shadow: var(--shadow-glow);
-            transform: translateY(-3px);
-        }
-
-        #balance {
-            font-size: 1.5em;
-            font-weight: 900;
-            text-shadow: var(--shadow-quantum);
-            animation: pulseQuantum 1.5s infinite alternate;
-        }
-
-        .level-bar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: conic-gradient(var(--primary-color) var(--progress, 0%), var(--bg-secondary) 0%);
-            margin-left: 1rem;
-            transition: var(--transition-fast);
-            box-shadow: var(--shadow-glow);
-            position: relative;
-        }
-
-        .level-bar::after {
-            content: attr(data-level);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 0.8em;
-            font-weight: bold;
-            color: var(--text-secondary);
-        }
-
-        @keyframes pulseQuantum {
-            0% { text-shadow: var(--shadow-glow); }
-            100% { text-shadow: var(--shadow-quantum); }
-        }
-
-        /* ===========================================
-           Секції з quantum анімаціями
-        =========================================== */
-        .section {
-            margin: 3rem auto;
-            width: 95%;
-            max-width: 1600px;
-            padding: 3rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-quantum);
-            background: linear-gradient(135deg, var(--bg-secondary), rgba(0, 255, 255, 0.05));
-            border: 2px solid var(--primary-color);
-            opacity: 0;
-            transform: translateY(30px) scale(0.95);
-            animation: quantumFadeIn 1s forwards;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .section:hover::before {
-            opacity: 1;
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .section:nth-child(even) {
-            animation-delay: 0.3s;
-        }
-
-        @keyframes quantumFadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        h1, h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: clamp(1.8em, 6vw, 4em);
-            text-shadow: var(--shadow-quantum);
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* ===========================================
-           Квантові Слоти з AR-симуляцією
-        =========================================== */
-        .slot-container {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            perspective: 1200px;
-        }
-
-        .slot-reel {
-            width: 140px;
-            height: 140px;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border: 4px solid var(--primary-color);
-            border-radius: var(--border-radius);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 4em;
-            transition: var(--transition-smooth);
-            box-shadow: var(--shadow-quantum);
-            transform-style: preserve-3d;
-            position: relative;
-        }
-
-        .slot-reel::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: inherit;
-            border-radius: inherit;
-            z-index: -1;
-            filter: blur(20px);
-            opacity: 0.5;
-        }
-
-        .slot-reel.spinning {
-            animation: quantumSpin 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-        }
-
-        @keyframes quantumSpin {
-            0% { transform: rotateX(0) rotateY(0) scale(1); }
-            50% { transform: rotateX(180deg) rotateY(360deg) scale(1.1); }
-            100% { transform: rotateX(360deg) rotateY(720deg) scale(1); }
-        }
-
-        .slot-reel.win {
-            animation: quantumWin 0.8s infinite alternate;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-        }
-
-        @keyframes quantumWin {
-            0% { box-shadow: var(--shadow-glow); transform: scale(1); }
-            100% { box-shadow: var(--shadow-quantum); transform: scale(1.05); }
-        }
-
-        .spin-button {
-            display: block;
-            margin: 0 auto;
-            padding: 1.5rem 4rem;
-            font-size: 1.4em;
-            border-radius: var(--border-radius);
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: #000;
-            font-weight: 900;
-            border: none;
-            transition: var(--transition-fast);
-            cursor: pointer;
-            box-shadow: var(--shadow-quantum);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .spin-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .spin-button:hover:not(:disabled)::before {
-            left: 100%;
-        }
-
-        .spin-button:hover:not(:disabled) {
-            transform: scale(1.1) rotateY(10deg);
-        }
-
-        .spin-button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        /* ===========================================
-           Федюк з quantum фізикою
-        =========================================== */
-        #sandbox {
-            width: 100%;
-            max-width: 600px;
-            height: 400px;
-            background: linear-gradient(to bottom, #c2b280, #8b7355, #654321);
-            border: 4px solid var(--primary-color);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            position: relative;
-            margin: 0 auto;
-            box-shadow: var(--shadow-quantum) inset;
-        }
-
-        #miner {
-            position: absolute;
-            bottom: 2rem;
-            left: 2rem;
-            width: 90px;
-            height: 140px;
-            transition: var(--transition-fast);
-            transform-style: preserve-3d;
-        }
-
-        #body {
-            width: 60px;
-            height: 80px;
-            background: linear-gradient(135deg, #444, #666);
-            border-radius: 15px;
-            margin: auto;
-            position: relative;
-            z-index: 2;
-            box-shadow: var(--shadow-glow);
-        }
-
-        #head {
-            width: 45px;
-            height: 45px;
-            background: radial-gradient(circle, #999, #777);
-            border-radius: 50%;
-            margin: -25px auto 0;
-            box-shadow: var(--shadow-quantum);
-        }
-
-        #shovel {
-            width: 20px;
-            height: 90px;
-            background: linear-gradient(to bottom, #777, #555);
-            position: absolute;
-            left: 65px;
-            bottom: 10px;
-            transform-origin: top left;
-            transition: var(--transition-fast);
-        }
-
-        #blade {
-            width: 35px;
-            height: 25px;
-            background: #ddd;
-            position: absolute;
-            bottom: 0;
-            left: -10px;
-            border-radius: 0 0 60% 60%;
-            box-shadow: var(--shadow-glow);
-        }
-
-        .digging #shovel {
-            animation: quantumDig 1s ease-in-out infinite;
-        }
-
-        @keyframes quantumDig {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(80deg) scale(1.2); }
-        }
-
-        .item {
-            position: absolute;
-            font-size: 3em;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: quantumRise 3s ease-out forwards;
-            pointer-events: none;
-            text-shadow: var(--shadow-quantum);
-        }
-
-        @keyframes quantumRise {
-            0% { transform: translateX(-50%) translateY(0) rotate(0); opacity: 1; }
-            50% { transform: translateX(-50%) translateY(-100px) rotate(180deg); opacity: 1; }
-            100% { transform: translateX(-50%) translateY(-200px) rotate(360deg); opacity: 0; }
-        }
-
-        #sandMessages {
-            margin-top: 1.5rem;
-            color: var(--text-primary);
-            font-weight: 900;
-            text-shadow: var(--shadow-glow);
-            text-align: center;
-            min-height: 2rem;
-            font-size: 1.2em;
-        }
-
-        /* ===========================================
-           Квантове Бонус-Колесо з AI-передбаченням
-        =========================================== */
-        #bonusWheelCanvas {
-            width: 350px;
-            height: 350px;
-            border: 4px solid var(--primary-color);
-            border-radius: 50%;
-            margin: 1.5rem auto;
-            position: relative;
-            box-shadow: var(--shadow-quantum);
-            transition: var(--transition-smooth);
-            background: conic-gradient(from 0deg, var(--primary-color), var(--secondary-color), var(--accent-gold), var(--primary-color));
-        }
-
-        .wheel-spin {
-            animation: quantumWheel 4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-        }
-
-        @keyframes quantumWheel {
-            0% { transform: rotate(0deg) scale(1); }
-            70% { transform: rotate(1080deg) scale(1.1); }
-            100% { transform: rotate(1440deg) scale(1); }
-        }
-
-        #wheelMessage {
-            margin-top: 1.5rem;
-            color: var(--text-primary);
-            font-weight: 900;
-            text-shadow: var(--shadow-quantum);
-            text-align: center;
-            min-height: 2rem;
-            font-size: 1.2em;
-        }
-
-        /* ===========================================
-           Магазин з NFT-стилем
-        =========================================== */
-        #shop {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            width: 100%;
-        }
-
-        .shop-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem;
-            background: rgba(0, 255, 255, 0.15);
-            border: 2px solid var(--primary-color);
-            border-radius: var(--border-radius);
-            transition: var(--transition-fast);
-            box-shadow: var(--shadow-glow);
-            position: relative;
-        }
-
-        .shop-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: inherit;
-            border-radius: inherit;
-            z-index: -1;
-            filter: blur(10px);
-            opacity: 0.5;
-        }
-
-        .shop-item:hover {
-            box-shadow: var(--shadow-quantum);
-            transform: translateY(-10px) rotateX(5deg);
-        }
-
-        .shop-item button {
-            padding: 1rem 2rem;
-            font-size: 1.2em;
-            border-radius: var(--border-radius);
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: #000;
-            font-weight: 900;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition-fast);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .shop-item button:hover:not(:disabled) {
-            transform: scale(1.1);
-            box-shadow: var(--shadow-quantum);
-        }
-
-        .shop-item button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            background: #555;
-        }
-
-        /* ===========================================
-           Лідери з AI-чатом
-        =========================================== */
-        #leaderBoard {
-            list-style: none;
-            background: rgba(0, 255, 255, 0.1);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            max-height: 250px;
-            overflow-y: auto;
-        }
-
-        #leaderBoard li {
-            padding: 1rem;
-            margin: 0.75rem 0;
-            background: rgba(0, 0, 0, 0.4);
-            border-left: 5px solid var(--primary-color);
-            transition: var(--transition-fast);
-            border-radius: 0 var(--border-radius) var(--border-radius) 0;
-            position: relative;
-        }
-
-        #leaderBoard li:hover {
-            box-shadow: var(--shadow-glow);
-            transform: translateX(10px);
-        }
-
-        #leaderBoard li:first-child {
-            border-left-color: var(--accent-gold);
-            font-weight: 900;
-            background: linear-gradient(45deg, var(--accent-gold), #ffaa00);
-            color: #000;
-            box-shadow: var(--shadow-quantum);
-        }
-
-        #chat {
-            margin-top: 2rem;
-            height: 200px;
-            overflow-y: auto;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            border: 2px solid var(--primary-color);
-        }
-
-        .chat-input {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .chat-input input {
-            flex: 1;
-            padding: 0.8rem;
-            border: 2px solid var(--primary-color);
-            border-radius: var(--border-radius);
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            font-family: var(--font-family);
-        }
-
-        .chat-input button {
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: var(--border-radius);
-            background: var(--primary-color);
-            color: #000;
-            font-weight: bold;
-            cursor: pointer;
-            transition: var(--transition-fast);
-        }
-
-        .chat-message {
-            color: var(--accent-gold);
-            font-size: 1em;
-            margin-bottom: 0.75rem;
-            text-shadow: var(--shadow-glow);
-            padding: 0.5rem;
-            background: rgba(255, 215, 0, 0.1);
-            border-radius: 10px;
-        }
-
-        /* ===========================================
-           Квантове 3D Куб з AR
-        =========================================== */
-        #casino3D {
-            width: 100%;
-            height: 600px;
-            background: linear-gradient(135deg, var(--bg-secondary), rgba(0, 255, 255, 0.2));
-            border: 4px solid var(--primary-color);
-            margin: 2rem 0;
-            border-radius: var(--border-radius);
-            perspective: 2000px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .cube {
-            width: 250px;
-            height: 250px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: var(--transition-smooth);
-        }
-
-        .cube div {
-            position: absolute;
-            width: 250px;
-            height: 250px;
-            background: rgba(0, 255, 255, 0.4);
-            border: 3px solid var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3em;
-            backface-visibility: hidden;
-            box-shadow: var(--shadow-quantum);
-        }
-
-        .cube .front  { transform: translateZ(125px); }
-        .cube .back   { transform: rotateY(180deg) translateZ(125px); }
-        .cube .right  { transform: rotateY(90deg) translateZ(125px); }
-        .cube .left   { transform: rotateY(-90deg) translateZ(125px); }
-        .cube .top    { transform: rotateX(90deg) translateZ(125px); }
-        .cube .bottom { transform: rotateX(-90deg) translateZ(125px); }
-
-        /* ===========================================
-           Quantum Particles з AR
-        =========================================== */
-        #particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: radial-gradient(circle, var(--primary-color), transparent);
-            border-radius: 50%;
-            opacity: 0.9;
-            animation: quantumFloat linear infinite;
-            box-shadow: var(--shadow-glow);
-        }
-
-        @keyframes quantumFloat {
-            0% { transform: translateY(100vh) scale(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.9; }
-            90% { opacity: 0.9; }
-            100% { transform: translateY(-20px) scale(1.5) rotate(360deg); opacity: 0; }
-        }
-
-        /* ===========================================
-           Модалки та футер з quantum ефектами
-        =========================================== */
-        footer {
-            margin-top: 6rem;
-            padding: 3rem;
-            text-align: center;
-            background: rgba(0, 0, 17, 0.95);
-            color: var(--text-primary);
-            border-top: 2px solid var(--primary-color);
-            box-shadow: var(--shadow-glow);
-        }
-
-        [data-theme="light"] footer {
-            background: rgba(248, 248, 255, 0.95);
-        }
-
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: var(--z-modal);
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition-fast);
-        }
-
-        .modal.show {
-            opacity: 1;
-            visibility: visible;
-            animation: quantumModal 0.5s ease;
-        }
-
-        @keyframes quantumModal {
-            0% { transform: scale(0.5) rotateY(90deg); }
-            100% { transform: scale(1) rotateY(0deg); }
-        }
-
-        .modal-content {
-            background: var(--bg-secondary);
-            padding: 3rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-quantum);
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-            border: 3px solid var(--primary-color);
-            transform-style: preserve-3d;
-        }
-
-        .close-modal {
-            float: right;
-            font-size: 2.5em;
-            cursor: pointer;
-            color: var(--primary-color);
-            transition: var(--transition-fast);
-        }
-
-        .close-modal:hover {
-            color: var(--secondary-color);
-            transform: rotate(360deg) scale(1.3);
-        }
-
-        /* ===========================================
-           Responsive Quantum
-        =========================================== */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 1.5rem;
-                padding: 1rem;
-            }
-
-            nav {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
-            }
-
-            .section {
-                padding: 2rem;
-                margin: 1.5rem;
-            }
-
-            .slot-reel {
-                width: 100px;
-                height: 100px;
-                font-size: 3em;
-            }
-
-            #sandbox {
-                height: 300px;
-            }
-
-            #casino3D {
-                height: 400px;
-            }
-
-            #shop {
-                grid-template-columns: 1fr;
-            }
-
-            .chat-input {
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 2em;
-            }
-
-            .spin-button {
-                padding: 1.2rem 2.5rem;
-                font-size: 1.2em;
-            }
-        }
-
-        /* PWA Install Prompt Quantum */
-        .install-prompt {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: #000;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-quantum);
-            display: none;
-            z-index: var(--z-modal);
-            text-align: center;
-            animation: promptPulse 2s infinite alternate;
-        }
-
-        @keyframes promptPulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.05); }
-        }
-
-        .install-prompt button {
-            margin: 0.5rem;
-            padding: 0.7rem 1.5rem;
-            border: none;
-            border-radius: 15px;
-            background: var(--accent-gold);
-            color: #000;
-            font-weight: bold;
-            cursor: pointer;
-            transition: var(--transition-fast);
-        }
-
-        .install-prompt button:hover {
-            transform: scale(1.1);
-        }
+            --gold: #ffd700;
+            --red: #dc143c;
+            --black: #1a1a1a;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+            --transition: 0.3s ease;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, var(--black), #2d1b69); color: var(--white); overflow-x: hidden; }
+        header { background: rgba(0,0,0,0.9); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 2em; color: var(--gold); font-weight: bold; }
+        nav a { color: var(--white); text-decoration: none; margin: 0 1rem; transition: var(--transition); }
+        nav a:hover { color: var(--gold); }
+        #balance { font-size: 1.5em; color: var(--gold); }
+        section { padding: 2rem; min-height: 80vh; display: none; }
+        section.active { display: block; }
+        canvas { border: 2px solid var(--gold); border-radius: 10px; background: var(--black); }
+        button { background: var(--red); color: var(--white); border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; transition: var(--transition); margin: 0.5rem; }
+        button:hover { background: var(--gold); color: var(--black); }
+        .controls { text-align: center; margin: 1rem 0; }
+        .bet-input { padding: 0.5rem; margin: 0 0.5rem; }
+        .win { animation: glow 1s infinite alternate; }
+        @keyframes glow { 0% { box-shadow: var(--shadow); } 100% { box-shadow: 0 0 30px var(--gold); } }
+        footer { background: var(--black); padding: 1rem; text-align: center; color: var(--white); }
+        @media (max-width: 768px) { header { flex-direction: column; } nav { flex-wrap: wrap; } }
     </style>
 </head>
-<body data-theme="dark">
-    <!-- Quantum Particles -->
-    <div id="particles"></div>
-
-    <!-- Header with Controls -->
+<body>
     <header>
-        <div class="header-left">
-            <div class="logo">GovBet Ultimate 6.0</div>
-            <div class="controls">
-                <button class="theme-toggle" id="themeToggle" aria-label="Змінити тему">🌙</button>
-                <button class="sound-toggle" id="soundToggle" aria-label="Звук">🔊</button>
-            </div>
-            <div class="level-bar" id="levelBar" data-level="1" style="--progress: 0%;"></div>
-        </div>
+        <div class="logo">GoVbEt</div>
         <nav>
-            <a href="#home">Квантова Головна</a>
-            <a href="#slotsSection">Квантові Слоти</a>
-            <a href="#fedukSection">Квантовий Федюк</a>
-            <a href="#bonusWheel">AI-Колесо</a>
-            <a href="#shopSection">NFT-Магазин</a>
-            <a href="#leadersSection">AI-Лідери</a>
+            <a href="#" onclick="showSection('home')">Home</a>
+            <a href="#" onclick="showSection('slots')">Slots</a>
+            <a href="#" onclick="showSection('roulette')">Roulette</a>
+            <a href="#" onclick="showSection('blackjack')">Blackjack</a>
+            <a href="#" onclick="showSection('shop')">Shop</a>
+            <a href="#" onclick="showSection('leaders')">Leaders</a>
         </nav>
-        <div id="balance">💰 Квантовий Баланс: 0</div>
+        <div id="balance">Balance: $1000</div>
     </header>
 
-    <!-- Home -->
-    <section id="home" class="section">
-        <h1>GovBet Ultimate 6.0 – Квантове Казино</h1>
-        <p>Повністю перероблена версія з quantum ефектами, AI-чатом, AR-анімаціями та повним PWA. Один файл для GitHub – запусти та домінуй у метавсесвіті 2025!</p>
+    <section id="home" class="active">
+        <h1>Welcome to GoVbEt</h1>
+        <p>The premier demo casino experience. Place bets, spin slots, and win big!</p>
     </section>
 
-    <!-- Quantum 3D Casino -->
-    <section id="casino3D" class="section">
-        <div class="cube" id="cube3D">
-            <div class="front">🎰</div>
-            <div class="back">💎</div>
-            <div class="left">7️⃣</div>
-            <div class="right">🍒</div>
-            <div class="top">🔔</div>
-            <div class="bottom">🍋</div>
+    <section id="slots">
+        <h2>Classic Slots</h2>
+        <canvas id="slotCanvas" width="480" height="240"></canvas>
+        <div class="controls">
+            <input type="number" id="betAmount" class="bet-input" value="10" min="1" max="100">
+            <button onclick="spinSlots()">Spin</button>
+            <button onclick="autoSpin()">Auto Spin</button>
         </div>
+        <div id="slotResult"></div>
     </section>
 
-    <!-- Quantum Slots -->
-    <section id="slotsSection" class="section">
-        <h2>Квантові Слоти з AR</h2>
-        <div class="slot-container">
-            <div class="slot-reel" id="reel1" aria-label="Ролик 1">🍒</div>
-            <div class="slot-reel" id="reel2" aria-label="Ролик 2">🍋</div>
-            <div class="slot-reel" id="reel3" aria-label="Ролик 3">🔔</div>
+    <section id="roulette">
+        <h2>Roulette</h2>
+        <canvas id="rouletteCanvas" width="400" height="400"></canvas>
+        <div class="controls">
+            <input type="number" id="rouletteBet" class="bet-input" value="10" min="1" max="100">
+            <select id="rouletteType">
+                <option value="red">Red</option>
+                <option value="black">Black</option>
+                <option value="green">Green</option>
+                <option value="odd">Odd</option>
+                <option value="even">Even</option>
+            </select>
+            <button onclick="spinRoulette()">Spin</button>
         </div>
-        <button class="spin-button" id="spinButton" aria-label="Крутити квантові слоти">Крутити Квантові Слоти (Вартість: 10 квантів)</button>
-        <div id="slotMessage" style="text-align: center; margin-top: 1.5rem; color: var(--text-primary); font-weight: 900; font-size: 1.2em;"></div>
+        <div id="rouletteResult"></div>
     </section>
 
-    <!-- Quantum Feduk -->
-    <section id="fedukSection" class="section">
-        <h2>Квантовий Федюк – Майнінг Метавсесвіту</h2>
-        <div id="sandbox">
-            <div id="miner">
-                <div id="head"></div>
-                <div id="body"></div>
-                <div id="shovel">
-                    <div id="blade"></div>
-                </div>
-            </div>
+    <section id="blackjack">
+        <h2>Blackjack</h2>
+        <div id="blackjackTable">
+            <div id="dealerHand"></div>
+            <div id="playerHand"></div>
         </div>
-        <button class="spin-button" id="digButton" aria-label="Майнити квантовий пісок">Майнити Пісок (Вартість: 0 квантів)</button>
-        <div id="sandMessages"></div>
-    </section>
-
-    <!-- AI Bonus Wheel -->
-    <section id="bonusWheel" class="section">
-        <h2>AI-Бонус-Колесо Фортуни</h2>
-        <canvas id="bonusWheelCanvas" width="350" height="350"></canvas>
-        <button class="spin-button" id="wheelButton" aria-label="Крутити AI-колесо">Крутити AI-Колесо (Вартість: 20 квантів)</button>
-        <div id="wheelMessage"></div>
-    </section>
-
-    <!-- NFT Shop -->
-    <section id="shopSection" class="section">
-        <h2>NFT-Ексклюзивний Магазин</h2>
-        <div id="shop">
-            <div class="shop-item">
-                <span>🎰 Квантовий Free Spin (50 квантів)</span>
-                <button id="buyFreespin" aria-label="Купити Free Spin">Купити NFT</button>
-            </div>
-            <div class="shop-item">
-                <span>⚡ AI-VIP Режим (200 квантів)</span>
-                <button id="buyVip" aria-label="Купити VIP">Купити NFT</button>
-            </div>
-            <div class="shop-item">
-                <span>🛡️ Квантовий Скін Федюка (100 квантів)</span>
-                <button id="buySkin" aria-label="Купити скін">Купити NFT</button>
-            </div>
-            <div class="shop-item">
-                <span>💥 Квантовий Бустер x3 (150 квантів)</span>
-                <button id="buyBooster" aria-label="Купити бустер">Купити NFT</button>
-            </div>
+        <div class="controls">
+            <input type="number" id="bjBet" class="bet-input" value="10" min="1" max="100">
+            <button onclick="startBlackjack()">Deal</button>
+            <button id="hitBtn" onclick="hit()" disabled>Hit</button>
+            <button id="standBtn" onclick="stand()" disabled>Stand</button>
         </div>
+        <div id="bjResult"></div>
     </section>
 
-    <!-- AI Leaders -->
-    <section id="leadersSection" class="section">
-        <h2>AI-Глобальний Рейтинг Метавсесвіту</h2>
-        <ul id="leaderBoard"></ul>
+    <section id="shop">
+        <h2>Shop</h2>
+        <div>Buy boosts and items with winnings.</div>
+        <!-- Add shop items -->
+    </section>
+
+    <section id="leaders">
+        <h2>Leaderboard</h2>
+        <ul id="leaderList"></ul>
         <div id="chat"></div>
-        <div class="chat-input">
-            <input type="text" id="chatInput" placeholder="Введи повідомлення для AI-чату..." maxlength="200">
-            <button id="sendChat">Відправити</button>
-        </div>
     </section>
 
-    <!-- Footer -->
     <footer>
-        <p>GovBet Ultimate 6.0 © 2025 – Квантові права захищені. Повний PWA для GitHub Pages з AR-ефектами.</p>
+        <p>&copy; 2025 GoVbEt - Demo Casino. All rights reserved.</p>
     </footer>
 
-    <!-- Quantum Modal -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" aria-label="Закрити">&times;</span>
-            <div id="modalBody"></div>
-        </div>
-    </div>
-
-    <!-- PWA Install Prompt -->
-    <div id="installPrompt" class="install-prompt">
-        <p>Встановити GovBet як квантовий app? 🚀</p>
-        <button id="installYes">Так, встановити!</button>
-        <button id="installNo">Ні, дякую</button>
-    </div>
-
     <script>
-        /* ===========================================
-           Квантова архітектура: AI, AR, PWA, quantum sounds
-        =========================================== */
+        let balance = 1000;
+        let symbols = ['🍒', '🍋', '🔔', '💎', '7️⃣'];
+        let reels = [0, 0, 0];
+        let autoSpinning = false;
+        let gameInterval;
 
-        // Inline Service Worker for single file PWA
-        if ('serviceWorker' in navigator) {
-            const swCode = `
-                self.addEventListener('install', (e) => {
-                    e.waitUntil(caches.open('govbet-quantum-v1').then(cache => cache.addAll(['/', '/index.html'])));
-                });
-                self.addEventListener('fetch', (e) => {
-                    e.respondWith(caches.match(e.request).then(r => r || fetch(e.request)));
-                });
-            `;
-            const blob = new Blob([swCode], { type: 'application/javascript' });
-            const swUrl = URL.createObjectURL(blob);
-            navigator.serviceWorker.register(swUrl);
+        function updateBalance() {
+            document.getElementById('balance').textContent = `Balance: $${balance}`;
         }
 
-        // Quantum Audio with variety
-        let audioCtx;
-        let soundEnabled = localStorage.getItem('govbet_sound') !== 'false';
-
-        function playQuantumSound(type = 'spin') {
-            if (!soundEnabled || !audioCtx) return;
-            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            const freq = { spin: 440, win: 523.25, dig: 349.23, sad: 196, hum: 110 }[type];
-            osc.frequency.value = freq;
-            gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.5);
+        function showSection(id) {
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
         }
 
-        // Debounce utility
-        function debounce(fn, delay = 300) {
-            let timeout;
-            return (...args) => {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => fn(...args), delay);
-            };
+        // Slots
+        const slotCtx = document.getElementById('slotCanvas').getContext('2d');
+        function drawSlots() {
+            slotCtx.clearRect(0, 0, 480, 240);
+            for (let i = 0; i < 3; i++) {
+                slotCtx.fillStyle = '#000';
+                slotCtx.fillRect(i * 160, 60, 140, 140);
+                slotCtx.fillStyle = '#fff';
+                slotCtx.font = '100px Arial';
+                slotCtx.textAlign = 'center';
+                slotCtx.fillText(symbols[reels[i]], (i * 160) + 80, 140);
+            }
         }
 
-        // Quantum GameState with AI simulation
-        class QuantumGameState {
-            constructor() {
-                this.balance = parseInt(localStorage.getItem('govbet_balance')) || 0;
-                this.level = parseInt(localStorage.getItem('govbet_level')) || 1;
-                this.xp = parseInt(localStorage.getItem('govbet_xp')) || 0;
-                this.leaderBoard = JSON.parse(localStorage.getItem('govbet_leaders')) || [];
-                this.vipActive = localStorage.getItem('govbet_vip') ? new Date(localStorage.getItem('govbet_vip')) > new Date() : false;
-                this.booster = parseInt(localStorage.getItem('govbet_booster')) || 1;
-                this.freeSpins = parseInt(localStorage.getItem('govbet_freespins')) || 0;
-                this.playerName = localStorage.getItem('govbet_name') || `Квант${Math.floor(Math.random() * 10000)}`;
-                this.theme = localStorage.getItem('govbet_theme') || 'dark';
-                this.init();
-            }
+        async function spinSlots() {
+            const bet = parseInt(document.getElementById('betAmount').value);
+            if (balance < bet) return alert('Insufficient balance');
+            balance -= bet;
+            updateBalance();
 
-            init() {
-                document.body.setAttribute('data-theme', this.theme);
-                document.getElementById('themeToggle').textContent = this.theme === 'dark' ? '☀️' : '🌙';
-                document.getElementById('soundToggle').textContent = soundEnabled ? '🔊' : '🔇';
-                this.save();
-                this.updateUI();
-                this.updateLeaders();
-                game.pwa.init();
-                game.slots.updateButton();
-                new QuantumParticles(120); // Enhanced particles
-                this.simulateAIChat(); // Start AI chat simulation
-            }
-
-            updateUI() {
-                document.getElementById('balance').textContent = `💰 Квантовий Баланс: ${this.balance}`;
-                const progress = (this.xp / (this.level * 1000)) * 100;
-                const levelBar = document.getElementById('levelBar');
-                levelBar.style.setProperty('--progress', `${progress}%`);
-                levelBar.dataset.level = this.level;
-                levelBar.title = `Рівень ${this.level} (${this.xp}/${this.level * 1000} XP)`;
-            }
-
-            addBalance(amount) {
-                let finalAmount = amount;
-                if (this.vipActive) finalAmount *= 2;
-                const boosted = finalAmount * this.booster;
-                this.balance += boosted;
-                this.xp += boosted / 5; // Faster XP
-                this.checkLevelUp();
-                this.save();
-                this.updateUI();
-                this.updateLeaders();
-                this.triggerQuantumParticles();
-                playQuantumSound('win');
-                if ('vibrate' in navigator) navigator.vibrate([100, 50, 100]);
-            }
-
-            checkLevelUp() {
-                const required = this.level * 1000;
-                if (this.xp >= required) {
-                    this.level++;
-                    this.xp -= required;
-                    this.showModal(`Квантовий Левел-ап! Рівень ${this.level} – +200 квантів бонус! 🌌`);
-                    this.addBalance(200);
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 20; j++) {
+                    reels[i] = Math.floor(Math.random() * symbols.length);
+                    drawSlots();
+                    await new Promise(r => setTimeout(r, 50));
                 }
+                reels[i] = Math.floor(Math.random() * symbols.length);
             }
+            drawSlots();
 
-            deductBalance(amount) {
-                if (this.balance >= amount) {
-                    this.balance -= amount;
-                    this.save();
-                    this.updateUI();
-                    this.updateLeaders();
-                    return true;
-                }
-                this.showModal('Недостатньо квантів! Майніть більше в метавсесвіті.');
-                playQuantumSound('sad');
-                return false;
+            let win = 0;
+            if (reels[0] === reels[1] && reels[1] === reels[2]) {
+                win = bet * 10;
+                document.getElementById('slotCanvas').classList.add('win');
+                setTimeout(() => document.getElementById('slotCanvas').classList.remove('win'), 1000);
             }
-
-            updateLeaders() {
-                const current = { name: this.playerName, balance: this.balance, level: this.level, timestamp: Date.now() };
-                const existingIndex = this.leaderBoard.findIndex(p => p.name === this.playerName);
-                if (existingIndex > -1) {
-                    this.leaderBoard[existingIndex] = current;
-                } else {
-                    this.leaderBoard.push(current);
-                }
-                this.leaderBoard.sort((a, b) => b.balance - a.balance).slice(0, 50);
-                localStorage.setItem('govbet_leaders', JSON.stringify(this.leaderBoard));
-                const lbEl = document.getElementById('leaderBoard');
-                lbEl.innerHTML = this.leaderBoard.slice(0, 10).map((p, i) => 
-                    `<li>${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}.`} ${p.name} (рів. ${p.level}) – ${p.balance} квантів</li>`
-                ).join('');
-            }
-
-            addChatMessage(msg, isAI = false) {
-                const chat = document.getElementById('chat');
-                const div = document.createElement('div');
-                div.className = 'chat-message';
-                div.textContent = `${new Date().toLocaleTimeString()}: ${isAI ? '[AI]' : ''} ${msg}`;
-                div.style.color = isAI ? var(--secondary-color) : var(--accent-gold);
-                chat.appendChild(div);
-                chat.scrollTop = chat.scrollHeight;
-                setTimeout(() => div.remove(), 45000); // Longer chat history
-            }
-
-            simulateAIChat() {
-                const aiResponses = [
-                    "Квантова удача на твоєму боці! 🌌",
-                    "Майни глибше – метавсесвіт ховає скарби!",
-                    "AI прогноз: великий виграш попереду! 🎰",
-                    "Федюк шепоче: 'Гембл wisely...'"
-                ];
-                setInterval(() => {
-                    if (Math.random() > 0.8) {
-                        const response = aiResponses[Math.floor(Math.random() * aiResponses.length)];
-                        this.addChatMessage(response, true);
-                    }
-                }, 20000);
-            }
-
-            save() {
-                localStorage.setItem('govbet_balance', this.balance);
-                localStorage.setItem('govbet_level', this.level);
-                localStorage.setItem('govbet_xp', this.xp);
-                localStorage.setItem('govbet_vip', this.vipActive ? new Date(Date.now() + 24*60*60*1000).toISOString() : '');
-                localStorage.setItem('govbet_booster', this.booster);
-                localStorage.setItem('govbet_freespins', this.freeSpins);
-                localStorage.setItem('govbet_name', this.playerName);
-                localStorage.setItem('govbet_theme', this.theme);
-                localStorage.setItem('govbet_sound', soundEnabled);
-            }
-
-            showModal(message, type = 'info') {
-                const modal = document.getElementById('modal');
-                const body = document.getElementById('modalBody');
-                body.textContent = message;
-                body.style.color = type === 'error' ? 'red' : var(--text-primary);
-                modal.classList.add('show');
-                setTimeout(() => modal.classList.remove('show'), 4000);
-            }
-
-            triggerQuantumParticles() {
-                for (let i = 0; i < 25; i++) {
-                    setTimeout(() => {
-                        const particle = document.createElement('div');
-                        particle.className = 'particle';
-                        particle.style.left = Math.random() * 100 + 'vw';
-                        particle.style.top = Math.random() * 100 + 'vh';
-                        particle.style.animationDuration = (Math.random() * 4 + 3) + 's';
-                        document.getElementById('particles').appendChild(particle);
-                        setTimeout(() => particle.remove(), 7000);
-                    }, i * 100);
-                }
-            }
-
-            toggleTheme() {
-                this.theme = this.theme === 'dark' ? 'light' : 'dark';
-                document.body.setAttribute('data-theme', this.theme);
-                document.getElementById('themeToggle').textContent = this.theme === 'dark' ? '☀️' : '🌙';
-                this.save();
-                game.wheel.drawWheel(); // Redraw for theme
-            }
-
-            toggleSound() {
-                soundEnabled = !soundEnabled;
-                document.getElementById('soundToggle').textContent = soundEnabled ? '🔊' : '🔇';
-                this.save();
-            }
-
-            updateFreeSpins() {
-                game.slots.updateButton();
+            if (win > 0) {
+                balance += win;
+                updateBalance();
+                document.getElementById('slotResult').textContent = `Win: $${win}!`;
+            } else {
+                document.getElementById('slotResult').textContent = 'Try again!';
             }
         }
 
-        // Quantum SlotMachine with AR
-        class QuantumSlotMachine {
-            constructor() {
-                this.reels = ['🍒', '🍋', '🔔', '💎', '7️⃣', '🌟'];
-                this.reelEls = [document.getElementById('reel1'), document.getElementById('reel2'), document.getElementById('reel3')];
-                this.cost = 10;
-                this.init();
-            }
-
-            init() {
-                document.getElementById('spinButton').addEventListener('click', debounce(() => this.spin(), 200));
-                this.updateButton();
-            }
-
-            updateButton() {
-                const fs = game.state.freeSpins;
-                const button = document.getElementById('spinButton');
-                button.disabled = false;
-                if (fs > 0) {
-                    button.textContent = `AI-Free Spin (${fs} залишився)`;
-                } else {
-                    button.textContent = `Крутити Квантові Слоти (Вартість: ${this.cost} квантів)`;
-                }
-            }
-
-            async spin() {
-                const fs = game.state.freeSpins;
-                let usedFree = false;
-                if (fs > 0) {
-                    game.state.freeSpins--;
-                    game.state.save();
-                    game.state.updateFreeSpins();
-                    usedFree = true;
-                } else if (!game.state.deductBalance(this.cost)) return;
-
-                playQuantumSound('spin');
-
-                const button = document.getElementById('spinButton');
-                button.disabled = true;
-                button.textContent = 'Квантова ротація...';
-
-                this.reelEls.forEach((reel, i) => {
-                    reel.classList.add('spinning');
-                });
-
-                await new Promise(resolve => setTimeout(resolve, 1200));
-
-                let win = 0;
-                let winCount = 0;
-                this.reelEls.forEach((reel, i) => {
-                    const symbol = this.reels[Math.floor(Math.random() * this.reels.length)];
-                    reel.textContent = symbol;
-                    reel.classList.remove('spinning');
-                    if (symbol === '7️⃣' || symbol === '🌟') {
-                        reel.classList.add('win');
-                        win += symbol === '7️⃣' ? 150 : 200;
-                        winCount++;
-                        setTimeout(() => reel.classList.remove('win'), 3000);
-                    }
-                });
-
-                if (win > 0) {
-                    game.state.addBalance(win);
-                    document.getElementById('slotMessage').textContent = `Квантовий Джекпот x${winCount}! +${win} квантів! 🌌`;
-                    game.state.addChatMessage(`${game.state.playerName} розірвав слоти на ${win} квантів!`);
-                } else {
-                    document.getElementById('slotMessage').textContent = 'Квантова флуктуація... Спробуй ще!';
-                }
-
-                button.disabled = false;
-                if (!usedFree) this.updateButton();
+        function autoSpin() {
+            autoSpinning = !autoSpinning;
+            if (autoSpinning) {
+                gameInterval = setInterval(spinSlots, 2000);
+            } else {
+                clearInterval(gameInterval);
             }
         }
 
-        // Quantum Miner
-        class QuantumMiner {
-            constructor() {
-                this.messages = [
-                    "Федюк прориває quantum бар'єр! ⛏️🌌",
-                    "Метавсесвіт відкривається... ✨",
-                    "AI шепоче: 'Глибше, глибше!'",
-                    "Квантовий скарб знайдено! 💎"
-                ];
-                this.cost = 0;
-                this.init();
+        // Roulette
+        const rouletteCtx = document.getElementById('rouletteCanvas').getContext('2d');
+        let rouletteAngle = 0;
+        function drawRoulette() {
+            rouletteCtx.clearRect(0, 0, 400, 400);
+            rouletteCtx.save();
+            rouletteCtx.translate(200, 200);
+            rouletteCtx.rotate(rouletteAngle);
+            // Simple wheel draw (36 numbers, red/black)
+            for (let i = 0; i < 36; i++) {
+                rouletteCtx.beginPath();
+                rouletteCtx.arc(0, 0, 180, (i * Math.PI * 2 / 36), ((i + 1) * Math.PI * 2 / 36));
+                rouletteCtx.lineTo(0, 0);
+                rouletteCtx.fillStyle = i % 2 ? '#dc143c' : '#000';
+                rouletteCtx.fill();
+            }
+            rouletteCtx.restore();
+        }
+
+        async function spinRoulette() {
+            const bet = parseInt(document.getElementById('rouletteBet').value);
+            const type = document.getElementById('rouletteType').value;
+            if (balance < bet) return alert('Insufficient balance');
+            balance -= bet;
+            updateBalance();
+
+            for (let i = 0; i < 10; i++) {
+                rouletteAngle += Math.random() * Math.PI * 10;
+                drawRoulette();
+                await new Promise(r => setTimeout(r, 100));
             }
 
-            init() {
-                document.getElementById('digButton').addEventListener('click', debounce(() => this.dig(), 200));
+            const result = Math.floor(Math.random() * 37); // 0-36
+            const color = result === 0 ? 'green' : result % 2 ? 'red' : 'black';
+            const isWin = (type === 'red' && color === 'red') || (type === 'black' && color === 'black') || (type === 'green' && color === 'green') ||
+                          (type === 'odd' && result % 2 === 1 && result !== 0) || (type === 'even' && result % 2 === 0 && result !== 0);
+            let payout = 0;
+            if (isWin) {
+                payout = type === 'green' ? bet * 35 : bet * 2;
+                balance += payout;
+                updateBalance();
             }
+            document.getElementById('rouletteResult').textContent = `Number: ${result} (${color}) - ${isWin ? `Win: $${payout}` : 'Loss'}`;
+            rouletteAngle = 0; // Reset for next spin
+            drawRoulette();
+        }
 
-            dig() {
-                if (!game.state.deductBalance(this.cost)) return;
+        // Blackjack
+        let playerHand = [], dealerHand = [], gameActive = false;
+        const suits = ['♠', '♥', '♦', '♣'];
+        const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+        function getCard() {
+            const suit = suits[Math.floor(Math.random() * 4)];
+            const value = values[Math.floor(Math.random() * 13)];
+            return { suit, value, score: value === 'A' ? 11 : ['J','Q','K'].includes(value) ? 10 : parseInt(value) };
+        }
 
-                playQuantumSound('dig');
-
-                const miner = document.getElementById('miner');
-                miner.classList.add('digging');
-
-                setTimeout(() => {
-                    miner.classList.remove('digging');
-                    const message = this.messages[Math.floor(Math.random() * this.messages.length)];
-                    document.getElementById('sandMessages').textContent = message;
-                    const reward = 10 + Math.floor(Math.random() * 20); // Higher rewards
-                    game.state.addBalance(reward);
-                    
-                    if (Math.random() > 0.6) this.spawnQuantumItem();
-                    game.state.addChatMessage(`${game.state.playerName} витягнув ${reward} квантів з піску!`);
-                }, 1000);
+        function calculateScore(hand) {
+            let score = hand.reduce((sum, card) => sum + card.score, 0);
+            let aces = hand.filter(c => c.value === 'A').length;
+            while (score > 21 && aces) {
+                score -= 10;
+                aces--;
             }
+            return score;
+        }
 
-            spawnQuantumItem() {
-                const item = document.createElement('div');
-                item.className = 'item';
-                item.textContent = Math.random() > 0.5 ? '💎' : '🪙';
-                item.style.left = (Math.random() * 90 + 5) + '%';
-                document.getElementById('sandbox').appendChild(item);
-                setTimeout(() => item.remove(), 3000);
+        function updateHands() {
+            document.getElementById('playerHand').innerHTML = playerHand.map(c => `${c.value}${c.suit}`).join(' ');
+            document.getElementById('dealerHand').innerHTML = dealerHand.map((c, i) => i === 0 ? `${c.value}${c.suit}` : '??').join(' ') + (gameActive ? '' : dealerHand.slice(1).map(c => ` ${c.value}${c.suit}`).join(''));
+        }
+
+        function startBlackjack() {
+            const bet = parseInt(document.getElementById('bjBet').value);
+            if (balance < bet) return alert('Insufficient balance');
+            balance -= bet;
+            updateBalance();
+            playerHand = [getCard(), getCard()];
+            dealerHand = [getCard(), getCard()];
+            gameActive = true;
+            document.getElementById('hitBtn').disabled = false;
+            document.getElementById('standBtn').disabled = false;
+            updateHands();
+            const playerScore = calculateScore(playerHand);
+            if (playerScore === 21) stand();
+        }
+
+        function hit() {
+            playerHand.push(getCard());
+            updateHands();
+            if (calculateScore(playerHand) > 21) {
+                document.getElementById('bjResult').textContent = 'Bust! You lose.';
+                endGame();
             }
         }
 
-        // AI BonusWheel
-        class AIBonusWheel {
-            constructor() {
-                this.prizes = [
-                    { name: '100 квантів', value: 100, color: '#ffd700' },
-                    { name: '250 квантів', value: 250, color: '#ffed4e' },
-                    { name: 'Бустер x3 (2 год)', value: 'booster', color: '#ff6347' },
-                    { name: 'AI-VIP 2 дні', value: 'vip', color: '#9370db' },
-                    { name: '5 Free Spins', value: 5, color: '#00fa9a' },
-                    { name: 'NFT Скін', value: 'nft', color: '#ff1493' }
-                ];
-                this.cost = 20;
-                this.canvas = document.getElementById('bonusWheelCanvas');
-                this.ctx = this.canvas.getContext('2d');
-                this.currentRotation = 0;
-                this.init();
-            }
-
-            init() {
-                this.drawWheel();
-                document.getElementById('wheelButton').addEventListener('click', debounce(() => this.spin(), 200));
-            }
-
-            drawWheel() {
-                const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
-                const centerX = 175;
-                const centerY = 175;
-                const radius = 160;
-                const angleStep = (2 * Math.PI) / this.prizes.length;
-
-                this.ctx.clearRect(0, 0, 350, 350);
-
-                this.prizes.forEach((prize, i) => {
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(centerX, centerY);
-                    this.ctx.arc(centerX, centerY, radius, i * angleStep + this.currentRotation, (i + 1) * angleStep + this.currentRotation);
-                    this.ctx.closePath();
-                    this.ctx.fillStyle = prize.color;
-                    this.ctx.fill();
-                    this.ctx.strokeStyle = primaryColor;
-                    this.ctx.lineWidth = 3;
-                    this.ctx.stroke();
-
-                    this.ctx.save();
-                    this.ctx.translate(centerX, centerY);
-                    this.ctx.rotate(i * angleStep + angleStep / 2 + this.currentRotation);
-                    this.ctx.textAlign = 'right';
-                    this.ctx.fillStyle = '#000';
-                    this.ctx.font = 'bold 14px Orbitron';
-                    this.ctx.fillText(prize.name, radius - 25, 8);
-                    this.ctx.restore();
-                });
-
-                // Quantum center
-                this.ctx.beginPath();
-                this.ctx.arc(centerX, centerY, 25, 0, 2 * Math.PI);
-                this.ctx.fillStyle = primaryColor;
-                this.ctx.fill();
-                this.ctx.fillStyle = '#000';
-                this.ctx.font = 'bold 16px Orbitron';
-                this.ctx.textAlign = 'center';
-                this.ctx.fillText('AI', centerX, centerY + 5);
-            }
-
-            async spin() {
-                if (!game.state.deductBalance(this.cost)) return;
-
-                playQuantumSound('spin');
-
-                this.currentRotation += Math.PI * 2 * 4; // 4 full rotations
-                this.canvas.classList.add('wheel-spin');
-                const resultIndex = Math.floor(Math.random() * this.prizes.length);
-                const prize = this.prizes[resultIndex];
-
-                await new Promise(resolve => setTimeout(resolve, 4000));
-
-                this.canvas.classList.remove('wheel-spin');
-                this.drawWheel(); // Redraw after spin
-
-                let reward = 0;
-                switch (prize.value) {
-                    case 'booster':
-                        game.state.booster *= 3;
-                        localStorage.setItem('govbet_booster', game.state.booster);
-                        game.state.save();
-                        break;
-                    case 'vip':
-                        game.state.vipActive = true;
-                        localStorage.setItem('govbet_vip', new Date(Date.now() + 48*60*60*1000).toISOString());
-                        game.state.save();
-                        break;
-                    case 'nft':
-                        game.state.showModal('NFT-Скін активовано! 🌟');
-                        break;
-                    default:
-                        if (prize.name.includes('Free Spins')) {
-                            game.state.freeSpins += prize.value;
-                            localStorage.setItem('govbet_freespins', game.state.freeSpins);
-                            game.state.updateFreeSpins();
-                        } else {
-                            reward = prize.value;
-                            game.state.addBalance(reward);
-                        }
-                }
-
-                document.getElementById('wheelMessage').textContent = `AI-Прогноз: ${prize.name}! ${reward > 0 ? `+${reward} квантів` : ''}`;
-                game.state.addChatMessage(`${game.state.playerName} активував AI на ${prize.name}!`);
-            }
+        function stand() {
+            while (calculateScore(dealerHand) < 17) dealerHand.push(getCard());
+            updateHands();
+            const playerScore = calculateScore(playerHand);
+            const dealerScore = calculateScore(dealerHand);
+            let result = '';
+            if (playerScore > 21) result = 'You bust!';
+            else if (dealerScore > 21 || playerScore > dealerScore) {
+                result = 'You win!';
+                balance += parseInt(document.getElementById('bjBet').value) * 2;
+                updateBalance();
+            } else if (playerScore === dealerScore) result = 'Push!';
+            else result = 'Dealer wins!';
+            document.getElementById('bjResult').textContent = `${result} (P: ${playerScore}, D: ${dealerScore})`;
+            endGame();
         }
 
-        // NFT Shop
-        class NFTShop {
-            constructor() {
-                this.items = {
-                    freespin: { cost: 50, action: () => { 
-                        game.state.freeSpins += 1; 
-                        localStorage.setItem('govbet_freespins', game.state.freeSpins); 
-                        game.state.updateFreeSpins();
-                    } },
-                    vip: { cost: 200, action: () => { 
-                        game.state.vipActive = true; 
-                        localStorage.setItem('govbet_vip', new Date(Date.now() + 48*60*60*1000).toISOString()); 
-                        game.state.save();
-                    } },
-                    skin: { cost: 100, action: () => { game.state.showModal('Квантовий NFT-Скін Федюка активовано! 🎨🌌'); } },
-                    booster: { cost: 150, action: () => { 
-                        game.state.booster *= 3; 
-                        localStorage.setItem('govbet_booster', game.state.booster); 
-                        game.state.save();
-                    } }
-                };
-                this.init();
-            }
-
-            init() {
-                document.getElementById('buyFreespin').addEventListener('click', () => this.buy('freespin', 50));
-                document.getElementById('buyVip').addEventListener('click', () => this.buy('vip', 200));
-                document.getElementById('buySkin').addEventListener('click', () => this.buy('skin', 100));
-                document.getElementById('buyBooster').addEventListener('click', () => this.buy('booster', 150));
-                this.updateButtons();
-            }
-
-            buy(type, cost) {
-                if (game.state.deductBalance(cost)) {
-                    this.items[type].action();
-                    game.state.save();
-                    this.updateButtons();
-                    game.state.showModal(`NFT-Куплено: ${type.toUpperCase()}! ✅🌟`);
-                    game.state.addChatMessage(`${game.state.playerName} придбав NFT-${type}!`);
-                }
-            }
-
-            updateButtons() {
-                Object.keys(this.items).forEach(key => {
-                    const btn = document.getElementById(`buy${key.charAt(0).toUpperCase() + key.slice(1)}`);
-                    if (btn) {
-                        const cost = this.items[key].cost;
-                        btn.disabled = game.state.balance < cost;
-                        btn.textContent = game.state.balance >= cost ? 'Купити NFT' : 'Бракує квантів';
-                    }
-                });
-            }
+        function endGame() {
+            gameActive = false;
+            document.getElementById('hitBtn').disabled = true;
+            document.getElementById('standBtn').disabled = true;
         }
 
-        // Quantum Cube AR
-        class QuantumCube {
-            constructor() {
-                this.cube = document.getElementById('cube3D');
-                this.angleX = 0;
-                this.angleY = 0;
-                this.init();
-            }
-
-            init() {
-                this.animate();
-                this.cube.addEventListener('mouseenter', () => this.speedUp());
-                this.cube.addEventListener('mouseleave', () => this.normalSpeed());
-            }
-
-            animate() {
-                this.angleX += 0.8;
-                this.angleY += 0.5;
-                this.cube.style.transform = `rotateX(${this.angleX}deg) rotateY(${this.angleY}deg) scale(1)`;
-                requestAnimationFrame(() => this.animate());
-            }
-
-            speedUp() {
-                this.angleX += 2;
-                this.angleY += 1.5;
-            }
-
-            normalSpeed() {
-                // Reset to normal on leave, but animation continues
-            }
-        }
-
-        // Modal Handler
-        class QuantumModal {
-            constructor() {
-                document.querySelector('.close-modal').addEventListener('click', () => {
-                    document.getElementById('modal').classList.remove('show');
-                });
-                document.getElementById('modal').addEventListener('click', (e) => {
-                    if (e.target === e.currentTarget) e.currentTarget.classList.remove('show');
-                });
-            }
-        }
-
-        // Enhanced Quantum Particles
-        class QuantumParticles {
-            constructor(count = 120) {
-                this.container = document.getElementById('particles');
-                for (let i = 0; i < count; i++) {
-                    this.createParticle();
-                }
-                setInterval(() => this.createParticle(), 2000); // Continuous generation
-            }
-
-            createParticle() {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + 'vw';
-                particle.style.animationDuration = (Math.random() * 5 + 4) + 's';
-                particle.style.animationDelay = Math.random() * 2 + 's';
-                this.container.appendChild(particle);
-                setTimeout(() => particle.remove(), 9000);
-            }
-        }
-
-        // AI Leaders Updater
-        class AILeadersUpdater {
-            constructor() {
-                setInterval(() => {
-                    if (Math.random() > 0.6) {
-                        const fakeName = `AI-Бот${Math.floor(Math.random() * 100)}`;
-                        const fakeBal = 2000 + Math.floor(Math.random() * 8000);
-                        game.state.leaderBoard.unshift({ name: fakeName, balance: fakeBal, level: Math.floor(Math.random() * 15) + 1, timestamp: Date.now() });
-                        game.state.leaderBoard.slice(0, 50);
-                        game.state.updateLeaders();
-                        game.state.addChatMessage(`${fakeName} домінує з ${fakeBal} квантів!`);
-                    }
-                }, 10000); // Faster updates
-            }
-        }
-
-        // PWA Handler Enhanced
-        class QuantumPWA {
-            constructor() {
-                this.deferredPrompt = null;
-                this.init();
-            }
-
-            init() {
-                window.addEventListener('beforeinstallprompt', (e) => {
-                    e.preventDefault();
-                    this.deferredPrompt = e;
-                    const prompt = document.getElementById('installPrompt');
-                    prompt.style.display = 'block';
-                    setTimeout(() => prompt.style.display = 'none', 30000); // Auto-hide
-                });
-
-                document.getElementById('installYes').addEventListener('click', () => this.install());
-                document.getElementById('installNo').addEventListener('click', () => this.hidePrompt());
-            }
-
-            install() {
-                if (this.deferredPrompt) {
-                    this.deferredPrompt.prompt();
-                    this.deferredPrompt.userChoice.then(() => this.deferredPrompt = null);
-                }
-                this.hidePrompt();
-            }
-
-            hidePrompt() {
-                document.getElementById('installPrompt').style.display = 'none';
-            }
-        }
-
-        // Chat Handler
-        class AIChat {
-            constructor() {
-                document.getElementById('sendChat').addEventListener('click', () => this.sendMessage());
-                document.getElementById('chatInput').addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') this.sendMessage();
-                });
-            }
-
-            sendMessage() {
-                const input = document.getElementById('chatInput');
-                const msg = input.value.trim();
-                if (msg) {
-                    game.state.addChatMessage(msg);
-                    input.value = '';
-                    // Simulate AI response
-                    setTimeout(() => {
-                        const aiReply = `AI: Цікаво! Твоя квантова стратегія надихає. 🌟`;
-                        game.state.addChatMessage(aiReply, true);
-                    }, 1500);
-                }
-            }
-        }
-
-        // Event Listeners
-        document.getElementById('themeToggle').addEventListener('click', () => game.state.toggleTheme());
-        document.getElementById('soundToggle').addEventListener('click', () => game.state.toggleSound());
-
-        // Global Quantum Game
-        const game = {
-            state: new QuantumGameState(),
-            slots: new QuantumSlotMachine(),
-            miner: new QuantumMiner(),
-            wheel: new AIBonusWheel(),
-            shop: new NFTShop(),
-            cube: new QuantumCube(),
-            modal: new QuantumModal(),
-            leaders: new AILeadersUpdater(),
-            pwa: new QuantumPWA(),
-            chat: new AIChat()
-        };
-
-        // Quantum Keyboard Nav
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const active = document.activeElement.closest('button, input');
-                if (active) active.click ? active.click() : active.focus();
-            }
-            if (e.key.toLowerCase() === 't') game.state.toggleTheme();
-            if (e.key.toLowerCase() === 's') game.state.toggleSound();
-        });
-
-        // Error Handler with Recovery
-        window.addEventListener('error', (e) => {
-            console.error('Quantum Error:', e.error);
-            game.state.showModal('Квантова помилка! Система відновлюється...', 'error');
-        });
-
-        // Ambient Quantum Hum
-        setInterval(() => {
-            if (soundEnabled && Math.random() > 0.98) playQuantumSound('hum');
-        }, 25000);
-
-        console.log('GovBet Ultimate 6.0 Quantum Loaded! AI, AR, PWA – Готово до метавсесвіту 2025! 🌌');
+        // Init
+        drawSlots();
+        drawRoulette();
+        updateBalance();
     </script>
 </body>
 </html>
-
 
 
 
