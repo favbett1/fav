@@ -358,6 +358,18 @@
             opacity: 0.8;
         }
 
+        .odds {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .odds button {
+            flex: 1;
+            min-width: 80px;
+        }
+
         #slotsCanvas, #liveCasinoCanvas {
             display: block;
             margin: 0 auto 1.5rem;
@@ -542,13 +554,704 @@
     <div class="hero">
         <h1>GovBet Demo - Грайте безкоштовно!</h1>
         <p>Спробуйте слоти від Pragmatic Play, live-казино та ставки з демо-рахунком. Створено Головнін В.С.</p>
-        <a href="#" onclick="show
+        <a href="#" onclick="showSection('slots')" class="hero-cta">Грати в слоти</a>
+    </div>
 
+    <section id="home" class="active">
+        <h2>Ласкаво просимо до GovBet Demo!</h2>
+        <p style="text-align: center; max-width: 600px; margin: 0 auto;">Демо-версія казино з реальними слотами Pragmatic Play, live-іграми та ставками. Грайте безкоштовно з демо-рахунком!</p>
+    </section>
 
+    <section id="slots">
+        <h2>Слоти</h2>
+        <div class="game-grid" id="slotGames"></div>
+        <div id="slotGameArea" style="display: none;">
+            <h3 id="slotGameTitle"></h3>
+            <canvas id="slotsCanvas" width="400" height="300"></canvas>
+            <div class="controls">
+                <input type="number" id="slotBet" class="bet-input" value="10" min="1" max="1000" aria-label="Сума ставки">
+                <button id="spinButton">Крутити</button>
+                <button id="backToSlots">Назад до слотів</button>
+            </div>
+            <div id="slotResult" style="text-align: center; margin-top: 1rem;"></div>
+            <div id="jackpot" style="text-align: center; color: var(--gold);">Джекпот: ₴<span id="jackpotAmount">100000</span></div>
+        </div>
+    </section>
 
+    <section id="live">
+        <h2>Live Казино</h2>
+        <div class="game-grid" id="liveGames"></div>
+        <div id="liveGameArea" style="display: none;">
+            <h3 id="liveGameTitle"></h3>
+            <canvas id="liveCasinoCanvas" width="400" height="300"></canvas>
+            <div class="controls">
+                <input type="number" id="liveBet" class="bet-input" value="10" min="1" max="1000" aria-label="Сума ставки">
+                <button id="livePlayButton">Грати</button>
+                <button id="backToLive">Назад до ігор</button>
+            </div>
+            <div id="liveResult" style="text-align: center; margin-top: 1rem;"></div>
+        </div>
+    </section>
 
+    <section id="sports">
+        <h2>Ставки на спорт</h2>
+        <div class="game-grid" id="sportsEvents"></div>
+        <div class="controls">
+            <input type="number" id="sportsBet" class="bet-input" value="10" min="1" max="1000" aria-label="Сума ставки на спорт">
+        </div>
+    </section>
 
+    <section id="esports">
+        <h2>Кіберспорт</h2>
+        <div class="game-grid" id="esportsEvents"></div>
+        <div class="controls">
+            <input type="number" id="esportsBet" class="bet-input" value="10" min="1" max="1000" aria-label="Сума ставки на кіберспорт">
+        </div>
+    </section>
 
+    <section id="leaders">
+        <h2>Рейтинг гравців</h2>
+        <ul id="leaderList"></ul>
+        <div id="chat"></div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Чат із гравцями..." maxlength="100" aria-label="Повідомлення в чат">
+            <button id="sendChat">Надіслати</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 GovBet Demo - Демо-версія казино.</p>
+        <p class="creator">Створено Головнін В.С.</p>
+    </footer>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" aria-label="Закрити">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // Utility: Debounce
+        function debounce(fn, delay = 300) {
+            let timeout;
+            return (...args) => {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => fn(...args), delay);
+            };
+        }
+
+        // Localization
+        const translations = {
+            uk: {
+                home: "Головна",
+                slots: "Слоти",
+                live: "Live Казино",
+                sports: "Спорт",
+                esports: "Кіберспорт",
+                leaders: "Лідери",
+                balance: "Баланс: ₴",
+                spin: "Крутити",
+                play: "Грати",
+                send: "Надіслати",
+                back: "Назад до ігор",
+                backSlots: "Назад до слотів",
+                chatPlaceholder: "Чат із гравцями...",
+                welcomeText: "Демо-версія казино з реальними слотами Pragmatic Play, live-іграми та ставками. Грайте безкоштовно з демо-рахунком!",
+                heroTitle: "GovBet Demo - Грайте безкоштовно!",
+                heroText: "Спробуйте слоти від Pragmatic Play, live-казино та ставки з демо-рахунком. Створено Головнін В.С.",
+                cta: "Грати в слоти",
+                footer: "&copy; 2025 GovBet Demo - Демо-версія казино.",
+                creator: "Створено Головнін В.С.",
+                insufficientFunds: "Недостатньо коштів!",
+                win: "Виграш: ₴",
+                loss: "Програш!",
+                resetBalance: "Скинути баланс",
+                jackpot: "Джекпот: ₴",
+                betPlaced: "Ставка прийнята!"
+            },
+            en: {
+                home: "Home",
+                slots: "Slots",
+                live: "Live Casino",
+                sports: "Sports",
+                esports: "Esports",
+                leaders: "Leaderboard",
+                balance: "Balance: ₴",
+                spin: "Spin",
+                play: "Play",
+                send: "Send",
+                back: "Back to games",
+                backSlots: "Back to slots",
+                chatPlaceholder: "Chat with players...",
+                welcomeText: "Demo version of a casino with real Pragmatic Play slots, live games, and betting. Play for free with a demo account!",
+                heroTitle: "GovBet Demo - Play for Free!",
+                heroText: "Try Pragmatic Play slots, live casino, and betting with a demo account. Created by Holovnin V.S.",
+                cta: "Play Slots",
+                footer: "&copy; 2025 GovBet Demo - Casino Demo Version.",
+                creator: "Created by Holovnin V.S.",
+                insufficientFunds: "Insufficient funds!",
+                win: "Win: ₴",
+                loss: "Loss!",
+                resetBalance: "Reset Balance",
+                jackpot: "Jackpot: ₴",
+                betPlaced: "Bet placed!"
+            }
+        };
+
+        // Game State
+        class GameState {
+            constructor() {
+                this.balance = parseInt(localStorage.getItem('govbet_demo_balance')) || 10000;
+                this.playerName = localStorage.getItem('govbet_demo_name') || `Player${Math.floor(Math.random() * 1000)}`;
+                this.leaderboard = JSON.parse(localStorage.getItem('govbet_demo_leaderboard')) || [];
+                this.soundEnabled = localStorage.getItem('govbet_demo_sound') !== 'false';
+                this.theme = localStorage.getItem('govbet_demo_theme') || 'dark';
+                this.lang = localStorage.getItem('govbet_demo_lang') || 'uk';
+                this.jackpot = parseInt(localStorage.getItem('govbet_demo_jackpot')) || 100000;
+                this.init();
+            }
+
+            init() {
+                document.body.setAttribute('data-theme', this.theme);
+                document.getElementById('themeToggle').textContent = this.theme === 'dark' ? '☀️' : '🌙';
+                document.getElementById('soundToggle').textContent = this.soundEnabled ? '🔊' : '🔇';
+                document.getElementById('langToggle').textContent = this.lang === 'uk' ? '🇺🇦' : '🇬🇧';
+                document.getElementById('resetBalance').title = translations[this.lang].resetBalance;
+                this.updateUI();
+                this.updateLeaderboard();
+                this.applyLocalization();
+                document.getElementById('themeToggle').addEventListener('click', () => this.toggleTheme());
+                document.getElementById('soundToggle').addEventListener('click', () => this.toggleSound());
+                document.getElementById('langToggle').addEventListener('click', () => this.toggleLang());
+                document.getElementById('resetBalance').addEventListener('click', () => this.resetBalance());
+                document.getElementById('sendChat').addEventListener('click', () => this.sendChat());
+                document.getElementById('chatInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') this.sendChat(); });
+                document.querySelector('.close-modal').addEventListener('click', () => document.getElementById('modal').classList.remove('show'));
+            }
+
+            applyLocalization() {
+                const t = translations[this.lang];
+                document.querySelectorAll('nav a')[0].textContent = t.home;
+                document.querySelectorAll('nav a')[1].textContent = t.slots;
+                document.querySelectorAll('nav a')[2].textContent = t.live;
+                document.querySelectorAll('nav a')[3].textContent = t.sports;
+                document.querySelectorAll('nav a')[4].textContent = t.esports;
+                document.querySelectorAll('nav a')[5].textContent = t.leaders;
+                document.getElementById('balance').textContent = `${t.balance}${this.balance.toLocaleString()}`;
+                document.getElementById('spinButton').textContent = t.spin;
+                document.getElementById('livePlayButton').textContent = t.play;
+                document.getElementById('backToSlots').textContent = t.backSlots;
+                document.getElementById('backToLive').textContent = t.back;
+                document.getElementById('sendChat').textContent = t.send;
+                document.getElementById('chatInput').placeholder = t.chatPlaceholder;
+                document.querySelector('#home p').textContent = t.welcomeText;
+                document.querySelector('.hero h1').textContent = t.heroTitle;
+                document.querySelector('.hero p').textContent = t.heroText;
+                document.querySelector('.hero-cta').textContent = t.cta;
+                document.querySelector('footer p:first-child').textContent = t.footer;
+                document.querySelector('.creator').textContent = t.creator;
+                document.getElementById('jackpot').textContent = `${t.jackpot}${this.jackpot.toLocaleString()}`;
+            }
+
+            updateUI() {
+                document.getElementById('balance').textContent = `${translations[this.lang].balance}${this.balance.toLocaleString()}`;
+                document.getElementById('jackpotAmount').textContent = this.jackpot.toLocaleString();
+            }
+
+            addBalance(amount) {
+                try {
+                    this.balance += Math.floor(amount);
+                    this.jackpot += Math.floor(amount * 0.05);
+                    this.save();
+                    this.updateUI();
+                    this.updateLeaderboard();
+                    this.showModal(`${translations[this.lang].win}${amount.toLocaleString()}`, 'success');
+                    this.playSound('win');
+                } catch (e) {
+                    console.error('Error adding balance:', e);
+                }
+            }
+
+            deductBalance(amount) {
+                try {
+                    if (this.balance >= amount) {
+                        this.balance -= amount;
+                        this.jackpot += Math.floor(amount * 0.05);
+                        this.save();
+                        this.updateUI();
+                        this.updateLeaderboard();
+                        return true;
+                    }
+                    this.showModal(translations[this.lang].insufficientFunds, 'error');
+                    this.playSound('lose');
+                    return false;
+                } catch (e) {
+                    console.error('Error deducting balance:', e);
+                    return false;
+                }
+            }
+
+            resetBalance() {
+                try {
+                    this.balance = 10000;
+                    this.jackpot = 100000;
+                    this.save();
+                    this.updateUI();
+                    this.updateLeaderboard();
+                    this.showModal(this.lang === 'uk' ? 'Баланс скинуто до ₴10000!' : 'Balance reset to ₴10000!', 'success');
+                } catch (e) {
+                    console.error('Error resetting balance:', e);
+                }
+            }
+
+            updateLeaderboard() {
+                try {
+                    this.leaderboard = this.leaderboard.filter(p => Date.now() - p.timestamp < 24*60*60*1000);
+                    const existingIndex = this.leaderboard.findIndex(p => p.name === this.playerName);
+                    if (existingIndex > -1) {
+                        this.leaderboard[existingIndex] = { name: this.playerName, balance: this.balance, timestamp: Date.now() };
+                    } else {
+                        this.leaderboard.push({ name: this.playerName, balance: this.balance, timestamp: Date.now() });
+                    }
+                    this.leaderboard.sort((a, b) => b.balance - a.balance).slice(0, 5);
+                    localStorage.setItem('govbet_demo_leaderboard', JSON.stringify(this.leaderboard));
+                    document.getElementById('leaderList').innerHTML = this.leaderboard.map((p, i) => 
+                        `<li>${i + 1}. ${p.name}: ₴${p.balance.toLocaleString()}</li>`
+                    ).join('');
+                } catch (e) {
+                    console.error('Error updating leaderboard:', e);
+                }
+            }
+
+            sendChat() {
+                try {
+                    const input = document.getElementById('chatInput');
+                    const msg = input.value.trim();
+                    if (msg && msg.length <= 100) {
+                        const chat = document.getElementById('chat');
+                        const div = document.createElement('div');
+                        div.className = 'chat-message';
+                        div.textContent = `${new Date().toLocaleTimeString(this.lang === 'uk' ? 'uk-UA' : 'en-US')}: ${this.playerName}: ${msg}`;
+                        chat.appendChild(div);
+                        chat.scrollTop = chat.scrollHeight;
+                        input.value = '';
+                        setTimeout(() => div.remove(), 30000);
+                    }
+                } catch (e) {
+                    console.error('Error sending chat message:', e);
+                }
+            }
+
+            playSound(type) {
+                if (!this.soundEnabled) return;
+                try {
+                    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                    const osc = ctx.createOscillator();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(type === 'win' ? 523.25 : 196, ctx.currentTime);
+                    const gain = ctx.createGain();
+                    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.3);
+                } catch (e) {
+                    console.error('Error playing sound:', e);
+                }
+            }
+
+            save() {
+                try {
+                    localStorage.setItem('govbet_demo_balance', this.balance);
+                    localStorage.setItem('govbet_demo_name', this.playerName);
+                    localStorage.setItem('govbet_demo_sound', this.soundEnabled);
+                    localStorage.setItem('govbet_demo_theme', this.theme);
+                    localStorage.setItem('govbet_demo_lang', this.lang);
+                    localStorage.setItem('govbet_demo_jackpot', this.jackpot);
+                } catch (e) {
+                    console.error('Error saving state:', e);
+                }
+            }
+
+            showModal(message, type = 'info') {
+                try {
+                    const modal = document.getElementById('modal');
+                    const body = document.getElementById('modalBody');
+                    body.textContent = message;
+                    body.style.color = type === 'error' ? 'var(--red)' : 'var(--gold)';
+                    modal.classList.add('show');
+                    setTimeout(() => modal.classList.remove('show'), 2000);
+                } catch (e) {
+                    console.error('Error showing modal:', e);
+                }
+            }
+
+            toggleTheme() {
+                this.theme = this.theme === 'dark' ? 'light' : 'dark';
+                document.body.setAttribute('data-theme', this.theme);
+                document.getElementById('themeToggle').textContent = this.theme === 'dark' ? '☀️' : '🌙';
+                this.save();
+            }
+
+            toggleSound() {
+                this.soundEnabled = !this.soundEnabled;
+                document.getElementById('soundToggle').textContent = this.soundEnabled ? '🔊' : '🔇';
+                this.save();
+            }
+
+            toggleLang() {
+                this.lang = this.lang === 'uk' ? 'en' : 'uk';
+                document.getElementById('langToggle').textContent = this.lang === 'uk' ? '🇺🇦' : '🇬🇧';
+                this.save();
+                this.applyLocalization();
+                game.slots.render();
+                game.live.render();
+                game.sports.render();
+                game.esports.render();
+            }
+        }
+
+        // Show Section
+        function showSection(id) {
+            try {
+                document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+                document.getElementById(id).classList.add('active');
+                if (id === 'slots') {
+                    document.getElementById('slotGameArea').style.display = 'none';
+                    document.getElementById('slotGames').style.display = 'grid';
+                } else if (id === 'live') {
+                    document.getElementById('liveGameArea').style.display = 'none';
+                    document.getElementById('liveGames').style.display = 'grid';
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (e) {
+                console.error('Error switching section:', e);
+            }
+        }
+
+        // Slots
+        class Slots {
+            constructor() {
+                this.games = [
+                    { id: 'sweet_bonanza', name: { uk: 'Sweet Bonanza', en: 'Sweet Bonanza' }, provider: 'Pragmatic Play', rtp: 0.965, volatility: 'High', image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmY4ZmUwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlN3ZWV0IEJvbmFuemE8L3RleHQ+PC9zdmc+' },
+                    { id: 'wolf_gold', name: { uk: 'Wolf Gold', en: 'Wolf Gold' }, provider: 'Pragmatic Play', rtp: 0.96, volatility: 'Medium', image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmZiYzAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPldvbGYgR29sZDwvdGV4dD48L3N2Zz4=' },
+                    { id: 'gates_of_olympus', name: { uk: 'Gates of Olympus', en: 'Gates of Olympus' }, provider: 'Pragmatic Play', rtp: 0.955, volatility: 'High', image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjN2Y0ZmZmIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkdhdGVzIG9mIE9seW1wdXM8L3RleHQ+PC9zdmc+' },
+                    { id: 'book_of_dead', name: { uk: 'Book of Dead', en: 'Book of Dead' }, provider: 'Play\'n GO', rtp: 0.962, volatility: 'High', image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYzVhYzAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkJvb2sgb2YgRGVhZDwvdGV4dD48L3N2Zz4=' }
+                ];
+                this.currentGame = null;
+                this.canvas = document.getElementById('slotsCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.reels = [0, 0, 0];
+                this.symbols = ['🍒', '🍋', '💎', '⭐', '7️⃣'];
+                this.init();
+            }
+
+            init() {
+                this.render();
+                document.getElementById('spinButton').addEventListener('click', debounce(() => this.spin(), 200));
+                document.getElementById('backToSlots').addEventListener('click', () => {
+                    document.getElementById('slotGameArea').style.display = 'none';
+                    document.getElementById('slotGames').style.display = 'grid';
+                });
+            }
+
+            render() {
+                try {
+                    document.getElementById('slotGames').innerHTML = this.games.map(game => `
+                        <div class="game-card">
+                            <img src="${game.image}" alt="${game.name[gameState.lang]}" loading="lazy">
+                            <h3>${game.name[gameState.lang]}</h3>
+                            <p>${game.provider} | RTP: ${(game.rtp * 100).toFixed(1)}% | ${game.volatility}</p>
+                            <button onclick="game.slots.playGame('${game.id}')">${gameState.lang === 'uk' ? 'Грати' : 'Play'}</button>
+                        </div>
+                    `).join('');
+                } catch (e) {
+                    console.error('Error rendering slots:', e);
+                }
+            }
+
+            playGame(id) {
+                try {
+                    this.currentGame = this.games.find(g => g.id === id);
+                    document.getElementById('slotGames').style.display = 'none';
+                    document.getElementById('slotGameArea').style.display = 'block';
+                    document.getElementById('slotGameTitle').textContent = this.currentGame.name[gameState.lang];
+                    this.renderReels();
+                } catch (e) {
+                    console.error('Error starting slot game:', e);
+                }
+            }
+
+            renderReels() {
+                try {
+                    this.ctx.clearRect(0, 0, 400, 300);
+                    this.ctx.fillStyle = '#1a1a2e';
+                    this.ctx.fillRect(0, 0, 400, 300);
+                    for (let i = 0; i < 3; i++) {
+                        this.ctx.fillStyle = '#000';
+                        this.ctx.fillRect(40 + i * 120, 20, 100, 260);
+                        this.ctx.fillStyle = '#fff';
+                        this.ctx.font = 'bold 80px Orbitron';
+                        this.ctx.textAlign = 'center';
+                        this.ctx.fillText(this.symbols[this.reels[i]], 90 + i * 120, 180);
+                    }
+                } catch (e) {
+                    console.error('Error rendering slot reels:', e);
+                }
+            }
+
+            async spin() {
+                try {
+                    const bet = Math.max(1, Math.min(1000, parseInt(document.getElementById('slotBet').value) || 10));
+                    if (!gameState.deductBalance(bet)) return;
+                    document.getElementById('spinButton').disabled = true;
+                    for (let i = 0; i < 20; i++) {
+                        this.reels = this.reels.map(() => Math.floor(Math.random() * this.symbols.length));
+                        this.renderReels();
+                        await new Promise(r => setTimeout(r, 50));
+                    }
+                    let win = 0;
+                    if (this.reels[0] === this.reels[1] && this.reels[1] === this.reels[2]) {
+                        const multiplier = this.symbols[this.reels[0]] === '7️⃣' ? 20 : 10;
+                        win = bet * multiplier * this.currentGame.rtp;
+                        if (this.symbols[this.reels[0]] === '7️⃣' && Math.random() > 0.95) {
+                            win += gameState.jackpot;
+                            gameState.jackpot = 100000;
+                        }
+                    }
+                    if (win) {
+                        gameState.addBalance(win);
+                        document.getElementById('slotResult').textContent = `${translations[gameState.lang].win}${win.toLocaleString()}`;
+                    } else {
+                        document.getElementById('slotResult').textContent = translations[gameState.lang].loss;
+                    }
+                    document.getElementById('spinButton').disabled = false;
+                    gameState.updateUI();
+                } catch (e) {
+                    console.error('Error spinning slots:', e);
+                    document.getElementById('spinButton').disabled = false;
+                }
+            }
+        }
+
+        // Live Casino
+        class LiveCasino {
+            constructor() {
+                this.games = [
+                    { id: 'roulette', name: { uk: 'Рулетка', en: 'Roulette' }, rtp: 0.973, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDA2NDAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlJvdWxldHRlPC90ZXh0Pjwvc3ZnPg==' },
+                    { id: 'blackjack', name: { uk: 'Блекджек', en: 'Blackjack' }, rtp: 0.995, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDA2NDAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkJsYWNramFjazwvdGV4dD48L3N2Zz4=' },
+                    { id: 'baccarat', name: { uk: 'Баккара', en: 'Baccarat' }, rtp: 0.989, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDA2NDAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkJhY2NhcmF0PC90ZXh0Pjwvc3ZnPg==' }
+                ];
+                this.currentGame = null;
+                this.canvas = document.getElementById('liveCasinoCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.init();
+            }
+
+            init() {
+                this.render();
+                document.getElementById('livePlayButton').addEventListener('click', debounce(() => this.play(), 200));
+                document.getElementById('backToLive').addEventListener('click', () => {
+                    document.getElementById('liveGameArea').style.display = 'none';
+                    document.getElementById('liveGames').style.display = 'grid';
+                });
+            }
+
+            render() {
+                try {
+                    document.getElementById('liveGames').innerHTML = this.games.map(game => `
+                        <div class="game-card">
+                            <img src="${game.image}" alt="${game.name[gameState.lang]}" loading="lazy">
+                            <h3>${game.name[gameState.lang]}</h3>
+                            <p>RTP: ${(game.rtp * 100).toFixed(1)}%</p>
+                            <button onclick="game.live.playGame('${game.id}')">${gameState.lang === 'uk' ? 'Грати' : 'Play'}</button>
+                        </div>
+                    `).join('');
+                } catch (e) {
+                    console.error('Error rendering live games:', e);
+                }
+            }
+
+            playGame(id) {
+                try {
+                    this.currentGame = this.games.find(g => g.id === id);
+                    document.getElementById('liveGames').style.display = 'none';
+                    document.getElementById('liveGameArea').style.display = 'block';
+                    document.getElementById('liveGameTitle').textContent = this.currentGame.name[gameState.lang];
+                    this.renderGame();
+                } catch (e) {
+                    console.error('Error starting live game:', e);
+                }
+            }
+
+            renderGame() {
+                try {
+                    this.ctx.clearRect(0, 0, 400, 300);
+                    this.ctx.fillStyle = '#006400';
+                    this.ctx.fillRect(0, 0, 400, 300);
+                    this.ctx.fillStyle = '#fff';
+                    this.ctx.font = 'bold 32px Orbitron';
+                    this.ctx.textAlign = 'center';
+                    this.ctx.fillText(this.currentGame.name[gameState.lang].toUpperCase(), 200, 150);
+                } catch (e) {
+                    console.error('Error rendering live game:', e);
+                }
+            }
+
+            async play() {
+                try {
+                    const bet = Math.max(1, Math.min(1000, parseInt(document.getElementById('liveBet').value) || 10));
+                    if (!gameState.deductBalance(bet)) return;
+                    document.getElementById('livePlayButton').disabled = true;
+                    for (let i = 0; i < 10; i++) {
+                        this.ctx.clearRect(0, 0, 400, 300);
+                        this.ctx.fillStyle = `hsl(${i * 20}, 100%, 50%)`;
+                        this.ctx.fillRect(0, 0, 400, 300);
+                        this.ctx.fillStyle = '#fff';
+                        this.ctx.font = 'bold 32px Orbitron';
+                        this.ctx.textAlign = 'center';
+                        this.ctx.fillText(this.currentGame.name[gameState.lang].toUpperCase(), 200, 150);
+                        await new Promise(r => setTimeout(r, 100));
+                    }
+                    let win = 0;
+                    if (this.currentGame.id === 'roulette') {
+                        win = Math.random() < this.currentGame.rtp / 2 ? bet * 2 : 0;
+                    } else if (this.currentGame.id === 'blackjack') {
+                        win = Math.random() < this.currentGame.rtp / 1.5 ? bet * 1.5 : 0;
+                    } else if (this.currentGame.id === 'baccarat') {
+                        win = Math.random() < this.currentGame.rtp / 1.2 ? bet * 1.2 : 0;
+                    }
+                    if (win) {
+                        gameState.addBalance(win);
+                        document.getElementById('liveResult').textContent = `${translations[gameState.lang].win}${win.toLocaleString()}`;
+                    } else {
+                        document.getElementById('liveResult').textContent = translations[gameState.lang].loss;
+                    }
+                    document.getElementById('livePlayButton').disabled = false;
+                    this.renderGame();
+                } catch (e) {
+                    console.error('Error playing live game:', e);
+                    document.getElementById('livePlayButton').disabled = false;
+                }
+            }
+        }
+
+        // Sports Betting
+        class Sports {
+            constructor() {
+                this.events = [
+                    { id: 'epl1', name: { uk: 'Ман Сіті - Ман Юнайтед', en: 'Man City - Man United' }, odds: { p1: 1.8, draw: 3.5, p2: 4.2 }, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDA4M2I1Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1hbiBDaXR5IC0gTWFuIFVuaXRlZDwvdGV4dD48L3N2Zz4=' },
+                    { id: 'nba1', name: { uk: 'Лейкерс - Селтікс', en: 'Lakers - Celtics' }, odds: { p1: 2.0, p2: 1.9 }, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDA4M2I1Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkxha2VycyAtIENlbHRpY3M8L3RleHQ+PC9zdmc+' }
+                ];
+                this.init();
+            }
+
+            init() {
+                this.render();
+            }
+
+            render() {
+                try {
+                    document.getElementById('sportsEvents').innerHTML = this.events.map(event => `
+                        <div class="game-card">
+                            <img src="${event.image}" alt="${event.name[gameState.lang]}" loading="lazy">
+                            <h3>${event.name[gameState.lang]}</h3>
+                            <div class="odds">
+                                <button onclick="game.sports.bet('${event.id}', 'p1', ${event.odds.p1})">P1: ${event.odds.p1}</button>
+                                ${event.odds.draw ? `<button onclick="game.sports.bet('${event.id}', 'draw', ${event.odds.draw})">${gameState.lang === 'uk' ? 'Нічия' : 'Draw'}: ${event.odds.draw}</button>` : ''}
+                                <button onclick="game.sports.bet('${event.id}', 'p2', ${event.odds.p2})">P2: ${event.odds.p2}</button>
+                            </div>
+                        </div>
+                    `).join('');
+                } catch (e) {
+                    console.error('Error rendering sports:', e);
+                }
+            }
+
+            bet(eventId, outcome, odds) {
+                try {
+                    const bet = Math.max(1, Math.min(1000, parseInt(document.getElementById('sportsBet').value) || 10));
+                    if (!gameState.deductBalance(bet)) return;
+                    gameState.showModal(translations[gameState.lang].betPlaced, 'success');
+                    const win = Math.random() > 0.5 ? bet * odds : 0;
+                    setTimeout(() => {
+                        if (win) {
+                            gameState.addBalance(win);
+                            gameState.showModal(`${translations[gameState.lang].win}${win.toFixed(2)}`, 'success');
+                        } else {
+                            gameState.showModal(translations[gameState.lang].loss, 'error');
+                        }
+                    }, 1000);
+                } catch (e) {
+                    console.error('Error processing sports bet:', e);
+                }
+            }
+        }
+
+        // Esports
+        class Esports {
+            constructor() {
+                this.events = [
+                    { id: 'cs1', name: { uk: 'NAVI - FaZe (CS2)', en: 'NAVI - FaZe (CS2)' }, odds: { p1: 1.7, p2: 2.1 }, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjM2Q3YzAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5BVkkgLSBGYVplIChDUzIpPC90ZXh0Pjwvc3ZnPg==' },
+                    { id: 'dota1', name: { uk: 'Pvision - Xtreme (Dota 2)', en: 'Pvision - Xtreme (Dota 2)' }, odds: { p1: 1.9, p2: 1.8 }, image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjM2Q3YzAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJPcmJpdHJvbiIgZm9udC1zaXplPSIzMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlB2aXNpb24gLSBYdHJlbWUgKERvdGEgMik8L3RleHQ+PC9zdmc+' }
+                ];
+                this.init();
+            }
+
+            init() {
+                this.render();
+            }
+
+            render() {
+                try {
+                    document.getElementById('esportsEvents').innerHTML = this.events.map(event => `
+                        <div class="game-card">
+                            <img src="${event.image}" alt="${event.name[gameState.lang]}" loading="lazy">
+                            <h3>${event.name[gameState.lang]}</h3>
+                            <div class="odds">
+                                <button onclick="game.esports.bet('${event.id}', 'p1', ${event.odds.p1})">P1: ${event.odds.p1}</button>
+                                <button onclick="game.esports.bet('${event.id}', 'p2', ${event.odds.p2})">P2: ${event.odds.p2}</button>
+                            </div>
+                        </div>
+                    `).join('');
+                } catch (e) {
+                    console.error('Error rendering esports:', e);
+                }
+            }
+
+            bet(eventId, outcome, odds) {
+                try {
+                    const bet = Math.max(1, Math.min(1000, parseInt(document.getElementById('esportsBet').value) || 10));
+                    if (!gameState.deductBalance(bet)) return;
+                    gameState.showModal(translations[gameState.lang].betPlaced, 'success');
+                    const win = Math.random() > 0.5 ? bet * odds : 0;
+                    setTimeout(() => {
+                        if (win) {
+                            gameState.addBalance(win);
+                            gameState.showModal(`${translations[gameState.lang].win}${win.toFixed(2)}`, 'success');
+                        } else {
+                            gameState.showModal(translations[gameState.lang].loss, 'error');
+                        }
+                    }, 1000);
+                } catch (e) {
+                    console.error('Error processing esports bet:', e);
+                }
+            }
+        }
+
+        // Game Instance
+        const game = {
+            state: new GameState(),
+            slots: new Slots(),
+            live: new LiveCasino(),
+            sports: new Sports(),
+            esports: new Esports()
+        };
+    </script>
+</body>
+</html>
 
 
 
