@@ -1,1 +1,613 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Іба Чотко — Офіційний мем-сайт</title>
+  <meta name="description" content="Офіційний мем-сайт персонажа «Іба Чотко». Мемний дизайн, звук, генератор мемів і логотип — все в одному файлі." />
+  <meta name="author" content="Головнін В.С." />
+  <style>
+    /* ============================
+       Іба Чотко — Один файл CSS
+       Коментарі українською
+       ============================ */
+    :root{
+      --bg:#071025;
+      --card:#0f1630;
+      --accent1:#ff3b6b;
+      --accent2:#ffd23f;
+      --muted:rgba(255,255,255,0.78);
+      --glass:rgba(255,255,255,0.03);
+      --glass-2:rgba(255,255,255,0.02);
+      --radius:14px;
+      --shadow-neon: 0 8px 40px rgba(255,59,107,0.12);
+      --mono: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--mono);
+      color:#fff;
+      background:
+        radial-gradient(600px 220px at 10% 10%, rgba(255,59,107,0.04), transparent 8%),
+        radial-gradient(500px 180px at 90% 90%, rgba(255,210,63,0.03), transparent 10%),
+        linear-gradient(180deg,#031226 0%, #071025 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+      padding-bottom:84px; /* for footer */
+    }
 
+    /* Header */
+    header.site-header{
+      position:sticky; top:0; z-index:40;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 20px; gap:12px;
+      backdrop-filter: blur(8px);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo-wrap{display:flex;align-items:center;gap:12px}
+    .logo-svg{width:62px;height:62px;flex-shrink:0}
+    .title{
+      font-weight:800;color:var(--accent2);
+      letter-spacing:0.6px;font-size:18px;
+      text-shadow:0 6px 18px rgba(0,0,0,0.6)
+    }
+    nav.main-nav{display:flex;gap:8px;align-items:center}
+    nav.main-nav a, .btn {
+      color:var(--muted); text-decoration:none;
+      padding:8px 12px;border-radius:10px;
+      border:1px solid transparent;font-weight:600;font-size:13px;
+      background:transparent; cursor:pointer;
+    }
+    nav.main-nav a:hover, .btn:hover{background:var(--glass)}
+    .btn-cta{
+      background:linear-gradient(90deg,var(--accent1),var(--accent2));
+      color:#081018;border:0; box-shadow:var(--shadow-neon);
+      padding:9px 14px;border-radius:14px;
+    }
+
+    /* Layout */
+    .container{max-width:1100px;margin:20px auto;padding:0 18px}
+    .hero{
+      display:grid; grid-template-columns:1fr 320px; gap:20px;
+      align-items:center; margin-bottom:18px;
+      padding:22px;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.006));
+      border-radius:18px; border:1px solid rgba(255,255,255,0.03);
+    }
+    .hero-left h1{margin:0;font-size:44px;color:var(--accent1);letter-spacing:0.2px}
+    .hero-left p{margin:8px 0 16px;color:var(--muted);max-width:60ch}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+    .hero-art{display:flex;justify-content:center;align-items:center}
+    .mascot{width:100%;max-width:280px;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.6));border-radius:12px}
+
+    /* Cards */
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.03);
+    }
+    .card h3{margin:6px 0 10px;font-size:18px;color:var(--accent2)}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* Meme grid */
+    .meme-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+    .meme-tile{
+      padding:12px;border-radius:10px;text-align:center;cursor:pointer;
+      transition:transform .18s ease, box-shadow .18s ease;
+      border:1px dashed rgba(255,255,255,0.03); background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)
+    }
+    .meme-tile:hover{transform:translateY(-6px); box-shadow:0 14px 30px rgba(0,0,0,0.55)}
+
+    /* Footer */
+    footer.site-footer{
+      position:fixed;left:12px;right:12px;bottom:12px;padding:10px 14px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.38));
+      border-radius:12px;border:1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(6px);
+    }
+    .small{font-size:13px;color:var(--muted)}
+
+    /* Inputs */
+    .select, .range {appearance:none;padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted)}
+    .range{width:120px}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr; text-align:center}
+      .grid{grid-template-columns:1fr}
+      nav.main-nav{display:none}
+      .mascot{max-width:260px}
+    }
+
+    /* Small decorative */
+    .neon-badge{
+      display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,var(--accent1),var(--accent2));
+      color:#081018;font-weight:800;font-size:13px;box-shadow:var(--shadow-neon)
+    }
+
+    /* Accessibility focus */
+    a:focus, button:focus, .meme-tile:focus {outline:3px solid rgba(255,210,63,0.14); outline-offset:3px}
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="brand">
+      <!-- Inline SVG логотип -->
+      <div class="logo-wrap" aria-hidden="false">
+        <svg class="logo-svg" viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="logoTitle">
+          <title id="logoTitle">Іба Чотко логотип</title>
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1">
+              <stop offset="0" stop-color="#ff3b6b"/>
+              <stop offset="1" stop-color="#ffd23f"/>
+            </linearGradient>
+            <filter id="f1" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000" flood-opacity="0.45"/>
+            </filter>
+          </defs>
+          <rect x="0" y="6" rx="18" ry="18" width="280" height="68" fill="rgba(255,255,255,0.02)"/>
+          <g filter="url(#f1)">
+            <text x="18" y="48" font-family="Segoe UI, Roboto, Arial" font-size="36" font-weight="800" fill="url(#g1)">
+              Іба <tspan fill="#fff" opacity="0.95">Чотко</tspan>
+            </text>
+          </g>
+          <g transform="translate(200,8)">
+            <circle cx="40" cy="28" r="20" fill="#111827"/>
+            <circle cx="40" cy="28" r="14" fill="#ffd23f"/>
+            <circle cx="40" cy="28" r="7" fill="#111827"/>
+            <path d="M25 8 C35 2, 55 2, 65 8" stroke="#ff3b6b" stroke-width="4" fill="none" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+      <div>
+        <div class="title">Іба Чотко — Офіційний сайт</div>
+        <div class="small">Мем, який говорить сам за себе</div>
+      </div>
+    </div>
+
+    <nav class="main-nav" aria-label="Головне меню">
+      <a href="#about">Про мем</a>
+      <a href="#meme-zone">Мем-зона</a>
+      <a href="#creator">Творець</a>
+      <button id="themeToggle" class="btn" title="Змінити тему">Тема</button>
+      <button id="quickIba" class="btn btn-cta" title="Швидко сказати «Іба чотко»">Іба Чотко!</button>
+    </nav>
+  </header>
+
+  <main class="container" role="main">
+    <section class="hero" id="hero" aria-labelledby="heroTitle">
+      <div class="hero-left">
+        <h1 id="heroTitle">Чітко. Гучно. Мемно.</h1>
+        <p>Офіційний сайт персонажа «Іба Чотко». Тут можна прослухати фрази, згенерувати мем-картинку, поділитись та завантажити.</p>
+
+        <div class="actions">
+          <div class="controls">
+            <button id="playPhrase" class="btn btn-cta" aria-label="Програти фразу">Проговорити</button>
+            <button id="randomize" class="btn" aria-label="Випадкова фраза">Ще фразу</button>
+            <button id="generateMeme" class="btn" aria-label="Згенерувати мем">Згенерувати мем</button>
+          </div>
+          <div class="controls" style="margin-left:8px;">
+            <label class="small" for="voiceSelect">Голос:</label>
+            <select id="voiceSelect" class="select" aria-label="Вибір голосу" title="Вибір голосу"></select>
+            <label class="small" for="rate" style="margin-left:6px">Швидкість</label>
+            <input id="rate" class="range" type="range" min="0.6" max="1.6" step="0.1" value="1" aria-label="Швидкість вимови">
+            <label class="small" for="pitch" style="margin-left:6px">Висота</label>
+            <input id="pitch" class="range" type="range" min="0.6" max="1.6" step="0.1" value="1" aria-label="Тон голосу">
+          </div>
+        </div>
+
+        <div style="margin-top:12px" class="muted">Шорткат: клавіша <kbd>Space</kbd> — програти, <kbd>G</kbd> — згенерувати мем</div>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <!-- Inline mascot SVG -->
+        <svg class="mascot" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mTitle">
+          <title id="mTitle">Маскот Іба Чотко</title>
+          <defs>
+            <linearGradient id="mg" x1="0" x2="1">
+              <stop offset="0" stop-color="#ff3b6b"/>
+              <stop offset="1" stop-color="#ffd23f"/>
+            </linearGradient>
+            <filter id="neon" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="6" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <rect width="100%" height="100%" rx="24" fill="transparent"/>
+          <g transform="translate(50,30)" filter="url(#neon)">
+            <ellipse cx="100" cy="90" rx="78" ry="78" fill="#071025"/>
+            <ellipse cx="100" cy="82" rx="68" ry="68" fill="url(#mg)"/>
+            <circle cx="78" cy="82" r="10" fill="#111"/>
+            <circle cx="122" cy="82" r="10" fill="#111"/>
+            <path d="M70 115 Q100 138 130 115" stroke="#111" stroke-width="8" stroke-linecap="round" fill="none"/>
+            <polygon points="160,10 170,30 190,34 174,48 178,68 160,56 142,68 146,48 130,34 150,30" fill="#fff" opacity="0.12"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section id="about" class="card" aria-labelledby="aboutTitle">
+      <h3 id="aboutTitle">Про мем</h3>
+      <p class="muted">Цей сайт — фан-сторінка та візуальний мем-проєкт. Тут зібрані фрази, інструменти для створення мемів та інтерактивні приколи.</p>
+      <ul class="muted">
+        <li>Голосове програвання через Web Speech API з вибором голосу.</li>
+        <li>Генератор мем-картинок (завантажити PNG).</li>
+        <li>Поширення, копіювання URL та прості шорткати.</li>
+      </ul>
+    </section>
+
+    <section id="meme-zone" class="card" aria-labelledby="memeTitle">
+      <h3 id="memeTitle">Мем-зона</h3>
+      <div class="meme-grid" id="memeGrid" role="list" aria-label="Колекція мем-фраз"></div>
+      <div style="margin-top:12px" class="muted">Клік по плитці — фраза вимовиться. Можна згенерувати свій мем зверху.</div>
+    </section>
+
+    <section id="creator" class="card" aria-labelledby="creatorTitle">
+      <h3 id="creatorTitle">Творець сайту</h3>
+      <p class="muted">Творець цього сайту — <strong>Головнін В.С.</strong></p>
+      <p class="muted">Якщо плануєте використати матеріали сайту в комерційних цілях, узгодьте з автором.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="small">© <span id="year"></span> Іба Чотко — офіційний мем-сайт • Творець: Головнін В.С.</div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button id="copyUrl" class="btn" title="Копіювати URL">Копіювати URL</button>
+      <a id="shareTweet" class="btn" href="#" target="_blank" rel="noopener" title="Поділитись у Twitter">Поділитись</a>
+      <button id="downloadMemeBtn" class="btn" title="Завантажити останній згенерований мем">Завантажити мем</button>
+    </div>
+  </footer>
+
+  <!-- Схований canvas для генерації мема -->
+  <canvas id="memeCanvas" width="1200" height="1200" style="display:none"></canvas>
+
+  <script>
+    // ============= Основний JS =============
+    // Функції та ініціалізація. Коментарі українською.
+    (function(){
+      // Поточний рік
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Фрази (можна додавати)
+      const phrases = [
+        "Іба чотко!",
+        "Чотко і без компромісів",
+        "Геть нудьгу — тільки меми",
+        "Коли все ясно — іба чотко",
+        "Звучить як план: іба чотко",
+        "Прокачай на 100%: іба чотко",
+        "Чотко, як ніколи",
+        "Іба — та і все ясно"
+      ];
+
+      // Елементи
+      const memeGrid = document.getElementById('memeGrid');
+      const playBtn = document.getElementById('playPhrase');
+      const randomizeBtn = document.getElementById('randomize');
+      const quickIba = document.getElementById('quickIba');
+      const voiceSelect = document.getElementById('voiceSelect');
+      const rateInput = document.getElementById('rate');
+      const pitchInput = document.getElementById('pitch');
+      const themeToggle = document.getElementById('themeToggle');
+      const copyUrlBtn = document.getElementById('copyUrl');
+      const shareTweet = document.getElementById('shareTweet');
+      const generateMemeBtn = document.getElementById('generateMeme');
+      const downloadMemeBtn = document.getElementById('downloadMemeBtn');
+      const canvas = document.getElementById('memeCanvas');
+      const ctx = canvas.getContext('2d');
+
+      // Стан
+      let lastGeneratedDataUrl = null;
+
+      // Наповнення мем-грід плитками
+      function populateGrid(){
+        memeGrid.innerHTML = '';
+        // створюємо 8 плиток, але з гарантованою різноманітністю
+        const used = new Set();
+        for (let i = 0; i < 8; i++) {
+          let idx;
+          do { idx = Math.floor(Math.random()*phrases.length); } while (used.has(idx) && used.size < phrases.length);
+          used.add(idx);
+          const text = phrases[idx];
+          const tile = document.createElement('button');
+          tile.className = 'meme-tile';
+          tile.type = 'button';
+          tile.setAttribute('role','listitem');
+          tile.innerHTML = `<div style="font-weight:800;color:var(--accent1);font-size:16px;margin-bottom:6px">${text}</div><div style="font-size:12px;color:var(--muted)">Натисни — програти</div>`;
+          tile.addEventListener('click', () => speakPhrase(text));
+          memeGrid.appendChild(tile);
+        }
+      }
+
+      populateGrid();
+
+      // =================== Голосовий синтез ===================
+      let voices = [];
+      function loadVoices(){
+        voices = speechSynthesis.getVoices().sort((a,b) => a.name.localeCompare(b.name));
+        voiceSelect.innerHTML = '';
+        // Сортуємо: українські та російські зверху, потім англійські
+        voices.forEach(v => {
+          const opt = document.createElement('option');
+          opt.value = v.name;
+          opt.textContent = `${v.name} — ${v.lang}`;
+          voiceSelect.appendChild(opt);
+        });
+        // Якщо пусто — додамо fallback
+        if (!voices.length) {
+          const opt = document.createElement('option');
+          opt.value = '';
+          opt.textContent = 'Відсутні голоси в браузері';
+          voiceSelect.appendChild(opt);
+        } else {
+          // Спробуємо за замовчуванням вибрати український
+          const uk = voices.find(v => /uk|uk-UA/i.test(v.lang));
+          if (uk) voiceSelect.value = uk.name;
+        }
+      }
+
+      if ('speechSynthesis' in window) {
+        loadVoices();
+        // Деякі браузери завантажують голоси асинхронно
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+      } else {
+        // Приховати контрол голосів, якщо не підтримується
+        voiceSelect.innerHTML = '<option>Web Speech API не підтримується</option>';
+        voiceSelect.disabled = true;
+      }
+
+      function speakPhrase(text){
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const msg = new SpeechSynthesisUtterance();
+          msg.text = text;
+          msg.rate = parseFloat(rateInput.value) || 1;
+          msg.pitch = parseFloat(pitchInput.value) || 1;
+          // обрати голос за назвою якщо є
+          const selectedName = voiceSelect.value;
+          if (selectedName && voices.length) {
+            const v = voices.find(x => x.name === selectedName);
+            if (v) msg.voice = v;
+          }
+          // Невеликий ефект: передати кличку як подію
+          msg.onstart = () => { document.activeElement.blur(); };
+          msg.onerror = (e) => { console.warn('TTS error', e); alert('Помилка відтворення голосу.'); };
+          window.speechSynthesis.speak(msg);
+        } else {
+          // fallback — просте модальне вікно
+          alert(text);
+        }
+      }
+
+      // Прив'язка кнопок
+      playBtn.addEventListener('click', () => speakPhrase("Іба чотко!"));
+      randomizeBtn.addEventListener('click', () => {
+        const t = phrases[Math.floor(Math.random()*phrases.length)];
+        // анімація заголовка
+        const h = document.querySelector('.hero-left h1');
+        h.style.opacity = 0;
+        setTimeout(()=>{ h.textContent = t; h.style.opacity = 1; }, 140);
+        speakPhrase(t);
+      });
+      quickIba.addEventListener('click', () => speakPhrase("Іба чотко!"));
+
+      // Клавіатурні шорткати
+      document.addEventListener('keydown', (e) => {
+        if (e.code === 'Space' && !/input|textarea/i.test(document.activeElement.tagName)) {
+          e.preventDefault();
+          speakPhrase("Іба чотко!");
+        }
+        if (e.key.toLowerCase() === 'g') {
+          e.preventDefault();
+          generateMeme();
+        }
+      });
+
+      // =================== Тема ===================
+      function applyTheme(t){
+        if (t === 'light') {
+          document.documentElement.style.setProperty('--bg','#f6f8fb');
+          document.documentElement.style.setProperty('--card','#ffffff');
+          document.documentElement.style.setProperty('--accent1','#ff3b6b');
+          document.documentElement.style.setProperty('--accent2','#ffd23f');
+          document.body.style.color = '#071025';
+        } else {
+          // dark defaults (do nothing)
+          document.documentElement.style.removeProperty('--bg');
+          document.documentElement.style.removeProperty('--card');
+          document.body.style.color = '#fff';
+        }
+        localStorage.setItem('iba_theme', t);
+      }
+      themeToggle.addEventListener('click', () => {
+        const cur = localStorage.getItem('iba_theme') || 'dark';
+        applyTheme(cur === 'dark' ? 'light' : 'dark');
+      });
+      // Ініціалізація теми
+      applyTheme(localStorage.getItem('iba_theme') || 'dark');
+
+      // =================== Копіювання URL та шаринг ===================
+      copyUrlBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(location.href);
+          copyUrlBtn.textContent = 'Скопійовано!';
+          setTimeout(()=> copyUrlBtn.textContent = 'Копіювати URL', 1400);
+        } catch (e) {
+          alert('Не вдалося скопіювати URL. Скопіюйте вручну.');
+        }
+      });
+
+      // Підготовка посилання для твітта
+      function updateShareLink(){
+        const text = encodeURIComponent("Іба Чотко — заходь на офіційний мем-сайт!");
+        const url = encodeURIComponent(location.href);
+        shareTweet.href = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+        shareTweet.setAttribute('aria-label','Поділитись у Twitter');
+      }
+      updateShareLink();
+
+      // =================== Генератор мемів (canvas) ===================
+      // Малюємо стилізований фон, маскот та текст — повертаємо dataURL
+      function drawMeme(topText, bottomText){
+        // Параметри
+        const W = 1200;
+        const H = 1200;
+        canvas.width = W; canvas.height = H;
+        // фон — градієнт
+        const g = ctx.createLinearGradient(0,0, W, H);
+        g.addColorStop(0, '#0b1020');
+        g.addColorStop(1, '#1b1630');
+        ctx.fillStyle = g;
+        ctx.fillRect(0,0,W,H);
+
+        // центральний круг (маскот базовий)
+        ctx.save();
+        ctx.translate(W/2, W/2 - 80);
+        const r = 360;
+        // зовнішній неон
+        ctx.beginPath();
+        ctx.arc(0,0,r,0,Math.PI*2);
+        ctx.fillStyle = 'rgba(255,59,107,0.06)';
+        ctx.fill();
+        // внутрішній градієнт
+        const lg = ctx.createLinearGradient(-r,-r, r,r);
+        lg.addColorStop(0, '#ff3b6b');
+        lg.addColorStop(1, '#ffd23f');
+        ctx.beginPath();
+        ctx.arc(0,0,260,0,Math.PI*2);
+        ctx.fillStyle = lg;
+        ctx.fill();
+
+        // обличчя (стилізовано)
+        ctx.fillStyle = '#071025';
+        ctx.beginPath();
+        ctx.arc(-40, -10, 40, 0, Math.PI*2);
+        ctx.arc(40, -10, 40, 0, Math.PI*2);
+        ctx.fill();
+
+        ctx.strokeStyle = '#071025';
+        ctx.lineWidth = 12;
+        ctx.beginPath();
+        ctx.moveTo(-60,70); ctx.quadraticCurveTo(0,110,60,70);
+        ctx.stroke();
+
+        ctx.restore();
+
+        // Верхній текст
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.font = 'bold 64px "Segoe UI", Roboto, Arial';
+        wrapText(ctx, topText.toUpperCase(), W/2, 120, W - 120, 64);
+
+        // Нижній текст
+        ctx.fillStyle = '#ffd23f';
+        ctx.font = 'bold 58px "Segoe UI", Roboto, Arial';
+        wrapText(ctx, bottomText.toUpperCase(), W/2, H - 120, W - 120, 58);
+
+        // Логотип внизу праворуч (маленький)
+        ctx.globalAlpha = 0.92;
+        ctx.fillStyle = '#fff';
+        ctx.font = '700 20px "Segoe UI", Roboto, Arial';
+        ctx.textAlign = 'right';
+        ctx.fillText('Іба Чотко', W - 40, H - 40);
+
+        return canvas.toDataURL('image/png');
+      }
+
+      // Допоміжна функція обгортки тексту для canvas
+      function wrapText(context, text, x, y, maxWidth, lineHeight){
+        const words = text.split(' ');
+        let line = '';
+        let testLine = '';
+        let lineArray = [];
+        for (let n = 0; n < words.length; n++) {
+          testLine += words[n] + ' ';
+          const metrics = context.measureText(testLine);
+          if (metrics.width > maxWidth && n > 0) {
+            lineArray.push(line.trim());
+            line = words[n] + ' ';
+            testLine = words[n] + ' ';
+          } else {
+            line += words[n] + ' ';
+          }
+        }
+        if (line) lineArray.push(line.trim());
+        // вертикальне вирівнювання: якщо декілька рядків, трохи підняти
+        const totalHeight = lineArray.length * lineHeight;
+        let startY = y - (totalHeight/2) + lineHeight/2;
+        for (let i = 0; i < lineArray.length; i++) {
+          // Stroke for readability
+          context.lineWidth = Math.max(6, lineHeight/12);
+          context.strokeStyle = 'rgba(0,0,0,0.6)';
+          context.strokeText(lineArray[i], x, startY + (i * lineHeight));
+          context.fillText(lineArray[i], x, startY + (i * lineHeight));
+        }
+      }
+
+      // Генерація мем-іконки з випадковою фразою
+      function generateMeme(){
+        const top = phrases[Math.floor(Math.random()*phrases.length)];
+        const bottom = "Іба Чотко";
+        lastGeneratedDataUrl = drawMeme(top, bottom);
+        // Показ користувачу — відкриємо в новій вкладці
+        const w = window.open('');
+        if (w) {
+          const img = w.document.createElement('img');
+          img.src = lastGeneratedDataUrl;
+          img.style.maxWidth = '100%';
+          w.document.body.style.background = '#101225';
+          w.document.body.style.margin = '0';
+          w.document.title = 'Згенерований мем — Іба Чотко';
+          w.document.body.appendChild(img);
+        } else {
+          // fallback — пропонуємо завантажити
+          setTimeout(()=> alert('Блокування вікон: дозволіть відкриття вікон або натисніть "Завантажити мем".'), 50);
+        }
+      }
+      generateMemeBtn.addEventListener('click', () => {
+        generateMeme();
+        // невеликий візуальний індикатор
+        generateMemeBtn.textContent = 'Згенеровано!';
+        setTimeout(()=> generateMemeBtn.textContent = 'Згенерувати мем', 1200);
+      });
+
+      // Завантажити останній мем
+      downloadMemeBtn.addEventListener('click', () => {
+        if (!lastGeneratedDataUrl) {
+          // згенеруємо на місці
+          lastGeneratedDataUrl = drawMeme('Іба чотко!', 'Завантажено з сайту');
+        }
+        const a = document.createElement('a');
+        a.href = lastGeneratedDataUrl;
+        a.download = 'iba-chotko-meme.png';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      });
+
+      // Допоміжні: згенерувати відразу маленький мем-рендер для мініатюри
+      (function pregen(){
+        lastGeneratedDataUrl = drawMeme('Іба чотко!', 'Офіційний мем');
+      })();
+
+      // Додаткові: оновлюємо посилку для шарингу щоразу при зміні URL
+      window.addEventListener('popstate', updateShareLink);
+
+      // Ініціалізація невеликих UI елементів завершено
+      // Простий лог дій для дебагу (не обов'язково)
+      console.log('Іба Чотко сайт: ініціалізація завершена');
+    })();
+  </script>
+</body>
+</html>
