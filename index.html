@@ -3,174 +3,174 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Іба Чотко — Офіційний мем-сайт (Максимально покращено)</title>
-  <meta name="description" content="Офіційний мем-сайт Іба Чотко — таби, завантаження логотипа (зображення), біографія, мем-студія, голосовий синтез, збереження налаштувань."/>
+  <title>Іба Чотко — Офіційний мем-сайт (Покращено)</title>
   <meta name="author" content="Головнін В.С." />
+  <meta name="description" content="Мем-сайт Іба Чотко — швидкий генератор мемів, TTS, завантаження логотипа (drag&drop / paste), збереження налаштувань."/>
   <style>
-    /* -----------------------------------------
-       Стилі — чисто, контрастно, мемно
-       ----------------------------------------- */
+    /* Полірований дизайн — контраст, читабельність, анімації */
     :root{
-      --bg-dark:#071025;
-      --card:#0f1630;
+      --bg-1:#061322;
+      --bg-2:#0b1026;
+      --card:#0f1830;
       --accent1:#ff3b6b;
       --accent2:#ffd23f;
-      --muted:rgba(255,255,255,0.82);
+      --muted:rgba(255,255,255,0.80);
       --glass:rgba(255,255,255,0.03);
       --radius:14px;
-      --shadow-neon: 0 10px 40px rgba(255,59,107,0.12);
-      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --neon: 0 8px 36px rgba(255,59,107,0.12);
+      --mono: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:
-      radial-gradient(600px 220px at 10% 10%, rgba(255,59,107,0.04), transparent 8%),
-      radial-gradient(500px 180px at 90% 90%, rgba(255,210,63,0.03), transparent 10%),
-      linear-gradient(180deg,#031226 0%, var(--bg-dark) 100%);}
-    body{color:#fff;-webkit-font-smoothing:antialiased;padding-bottom:110px}
-    .container{max-width:1100px;margin:20px auto;padding:0 18px}
+    html,body{height:100%;margin:0;font-family:var(--mono);-webkit-font-smoothing:antialiased}
+    body{
+      background:
+        radial-gradient(600px 220px at 8% 10%, rgba(255,59,107,0.04), transparent 8%),
+        radial-gradient(500px 220px at 92% 88%, rgba(255,210,63,0.03), transparent 10%),
+        linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      color:#fff;padding-bottom:120px;
+    }
 
     /* Header */
-    header{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-bottom:1px solid var(--glass)}
+    header{position:sticky;top:10px;z-index:80;margin:12px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .bar{display:flex;align-items:center;gap:12px;width:100%;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);box-shadow:var(--neon)}
     .brand{display:flex;align-items:center;gap:12px}
-    .logo-box{width:72px;height:72px;border-radius:12px;overflow:hidden;background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center}
+    .logo-box{width:76px;height:76px;border-radius:12px;overflow:hidden;border:2px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative}
     .logo-box img{width:100%;height:100%;object-fit:cover;display:block}
-    .title-main{font-weight:900;color:var(--accent2);line-height:1}
-    .subtitle{font-size:12px;color:var(--muted)}
+    .logo-hint{position:absolute;inset:auto 6px 6px 6px;font-size:11px;padding:4px 6px;border-radius:8px;background:rgba(0,0,0,0.35);color:var(--accent2)}
+    .title{font-weight:900;color:var(--accent2);letter-spacing:0.2px}
+    .subtitle{font-size:13px;color:var(--muted)}
 
     /* Tabs */
-    .tabs{display:flex;gap:10px;align-items:center;margin-left:6px}
-    .tab-btn{background:transparent;border:1px solid transparent;padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer;font-weight:700}
-    .tab-btn[aria-selected="true"]{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#081018;box-shadow:var(--shadow-neon)}
-    .tab-actions{display:flex;gap:8px;align-items:center}
+    .tabs{display:flex;gap:8px;align-items:center;margin-left:12px}
+    .tab-btn{padding:8px 12px;border-radius:10px;border:0;background:transparent;color:var(--muted);font-weight:800;cursor:pointer}
+    .tab-btn[aria-selected="true"]{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#081018;box-shadow:var(--neon)}
+    .controls-right{display:flex;gap:8px;align-items:center}
 
-    /* Main content cards */
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.004));border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.03);margin-top:18px}
+    /* Container */
+    .container{max-width:1200px;margin:18px auto;padding:0 18px}
+
+    /* Card */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.03);margin-top:14px}
     .card h2{margin:0 0 8px;color:var(--accent1)}
     .muted{color:var(--muted)}
 
-    /* layout for studio */
-    .studio{display:grid;grid-template-columns:1fr 340px;gap:18px;align-items:start}
+    /* Studio layout */
+    .studio{display:grid;grid-template-columns:1fr 360px;gap:16px;align-items:start}
     .meme-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
-    .meme-tile{padding:12px;border-radius:10px;text-align:center;cursor:pointer;border:1px dashed rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
-    .meme-tile:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(0,0,0,0.55);transition:transform .18s ease, box-shadow .18s ease}
+    .meme-tile{padding:12px;border-radius:10px;text-align:center;cursor:pointer;border:1px dashed rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);transition:transform .15s ease,box-shadow .15s ease}
+    .meme-tile:hover{transform:translateY(-6px);box-shadow:0 12px 28px rgba(0,0,0,0.6)}
 
-    /* uploader & preview */
-    .uploader{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-    .upload-preview{width:120px;height:120px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.02)}
-    .upload-preview img{max-width:100%;max-height:100%;display:block}
-
-    /* controls */
-    .controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
-    .btn{cursor:pointer;padding:8px 12px;border-radius:10px;background:transparent;border:1px solid transparent;color:var(--muted);font-weight:700}
-    .btn.strong{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#081018;box-shadow:var(--shadow-neon)}
     .input{padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--muted)}
+    .btn{padding:8px 12px;border-radius:10px;border:1px solid transparent;background:transparent;color:var(--muted);cursor:pointer;font-weight:800}
+    .btn.strong{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#081018;box-shadow:var(--neon)}
+    .uploader{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .preview{width:120px;height:120px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.02)}
+    .preview img{max-width:100%;max-height:100%;display:block}
 
-    /* small footer */
+    /* Footer */
     footer{position:fixed;left:12px;right:12px;bottom:12px;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.38));backdrop-filter:blur(6px)}
     .small{font-size:13px;color:var(--muted)}
 
-    /* responsiveness */
+    /* Responsive */
     @media (max-width:980px){
       .studio{grid-template-columns:1fr}
       .tabs{flex-wrap:wrap}
+      .logo-box{width:56px;height:56px}
     }
 
-    /* accessibility focus */
-    button:focus, [role="tab"]:focus {outline:3px solid rgba(255,210,63,0.14);outline-offset:3px}
+    /* focus */
+    button:focus, input:focus, [role="tab"]:focus{outline:3px solid rgba(255,210,63,0.14);outline-offset:3px}
   </style>
 </head>
 <body>
-  <header role="banner">
-    <div style="display:flex;align-items:center;gap:12px">
-      <div class="brand">
-        <div class="logo-box" id="logoBox" title="Логотип — натисни, щоб змінити">
-          <!-- Default inline SVG logo (will be replaced if user uploads a logo) -->
-          <svg id="defaultLogo" viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg" width="280" height="80" aria-hidden="true" style="width:100%;height:100%">
-            <defs>
-              <linearGradient id="g1" x1="0" x2="1">
-                <stop offset="0" stop-color="#ff3b6b"/>
-                <stop offset="1" stop-color="#ffd23f"/>
-              </linearGradient>
-            </defs>
-            <rect x="0" y="6" rx="18" ry="18" width="280" height="68" fill="rgba(255,255,255,0.02)"/>
-            <text x="18" y="48" font-family="Segoe UI, Roboto, Arial" font-size="36" font-weight="800" fill="url(#g1)">Іба <tspan fill="#fff" opacity="0.95">Чотко</tspan></text>
-          </svg>
+  <header>
+    <div class="bar">
+      <div style="display:flex;align-items:center;gap:12px;width:100%">
+        <div class="brand">
+          <div class="logo-box" id="logoBox" title="Перетягни сюди зображення або клікни, щоб завантажити">
+            <!-- default inline SVG logo (keeps layout until user sets image) -->
+            <svg id="defaultSVG" viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg" width="280" height="80" style="width:100%;height:100%">
+              <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#ff3b6b"/><stop offset="1" stop-color="#ffd23f"/></linearGradient></defs>
+              <rect x="0" y="6" rx="18" ry="18" width="280" height="68" fill="rgba(255,255,255,0.02)"/>
+              <text x="18" y="48" font-family="Segoe UI, Roboto, Arial" font-size="36" font-weight="800" fill="url(#g1)">Іба <tspan fill="#fff" opacity="0.95">Чотко</tspan></text>
+            </svg>
+            <div class="logo-hint">Логотип</div>
+          </div>
+
+          <div>
+            <div class="title">Іба Чотко — Офіційний мем-сайт</div>
+            <div class="subtitle">Фан-проєкт • Творець: Головнін В.С.</div>
+          </div>
         </div>
 
-        <div>
-          <div class="title-main">Іба Чотко — Офіційний мем-сайт</div>
-          <div class="subtitle">Фан-проєкт • Творець: Головнін В.С.</div>
-        </div>
+        <nav class="tabs" role="tablist" aria-label="Розділи" style="margin-left:8px">
+          <button class="tab-btn" role="tab" aria-selected="true" aria-controls="home" id="tab-home">Головна</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="studio" id="tab-studio">Мем-студія</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="bio" id="tab-bio">Біографія</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="creator" id="tab-creator">Творець</button>
+        </nav>
       </div>
 
-      <nav class="tabs" role="tablist" aria-label="Основні розділи">
-        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="tab-home" id="tabBtn-home">Головна</button>
-        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-studio" id="tabBtn-studio">Мем-студія</button>
-        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-bio" id="tabBtn-bio">Біографія</button>
-        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-creator" id="tabBtn-creator">Творець</button>
-      </nav>
-    </div>
-
-    <div class="tab-actions">
-      <!-- Button to quickly open current tab in a new browser tab/window -->
-      <button id="openInTab" class="btn" title="Відкрити поточний розділ у новому вікні">Відкрити в новому вікні</button>
-      <input id="logoFile" type="file" accept="image/*" style="display:none">
-      <button id="uploadLogoBtn" class="btn" title="Завантажити власний логотип">Завантажити логотип</button>
+      <div class="controls-right">
+        <button id="uploadLogoBtn" class="btn" title="Завантажити логотип">Завантажити логотип</button>
+        <input id="logoInput" type="file" accept="image/*" style="display:none" />
+        <button id="openTabBtn" class="btn" title="Відкрити поточний розділ у новій вкладці">Відкрити у вкладці</button>
+      </div>
     </div>
   </header>
 
-  <main class="container" id="mainContent">
+  <main class="container" id="container">
     <!-- HOME -->
-    <section id="tab-home" role="tabpanel" aria-labelledby="tabBtn-home" class="card" style="display:block">
+    <section id="home" role="tabpanel" style="display:block" class="card">
       <h2>Ласкаво просимо</h2>
-      <p class="muted">Я оновив сайт на максимум: тепер — вкладки (таб-інтерфейс), мем-студія з підтримкою завантажених зображень, можливість встановити завантажене фото як логотип, біографія персонажа і багато UX-покращень.</p>
+      <p class="muted">Я переробив сайт максимально: краще UI, плавні анімації, надійний TTS, стабільний генератор мемів та просте встановлення логотипа (drag&drop / paste / file). Нижче — інструменти і коротка інструкція.</p>
 
-      <div style="display:flex;gap:12px;align-items:center;margin-top:12px">
-        <button id="playIba" class="btn strong">Проговорити: Іба чотко!</button>
-        <button id="randomPhrase" class="btn">Випадкова фраза + TTS</button>
-        <button id="openStudioBtn" class="btn">Перейти в мем-студію</button>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap">
+        <button id="sayIba" class="btn strong">Проговорити: Іба чотко!</button>
+        <button id="randPhrase" class="btn">Випадкова фраза + TTS</button>
+        <button id="goStudio" class="btn">Відкрити Мем-студію</button>
       </div>
 
-      <div class="card" style="margin-top:14px">
-        <h3>Покращення</h3>
-        <ul class="muted">
-          <li>Тематичний, адаптивний дизайн і підвищена доступність (ARIA, клавіатура).</li>
-          <li>Можливість завантажити зображення персонажа та встановити його як логотип сайту (зберігається в localStorage).</li>
-          <li>Окрема мем-студія з генератором PNG (canvas), попереднім переглядом та кнопкою для завантаження.</li>
-          <li>Кнопка "Відкрити в новому вікні" відкриває поточний таб у новій вкладці для поділу/збереження.</li>
-        </ul>
+      <div class="card" style="margin-top:12px">
+        <h3>Як швидко встановити твоє зображення як логотип</h3>
+        <ol class="muted">
+          <li>Збережи зображення з повідомлення (правою кнопкою → "Зберегти зображення як...").</li>
+          <li>Перетягни файл на квадрат логотипа у лівому верхньому кутку або клікни "Завантажити логотип" і вибери файл.</li>
+          <li>Альтернатива: відкрий картинку на комп'ютері, скопіюй (Ctrl+C) і встав (Ctrl+V) в будь-якому місці сторінки — сайт підхопить картинку і запропонує зберегти її як логотип.</li>
+        </ol>
+        <p class="muted">Все зберігається локально у твоєму браузері (localStorage). Ніхто нічого не отримує — це оффлайн у твоєму браузері.</p>
       </div>
     </section>
 
     <!-- STUDIO -->
-    <section id="tab-studio" role="tabpanel" aria-labelledby="tabBtn-studio" class="card" style="display:none">
+    <section id="studio" role="tabpanel" style="display:none" class="card">
       <h2>Мем-студія</h2>
       <div class="studio">
         <div>
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div class="muted">Клік по плитці — фразу буде програно. Подвійний клік у сітці — додати власну фразу.</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <div class="muted">Клік по плитці — фразу буде програно</div>
             <div style="display:flex;gap:8px;align-items:center">
-              <label style="font-size:13px;color:var(--muted)">Голос:</label>
-              <select id="voiceSelect" class="input" aria-label="Вибір голосу"></select>
-              <label style="font-size:13px;color:var(--muted);margin-left:6px">Швидкість</label>
+              <label class="muted">Голос</label>
+              <select id="voiceSelect" class="input"></select>
+              <label class="muted">Швидкість</label>
               <input id="rate" type="range" min="0.6" max="1.6" step="0.1" value="1">
             </div>
           </div>
 
           <div class="card" style="margin-top:12px">
-            <h3>Мем-плитки</h3>
+            <h3>Фрази</h3>
             <div id="memeGrid" class="meme-grid" role="list"></div>
-            <div style="margin-top:10px" class="muted">Порада: подвійний клік у пустому місці сітки дозволяє додати власну фразу.</div>
+            <div class="muted" style="margin-top:8px">Порада: подвійний клік у сітці — додати власну фразу.</div>
           </div>
 
           <div class="card" style="margin-top:12px">
-            <h3>Керування фразами</h3>
-            <div style="display:flex;gap:8px;flex-wrap:wrap">
-              <input id="customPhrase" placeholder="Введи фразу для збереження" class="input" style="min-width:220px">
-              <button id="addPhrase" class="btn">Додати фразу</button>
-              <button id="clearPhrases" class="btn">Очистити додані</button>
+            <h3>Додати фразу</h3>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <input id="addInput" class="input" placeholder="Нова фраза" style="min-width:220px">
+              <button id="addBtn" class="btn">Додати</button>
+              <button id="clearBtn" class="btn">Очистити додані</button>
             </div>
-            <div style="margin-top:8px" class="muted">Збережені фрази зберігаються у localStorage і відобразяться у мем-гріді.</div>
+            <div class="muted" style="margin-top:8px">Додані фрази зберігаються локально.</div>
           </div>
         </div>
 
@@ -178,36 +178,32 @@
           <div class="card">
             <h3>Завантажити фото персонажа</h3>
             <div class="uploader">
-              <div class="upload-preview" id="previewLogo">
-                <!-- preview content injected by JS -->
-                <svg width="80" height="80" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#ff3b6b"/><stop offset="1" stop-color="#ffd23f"/></linearGradient></defs><rect width="100%" height="100%" rx="12" fill="url(#lg)"/><text x="50%" y="52%" text-anchor="middle" fill="#081018" font-weight="800" font-size="22">Іба</text></svg>
-              </div>
-
+              <div id="preview" class="preview" title="Прев'ю (перетягни або встав)</div>
               <div style="display:flex;flex-direction:column;gap:8px">
-                <label for="imageUpload" class="btn" style="display:inline-block;padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);cursor:pointer">Вибрати фото</label>
-                <input id="imageUpload" type="file" accept="image/*" style="display:none">
-                <button id="setAsLogo" class="btn">Встановити як логотип</button>
-                <button id="useForMeme" class="btn">Використати у мемі</button>
+                <label for="imageUpload" class="btn" style="cursor:pointer;padding:8px 10px;border-radius:8px">Вибрати фото</label>
+                <input id="imageUpload" type="file" accept="image/*" style="display:none" />
+                <button id="useAsLogo" class="btn">Встановити як логотип</button>
+                <button id="useInMeme" class="btn">Використати у мемі</button>
               </div>
             </div>
 
             <div style="margin-top:12px">
-              <h4>Налаштування мему</h4>
+              <h4>Генератор</h4>
               <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-                <input id="memeTop" class="input" placeholder="Текст зверху" style="min-width:150px">
-                <input id="memeBottom" class="input" placeholder="Текст знизу" style="min-width:150px">
-                <button id="generate" class="btn strong">Згенерувати PNG</button>
+                <input id="topText" class="input" placeholder="Текст зверху" style="min-width:150px">
+                <input id="bottomText" class="input" placeholder="Текст знизу" style="min-width:150px">
+                <button id="createMeme" class="btn strong">Згенерувати PNG</button>
               </div>
-              <div style="margin-top:8px" class="muted">Після генерації зображення можна завантажити або відкрити у новій вкладці.</div>
+              <div class="muted" style="margin-top:8px">Після генерації відкриється попередній перегляд; потім можна завантажити.</div>
             </div>
           </div>
 
           <div class="card" style="margin-top:12px">
             <h3>Останній мем</h3>
-            <div id="lastPreview" class="upload-preview" style="height:160px"></div>
+            <div id="last" class="preview" style="height:160px"></div>
             <div style="display:flex;gap:8px;margin-top:8px">
-              <button id="downloadMeme" class="btn">Завантажити</button>
-              <button id="openMeme" class="btn">Відкрити у вкладці</button>
+              <button id="downloadBtn" class="btn">Завантажити</button>
+              <button id="openBtn" class="btn">Відкрити у вкладці</button>
             </div>
           </div>
         </aside>
@@ -215,94 +211,85 @@
     </section>
 
     <!-- BIO -->
-    <section id="tab-bio" role="tabpanel" aria-labelledby="tabBtn-bio" class="card" style="display:none">
-      <h2>Біографія персонажа «Іба Чотко»</h2>
+    <section id="bio" role="tabpanel" style="display:none" class="card">
+      <h2>Біографія «Іба Чотко»</h2>
       <div class="muted" style="margin-top:8px">
-        Це фан-біографія, створена для атмосфери і розваги. Якщо маєш офіційні факти — можемо додати їх у розділ джерел.
+        Це фан-історія, створена, щоб надати атмосферу. Якщо маєш офіційну інформацію — надішли, і ми додамо.
       </div>
 
-      <div style="margin-top:12px" class="card">
-        <h3>Коротка історія</h3>
-        <ol class="muted">
-          <li><strong>Походження:</strong> кадр із мультфільму, який спонукав інтернет-ремікси.</li>
-          <li><strong>Поширення:</strong> мем швидко набув форм: аудіосемпли, ремікси, фан-арт.</li>
-          <li><strong>Сенс фрази:</strong> «Іба чотко» — означає рішучість, ясно та круто.</li>
-          <li><strong>Мета сайту:</strong> місце для фанів, генерації мемів та збереження культури реміксу.</li>
-        </ol>
-      </div>
-
-      <div style="margin-top:12px" class="card">
-        <h3>Деталі</h3>
-        <p class="muted">Тут можна додати джерела, посилання на епізоди, авторів оригінального контенту або дозволи. Якщо хочеш — я додам форму для редагування/пропозицій контенту.</p>
+      <div style="margin-top:12px">
+        <div class="card"><strong>Походження:</strong> кадр із мультфільму, який став мемом у спільноті.</div>
+        <div class="card" style="margin-top:8px"><strong>Значення фрази:</strong> "Іба чотко" — означає чітко, круто, однозначно.</div>
       </div>
     </section>
 
     <!-- CREATOR -->
-    <section id="tab-creator" role="tabpanel" aria-labelledby="tabBtn-creator" class="card" style="display:none">
-      <h2>Творець та контакт</h2>
-      <p class="muted">Творець і розробник сайту — <strong>Головнін В.С.</strong></p>
-      <p class="muted">Цей сайт — фан-проєкт. Якщо ти — правовласник медіа або хочеш співпрацю, звернись до творця.</p>
+    <section id="creator" role="tabpanel" style="display:none" class="card">
+      <h2>Творець</h2>
+      <p class="muted"><strong>Головнін В.С.</strong> — автор/куратор цього фан-сайту.</p>
+      <p class="muted">Якщо ти — правовласник або маєш офіційні матеріали, напиши для узгодження використання зображень.</p>
     </section>
   </main>
 
-  <footer role="contentinfo">
+  <footer>
     <div class="small">© <span id="year"></span> Іба Чотко — Творець: Головнін В.С.</div>
     <div style="display:flex;gap:8px;align-items:center">
       <button id="copyUrl" class="btn">Копіювати URL</button>
-      <a id="shareTweet" class="btn" href="#" target="_blank" rel="noopener">Поширити у Twitter</a>
+      <a id="tweet" class="btn" href="#" target="_blank" rel="noopener">Поділитись у Twitter</a>
     </div>
   </footer>
 
-  <!-- Hidden canvas for meme generation -->
-  <canvas id="memeCanvas" width="1200" height="1200" style="display:none"></canvas>
+  <!-- hidden canvas -->
+  <canvas id="canvas" width="1200" height="1200" style="display:none"></canvas>
 
   <script>
-    /* -----------------------------------------
-       JS: таби, завантаження логотипа, мем-студія
-       Продумано: збереження в localStorage, фолбеки, доступність
-       ----------------------------------------- */
     (function(){
-      // --- DOM refs
+      // Елементи
       const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
       const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
-      const openInTabBtn = document.getElementById('openInTab');
-      const logoFileInput = document.getElementById('logoFile');
-      const uploadLogoBtn = document.getElementById('uploadLogoBtn');
       const logoBox = document.getElementById('logoBox');
-      const defaultLogo = document.getElementById('defaultLogo');
+      const logoInput = document.getElementById('logoInput');
+      const uploadLogoBtn = document.getElementById('uploadLogoBtn');
+      const openTabBtn = document.getElementById('openTabBtn');
 
-      const playIba = document.getElementById('playIba');
-      const randomPhrase = document.getElementById('randomPhrase');
-      const openStudioBtn = document.getElementById('openStudioBtn');
+      const sayIba = document.getElementById('sayIba');
+      const randPhrase = document.getElementById('randPhrase');
+      const goStudio = document.getElementById('goStudio');
 
-      // Studio refs
+      // Studio
       const memeGrid = document.getElementById('memeGrid');
       const voiceSelect = document.getElementById('voiceSelect');
       const rate = document.getElementById('rate');
       const imageUpload = document.getElementById('imageUpload');
-      const previewLogo = document.getElementById('previewLogo');
-      const setAsLogoBtn = document.getElementById('setAsLogo');
-      const useForMemeBtn = document.getElementById('useForMeme');
-      const generateBtn = document.getElementById('generate');
-      const memeTop = document.getElementById('memeTop');
-      const memeBottom = document.getElementById('memeBottom');
-      const lastPreview = document.getElementById('lastPreview');
-      const downloadMeme = document.getElementById('downloadMeme');
-      const openMeme = document.getElementById('openMeme');
-      const addPhraseBtn = document.getElementById('addPhrase');
-      const customPhraseInput = document.getElementById('customPhrase');
-      const clearPhrasesBtn = document.getElementById('clearPhrases');
+      const preview = document.getElementById('preview');
+      const useAsLogoBtn = document.getElementById('useAsLogo');
+      const useInMemeBtn = document.getElementById('useInMeme');
 
-      const copyUrlBtn = document.getElementById('copyUrl');
-      const shareTweet = document.getElementById('shareTweet');
-      const logoFileHidden = document.getElementById('logoFile');
+      const topText = document.getElementById('topText');
+      const bottomText = document.getElementById('bottomText');
+      const createMeme = document.getElementById('createMeme');
 
-      // Canvas
-      const canvas = document.getElementById('memeCanvas');
+      const lastPreview = document.getElementById('last');
+      const downloadBtn = document.getElementById('downloadBtn');
+      const openBtn = document.getElementById('openBtn');
+
+      const addInput = document.getElementById('addInput');
+      const addBtn = document.getElementById('addBtn');
+      const clearBtn = document.getElementById('clearBtn');
+
+      const canvas = document.getElementById('canvas');
       const ctx = canvas.getContext('2d');
 
+      const copyUrl = document.getElementById('copyUrl');
+      const tweet = document.getElementById('tweet');
+      const yearEl = document.getElementById('year');
+
+      yearEl.textContent = new Date().getFullYear();
+
       // State
-      let phrases = [
+      let phrases = JSON.parse(localStorage.getItem('iba_phrases') || '[]');
+      // seed defaults if none
+      if (!phrases.length) phrases = [
         "Іба чотко!",
         "Чотко і без компромісів",
         "Коли все ясно — іба чотко",
@@ -310,100 +297,98 @@
         "Прокачай на 100%: іба чотко",
         "Котрий раз говорю — іба чотко!"
       ];
-      let extraPhrases = JSON.parse(localStorage.getItem('iba_phrases') || '[]');
-      phrases = extraPhrases.concat(phrases);
-      let uploadedImage = null;
+      let uploadedImage = null;    // Image object for preview & meme
+      let storedLogo = localStorage.getItem('iba_logo') || null; // dataURL
       let lastMemeDataUrl = null;
-      let storedLogoDataUrl = localStorage.getItem('iba_logo') || null;
+      let voices = [];
 
-      // --- Utility functions
+      // ---------- Tabs ----------
       function showPanel(id){
         panels.forEach(p => p.style.display = (p.id === id) ? 'block' : 'none');
         tabs.forEach(t => t.setAttribute('aria-selected', t.getAttribute('aria-controls') === id ? 'true' : 'false'));
       }
-      // Initialize tabs
-      tabs.forEach(t => {
-        t.addEventListener('click', ()=> showPanel(t.getAttribute('aria-controls')));
-        t.addEventListener('keydown', (e) => {
-          let idx = tabs.indexOf(e.currentTarget);
-          if (e.key === 'ArrowRight') idx = (idx + 1) % tabs.length;
-          if (e.key === 'ArrowLeft') idx = (idx - 1 + tabs.length) % tabs.length;
-          tabs[idx].focus();
-        });
-      });
+      tabs.forEach(t => t.addEventListener('click', ()=> showPanel(t.getAttribute('aria-controls'))));
+      // keyboard nav
+      tabs.forEach((t,i) => t.addEventListener('keydown',(e)=>{
+        if (e.key === 'ArrowRight') tabs[(i+1)%tabs.length].focus();
+        if (e.key === 'ArrowLeft') tabs[(i-1+tabs.length)%tabs.length].focus();
+      }));
 
-      // Open current panel in a new tab/window
-      openInTabBtn.addEventListener('click', () => {
-        const current = tabs.find(t => t.getAttribute('aria-selected') === 'true');
-        if (!current) return alert('Відсутній поточний таб.');
-        const panel = document.getElementById(current.getAttribute('aria-controls'));
-        const html = buildStandaloneHTML(current.textContent, panel.innerHTML);
-        const w = window.open();
-        if (w) {
-          w.document.open();
-          w.document.write(html);
-          w.document.close();
-        } else {
-          alert('Попап заблоковано. Дозволь відкриття вікон або збережи сторінку вручну.');
-        }
-      });
-
-      function buildStandaloneHTML(title, bodyContent){
-        // Minimal standalone page — інлайн стилі для читабельності
-        return `<!doctype html><html lang="uk"><head><meta charset="utf-8"><title>${escapeHtml(title)}</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Arial,Helvetica,sans-serif;background:#071025;color:#fff;padding:18px} .card{background:#0f1630;padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}</style></head><body><div class="card">${bodyContent}</div></body></html>`;
-      }
-      function escapeHtml(s){ return (s+'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-      // --- Logo handling (upload, preview, set)
-      function setLogoFromDataUrl(dataUrl){
-        // replace default svg with <img> containing logo
+      // ---------- Logo handling (drag/drop, paste, file input) ----------
+      function setLogoDataUrl(dataUrl){
+        // create <img> inside logoBox
+        logoBox.innerHTML = '';
         const img = document.createElement('img');
         img.src = dataUrl;
         img.alt = 'Логотип Іба Чотко';
-        img.onload = () => {
-          // clear and append
-          logoBox.innerHTML = '';
-          logoBox.appendChild(img);
-          // store persistently
-          try { localStorage.setItem('iba_logo', dataUrl); storedLogoDataUrl = dataUrl; } catch(e){ console.warn('Не вдалось зберегти логотип у localStorage', e); }
-        };
-        img.onerror = () => {
-          alert('Не вдалося завантажити логотип. Файл може бути пошкодженим.');
-        };
+        logoBox.appendChild(img);
+        const hint = document.createElement('div');
+        hint.className = 'logo-hint';
+        hint.textContent = 'Логотип';
+        logoBox.appendChild(hint);
+        try { localStorage.setItem('iba_logo', dataUrl); storedLogo = dataUrl; } catch(e){ console.warn('Cannot save logo to localStorage', e); }
       }
 
-      // Initialize logo from storage if present
-      if (storedLogoDataUrl){
-        setLogoFromDataUrl(storedLogoDataUrl);
+      // load stored logo if present
+      if (storedLogo){
+        setLogoDataUrl(storedLogo);
       }
 
-      uploadLogoBtn.addEventListener('click', () => logoFileHidden.click());
-      logoFileHidden.addEventListener('change', async (ev) => {
-        const f = ev.target.files && ev.target.files[0];
+      // click -> open file dialog
+      logoBox.addEventListener('click', ()=> logoInput.click());
+      uploadLogoBtn.addEventListener('click', ()=> logoInput.click());
+      logoInput.addEventListener('change', (e)=>{
+        const f = e.target.files && e.target.files[0];
         if (!f) return;
-        if (!f.type.startsWith('image/')) return alert('Виберіть зображення.');
+        if (!f.type.startsWith('image/')) return alert('Виберіть зображення');
         const reader = new FileReader();
-        reader.onload = () => {
-          const dataUrl = reader.result;
-          // show preview in top-left preview
-          previewLogo.innerHTML = '';
-          const im = document.createElement('img'); im.src = dataUrl; im.alt = 'Прев\'ю логотипа';
-          previewLogo.appendChild(im);
-          // set as site logo immediately for convenience (and keep button to revert)
-          if (confirm('Встановити це зображення як логотип сайту?')) {
-            setLogoFromDataUrl(dataUrl);
-          }
-        };
+        reader.onload = () => setLogoDataUrl(reader.result);
         reader.readAsDataURL(f);
-        // also set file input for studio upload (to re-use)
-        // (not necessary)
       });
 
-      // --- Meme studio: load phrases into grid
-      function populateMemeGrid(){
+      // drag & drop on logoBox
+      logoBox.addEventListener('dragover', (e)=>{ e.preventDefault(); logoBox.style.opacity = 0.9; });
+      logoBox.addEventListener('dragleave', (e)=>{ logoBox.style.opacity = 1; });
+      logoBox.addEventListener('drop', (e)=>{
+        e.preventDefault();
+        logoBox.style.opacity = 1;
+        const f = (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]);
+        if (f && f.type && f.type.startsWith('image/')){
+          const r = new FileReader();
+          r.onload = ()=> setLogoDataUrl(r.result);
+          r.readAsDataURL(f);
+        } else {
+          alert('Перетягни файл зображення (jpg/png/webp...)');
+        }
+      });
+
+      // paste support (Ctrl+V) anywhere on page to set logo
+      window.addEventListener('paste', async (e)=>{
+        const items = (e.clipboardData && e.clipboardData.items) || [];
+        for (let it of items){
+          if (it.type && it.type.startsWith('image/')){
+            const blob = it.getAsFile();
+            const r = new FileReader();
+            r.onload = ()=> {
+              // prompt: set as logo immediately
+              if (confirm('Вставлене зображення знайдено. Встановити як логотип?')) setLogoDataUrl(r.result);
+            };
+            r.readAsDataURL(blob);
+            return;
+          }
+        }
+      });
+
+      // ---------- Phrases & Meme grid ----------
+      function savePhrases(){
+        localStorage.setItem('iba_phrases', JSON.stringify(phrases));
+      }
+      function populateGrid(){
         memeGrid.innerHTML = '';
         const used = new Set();
-        for (let i=0;i<10;i++){
+        // show up to 12 tiles
+        const count = Math.min(12, Math.max(6, phrases.length));
+        for (let i=0;i<count;i++){
           let idx;
           do { idx = Math.floor(Math.random()*phrases.length); } while (used.has(idx) && used.size < phrases.length);
           used.add(idx);
@@ -411,49 +396,33 @@
           const btn = document.createElement('button');
           btn.className = 'meme-tile';
           btn.type = 'button';
-          btn.innerHTML = `<div style="font-weight:800;color:var(--accent1);font-size:15px;margin-bottom:6px">${escapeHtml(text)}</div><div style="font-size:12px;color:var(--muted)">Натисни — програти</div>`;
+          btn.innerHTML = `<div style="font-weight:900;color:var(--accent1);font-size:15px;margin-bottom:6px">${escapeHtml(text)}</div><div style="font-size:12px;color:var(--muted)">Натисни — програти</div>`;
           btn.addEventListener('click', ()=> speak(text));
           memeGrid.appendChild(btn);
         }
       }
-      populateMemeGrid();
+      function escapeHtml(s){ return (s+'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+      populateGrid();
 
-      // Allow double-click on meme grid to prompt for new phrase
-      memeGrid.addEventListener('dblclick', (e)=>{
+      // allow double click on grid to add phrase
+      memeGrid.addEventListener('dblclick', ()=>{
         const txt = prompt('Введи нову фразу для мем-зони:');
         if (txt && txt.trim()){
           phrases.unshift(txt.trim());
-          // save extras separately (user-added)
-          const extras = phrases.filter(p => ![
-            "Іба чотко!",
-            "Чотко і без компромісів",
-            "Коли все ясно — іба чотко",
-            "Звучить як план: іба чотко",
-            "Прокачай на 100%: іба чотко",
-            "Котрий раз говорю — іба чотко!"
-          ].includes(p));
-          localStorage.setItem('iba_phrases', JSON.stringify(extras));
-          populateMemeGrid();
+          savePhrases();
+          populateGrid();
         }
       });
 
-      addPhraseBtn.addEventListener('click', ()=>{
-        const t = (customPhraseInput.value || '').trim();
-        if (!t) return alert('Введи фразу.');
-        phrases.unshift(t);
-        const extras = phrases.filter(p => ![
-          "Іба чотко!",
-          "Чотко і без компромісів",
-          "Коли все ясно — іба чотко",
-          "Звучить як план: іба чотко",
-          "Прокачай на 100%: іба чотко",
-          "Котрий раз говорю — іба чотко!"
-        ].includes(p));
-        localStorage.setItem('iba_phrases', JSON.stringify(extras));
-        customPhraseInput.value = '';
-        populateMemeGrid();
+      addBtn.addEventListener('click', ()=>{
+        const v = (addInput.value||'').trim();
+        if (!v) return alert('Введи фразу');
+        phrases.unshift(v);
+        addInput.value = '';
+        savePhrases();
+        populateGrid();
       });
-      clearPhrasesBtn.addEventListener('click', ()=>{
+      clearBtn.addEventListener('click', ()=>{
         if (!confirm('Очистити користувацькі фрази?')) return;
         localStorage.removeItem('iba_phrases');
         phrases = [
@@ -464,62 +433,73 @@
           "Прокачай на 100%: іба чотко",
           "Котрий раз говорю — іба чотко!"
         ];
-        populateMemeGrid();
+        populateGrid();
       });
 
-      // --- Image upload for studio preview & meme
-      imageUpload.addEventListener('change', (ev)=>{
-        const f = ev.target.files && ev.target.files[0];
+      // ---------- Image upload for meme ----------
+      imageUpload.addEventListener('change', (e)=>{
+        const f = e.target.files && e.target.files[0];
         if (!f) return;
-        if (!f.type.startsWith('image/')) return alert('Виберіть зображення.');
+        if (!f.type.startsWith('image/')) return alert('Виберіть зображення');
         const url = URL.createObjectURL(f);
         const img = new Image();
-        img.onload = () => {
+        img.onload = ()=>{
           uploadedImage = img;
-          // preview
-          previewLogo.innerHTML = '';
-          const im = document.createElement('img'); im.src = url; im.alt = 'Завантажене фото';
-          previewLogo.appendChild(im);
-          // release objectURL later (kept for preview)
+          preview.innerHTML = '';
+          const el = document.createElement('img'); el.src = url; el.alt = 'Прев\'ю'; preview.appendChild(el);
+          // revokeObjectURL later after use
         };
-        img.onerror = ()=> alert('Не вдалося прочитати файл.');
+        img.onerror = ()=> alert('Не вдалося прочитати файл');
         img.src = url;
       });
 
-      setAsLogoBtn.addEventListener('click', ()=>{
-        if (!uploadedImage) return alert('Спочатку виберіть фото для попереднього перегляду.');
-        // convert uploadedImage to dataURL via canvas
+      // drag & drop to preview
+      preview.addEventListener('dragover',(e)=>{ e.preventDefault(); preview.style.opacity = 0.9; });
+      preview.addEventListener('dragleave',()=> preview.style.opacity = 1);
+      preview.addEventListener('drop', (e)=>{
+        e.preventDefault(); preview.style.opacity = 1;
+        const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+        if (!f) return;
+        if (!f.type.startsWith('image/')) return alert('Перетягни файл зображення');
+        const url = URL.createObjectURL(f);
+        const img = new Image();
+        img.onload = ()=> { uploadedImage = img; preview.innerHTML = ''; const el = document.createElement('img'); el.src = url; preview.appendChild(el); };
+        img.src = url;
+      });
+
+      useAsLogoBtn.addEventListener('click', ()=>{
+        if (!uploadedImage) return alert('Спочатку виберіть фото');
+        // convert to dataURL
         const tmp = document.createElement('canvas');
-        tmp.width = uploadedImage.width;
-        tmp.height = uploadedImage.height;
+        tmp.width = uploadedImage.width; tmp.height = uploadedImage.height;
         const tctx = tmp.getContext('2d');
-        tctx.drawImage(uploadedImage, 0, 0);
+        tctx.drawImage(uploadedImage,0,0);
         try {
           const dataUrl = tmp.toDataURL('image/png');
-          setLogoFromDataUrl(dataUrl);
-          alert('Логотип встановлено та збережено локально у браузері.');
-        } catch(e){
-          alert('Не вдалося зберегти логотип (можливо, політика браузера). Спробуйте інший файл.');
+          setLogoDataUrl(dataUrl);
+          alert('Логотип збережено (локально у браузері).');
+        } catch (e){
+          alert('Не вдалося зберегти логотип. Спробуйте інший файл.');
         }
       });
 
-      useForMemeBtn.addEventListener('click', ()=>{
-        if (!uploadedImage) return alert('Виберіть фото спочатку.');
-        alert('Зображення буде використано під час наступної генерації мему.');
+      useInMemeBtn.addEventListener('click', ()=>{
+        if (!uploadedImage) return alert('Спочатку виберіть фото');
+        alert('Зображення буде використано у наступній генерації мему.');
       });
 
-      // --- TTS (Web Speech API) with voice selection
-      let voices = [];
+      // ---------- TTS (robust) ----------
       function loadVoices(){
         voices = speechSynthesis.getVoices().sort((a,b)=>a.name.localeCompare(b.name));
         voiceSelect.innerHTML = '';
         if (!voices.length){
-          const o = document.createElement('option'); o.textContent = 'Голосів не знайдено'; voiceSelect.appendChild(o); voiceSelect.disabled = true;
+          const opt = document.createElement('option'); opt.textContent = 'Голосів не знайдено'; voiceSelect.appendChild(opt); voiceSelect.disabled = true;
         } else {
           voiceSelect.disabled = false;
-          voices.forEach(v => {
-            const opt = document.createElement('option'); opt.value = v.name; opt.textContent = `${v.name} — ${v.lang}`; voiceSelect.appendChild(opt);
+          voices.forEach(v=>{
+            const o = document.createElement('option'); o.value = v.name; o.textContent = `${v.name} — ${v.lang}`; voiceSelect.appendChild(o);
           });
+          // try to pick uk
           const uk = voices.find(v=>/uk|uk-UA/i.test(v.lang)) || voices[0];
           if (uk) voiceSelect.value = uk.name;
         }
@@ -535,70 +515,73 @@
       function speak(text){
         if (!text) return;
         if ('speechSynthesis' in window){
-          speechSynthesis.cancel();
-          const u = new SpeechSynthesisUtterance(text);
-          u.rate = parseFloat(rate.value) || 1;
-          const sel = voiceSelect.value;
-          if (voices.length && sel){
-            const v = voices.find(x=>x.name===sel);
-            if (v) u.voice = v;
+          try {
+            speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(text);
+            u.rate = parseFloat(rate.value) || 1;
+            const sel = voiceSelect.value;
+            if (voices.length && sel){
+              const v = voices.find(x=>x.name === sel);
+              if (v) u.voice = v;
+            }
+            speechSynthesis.speak(u);
+          } catch(e){
+            console.warn('TTS error', e);
+            alert(text);
           }
-          u.onerror = ()=> console.warn('TTS error');
-          speechSynthesis.speak(u);
-        } else alert(text);
+        } else { alert(text); }
       }
 
-      // Connect quick actions
-      playIba.addEventListener('click', ()=> speak('Іба чотко!'));
-      randomPhrase.addEventListener('click', ()=>{
-        const t = phrases[Math.floor(Math.random()*phrases.length)];
-        speak(t);
-      });
-      openStudioBtn.addEventListener('click', ()=> showPanel('tab-studio'));
+      sayIba.addEventListener('click', ()=> speak('Іба чотко!'));
+      randPhrase.addEventListener('click', ()=> speak(phrases[Math.floor(Math.random()*phrases.length)]));
+      goStudio.addEventListener('click', ()=> showPanel('studio'));
 
-      // --- Meme generation (canvas based)
-      function wrapText(context, text, x, y, maxWidth, lineHeight){
+      // keyboard shortcuts
+      document.addEventListener('keydown',(e)=>{
+        if (e.code === 'Space' && !/input|textarea/i.test(document.activeElement.tagName)) { e.preventDefault(); speak('Іба чотко!'); }
+        if (e.key.toLowerCase() === 'g') { e.preventDefault(); showPanel('studio'); createMeme.click(); }
+      });
+
+      // ---------- Meme generation (waits for images) ----------
+      function wrapText(ctx, text, x, y, maxWidth, lineHeight){
         const words = text.split(' ');
-        let line = '';
-        const lines = [];
+        let line = ''; const lines = [];
         for (let n=0;n<words.length;n++){
-          const testLine = line + words[n] + ' ';
-          const metrics = context.measureText(testLine);
-          if (metrics.width > maxWidth && n>0){
-            lines.push(line.trim());
-            line = words[n] + ' ';
-          } else line = testLine;
+          const test = line + words[n] + ' ';
+          const m = ctx.measureText(test);
+          if (m.width > maxWidth && n>0){ lines.push(line.trim()); line = words[n] + ' '; } else line = test;
         }
         if (line) lines.push(line.trim());
         const totalHeight = lines.length * lineHeight;
         let startY = y - totalHeight/2 + lineHeight/2;
-        for (let i=0;i<lines.length;i++){
-          const ln = lines[i];
-          context.lineWidth = Math.max(6, lineHeight/12);
-          context.strokeStyle = 'rgba(0,0,0,0.6)';
-          context.strokeText(ln, x, startY + i*lineHeight);
-          context.fillText(ln, x, startY + i*lineHeight);
-        }
+        lines.forEach((ln,i)=>{
+          ctx.lineWidth = Math.max(6, lineHeight/12);
+          ctx.strokeStyle = 'rgba(0,0,0,0.6)';
+          ctx.strokeText(ln, x, startY + i*lineHeight);
+          ctx.fillText(ln, x, startY + i*lineHeight);
+        });
       }
 
-      function drawMeme(topText, bottomText){
+      async function generateMemeAsync(top, bottom){
         const W = 1200, H = 1200;
         canvas.width = W; canvas.height = H;
-        // background gradient
+
+        // background
         const g = ctx.createLinearGradient(0,0,W,H); g.addColorStop(0,'#0b1020'); g.addColorStop(1,'#1b1630');
         ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
 
+        // draw uploaded image if present
         if (uploadedImage){
-          // draw uploaded image centered, cover-like
           const img = uploadedImage;
+          // compute cover-like scaling
           const scale = Math.max(W/img.width, H/img.height) * 0.95;
           const iw = img.width * scale, ih = img.height * scale;
           const ix = (W - iw)/2, iy = (H - ih)/2;
           ctx.drawImage(img, ix, iy, iw, ih);
-          // overlay for text contrast
-          ctx.fillStyle = 'rgba(0,0,0,0.18)'; ctx.fillRect(0,0,W,H);
+          // dark overlay for contrast
+          ctx.fillStyle = 'rgba(0,0,0,0.2)'; ctx.fillRect(0,0,W,H);
         } else {
-          // stylized mascot circle
+          // stylized mascot default
           ctx.save();
           ctx.translate(W/2, H/2 - 60);
           ctx.beginPath(); ctx.arc(0,0,360,0,Math.PI*2); ctx.fillStyle = 'rgba(255,59,107,0.06)'; ctx.fill();
@@ -609,98 +592,110 @@
           ctx.restore();
         }
 
-        // Top text
-        ctx.fillStyle = '#ffffff'; ctx.textAlign = 'center';
-        ctx.font = 'bold 64px "Segoe UI", Roboto, Arial';
-        wrapText(ctx, (topText||'').toUpperCase(), W/2, 120, W - 140, 64);
-
-        // Bottom text
-        ctx.fillStyle = '#ffd23f'; ctx.font = 'bold 58px "Segoe UI", Roboto, Arial';
-        wrapText(ctx, (bottomText||'').toUpperCase(), W/2, H - 120, W - 140, 58);
-
-        // branding + logo thumbnail (if stored)
-        ctx.globalAlpha = 0.95; ctx.fillStyle = '#fff'; ctx.font = '700 20px "Segoe UI", Roboto, Arial'; ctx.textAlign = 'right';
-        ctx.fillText('Іба Чотко — Головнін В.С.', W - 40, H - 40);
-
-        // include small logo if stored
-        if (storedLogoDataUrl){
-          const img = new Image();
-          img.src = storedLogoDataUrl;
-          // draw synchronously won't work until loaded; but we can return dataURL after drawing image in onload
-          // For simplicity: ignore logo in final until it's loaded — return dataURL after drawing
+        // If logo stored, draw small logo at bottom-left (async ensure loaded)
+        if (localStorage.getItem('iba_logo')){
+          const logoData = localStorage.getItem('iba_logo');
+          await new Promise((resolve)=>{
+            const li = new Image();
+            li.onload = () => {
+              // draw small branded logo
+              const maxW = 200, maxH = 80;
+              let lw = li.width, lh = li.height;
+              const scale = Math.min(maxW / lw, maxH / lh, 1);
+              lw *= scale; lh *= scale;
+              ctx.globalAlpha = 0.95;
+              ctx.drawImage(li, 40, H - lh - 40, lw, lh);
+              ctx.globalAlpha = 1;
+              resolve();
+            };
+            li.onerror = ()=> resolve();
+            li.src = logoData;
+          });
         }
+
+        // Text styling & draw
+        ctx.fillStyle = '#fff'; ctx.font = 'bold 64px "Segoe UI", Roboto, Arial'; ctx.textAlign = 'center';
+        wrapText(ctx, (top||'').toUpperCase(), W/2, 120, W - 140, 64);
+        ctx.fillStyle = '#ffd23f'; ctx.font = 'bold 58px "Segoe UI", Roboto, Arial';
+        wrapText(ctx, (bottom||'').toUpperCase(), W/2, H - 120, W - 140, 58);
+
+        // branding line
+        ctx.globalAlpha = 0.95; ctx.fillStyle = '#fff'; ctx.font = '700 18px "Segoe UI", Roboto, Arial'; ctx.textAlign = 'right';
+        ctx.fillText('Іба Чотко • Головнін В.С.', W - 40, H - 24);
 
         return canvas.toDataURL('image/png');
       }
 
-      // Generate & preview
-      generateBtn.addEventListener('click', ()=>{
-        const top = (memeTop.value || phrases[Math.floor(Math.random()*phrases.length)]);
-        const bottom = (memeBottom.value || 'Іба Чотко');
+      createMeme.addEventListener('click', async ()=>{
+        const top = topText.value.trim() || phrases[Math.floor(Math.random()*phrases.length)];
+        const bottom = bottomText.value.trim() || 'Іба Чотко';
         try {
-          lastMemeDataUrl = drawMeme(top, bottom);
-          showLastPreview(lastMemeDataUrl);
+          lastMemeDataUrl = await generateMemeAsync(top, bottom);
+          lastPreview.innerHTML = '';
+          const im = document.createElement('img'); im.src = lastMemeDataUrl; im.alt = 'Останній мем'; im.style.maxWidth = '100%';
+          lastPreview.appendChild(im);
+          alert('Мем згенеровано. Можеш відкрити у вкладці або завантажити.');
         } catch (e){
-          console.warn(e); alert('Помилка при генерації. Спробуйте інше зображення або оновіть сторінку.');
+          console.error(e);
+          alert('Помилка при генерації мему. Спробуй перезавантажити сторінку або інше зображення.');
         }
       });
 
-      function showLastPreview(dataUrl){
-        lastPreview.innerHTML = '';
-        const im = document.createElement('img'); im.src = dataUrl; im.alt = 'Останній згенерований мем'; im.style.maxWidth = '100%';
-        lastPreview.appendChild(im);
-      }
-
-      downloadMeme.addEventListener('click', ()=>{
+      downloadBtn.addEventListener('click', ()=>{
         if (!lastMemeDataUrl) return alert('Спочатку згенеруйте мем.');
         const a = document.createElement('a'); a.href = lastMemeDataUrl; a.download = 'iba-chotko-meme.png';
         document.body.appendChild(a); a.click(); a.remove();
       });
 
-      openMeme.addEventListener('click', ()=>{
-        if (!lastMemeDataUrl) return alert('Згенеруйте мем спочатку.');
+      openBtn.addEventListener('click', ()=>{
+        if (!lastMemeDataUrl) return alert('Спочатку згенеруйте мем.');
         const w = window.open('');
         if (w){
           w.document.title = 'Мем — Іба Чотко';
           w.document.body.style.background = '#071025';
           w.document.body.style.margin = '0';
-          const img = w.document.createElement('img');
-          img.src = lastMemeDataUrl; img.style.maxWidth = '100%';
+          const img = w.document.createElement('img'); img.src = lastMemeDataUrl; img.style.maxWidth = '100%';
           w.document.body.appendChild(img);
-        } else alert('Попап заблоковано.');
+        } else alert('Попап заблоковано — дозволь відкриття вікон і спробуй знову.');
       });
 
-      // --- Quick pregen of default meme
-      try { lastMemeDataUrl = drawMeme('Іба чотко!', 'Офіційний мем'); showLastPreview(lastMemeDataUrl); } catch(e){ console.warn('pregen error', e); }
-
-      // --- TTS quick actions & keyboard shortcuts
-      document.addEventListener('keydown', (e)=>{
-        if (e.code === 'Space' && !/input|textarea/i.test(document.activeElement.tagName)) { e.preventDefault(); speak('Іба чотко!'); }
-        if (e.key.toLowerCase() === 'g') { e.preventDefault(); showPanel('tab-studio'); generateBtn.click(); }
+      // ---------- Open current tab as standalone ----------
+      openTabBtn.addEventListener('click', ()=>{
+        const current = tabs.find(t => t.getAttribute('aria-selected') === 'true');
+        if (!current) return;
+        const panel = document.getElementById(current.getAttribute('aria-controls'));
+        const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(current.textContent)} — Іба Чотко</title><style>body{background:#071025;color:#fff;font-family:Arial;padding:18px}img{max-width:100%} .card{background:#0f1830;padding:16px;border-radius:12px}</style></head><body><div class="card">${escapeHtml(panel.innerHTML)}</div></body></html>`;
+        const w = window.open('');
+        if (w){ w.document.open(); w.document.write(html); w.document.close(); } else alert('Попап заблоковано.');
       });
 
-      // --- Small utilities
-      copyUrlBtn.addEventListener('click', async ()=>{
-        try { await navigator.clipboard.writeText(location.href); copyUrlBtn.textContent = 'Скопійовано!'; setTimeout(()=>copyUrlBtn.textContent='Копіювати URL',1200); } catch { alert('Не вдалось скопіювати URL. Скопіюй вручну.'); }
+      // ---------- Copy URL & share ----------
+      copyUrl.addEventListener('click', async ()=>{
+        try { await navigator.clipboard.writeText(location.href); copyUrl.textContent = 'Скопійовано!'; setTimeout(()=> copyUrl.textContent = 'Копіювати URL',1500); } catch { alert('Не вдалося скопіювати URL. Скопіюй вручну.'); }
       });
-
-      // share link
-      function updateShare() {
-        const txt = encodeURIComponent('Іба Чотко — заходь на офіційний мем-сайт!');
-        const url = encodeURIComponent(location.href);
-        shareTweet.href = `https://twitter.com/intent/tweet?text=${txt}&url=${url}`;
+      function updateShare(){
+        const t = encodeURIComponent('Іба Чотко — заходь на офіційний мем-сайт!');
+        const u = encodeURIComponent(location.href);
+        tweet.href = `https://twitter.com/intent/tweet?text=${t}&url=${u}`;
       }
       updateShare();
 
-      // Set voice select placeholder if no voices
-      if (!('speechSynthesis' in window)) { voiceSelect.innerHTML = '<option>Web Speech API не підтримується</option>'; }
+      // ---------- Voice helpers on page ready ----------
+      // ensure voices loaded
+      if ('speechSynthesis' in window) {
+        if (!speechSynthesis.getVoices().length) {
+          // some browsers load voices asynchronously; try again after short delay
+          setTimeout(()=> { try { loadVoices(); } catch(e){} }, 250);
+        }
+      }
 
-      // Initialize some UI bits
-      document.getElementById('year').textContent = new Date().getFullYear();
-      populateMemeGrid();
+      // ---------- Keyboard hints ----------
+      // add minimal tooltips / hints
+      // (already present in UI text)
 
-      // Expose simple diagnostics in console
-      console.log('Іба Чотко — покращена версія: ініціалізовано. Логотип в localStorage:', !!storedLogoDataUrl);
+      // final init
+      populateGrid();
+      console.log('Іба Чотко — оновлений сайт ініціалізовано. Логотип в localStorage:', !!storedLogo);
     })();
   </script>
 </body>
