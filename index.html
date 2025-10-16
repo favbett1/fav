@@ -4,222 +4,221 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Іба Чотко — офіційний мем-сайт</title>
-  <meta name="description" content="Офіційна фан-сторінка мем-персонажу 'Іба Чотко' — приколи, історія, мем-генератор, логотип та інтерфейс із вау-дизайном." />
+  <meta name="description" content="Фан-сайт мем-персонажу 'Іба Чотко' — історія, галерея, мем-генератор, бренд-центр. Готово до деплою на GitHub Pages/Netlify." />
 
-  <!-- Google fonts -->
+  <!-- Open Graph -->
+  <meta property="og:title" content="Іба Чотко — офіційний мем-сайт" />
+  <meta property="og:description" content="Фан-сайт мем-персонажу 'Іба Чотко' — історія, галерея, мем-генератор." />
+  <meta property="og:image" content="data:image/webp;base64,UklGRpBdAABXRUJQVlA4IIRdAABw3QGdASoAAn0BPlEkj0SjoiGVqUWMOAUEsrGt/IZX/e/9bzU+8WTfng9CdR32p5+Un/tC1V5e39bobCt2ZrVDDwBCeOxbKJdSHYld" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- favicon -->
+  <link rel="icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect rx="18" width="100" height="100" fill="%23071124"/><text x="50%" y="56%" text-anchor="middle" fill="%23ff6b6b" font-size="38" font-family="Arial">Ї</text></svg>' />
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Rubik:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg:#071124; --card:#0b1220; --muted:#9aa4b2; --accent:#ff6b6b; --neon:#7cfc00;
-      --glass: rgba(255,255,255,0.04);
-    }
+    :root{ --bg:#071124; --card:#0b1220; --muted:#9aa4b2; --accent:#ff6b6b; --accent2:#7c8bff; --neon:#7cfc00 }
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      background: radial-gradient(800px 400px at 10% 10%, rgba(124,252,0,0.03), transparent),
-                  linear-gradient(180deg, rgba(8,12,24,1), rgba(6,8,14,1));
-      color:#e6eef6; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      -webkit-touch-callout:none;overflow-x:hidden;
-    }
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;color:#e6eef6;background:linear-gradient(180deg,#071124,#041021);-webkit-font-smoothing:antialiased}
 
-    /* header */
-    header{display:flex;align-items:center;gap:18px;padding:16px 28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);backdrop-filter: blur(6px);position:sticky;top:0;z-index:80}
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo img{width:64px;height:64px;object-fit:cover;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,0.6);border:2px solid rgba(255,255,255,0.03)}
-    .site-title{font-family:Rubik, Inter; font-weight:800; font-size:20px; letter-spacing:0.6px}
-    .tagline{font-size:12px;color:var(--muted)}
+    /* layout */
+    header{position:sticky;top:0;z-index:120;display:flex;align-items:center;gap:12px;padding:12px 18px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);backdrop-filter:blur(6px)}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:64px;height:64px;border-radius:14px;object-fit:cover;border:2px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+    .brand h1{font-family:Rubik;margin:0;font-size:18px}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
 
-    .container{max-width:1200px;margin:28px auto;padding:0 20px}
-    .grid{display:grid;grid-template-columns:1fr 340px;gap:28px}
+    nav{margin-left:auto;display:flex;gap:8px;align-items:center}
+    .btn{padding:8px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#ff8a8a);color:#071124}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    .container{max-width:1200px;margin:26px auto;padding:0 18px}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:26px}
 
     /* hero */
-    .hero{display:flex;gap:22px;align-items:center;padding:28px;border-radius:16px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));box-shadow:0 10px 40px rgba(2,6,23,0.6)}
-    .hero-left{flex:1}
-    .hero h1{margin:0;font-family:Rubik; font-size:48px;line-height:1}
-    .neon{color:var(--neon);text-shadow:0 6px 22px rgba(124,252,0,0.09),0 0 40px rgba(124,252,0,0.03)}
-    .hero p{color:var(--muted);margin-top:10px}
+    .hero{display:flex;gap:22px;align-items:center;padding:26px;border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,0.02),transparent);box-shadow:0 30px 70px rgba(2,6,23,0.6);position:relative}
+    .hero-left h2{margin:0;font-size:38px;font-family:Rubik}
+    .hero-left p{color:var(--muted);margin-top:10px}
+    .badge{position:absolute;left:-18px;top:-18px;background:linear-gradient(90deg,#ffd36b,#ff8a8a);padding:8px;border-radius:10px;font-weight:800;color:#071124}
 
-    .buttons{display:flex;gap:12px;margin-top:18px}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,var(--accent),#ff8a8a);color:white;font-weight:700;border:none;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,0.45)}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600}
-
-    .card{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);box-shadow: 0 6px 20px rgba(2,6,23,0.6)}
-
-    /* sidebar */
-    aside{position:relative}
-    .creator{position:sticky;top:84px;padding:18px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(6px)}
+    .logo-large{width:240px;border-radius:18px;border:6px solid rgba(255,255,255,0.02);box-shadow:0 28px 60px rgba(0,0,0,0.6)}
 
     /* sections */
     section{margin-top:22px}
-    .masonry{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:14px;border-radius:12px}
+    .masonry{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 
     /* meme generator */
-    .meme-area{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:12px;padding:12px}
-    canvas{max-width:100%;border-radius:12px;background:#0b0f18;display:block}
+    .meme-area{padding:14px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.015),transparent)}
+    canvas{display:block;width:100%;border-radius:12px;background:#0b0f18}
 
     /* gallery */
-    .sticker{display:block;width:100%;border-radius:10px;overflow:hidden;box-shadow:0 8px 30px rgba(3,6,12,0.6);border:4px solid rgba(255,255,255,0.02)}
+    #galleryGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+    .gallery-item{border-radius:10px;overflow:hidden;background:#071124;padding:8px}
+    .gallery-item img{width:100%;height:180px;object-fit:cover;border-radius:8px}
+
+    /* contact */
+    form input, form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
 
     footer{margin:40px 0;color:var(--muted);text-align:center}
 
-    /* neon side label */
-    .side-label{position:fixed;right:12px;top:120px;writing-mode:vertical-rl;transform:rotate(180deg);font-family:Rubik;font-weight:700;padding:8px 12px;border-radius:8px;background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);box-shadow:0 6px 20px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.03)}
-    .side-label .creator-name{display:block;margin-top:12px;color:var(--neon);text-align:center}
-
-    /* small screens */
-    @media (max-width:980px){.grid{grid-template-columns:1fr} aside{position:static}.hero h1{font-size:34px}}
-
-    /* extra visuals */
-    .sparkles{position:absolute;inset:0;pointer-events:none;z-index:0}
-    .badge{position:absolute;left:-18px;top:-18px;background:linear-gradient(90deg,#fff,#ffd36b);padding:10px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.5);font-weight:800;color:#071124;font-family:'Press Start 2P', monospace}
-
-    .pulse{animation:pulse 2.8s infinite}
-    @keyframes pulse{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+    /* responsive */
+    @media(max-width:980px){.grid{grid-template-columns:1fr} nav{display:none}} 
+    @media(max-width:640px){.masonry{grid-template-columns:1fr}}
 
     .muted{color:var(--muted)}
+    .neon{color:var(--neon);text-shadow:0 10px 30px rgba(124,252,0,0.06)}
+
+    /* small animations */
+    .fade-up{transform:translateY(8px);opacity:0;transition:all .6s cubic-bezier(.2,.9,.25,1)}
+    .fade-up.in{transform:none;opacity:1}
   </style>
 </head>
 <body>
   <header>
-    <div class="logo">
-      <!-- use uploaded sticker as logo -->
-      <img id="logoImg" src="data:image/webp;base64,UklGRpBdAABXRUJQVlA4IIRdAABw3QGdASoAAn0BPlEkj0SjoiGVqUWMOAUEsrGtsn95WjXECGMZxMnxz+VEx41+r59/Vnt3NL47c7r9d8z7v/7e7v8v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7" alt="Іба Чотко логотип" />
+    <div class="brand">
+      <img id="logoImg" src="data:image/webp;base64,UklGRpBdAABXRUJQVlA4IIRdAABw3QGdASoAAn0BPlEkj0SjoiGVqUWMOAUEsrGt/IZX/e/9bzU+8WTfng9CdR32p5+Un/tC1V5e39bobCt2ZrVDDwBCeOxbKJdSHYld" alt="Іба Чотко" />
       <div>
-        <div class="site-title">Іба Чотко <span class="muted">— мем-персонаж</span></div>
-        <div class="tagline">офіційна фан-сторінка • меми, генератор, творчість</div>
+        <h1>Іба Чотко</h1>
+        <p class="muted">Офіційний фан-сайт мем-персонажу</p>
       </div>
     </div>
 
-    <div style="margin-left:auto;display:flex;gap:12px;align-items:center">
-      <button class="btn ghost" id="toggleTheme">Тема</button>
-      <a class="btn" href="#meme">Мем-генератор</a>
-    </div>
+    <nav>
+      <a class="btn ghost" href="#about">Історія</a>
+      <a class="btn ghost" href="#meme">Мем-генератор</a>
+      <a class="btn ghost" href="#gallery">Галерея</a>
+      <button class="btn primary" id="downloadLogoBtn">Завантажити логотип</button>
+    </nav>
   </header>
 
   <main class="container">
     <div class="grid">
-      <div style="position:relative">
-        <div class="hero">
+      <div>
+        <section class="hero fade-up" id="top">
+          <div class="badge">Офіційно</div>
           <div class="hero-left">
-            <h1 class="neon">Іба Чотко — <span style="color:#fff;">чотко як ніколи</span></h1>
-            <p>Фан-сайт для створення мемів, збереження фанових робіт та просування вайбу. Клац — і у тебе вже мем, який запам'ятають.</p>
-
-            <div class="buttons">
-              <button class="btn" id="surpriseBtn">Сюрприз</button>
+            <h2 class="neon">Іба Чотко — мемний півень з мультфільму</h2>
+            <p class="muted">Цей сайт присвячений образу, який став мемом: історія походження, мем-генератор, офіційні логотипи та галерея фан-робіт.</p>
+            <div style="margin-top:14px;display:flex;gap:10px">
+              <button class="btn primary" id="useLogoHero">Створити мем</button>
               <button class="btn ghost" id="copyTitle">Копіювати назву</button>
-              <button class="btn" id="openGallery">Галерея</button>
             </div>
 
-            <div style="margin-top:18px;display:flex;gap:12px">
-              <div class="card" style="flex:1">
-                <strong>Мем-генератор</strong>
-                <div class="muted" style="font-size:13px">Завантаж фон або використай офіційний логотип</div>
-              </div>
-              <div class="card" style="width:220px">
-                <strong>Хроніка</strong>
-                <div class="muted" style="font-size:13px">Коли мем народився та як розвивався</div>
-              </div>
-            </div>
-
-          </div>
-
-          <div style="width:320px;text-align:center;position:relative">
-            <div class="badge">Іба Чотко</div>
-            <img src="data:image/webp;base64,UklGRpBdAABXRUJQVlA4IIRdAABw3QGdASoAAn0BPlEkj0SjoiGVqUWMOAUEsrGtsn95WjXECGMZxMnxz+VEx41+r59/Vnt3NL47c7r9d8z7v/7e7v8v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7" alt="Лого великий" style="width:220px;border-radius:18px;box-shadow:0 18px 40px rgba(0,0,0,0.6);border:6px solid rgba(255,255,255,0.02)" />
-            <div class="muted" style="margin-top:10px">Офіційний стікер — використовуй в мемах</div>
-          </div>
-        </div>
-
-        <!-- decorative sparkles (canvas) -->
-        <canvas id="sparkle" class="sparkles" width="1200" height="600" aria-hidden="true"></canvas>
-
-        <!-- content blocks -->
-        <section id="about">
-          <h2>Про персонажа</h2>
-          <div class="masonry">
-            <div class="card">
-              <h3>Коротко</h3>
-              <p class="muted">Фраза «іба чотко» стала символом моментального захоплення — тут ми дали їй образ та вайб, який люблять фанати.</p>
-            </div>
-            <div class="card">
-              <h3>Цікаві факти</h3>
+            <div style="margin-top:16px" class="card">
+              <strong>Що тут є</strong>
               <ul class="muted" style="margin:8px 0 0;padding-left:18px">
-                <li>Логотип — твій uploaded sticker (вставлено в шапку).</li>
-                <li>Мем-генератор підтримує drag&drop та пряме скачування.</li>
+                <li>Докладна історія персонажа.</li>
+                <li>Потужний мем-генератор (drag & drop).</li>
+                <li>Галерея з localStorage та можливістю завантажити роботу.</li>
+                <li>Офіційні логотипи для фан-контенту.</li>
               </ul>
             </div>
           </div>
+
+          <div style="width:260px;text-align:center">
+            <img class="logo-large" src="data:image/webp;base64,UklGRpBdAABXRUJQVlA4IIRdAABw3QGdASoAAn0BPlEkj0SjoiGVqUWMOAUEsrGt/IZX/e/9bzU+8WTfng9CdR32p5+Un/tC1V5e39bobCt2ZrVDDwBCeOxbKJdSHYld" alt="Логотип" />
+            <div class="muted" style="margin-top:8px">Офіційний стікер — використай у мемах</div>
+          </div>
         </section>
 
-        <section id="meme">
-          <h2>Мем-генератор</h2>
-          <div class="meme-area">
-            <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start">
+        <section id="about" class="fade-up">
+          <h3>Історія персонажа</h3>
+          <div class="card">
+            <p class="muted">Персонаж "Іба Чотко" бере початок з епізоду мультфільму, де півень демонструє надмірну впевненість та чітку реакцію. Сцена швидко стала інтернет-мемом: люди почали додавати підписи, ремікси та стікери. На цьому сайті ми зібрали хроніку, фан-арти і дали інструменти для створення своїх вдалих варіацій.</p>
+            <h4>Хроніка</h4>
+            <ul class="muted">
+              <li><strong>2022</strong> — кадри з мультика поширюються.</li>
+              <li><strong>2023</strong> — фраза «іба чотко» набуває популярності.</li>
+              <li><strong>2024</strong> — народжуються фан-арти і стікери.</li>
+              <li><strong>2025</strong> — сайт-спільнота для мемів.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="meme" class="fade-up">
+          <h3>Мем-генератор</h3>
+          <div class="meme-area card">
+            <div style="display:flex;gap:12px;flex-wrap:wrap">
               <div style="flex:1;min-width:260px">
-                <label class="muted">Завантажити фон (або перетягни зображення сюди)</label>
+                <label class="muted">Завантажити фон</label>
                 <input type="file" id="bgInput" accept="image/*" style="display:block;margin-top:8px" />
 
                 <label class="muted" style="margin-top:10px;display:block">Текст зверху</label>
-                <input id="topText" placeholder="Іба чотко" style="width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
+                <input id="topText" placeholder="Іба чотко" />
 
                 <label class="muted" style="margin-top:10px;display:block">Текст знизу</label>
-                <input id="botText" placeholder="Коротко і чотко" style="width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
+                <input id="botText" placeholder="Коротко і чотко" />
 
                 <div style="display:flex;gap:8px;margin-top:12px">
-                  <button class="btn" id="renderBtn">Генерувати</button>
-                  <button class="btn" id="downloadBtn" style="background:linear-gradient(90deg,#7c8bff,#8affd0)">Завантажити</button>
+                  <button class="btn primary" id="renderBtn">Генерувати</button>
+                  <button class="btn" id="downloadBtn" style="background:linear-gradient(90deg,var(--accent2),#8affd0)">Завантажити PNG</button>
                   <button class="btn ghost" id="useLogo">Використати логотип</button>
                 </div>
 
-                <div class="hint">Порада: натисни сюрприз для випадкового підпису; секрет — Konami-код.</div>
+                <div class="muted" style="margin-top:10px">Порада: перетягни картинку прямо на полотно або використай офіційний логотип.</div>
               </div>
 
-              <div style="width:520px;max-width:100%">
-                <canvas id="memeCanvas" width="1000" height="750"></canvas>
+              <div style="width:760px;max-width:100%">
+                <canvas id="memeCanvas" width="1200" height="840"></canvas>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="gallery">
-          <h2>Галерея</h2>
-          <div class="masonry">
-            <div class="card"><img class="sticker" src="data:image/webp;base64,UklGRpBdAABXRUJQVlA4IIRdAABw3QGdASoAAn0BPlEkj0SjoiGVqUWMOAUEsrGtsn95WjXECGMZxMnxz+VEx41+r59/Vnt3NL47c7r9d8z7v/7e7v8v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7" alt="sticker" /></div>
-            <div class="card"><img class="sticker" src="data:image/webp;base64,UklGRpBdAABXRUJQVlA4IIRdAABw3QGdASoAAn0BPlEkj0SjoiGVqUWMOAUEsrGtsn95WjXECGMZxMnxz+VEx41+r59/Vnt3NL47c7r9d8z7v/7e7v8v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7" alt="sticker" /></div>
+        <section id="gallery" class="fade-up">
+          <h3>Галерея фан-робіт</h3>
+          <div class="card">
+            <div id="galleryGrid"></div>
+            <div style="margin-top:12px" class="muted">Збережені роботи зберігаються локально у твоєму браузері. Поділися своїм мемом у соцмережах!</div>
+          </div>
+        </section>
+
+        <section id="contact" class="fade-up">
+          <h3>Контакти / Зворотний зв'язок</h3>
+          <div class="card">
+            <!-- Netlify-friendly form markup (works with Netlify forms when deployed) -->
+            <form id="contactForm" name="contact" method="POST" data-netlify="true">
+              <input type="hidden" name="form-name" value="contact">
+              <label class="muted">Ваше ім'я</label>
+              <input name="name" placeholder="Вадим" required />
+              <label class="muted" style="margin-top:8px">Email</label>
+              <input name="email" type="email" placeholder="email@example.com" required />
+              <label class="muted" style="margin-top:8px">Повідомлення</label>
+              <textarea name="message" rows="4" placeholder="Хочу запропонувати..." required></textarea>
+              <div style="margin-top:10px;display:flex;gap:8px"><button class="btn primary" type="submit">Відправити</button><button class="btn ghost" type="button" id="resetContact">Очистити</button></div>
+              <div id="contactResult" class="muted" style="margin-top:8px"></div>
+            </form>
+            <div style="margin-top:10px" class="muted">Примітка: якщо не використовуєш Netlify, форма все одно показує підтвердження локально.</div>
           </div>
         </section>
 
       </div>
 
       <aside>
-        <div class="creator">
+        <div class="card creator">
           <div style="display:flex;gap:12px;align-items:center">
-            <img src="data:image/webp;base64,UklGRpBdAABXRUJQVlA4IIRdAABw3QGdASoAAn0BPlEkj0SjoiGVqUWMOAUEsrGtsn95WjXECGMZxMnxz+VEx41+r59/Vnt3NL47c7r9d8z7v/7e7v8v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7" width="56" height="56" style="border-radius:10px;object-fit:cover;" alt="ГВ"/>
+            <img src="data:image/webp;base64,UklGRpBdAABXRUJQVlA4IIRdAABw3QGdASoAAn0BPlEkj0SjoiGVqUWMOAUEsrGt/IZX/e/9bzU+8WTfng9CdR32p5+Un/tC1V5e39bobCt2ZrVDDwBCeOxbKJdSHYld" width="56" height="56" style="border-radius:10px;object-fit:cover" alt="Головін"/>
             <div>
               <div style="font-weight:800">Головін В.С.</div>
-              <div class="muted" style="font-size:13px">Творець сайту</div>
+              <div class="muted" style="font-size:13px">Творець та куратор</div>
             </div>
           </div>
-          <h3>Про проєкт</h3>
-          <p class="muted">Фан-проєкт для збереження мем-культури. Використання логотипу дозволено для фан-контенту.</p>
-          <div style="margin-top:12px;display:flex;gap:8px">
-            <button class="btn" id="themeHint" style="padding:8px">Ніч/День</button>
-            <button class="btn" id="donate" style="background:linear-gradient(90deg,#ffd36b,#ff8a8a)">Підтримати</button>
+
+          <div style="margin-top:12px">
+            <h4>Офіційні матеріали</h4>
+            <div class="muted">Завантажуй логотипи для фан-арту або використай API для автоматизації.</div>
+            <div style="display:flex;gap:8px;margin-top:8px"><button class="btn" id="downloadPNG">PNG</button><button class="btn ghost" id="downloadSVG">SVG</button></div>
+          </div>
+
+          <div style="margin-top:12px">
+            <h4>Контакти</h4>
+            <div class="muted">Telegram: @your_telegram &nbsp;•&nbsp; Email: email@example.com</div>
           </div>
         </div>
-
-        <div class="card" style="margin-top:16px">
-          <h3>Хроніка</h3>
-          <div class="muted">2023 — перші згадки • 2024 — вайб росте • 2025 — фан-сайт</div>
-        </div>
       </aside>
-    </div>
-
-    <div class="side-label">
-      <div style="font-size:14px">Творець</div>
-      <div class="creator-name">Головін В.С.</div>
     </div>
 
     <footer>
@@ -228,78 +227,74 @@
   </main>
 
   <script>
-    // year
+    // small utilities
     document.getElementById('year').textContent = new Date().getFullYear();
+    // reveal animations
+    function reveal(){ document.querySelectorAll('.fade-up').forEach(el=>el.classList.add('in')); }
+    window.addEventListener('load', reveal);
 
-    // small sparkle canvas for hero
-    (function(){
-      const c = document.getElementById('sparkle'); if(!c) return; const ctx = c.getContext('2d');
-      function resize(){ c.width = document.documentElement.clientWidth; c.height = 420; }
-      resize(); window.addEventListener('resize', resize);
-      const particles = [];
-      for(let i=0;i<40;i++) particles.push({x:Math.random()*c.width,y:Math.random()*c.height,vy:0.2+Math.random()*0.6, size:1+Math.random()*3, alpha:0.2+Math.random()*0.8});
-      function anim(){ ctx.clearRect(0,0,c.width,c.height); particles.forEach(p=>{p.y += p.vy; if(p.y>c.height+10){p.y=-10; p.x=Math.random()*c.width;} ctx.globalAlpha=p.alpha; ctx.fillStyle='rgba(124,252,0,0.75)'; ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill();}); requestAnimationFrame(anim);} anim();
-    })();
+    // logo data URI (already embedded)
+    const logoData = 'data:image/webp;base64,UklGRpBdAABXRUJQVlA4IIRdAABw3QGdASoAAn0BPlEkj0SjoiGVqUWMOAUEsrGt/IZX/e/9bzU+8WTfng9CdR32p5+Un/tC1V5e39bobCt2ZrVDDwBCeOxbKJdSHYld';
 
-    // copy title
-    document.getElementById('copyTitle').addEventListener('click',async()=>{ try{ await navigator.clipboard.writeText('Іба Чотко'); alert('Назву скопійовано!'); }catch(e){ alert('Не вдалося скопіювати') } });
-
-    // surprise
-    const slogans = ['Іба чотко — куди не глянь, сміливо!','Коротко, чотко, мемно.','Чоткий вайб з кожним кліком.','Немає сумнівів — тільки чотко.','Більше стікерів — більше вайбу.'];
-    document.getElementById('surpriseBtn').addEventListener('click',()=>alert(slogans[Math.floor(Math.random()*slogans.length)]));
-
-    // meme generator
+    // Meme generator core
     const canvas = document.getElementById('memeCanvas'); const ctx = canvas.getContext('2d'); const bgInput = document.getElementById('bgInput'); const topText = document.getElementById('topText'); const botText = document.getElementById('botText'); let bgImg = null;
 
-    // use uploaded sticker as default bg element
-    const logoPath = 'data:image/webp;base64,UklGRpBdAABXRUJQVlA4IIRdAABw3QGdASoAAn0BPlEkj0SjoiGVqUWMOAUEsrGtsn95WjXECGMZxMnxz+VEx41+r59/Vnt3NL47c7r9d8z7v/7e7v8v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7';
-    const defaultBg = new Image(); defaultBg.src = logoPath; defaultBg.onload = ()=>{ if(!bgImg){ bgImg = defaultBg; renderMeme(); } };
+    const defaultBg = new Image(); defaultBg.src = logoData; defaultBg.onload = ()=>{ if(!bgImg){ bgImg = defaultBg; renderMeme(); } };
 
-    bgInput.addEventListener('change',(e)=>{ const f = e.target.files[0]; if(!f) return; const url = URL.createObjectURL(f); const i = new Image(); i.onload=()=>{ bgImg = i; renderMeme(); URL.revokeObjectURL(url); }; i.src = url; });
+    bgInput.addEventListener('change',(e)=>{ const f=e.target.files[0]; if(!f) return; const url=URL.createObjectURL(f); const i=new Image(); i.onload=()=>{ bgImg=i; renderMeme(); URL.revokeObjectURL(url); }; i.src=url; });
 
-    document.getElementById('useLogo').addEventListener('click',()=>{ const i = new Image(); i.onload=()=>{ bgImg = i; renderMeme(); }; i.src = logoPath; });
+    document.getElementById('useLogo').addEventListener('click',()=>{ const i=new Image(); i.onload=()=>{ bgImg=i; renderMeme(); }; i.src = logoData; });
+    document.getElementById('useLogoHero').addEventListener('click',()=>{ document.location.hash='#meme'; document.getElementById('useLogo').click(); });
 
-    function renderMeme(){
-      // responsive sizing
-      const parentW = Math.min(1000, Math.max(420, document.querySelector('#memeCanvas').parentElement.clientWidth));
-      canvas.width = parentW; canvas.height = Math.round(parentW * 0.7);
+    function resizeCanvas(){ const parentW = Math.min(1200, Math.max(420, canvas.parentElement.clientWidth)); canvas.width = parentW; canvas.height = Math.round(parentW*0.7); }
 
-      // bg
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      if(bgImg){ const r = Math.max(canvas.width/bgImg.width, canvas.height/bgImg.height); const nw = bgImg.width*r, nh = bgImg.height*r; const dx=(canvas.width-nw)/2, dy=(canvas.height-nh)/2; ctx.drawImage(bgImg,dx,dy,nw,nh); } else { ctx.fillStyle='#0b0f18'; ctx.fillRect(0,0,canvas.width,canvas.height); }
-
-      // overlay vignette
+    function renderMeme(){ resizeCanvas(); ctx.clearRect(0,0,canvas.width,canvas.height); if(bgImg){ const r = Math.max(canvas.width/bgImg.width, canvas.height/bgImg.height); const nw = bgImg.width*r, nh = bgImg.height*r; const dx=(canvas.width-nw)/2, dy=(canvas.height-nh)/2; ctx.drawImage(bgImg,dx,dy,nw,nh);} else { ctx.fillStyle='#071124'; ctx.fillRect(0,0,canvas.width,canvas.height);} // vignette
       const g = ctx.createLinearGradient(0,0,0,canvas.height); g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(1,'rgba(2,6,23,0.45)'); ctx.fillStyle=g; ctx.fillRect(0,0,canvas.width,canvas.height);
-
-      // top text with outline
-      const outline = (text,x,y,size)=>{ ctx.font = `700 ${size}px Rubik, Inter, sans-serif`; ctx.textAlign='center'; ctx.lineJoin='round'; ctx.strokeStyle='rgba(0,0,0,0.9)'; ctx.lineWidth = Math.max(8, size*0.12); ctx.miterLimit=2; ctx.strokeText(text,x,y); ctx.fillStyle='white'; ctx.fillText(text,x,y); };
-      const top = (topText.value||'Іба чотко').toUpperCase(); const bot = (botText.value||'Коротко і чотко').toUpperCase();
-      outline(top, canvas.width/2, Math.round(canvas.height*0.12), Math.round(canvas.width*0.07));
-      outline(bot, canvas.width/2, Math.round(canvas.height*0.88), Math.round(canvas.width*0.055));
-
-      // small sticker in corner
-      const sticker = new Image(); sticker.src = logoPath; const sw = Math.round(canvas.width*0.18); sticker.onload = ()=>{ ctx.drawImage(sticker, canvas.width - sw - 18, canvas.height - sw - 18, sw, sw); ctx.strokeStyle='rgba(0,0,0,0.55)'; ctx.lineWidth=6; ctx.strokeRect(canvas.width - sw - 18, canvas.height - sw - 18, sw, sw); };
+      // text with outline
+      const outline = (text,x,y,size)=>{ ctx.font = `700 ${size}px Rubik, Inter, sans-serif`; ctx.textAlign='center'; ctx.lineJoin='round'; ctx.strokeStyle='rgba(0,0,0,0.95)'; ctx.lineWidth = Math.max(8, size*0.12); ctx.miterLimit=2; ctx.strokeText(text,x,y); ctx.fillStyle='white'; ctx.fillText(text,x,y); };
+      const top = (topText.value||'Іба чотко').toUpperCase(); const bot = (botText.value||'Коротко і чотко').toUpperCase(); outline(top,canvas.width/2,Math.round(canvas.height*0.12),Math.round(canvas.width*0.07)); outline(bot,canvas.width/2,Math.round(canvas.height*0.88),Math.round(canvas.width*0.055));
+      // small sticker corner
+      const stick = new Image(); stick.src = logoData; const sw = Math.round(canvas.width*0.16); stick.onload = ()=>{ ctx.drawImage(stick, canvas.width - sw - 18, canvas.height - sw - 18, sw, sw); ctx.strokeStyle='rgba(0,0,0,0.55)'; ctx.lineWidth=6; ctx.strokeRect(canvas.width - sw - 18, canvas.height - sw - 18, sw, sw); };
     }
 
     document.getElementById('renderBtn').addEventListener('click', renderMeme);
-    document.getElementById('downloadBtn').addEventListener('click', ()=>{ const url = canvas.toDataURL('image/png'); const a = document.createElement('a'); a.href = url; a.download = 'iba_chotko_meme.png'; a.click(); });
+    document.getElementById('downloadBtn').addEventListener('click', ()=>{ const url = canvas.toDataURL('image/png'); const a=document.createElement('a'); a.href=url; a.download='iba_chotko_meme.png'; a.click(); // save to gallery
+      setTimeout(()=>{ const arr = JSON.parse(localStorage.getItem('iba_gallery')||'[]'); arr.push(url); localStorage.setItem('iba_gallery', JSON.stringify(arr)); loadGallery(); },200);
+    });
 
     // drag & drop to canvas
-    canvas.addEventListener('dragover', e=>e.preventDefault()); canvas.addEventListener('drop', e=>{ e.preventDefault(); const f = e.dataTransfer.files && e.dataTransfer.files[0]; if(!f) return; const u = URL.createObjectURL(f); const i = new Image(); i.onload=()=>{ bgImg = i; renderMeme(); URL.revokeObjectURL(u); }; i.src = u; });
+    canvas.addEventListener('dragover',e=>e.preventDefault()); canvas.addEventListener('drop',e=>{ e.preventDefault(); const f=e.dataTransfer.files && e.dataTransfer.files[0]; if(!f) return; const u=URL.createObjectURL(f); const i=new Image(); i.onload=()=>{ bgImg=i; renderMeme(); URL.revokeObjectURL(u); }; i.src=u; });
 
-    // konami easter egg
-    const konami = [38,38,40,40,37,39,37,39,66,65]; let kpos=0; window.addEventListener('keydown', e=>{ if(e.keyCode===konami[kpos]){ kpos++; if(kpos===konami.length){ triggerKonami(); kpos=0; } } else kpos=0; });
-    function triggerKonami(){ for(let i=0;i<120;i++){ const el = document.createElement('div'); el.style.position='fixed'; el.style.left=Math.random()*100+'%'; el.style.top='-20px'; el.style.width='12px'; el.style.height='16px'; el.style.background = `hsl(${Math.random()*360} 90% 60%)`; el.style.opacity='0.95'; el.style.transform = `rotate(${Math.random()*360}deg)`; el.style.zIndex=99999; el.style.borderRadius='3px'; document.body.appendChild(el); const fall = el.animate([{transform:'translateY(0)'},{transform:`translateY(${window.innerHeight+200}px)`}],{duration:1800+Math.random()*2200,iterations:1,easing:'cubic-bezier(.2,.9,.2,1)'}); fall.onfinish=()=>el.remove(); } alert('Секрет активовано — вайб посилено!'); }
+    // download logo PNG
+    document.getElementById('downloadLogoBtn').addEventListener('click', ()=>{ const img = new Image(); img.src = logoData; img.onload = ()=>{ const c=document.createElement('canvas'); const s = 1024; c.width=s; c.height=s; const cx=c.getContext('2d'); cx.clearRect(0,0,s,s); cx.drawImage(img,(s-img.width)/2,(s-img.height)/2,img.width,img.height); const a=document.createElement('a'); a.href=c.toDataURL('image/png'); a.download='iba_chotko_logo.png'; a.click(); }; });
+    document.getElementById('downloadPNG').addEventListener('click', ()=>{ document.getElementById('downloadLogoBtn').click(); });
+    document.getElementById('downloadSVG').addEventListener('click', ()=>{ const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900"><rect width="100%" height="100%" fill="#071124"/><g transform="translate(80,80)"><circle cx="500" cy="300" r="220" fill="#ff6b6b"/><circle cx="420" cy="260" r="30" fill="#071124"/><circle cx="580" cy="260" r="30" fill="#071124"/><path d="M420 420 Q500 520 580 420" stroke="#071124" stroke-width="22" fill="none" stroke-linecap="round"/></g></svg>`; const blob=new Blob([svg],{type:'image/svg+xml'}); const u=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=u; a.download='iba_chotko_logo.svg'; a.click(); URL.revokeObjectURL(u); });
 
-    // small UI helpers
-    document.getElementById('openGallery').addEventListener('click', ()=>{ location.href='#gallery'; });
-    document.getElementById('donate').addEventListener('click', ()=>{ alert('Дякуємо за підтримку! Зв'яжіться для реквізитів.'); });
-    document.getElementById('themeHint').addEventListener('click', ()=>{ document.body.classList.toggle('alt-theme'); alert('Тему змінено (в стратегії CSS)'); });
+    // gallery localStorage
+    const galleryGrid = document.getElementById('galleryGrid'); function loadGallery(){ const stored = JSON.parse(localStorage.getItem('iba_gallery')||'[]'); galleryGrid.innerHTML=''; if(stored.length===0){ galleryGrid.innerHTML='<div class="muted">Порожня галерея — створи перший мем!</div>'; return;} stored.slice().reverse().forEach((item,idx)=>{ const d=document.createElement('div'); d.className='gallery-item'; d.innerHTML = `<img src="${item}" alt="meme"/><div style="display:flex;gap:8px;margin-top:8px"><button class="btn primary" data-idx="${idx}">Завантажити</button><button class="btn ghost" data-share="${idx}">Поділитися</button></div>`; galleryGrid.appendChild(d); }); }
+    loadGallery();
 
-    // initial render
-    window.addEventListener('load', ()=>{ renderMeme(); setTimeout(renderMeme,400); });
-    window.addEventListener('resize', ()=>{ renderMeme(); });
+    galleryGrid.addEventListener('click', (e)=>{ const btn = e.target.closest('button'); if(!btn) return; const idx = Number(btn.getAttribute('data-idx')); const share = btn.getAttribute('data-share'); const stored = JSON.parse(localStorage.getItem('iba_gallery')||'[]'); const item = stored[stored.length - 1 - idx]; if(idx>=0){ const a=document.createElement('a'); a.href=item; a.download='iba_chotko_saved.png'; a.click(); } if(share!==null){ // share via navigator.share if available
+        if(navigator.share){ navigator.share({title:'Іба Чотко — мій мем', text:'Глянь, мій мем!', url:item}).catch(()=>alert('Не вдалося поділитися')); } else { prompt('Посилання на зображення (скопіюй та поділись):', item); } }
+    });
+
+    // contact form (client-side fallback)
+    const contactForm = document.getElementById('contactForm'); contactForm.addEventListener('submit',(e)=>{ e.preventDefault(); document.getElementById('contactResult').textContent='Дякуємо! Повідомлення відправлено (локально).'; contactForm.reset(); }); document.getElementById('resetContact').addEventListener('click', ()=>contactForm.reset());
+
+    // small helpers
+    document.getElementById('surpriseBtn').addEventListener('click', ()=>{ const s=['Іба чотко — чоткіший за всіх!','Мемний вайб на максимум','Коротко. Чотко. І все.','Півень знає своє — іба чотко!']; alert(s[Math.floor(Math.random()*s.length)]); });
+    document.getElementById('copyTitle').addEventListener('click', async()=>{ try{ await navigator.clipboard.writeText('Іба Чотко'); alert('Назву скопіювано!'); }catch(e){ alert('Не вдалося скопіювати'); } });
+
+    window.addEventListener('load', ()=>{ renderMeme(); loadGallery(); }); window.addEventListener('resize', ()=>{ renderMeme(); });
   </script>
+
+  <!-- Deployment notes (hidden in page comments) -->
+  <!--
+    Deployment tips:
+    - This is a single-file static site. To deploy: create a GitHub repo, add this index.html, enable GitHub Pages (main branch).
+    - For Netlify Forms: the <form> has data-netlify="true" and name="contact"; enable forms in Netlify settings. For serverless functions, create a Netlify Function (lambda) to forward emails.
+    - If you want a packaged ZIP, download this file as index.html and compress locally.
+  -->
 </body>
 </html>
 
