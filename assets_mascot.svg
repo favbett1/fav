@@ -1,0 +1,32 @@
+<!-- Проста стилізована маскот-ілюстрація, оригінальна -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300" role="img" aria-labelledby="mTitle">
+  <title id="mTitle">Маскот Іба Чотко</title>
+  <defs>
+    <linearGradient id="mg" x1="0" x2="1">
+      <stop offset="0" stop-color="#ff3b6b"/>
+      <stop offset="1" stop-color="#ffd23f"/>
+    </linearGradient>
+    <filter id="neon" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="100%" height="100%" rx="24" fill="transparent"/>
+
+  <!-- head -->
+  <g transform="translate(50,30)" filter="url(#neon)">
+    <ellipse cx="100" cy="90" rx="78" ry="78" fill="#0b1020"/>
+    <ellipse cx="100" cy="82" rx="68" ry="68" fill="url(#mg)"/>
+    <!-- face -->
+    <circle cx="78" cy="82" r="10" fill="#111"/>
+    <circle cx="122" cy="82" r="10" fill="#111"/>
+    <!-- mouth (smirk) -->
+    <path d="M70 115 Q100 138 130 115" stroke="#111" stroke-width="8" stroke-linecap="round" fill="none"/>
+    <!-- accent spark -->
+    <polygon points="160,10 170,30 190,34 174,48 178,68 160,56 142,68 146,48 130,34 150,30" fill="#fff" opacity="0.14"/>
+  </g>
+</svg>
