@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GovBet — Ігри</title>
+  <meta name="description" content="Сторінка ігор — фільтри, провайдери, пошук, демо-запуск гри." />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page page--games">
+    <header class="site-header small">
+      <div class="container header-inner">
+        <a class="brand" href="index.html"><span class="logo">GB</span><span class="brand-text">GovBet</span></a>
+        <nav class="main-nav">
+          <a href="index.html">Головна</a>
+          <a href="games.html" class="active">Ігри</a>
+          <a href="about.html">Про нас</a>
+        </nav>
+        <div class="header-actions">
+          <div class="lang-switch" role="tablist">
+            <button class="lang-btn active" data-lang="uk">UA</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+          </div>
+          <button class="btn btn--ghost" id="btn-login-2">Увійти</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="container filters-section">
+        <div class="filters-row">
+          <div class="chips" role="toolbar" aria-label="Фільтри">
+            <button class="chip active" data-filter="all">Усі</button>
+            <button class="chip" data-filter="slots">Слоти</button>
+            <button class="chip" data-filter="table">Табличні</button>
+            <button class="chip" data-filter="live">Live</button>
+            <button class="chip" data-filter="jackpot">Джекпот</button>
+          </div>
+
+          <div class="filters-right">
+            <select id="provider-filter" class="select">
+              <option value="all">Всі провайдери</option>
+              <option value="pragmatic">Pragmatic</option>
+              <option value="netent">NetEnt</option>
+              <option value="playngo">Play'n GO</option>
+              <option value="extern">External API</option>
+            </select>
+            <input id="search-games" class="search" placeholder="Пошук ігор..." />
+            <button class="btn btn--primary" id="btn-load-games">Завантажити</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="container">
+        <div id="games-grid" class="games-grid large"></div>
+
+        <div id="pagination" class="pagination" aria-hidden="true"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div><strong>GovBet</strong><div class="muted">© <span id="year-2"></span> GovBet — Demo</div></div>
+        <div class="footer-links"><a href="index.html">Home</a></div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- player modal -->
+  <div class="modal-backdrop" id="game-player" aria-hidden="true">
+    <div class="modal player-modal" role="dialog" aria-labelledby="player-title">
+      <button class="player-close" id="player-close" aria-label="Close">✕</button>
+      <iframe id="game-iframe" class="player-iframe" src="about:blank" title="Game player"></iframe>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
