@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GovBet — Demo</title>
+  <meta name="description" content="GovBet (DEMO). Освітній макет сайту для ставок та казино. Без реальних грошей." />
+  <link rel="icon" href="assets/logo.svg">
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gov: { primary: "#6C5CE7", accent: "#00D1B2", dark: "#0B1020" }
+          },
+          boxShadow: {
+            glow: "0 0 0 2px rgba(108,92,231,0.25), 0 10px 30px rgba(0,0,0,0.35)"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html, body { background: #0B1020; color: #E8EAF6; }
+    .glass { background: rgba(255,255,255,0.06); backdrop-filter: blur(10px); }
+    .btn { @apply px-4 py-2 rounded-2xl font-semibold transition hover:scale-[1.02] active:scale-[0.98]; }
+    .btn-primary { @apply bg-[var(--primary,#6C5CE7)] text-white shadow-glow; }
+    .btn-ghost { @apply border border-white/10; }
+    .card { @apply glass rounded-2xl p-5 shadow-xl; }
+  </style>
+</head>
+<body class="min-h-screen">
+  <!-- Age Gate / Legal Notice -->
+  <div id="ageGate" class="fixed inset-0 z-50 grid place-items-center bg-black/80">
+    <div class="card max-w-lg text-center">
+      <img src="assets/logo.svg" alt="GovBet" class="h-14 mx-auto mb-3" />
+      <h1 class="text-2xl font-bold mb-2">GovBet — Демонстраційний сайт</h1>
+      <p class="text-white/80 mb-4">
+        Це <strong>демо</strong> інтерфейс для освітніх цілей. <br/>
+        Немає приймання ставок на реальні гроші. Баланс — умовні кредити.
+      </p>
+      <button class="btn btn-primary" onclick="GovBet.acceptAge()">Мені 21+ / Я розумію</button>
+      <p class="mt-3 text-xs text-white/60">
+        Для реального запуску потрібні ліцензії, KYC/AML, геоблокінг і політики відповідальної гри.
+      </p>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40 bg-[#0B1020]/80 backdrop-blur border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
+      <img src="assets/logo.svg" class="h-8" alt="GovBet logo"/>
+      <nav class="flex-1 hidden md:flex gap-3">
+        <a href="#home" class="hover:text-[var(--accent,#00D1B2)]">Головна</a>
+        <a href="#sportsbook" class="hover:text-[var(--accent,#00D1B2)]">Ставки на спорт</a>
+        <a href="#casino" class="hover:text-[var(--accent,#00D1B2)]">Казино</a>
+        <a href="#support" class="hover:text-[var(--accent,#00D1B2)]">Підтримка</a>
+        <a href="#responsible" class="hover:text-[var(--accent,#00D1B2)]">Відповідальна гра</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <div class="text-sm">
+          <div class="text-white/60">Баланс</div>
+          <div class="font-semibold"><span id="balance">—</span> GC</div>
+        </div>
+        <button class="btn btn-ghost" onclick="GovBet.addCredits(1000)">+1000 GC</button>
+        <button class="btn btn-primary" onclick="GovBet.openAuth()">Увійти</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h2 class="text-4xl md:text-5xl font-black leading-tight">
+          GovBet <span class="text-[var(--accent,#00D1B2)]">DEMO</span>: ставки та казино без ризику
+        </h2>
+        <p class="mt-4 text-white/80">
+          Переглянь сучасний дизайн, UX та логіку. Ставки виконуються на <strong>демо-кредити (GC)</strong>.
+          Для реальних грошей потрібна окрема ліцензована платформа.
+        </p>
+        <div class="mt-6 flex gap-3">
+          <a href="#sportsbook" class="btn btn-primary">До Sportsbook</a>
+          <a href="#casino" class="btn btn-ghost">В казино</a>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="card">
+          <h3 class="text-xl font-bold mb-3">Швидка ставка (DEMO)</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm text-white/70">Подія</label>
+              <select id="quickEvent" class="w-full bg-white/5 rounded-xl p-2">
+              </select>
+            </div>
+            <div>
+              <label class="text-sm text-white/70">Сума (GC)</label>
+              <input id="quickStake" type="number" min="1" value="50" class="w-full bg-white/5 rounded-xl p-2"/>
+            </div>
+          </div>
+          <button class="btn btn-primary mt-4 w-full" onclick="GovBet.quickBet()">Поставити (демо)</button>
+          <p id="quickResult" class="mt-3 text-sm text-white/80"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sportsbook -->
+  <section id="sportsbook" class="max-w-7xl mx-auto px-4 py-14">
+    <div class="flex items-end justify-between mb-4">
+      <h2 class="text-3xl font-bold">Ставки на спорт (DEMO)</h2>
+      <div class="flex gap-2">
+        <input id="sportSearch" placeholder="Пошук команд/ліг..." class="bg-white/5 rounded-xl px-3 py-2">
+        <select id="sportFilter" class="bg-white/5 rounded-xl px-3 py-2">
+          <option value="">Усі види</option>
+          <option>Футбол</option>
+          <option>Баскетбол</option>
+          <option>Теніс</option>
+          <option>Хокей</option>
+          <option>Кіберспорт</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="events" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+  </section>
+
+  <!-- Casino -->
+  <section id="casino" class="max-w-7xl mx-auto px-4 py-14">
+    <h2 class="text-3xl font-bold mb-4">Казино (DEMO)</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- Slots -->
+      <div class="card">
+        <h3 class="text-xl font-bold mb-2">Mystic Slots</h3>
+        <div id="slotReels" class="grid grid-cols-3 gap-2 text-center text-3xl">
+          <div class="glass rounded-xl py-6" id="r1">🍀</div>
+          <div class="glass rounded-xl py-6" id="r2">💎</div>
+          <div class="glass rounded-xl py-6" id="r3">🍒</div>
+        </div>
+        <div class="mt-4 grid grid-cols-2 gap-2">
+          <input id="slotStake" type="number" min="1" value="25" class="bg-white/5 rounded-xl px-3 py-2">
+          <button class="btn btn-primary" onclick="GovBet.spin()">Крутити (демо)</button>
+        </div>
+        <p id="slotMsg" class="mt-3 text-sm text-white/80"></p>
+      </div>
+
+      <!-- Roulette -->
+      <div class="card">
+        <h3 class="text-xl font-bold mb-2">Європейська рулетка</h3>
+        <p class="text-white/70">Ставка на Червоне / Чорне (1:1)</p>
+        <div class="mt-3 grid grid-cols-2 gap-2">
+          <input id="rouletteStake" type="number" min="1" value="50" class="bg-white/5 rounded-xl px-3 py-2">
+          <select id="roulettePick" class="bg-white/5 rounded-xl px-3 py-2">
+            <option value="red">Червоне</option>
+            <option value="black">Чорне</option>
+          </select>
+        </div>
+        <button class="btn btn-primary mt-3" onclick="GovBet.roulette()">Крутити (демо)</button>
+        <p id="rouletteMsg" class="mt-3 text-sm text-white/80"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Support -->
+  <section id="support" class="max-w-4xl mx-auto px-4 py-14">
+    <div class="card">
+      <h2 class="text-3xl font-bold mb-4">Підтримка</h2>
+      <form onsubmit="GovBet.sendTicket(event)" class="grid md:grid-cols-2 gap-4">
+        <input id="sName" required placeholder="Ваше ім’я" class="bg-white/5 rounded-xl px-3 py-2">
+        <input id="sEmail" required type="email" placeholder="Email" class="bg-white/5 rounded-xl px-3 py-2">
+        <select id="sTopic" class="bg-white/5 rounded-xl px-3 py-2 md:col-span-2">
+          <option>Загальні питання</option>
+          <option>Проблеми з акаунтом</option>
+          <option>Відповідальна гра</option>
+          <option>Інше</option>
+        </select>
+        <textarea id="sMsg" required rows="4" placeholder="Опишіть питання..." class="bg-white/5 rounded-xl px-3 py-2 md:col-span-2"></textarea>
+        <button class="btn btn-primary md:col-span-2">Надіслати</button>
+      </form>
+      <p id="sResult" class="mt-3 text-white/80"></p>
+    </div>
+  </section>
+
+  <!-- Responsible gambling -->
+  <section id="responsible" class="max-w-4xl mx-auto px-4 py-14">
+    <div class="card">
+      <h2 class="text-3xl font-bold mb-3">Відповідальна гра</h2>
+      <ul class="list-disc pl-5 space-y-2 text-white/80">
+        <li>Мінімальний вік 21+. Грайте відповідально.</li>
+        <li>Ніколи не переслідуйте втрати. Встановлюйте ліміти часу та бюджету.</li>
+        <li>Шукаєте допомогу? Зверніться до локальних служб підтримки залежностей.</li>
+      </ul>
+      <div class="mt-4">
+        <button class="btn btn-ghost" onclick="GovBet.setLimits()">Встановити персональні ліміти</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 py-8 text-center text-white/60">
+    <p>© <span id="year"></span> GovBet (DEMO). Усі права захищено. Цей сайт не приймає реальні гроші.</p>
+    <p class="mt-1 text-xs">“GovBet” — умовна назва макета. Для продакшну потрібні ліцензії, KYC/AML, політики, геоблокінг.</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
