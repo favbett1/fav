@@ -1,8 +1,0 @@
-[
-  { "id": "prag-001", "name": "Pragmatic Hot", "provider": "Pragmatic", "type": "slots", "runtimeUrl": "/runtime/prag-001" },
-  { "id": "prag-002", "name": "Pragmatic Mega", "provider": "Pragmatic", "type": "slots", "runtimeUrl": "/runtime/prag-002" },
-  { "id": "net-001", "name": "Star Spin", "provider": "NetEnt", "type": "slots", "runtimeUrl": "/runtime/net-001" },
-  { "id": "pgo-001", "name": "Book of Demo", "provider": "Play'n GO", "type": "slots", "runtimeUrl": "/runtime/pgo-001" },
-  { "id": "jack-001", "name": "Mega Jackpot", "provider": "Progressive", "type": "jackpot", "runtimeUrl": "/runtime/jack-001" },
-  { "id": "live-01", "name": "Royal Roulette", "provider": "LiveProvider", "type": "live", "runtimeUrl": "/runtime/live-01" }
-]
